@@ -8,7 +8,68 @@
       - label:
           name: node
           default: nectar-rc-trusty
+          description: "The node on which to run the job."
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on-patchset-uploaded-event: true
+          trigger-on-draft-published-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean: true
+         choosing-strategy: gerrit
+
+
+    builders:
+      - puppet-lint
+      - puppet-syntax
+
+    publishers:
+      - warnings:
+          console-log-parsers:
+            - Puppet-Lint
+
+
+#
+#  A temporary job template to assist with the migration, it will not
+#  report back to gerrit.
+#
+
+- job-template:
+    name: '{name}-puppet-unit-tmp'
+    project-type: freestyle
+    defaults: global
+    label: nectar
+
+    parameters:
+      - label:
+          name: node
+          default: nectar-rc-trusty
           description: "The node on which to run the job"
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
 
     triggers:
       - gerrit:
@@ -34,7 +95,7 @@
          wipe-workspace: false
          clean: true
          choosing-strategy: gerrit
-         
+
 
     builders:
       - puppet-lint
@@ -45,7 +106,218 @@
           console-log-parsers:
             - Puppet-Lint
 
+
+# - project:
+#     name: puppet-apache
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
 - project:
     name: puppet-ceilometer
     jobs:
       - '{name}-puppet-unit'
+
+- project:
+    name: puppet-cinder
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-dashboard
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-denyhosts
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-denyhosts
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-elasticsearch
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-elk
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-etckeeper
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-facts
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-fail2ban
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-ganglia
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-glance
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-haproxy
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-iptables
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-kexec
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-keystone
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-logrotate
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-logstash
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-manila
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-mongodb
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-mysql
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-nagios
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-nectar
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-nginx
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-nova
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-openstack
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-openvpn
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-patchman
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-physical
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-postfix
+    jobs:
+      - '{name}-puppet-unit'
+
+- project:
+    name: puppet-pound
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-puppet
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-rabbitmq
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-rcshib
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-rsyslog
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-shibboleth
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-snmp
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-ssh
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+- project:
+    name: puppet-swift
+    jobs:
+      - '{name}-puppet-unit'
+
+# - project:
+#     name: puppet-ubuntu
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-vim
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
+
+# - project:
+#     name: puppet-virtual
+#     jobs:
+#       - '{name}-puppet-unit-tmp'
