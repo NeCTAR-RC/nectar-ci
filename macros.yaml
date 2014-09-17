@@ -1,0 +1,28 @@
+- builder:
+    name: run-tests
+    builders:
+      - shell: "./run-tests.sh"
+
+- builder:
+    name: puppet-lint
+    builders:
+      - shell: |
+          wget https://raw.githubusercontent.com/NeCTAR-RC/flake8-diff/master/lint.py
+          chmod +x lint.py
+          if [ -f Gemfile ]; then
+            mkdir .bundled_gems
+            export GEM_HOME=`pwd`/.bundled_gems
+            bundle install
+            bundle exec ./lint.py rake lint 2>&1
+          else
+            ./lint.py rake lint 2>&1
+          fi
+
+- builder:
+    name: puppet-syntax
+    builders:
+      - shell: |
+          find . -iname *.pp | xargs puppet parser validate --modulepath=`pwd`/modules
+          for f in `find . -iname *.erb` ; do
+            erb -x -T '-' $f | ruby -c
+          done
