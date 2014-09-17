@@ -20,7 +20,7 @@
           trigger-on-draft-published-event: true
           projects:
             - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/{name}'
+              project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
@@ -30,7 +30,7 @@
 
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -77,7 +77,7 @@
           trigger-on-draft-published-event: true
           projects:
             - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/{name}'
+              project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
@@ -87,7 +87,7 @@
 
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -110,214 +110,278 @@
 # - project:
 #     name: puppet-apache
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-ceilometer
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-cinder
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-dashboard
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-denyhosts
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-denyhosts
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-elasticsearch
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-elk
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-etckeeper
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-facts
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-fail2ban
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-ganglia
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-glance
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-haproxy
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-iptables
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-kexec
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-keystone
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-logrotate
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-logstash
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-manila
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-mongodb
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-mysql
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-nagios
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-nectar
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-nginx
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-nova
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-openstack
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-openvpn
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-patchman
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-physical
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-postfix
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 - project:
     name: puppet-pound
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-puppet
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-rabbitmq
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-rcshib
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-rsyslog
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-shibboleth
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-snmp
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-ssh
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 - project:
     name: puppet-swift
     jobs:
-      - '{name}-puppet-unit'
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR'
 
 # - project:
 #     name: puppet-ubuntu
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-vim
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
 
 # - project:
 #     name: puppet-virtual
 #     jobs:
-#       - '{name}-puppet-unit-tmp'
+#       - '{name}-puppet-unit-tmp':
+#          organisation: 'internal'
+
