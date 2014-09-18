@@ -1,0 +1,42 @@
+- job-template:
+    name: '{name}-python-tox-{environment}'
+    project-type: freestyle
+    defaults: global
+    node: trusty-icehouse
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on-patchset-uploaded-event: true
+          trigger-on-draft-published-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean: true
+         choosing-strategy: gerrit
+
+
+    builders:
+      - python-tox-{environment}
+
+
