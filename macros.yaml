@@ -55,3 +55,14 @@
             mv -v "${WORKSPACE}/doc/files/${WORKSPACE}/modules" "${WORKSPACE}/doc/files/modules"
           fi;
           grep -l -R ${WORKSPACE} * | while read fname; do sed -i "s@${WORKSPACE}/@/@g" $fname; done;
+
+- builder:
+    name: 'python-tox-py27'
+    builders:
+      - shell: 'tox -e py27'
+
+- builder:
+    name: 'python-tox-flake8'
+    builders:
+      - shell: 'tox -e flake8'
+
