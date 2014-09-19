@@ -64,5 +64,7 @@
 - builder:
     name: 'python-tox-flake8'
     builders:
-      - shell: 'tox -e flake8'
-
+      - shell: |
+          wget https://raw.githubusercontent.com/NeCTAR-RC/flake8-diff/master/lint.py
+          chmod +x lint.py
+          ./lint.py --linter flake8 -- tox -e flake8
