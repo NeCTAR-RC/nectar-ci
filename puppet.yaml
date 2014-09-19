@@ -2,13 +2,9 @@
     name: '{name}-puppet-unit'
     project-type: freestyle
     defaults: global
-    label: nectar
+    node: trusty-icehouse
 
     parameters:
-      - label:
-          name: node
-          default: nectar-rc-trusty
-          description: "The node on which to run the job."
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
