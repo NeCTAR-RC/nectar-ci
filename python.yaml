@@ -18,3 +18,21 @@
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
 
+- project:
+    name: hive_master
+    jobs:
+      - '{name}-run-tests':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: langstroth
+    jobs:
+      - '{name}-run-tests':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-tools
+    jobs:
+      - '{name}-run-tests':
+         organisation: 'NeCTAR-RC'
+
