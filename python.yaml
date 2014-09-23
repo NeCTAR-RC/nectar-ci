@@ -87,3 +87,10 @@
       - '{name}-deb-package':
          organisation: 'NeCTAR-RC'
 
+- project:
+    name: cookiecutter-pypackage
+    jobs:
+      - '{name}-python-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+
