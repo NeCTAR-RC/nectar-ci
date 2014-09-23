@@ -7,6 +7,8 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - '{name}-deb-package':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: hivemind_contrib
@@ -17,6 +19,8 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - '{name}-deb-package':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: hive_master

@@ -88,6 +88,51 @@
 
 
 - job-template:
+    name: '{name}-deb-package'
+    project-type: freestyle
+    defaults: global
+    node: trusty-icehouse
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on-change-merged-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean: true
+         choosing-strategy: gerrit
+
+    builders:
+      - pbuilder-create
+      - pbuilder-buildpackage
+
+- job-template:
     name: '{name}-run-tests'
     project-type: freestyle
     defaults: global
