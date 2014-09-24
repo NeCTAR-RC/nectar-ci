@@ -100,3 +100,10 @@
       - '{name}-python-tox-{environment}':
          organisation: 'internal'
          environment: 'flake8'
+
+- project:
+    name: rcshibboleth
+    jobs:
+      - '{name}-python-tox-{environment}':
+         organisation: 'internal'
+         environment: 'flake8'
