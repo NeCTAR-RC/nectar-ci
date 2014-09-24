@@ -94,3 +94,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'py27'
 
+- project:
+    name: rcportal
+    jobs:
+      - '{name}-python-tox-{environment}':
+         organisation: 'internal'
+         environment: 'flake8'

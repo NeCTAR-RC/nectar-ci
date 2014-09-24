@@ -67,6 +67,12 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/havana'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/icehouse'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
@@ -108,6 +114,12 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/havana'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/icehouse'
           silent: false
           escape-quotes: true
 
@@ -172,5 +184,3 @@
 
     builders:
       - run-tests
-
-
