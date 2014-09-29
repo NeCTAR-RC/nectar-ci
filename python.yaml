@@ -119,3 +119,15 @@
       - '{name}-python-tox-{environment}':
          organisation: 'internal'
          environment: 'flake8'
+
+- project:
+    name: external_naginator
+    jobs:
+      - '{name}-python-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-python-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-deb-package':
+         organisation: 'NeCTAR-RC'
