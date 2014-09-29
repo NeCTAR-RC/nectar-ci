@@ -20,8 +20,22 @@
     name: puppet-lint
     builders:
       - shell: |
+          MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
+          if [ -f Modulefile ]; then
+            MODULE=$(awk '/^name/ {print $NF}' Modulefile |tr -d \"\')
+            if [ -z "$MODULE" ]; then
+              echo "Module name not defined in Modulefile"
+            fi
+          fi
+
+          if [ -n "$MODULE" ]; then
+            git clone . $MODULE
+            cd "$MODULE"
+          fi
+
           wget https://raw.githubusercontent.com/NeCTAR-RC/flake8-diff/master/lint.py
           chmod +x lint.py
+
           if [ -f Gemfile ]; then
             mkdir .bundled_gems
             export GEM_HOME=`pwd`/.bundled_gems
