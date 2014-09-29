@@ -67,10 +67,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-              branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'nectar/havana'
-              branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'nectar/icehouse'
           silent: false
@@ -114,10 +112,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-              branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'nectar/havana'
-              branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'nectar/icehouse'
           silent: false
