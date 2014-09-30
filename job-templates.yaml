@@ -91,8 +91,25 @@
       - python-tox-{environment}
 
 
+- job-group:
+    name: 'deb-package'
+    os_release:
+      - icehouse
+      - havana
+    jobs:
+      - '{name}-{os_release}-deb-package'
+
+
+- job-group:
+    name: 'icehouse-deb-package'
+    os_release:
+      - havana
+    jobs:
+      - '{name}-{os_release}-deb-package'
+
+
 - job-template:
-    name: '{name}-deb-package'
+    name: '{name}-{os_release}-deb-package'
     project-type: freestyle
     defaults: global
     node: trusty-icehouse
@@ -137,8 +154,11 @@
          choosing-strategy: gerrit
 
     builders:
-      - pbuilder-create
-      - pbuilder-buildpackage
+      - pbuilder-create:
+          os_release: "{os_release}"
+      - pbuilder-buildpackage:
+          os_release: "{os_release}"
+
 
 - job-template:
     name: '{name}-run-tests'

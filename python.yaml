@@ -7,7 +7,7 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-deb-package':
+      - 'icehouse-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -19,7 +19,7 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-deb-package':
+      - 'icehouse-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -84,7 +84,7 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-deb-package':
+      - 'icehouse-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -103,7 +103,7 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-deb-package':
+      - 'icehouse-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -129,5 +129,5 @@
       - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-deb-package':
+      - 'deb-package':
          organisation: 'NeCTAR-RC'
