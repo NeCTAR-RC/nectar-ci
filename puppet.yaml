@@ -77,6 +77,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-graphite
+    jobs:
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-haproxy
     jobs:
       - '{name}-puppet-unit':
