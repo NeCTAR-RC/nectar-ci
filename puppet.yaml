@@ -35,6 +35,12 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-designate
+    jobs:
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-elasticsearch
     jobs:
       - '{name}-puppet-unit':
