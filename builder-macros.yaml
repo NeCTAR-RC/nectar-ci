@@ -85,6 +85,11 @@
           ./lint.py --linter flake8 -- tox -e flake8
 
 - builder:
+    name: 'python-tox-jshint'
+    builders:
+      - shell: 'tox -e jshint'
+
+- builder:
     name: 'pbuilder-create'
     builders:
       - shell: 'hivemind pbuilder.create --os-release {os_release} || hivemind pbuilder.update --os-release {os_release}'
