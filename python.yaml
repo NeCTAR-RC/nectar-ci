@@ -44,9 +44,14 @@
 - project:
     name: nectar-tools
     jobs:
-      - '{name}-run-tests':
+      - '{name}-python-tox-{environment}':
          organisation: 'NeCTAR-RC'
-
+         environment: 'py27'
+      - '{name}-python-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - 'icehouse-deb-package':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: karaage
