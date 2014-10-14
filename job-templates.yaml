@@ -103,7 +103,7 @@
 - job-group:
     name: 'icehouse-deb-package'
     os_release:
-      - havana
+      - icehouse
     jobs:
       - '{name}-{os_release}-deb-package'
 
