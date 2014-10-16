@@ -2,269 +2,314 @@
     name: puppet-apache
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-ceilometer
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-cinder
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-dashboard
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-denyhosts
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-denyhosts
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-designate
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-elasticsearch
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-elk
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-etckeeper
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-facts
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-fail2ban
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ganglia
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-glance
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-graphite
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-haproxy
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-iptables
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-kexec
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-keystone
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-logrotate
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-logstash
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-manila
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-mongodb
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-mysql
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nagios
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nectar
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nginx
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nova
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-openstack
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-openvpn
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-patchman
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-physical
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-postfix
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-pound
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-puppet
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-rabbitmq
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-rcshib
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-rsyslog
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-shibboleth
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-ssh
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-swift
     jobs:
       - '{name}-puppet-unit':
+         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ubuntu
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-vim
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-virtual
     jobs:
       - '{name}-puppet-unit':
+         access: 'nobody'
          organisation: 'internal'
 

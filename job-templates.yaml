@@ -10,6 +10,12 @@
           default: refs/heads/master
           description: "The default branch to test."
 
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+
     triggers:
       - gerrit:
           trigger-on-patchset-uploaded-event: true
@@ -56,6 +62,12 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
 
     triggers:
       - gerrit:
@@ -120,6 +132,12 @@
           default: refs/heads/master
           description: "The default branch to test."
 
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+
     triggers:
       - gerrit:
           trigger-on-change-merged-event: true
@@ -171,6 +189,12 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
 
     triggers:
       - gerrit:
