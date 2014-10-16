@@ -10,6 +10,12 @@
           default: refs/heads/master
           description: "The default branch to test."
 
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+
     triggers:
       - gerrit:
           trigger-on-patchset-uploaded-event: true
@@ -42,5 +48,6 @@
 - project:
     name: nectar-ci
     jobs:
-      - '{name}-ruby-lint'
+      - '{name}-ruby-lint':
+          access: 'anonymous'
 
