@@ -34,13 +34,6 @@
          organisation: 'internal'
 
 - project:
-    name: puppet-denyhosts
-    jobs:
-      - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
-
-- project:
     name: puppet-designate
     jobs:
       - '{name}-puppet-unit':
