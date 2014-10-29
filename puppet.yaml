@@ -244,7 +244,7 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: puppet-rcshib
+    name: puppet-rcshibboleth
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
