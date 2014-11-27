@@ -121,10 +121,15 @@
           fi
           git fetch --tags alt-origin
           if [ ! -d debian ]; then
-            git branch debian alt-origin/debian
+            for rb in `git branch -r --list | grep alt-origin | grep debian`
+            do 
+              branch=`echo $rb | sed "s,alt-origin/,,g"`; 
+              git branch $branch alt-origin/$branch;
+            done
           fi
-          git branch -d master || true
-          git checkout -b master
+
+          git branch -d $GERRIT_BRANCH || true
+          git checkout -b $GERRIT_BRANCH
 
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
