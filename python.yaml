@@ -188,3 +188,14 @@
       - 'icehouse-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: cinder
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - 'icehouse-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
