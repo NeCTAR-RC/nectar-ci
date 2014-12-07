@@ -1,0 +1,8 @@
+- job:
+    name: testcloud-upgrade
+    project-type: freestyle
+    defaults: global
+    node: upgrader
+    concurrent: false     
+    builders:
+      - shell: 'hivemind -R test-cloud upgrade.upgrade --unattended'
