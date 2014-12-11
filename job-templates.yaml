@@ -115,6 +115,10 @@
           channels:
             - name: '#nectar-builds'
               notify-only: true
+      - cobertura:
+          report-file: "coverage.xml"
+          only-stable: "true"
+          targets: {}
 
 
 - job-group:
@@ -256,3 +260,7 @@
           channels:
             - name: '#nectar-builds'
               notify-only: true
+      - cobertura:
+          report-file: "coverage.xml"
+          only-stable: "true"
+          targets: {}
