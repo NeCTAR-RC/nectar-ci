@@ -85,10 +85,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/havana'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/icehouse'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
@@ -165,10 +163,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/havana'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/icehouse'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
 
@@ -232,8 +228,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/icehouse'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
