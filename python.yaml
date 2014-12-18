@@ -154,6 +154,9 @@
          access: 'nobody'
          organisation: 'internal'
          environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: rcshibboleth
@@ -162,6 +165,9 @@
          access: 'nobody'
          organisation: 'internal'
          environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: external_naginator
