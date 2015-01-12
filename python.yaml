@@ -84,6 +84,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: karaage-keystone
@@ -96,6 +99,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: karaage-user
@@ -108,6 +114,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-metrics
