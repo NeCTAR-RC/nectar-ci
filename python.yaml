@@ -119,6 +119,36 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: karaage-auth
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: karaage-terms
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - 'icehouse-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: nectar-metrics
     jobs:
       - '{name}-python-tox-{environment}':
