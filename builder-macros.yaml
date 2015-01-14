@@ -135,3 +135,45 @@
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
 
           hivemind packaging.buildpackage --os-release {os_release}
+
+- builder:
+    name: 'os-pbuilder-create'
+    builders:
+      - shell: 'hivemind pbuilder.create || hivemind pbuilder.update'
+
+- builder:
+    name: 'os-pbuilder-buildpackage'
+    builders:
+      - shell: |
+          # Set up remote for github or internal, since we have no tags otherwise.
+          git remote | grep 'alt-origin' > /dev/null && retval=0 || retval=1
+          if [ $retval -ne 0 ]; then
+
+            git remote -v | grep '29418/NeCTAR-RC' > /dev/null && retval=0 || retval=1
+            if [ $retval -eq 0 ]; then
+              URL=$(git remote -v | grep 29418 | sed 's/.*29418\/\(.*\) .*/\1/' | head -1)
+              git remote add alt-origin https://github.com/$URL
+            fi
+
+            git remote -v | grep '29418/internal' > /dev/null && retval=0 || retval=1
+            if [ $retval -eq 0 ]; then
+              URL=$(git remote -v | grep 29418 | sed 's/.*29418\/\(.*\) .*/\1/' | head -1)
+              git remote add alt-origin git@git.melbourne.nectar.org.au:$URL
+            fi
+          fi
+          git fetch --tags alt-origin
+          if [ ! -d debian ]; then
+            for rb in `git branch -r --list | grep alt-origin | grep debian`
+            do
+              branch=`echo $rb | sed "s,alt-origin/,,g"`;
+              git branch $branch alt-origin/$branch;
+            done
+          fi
+
+          git branch -d $GERRIT_BRANCH || true
+          git checkout -b $GERRIT_BRANCH origin/$GERRIT_BRANCH
+
+          export DEBFULLNAME="$GIT_AUTHOR_NAME"
+          export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+
+          hivemind packaging.buildpackage
