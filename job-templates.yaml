@@ -204,7 +204,7 @@
               notify-only: true
 
 - job-template:
-    name: 'os-deb-package'
+    name: '{name}-os-deb-package'
     project-type: freestyle
     defaults: global
     node: trusty-icehouse

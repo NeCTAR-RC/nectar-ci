@@ -230,7 +230,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - 'os-deb-package':
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -241,6 +241,6 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - 'os-deb-package':
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
