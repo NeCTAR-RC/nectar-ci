@@ -193,6 +193,10 @@
          access: 'nobody'
          organisation: 'internal'
          environment: 'flake8'
+      - '{name}-python-tox-{environment}':
+         access: 'nobody'
+         organisation: 'internal'
+         environment: 'py27'
       - 'icehouse-deb-package':
          access: 'nobody'
          organisation: 'internal'
