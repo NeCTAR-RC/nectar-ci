@@ -258,7 +258,6 @@
          choosing-strategy: gerrit
 
     builders:
-      - os-pbuilder-create
       - os-pbuilder-buildpackage
 
     publishers:
