@@ -140,6 +140,7 @@
     name: '{name}-{os_release}-deb-package'
     project-type: freestyle
     defaults: global
+    concurrent: false
     node: trusty-icehouse
 
     parameters:
