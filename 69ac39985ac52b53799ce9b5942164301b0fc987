@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa2559ec_0a1d1b74",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2015-01-20T03:24:35Z",
+      "side": 1,
+      "message": "need to pass in --os-release here",
+      "revId": "69ac39985ac52b53799ce9b5942164301b0fc987",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
