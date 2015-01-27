@@ -160,6 +160,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-melbourne
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-mongodb
     jobs:
       - '{name}-puppet-unit':
