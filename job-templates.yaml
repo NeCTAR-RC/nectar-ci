@@ -190,6 +190,7 @@
          choosing-strategy: gerrit
 
     builders:
+      - os-pbuilder-checkout
       - pbuilder-create:
           os_release: "{os_release}"
       - pbuilder-buildpackage:
@@ -257,6 +258,7 @@
          choosing-strategy: gerrit
 
     builders:
+      - os-pbuilder-checkout
       - os-pbuilder-create
       - os-pbuilder-buildpackage
 
