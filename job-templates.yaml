@@ -257,6 +257,7 @@
          choosing-strategy: gerrit
 
     builders:
+      - os-pbuilder-checkout
       - os-pbuilder-create
       - os-pbuilder-buildpackage
 
