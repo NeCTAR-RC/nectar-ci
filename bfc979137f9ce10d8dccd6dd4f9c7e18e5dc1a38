@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fa2559ec_f35402cc",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000084
+      },
+      "writtenOn": "2015-02-02T03:30:49Z",
+      "side": 1,
+      "message": "this shiz is the same as....",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 62
+      },
+      "revId": "bfc979137f9ce10d8dccd6dd4f9c7e18e5dc1a38",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa2559ec_736e52cb",
         "filename": "builder-macros.yaml",
         "patchSetId": 1
@@ -42,6 +65,29 @@
         "startChar": 10,
         "endLine": 140,
         "endChar": 32
+      },
+      "revId": "bfc979137f9ce10d8dccd6dd4f9c7e18e5dc1a38",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa2559ec_d351fed9",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000084
+      },
+      "writtenOn": "2015-02-02T03:30:49Z",
+      "side": 1,
+      "message": "this shiz.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 62
       },
       "revId": "bfc979137f9ce10d8dccd6dd4f9c7e18e5dc1a38",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
