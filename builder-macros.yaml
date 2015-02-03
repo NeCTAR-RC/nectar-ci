@@ -177,3 +177,27 @@
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
 
           hivemind packaging.buildpackage
+
+- builder:
+    name: 'image-builder'
+    builders:
+      - shell: |
+          DESC="NeCTAR {image_name} [v$BUILD_NUMBER]"
+
+          [ -d output-{job_name} ] && rm -fr output-{job_name}
+          packer build -color=false {job_name}.json
+          cd output-{job_name}
+          mv {job_name}.qcow2 {job_name}-orig.qcow2
+          qemu-img convert -c -o compat=0.10 -O qcow2 {job_name}-orig.qcow2 {job_name}.qcow2
+          rm {job_name}-orig.qcow2
+          KS_USERNAME=`echo $KEYSTONE_CREDS | cut -f1 -d:`
+          KS_PASSWORD=`echo $KEYSTONE_CREDS | cut -f2 -d:`
+
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v2.0/
+          export OS_TENANT_ID=2f6f7e75fc0f453d9c127b490b02e9e3
+          export OS_TENANT_NAME=NeCTAR-Devs
+          export OS_USERNAME="$KS_USERNAME"
+          export OS_PASSWORD="$KS_PASSWORD"
+          export OS_NO_CACHE=True
+
+          glance image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER
