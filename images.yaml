@@ -1,0 +1,63 @@
+- project:
+    name: centos-6-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'CentOS 6 x86_64'
+
+- project:
+    name: centos-7-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'CentOS 7 x86_64'
+
+- project:
+    name: debian-7-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Debian 7 (Wheezy) x86_64'
+
+- project:
+    name: fedora-21-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 21 x86_64'
+
+- project:
+    name: scientific-6-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Scientific Linux 6 x86_64'
+
+- project:
+    name: ubuntu-14.04-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 14.04 (Trusty) x86_64'
+
+- project:
+    name: ubuntu-14.10-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 14.10 (Utopic) x86_64'
+
+- project:
+    name: opensuse-13.2-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'OpenSuSE 13.2 x86_64'
