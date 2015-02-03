@@ -197,7 +197,7 @@
          access: 'nobody'
          organisation: 'internal'
          environment: 'py27'
-      - 'icehouse-deb-package':
+      - '{name}-os-deb-package':
          access: 'nobody'
          organisation: 'internal'
 
