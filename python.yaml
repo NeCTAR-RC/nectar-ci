@@ -248,3 +248,14 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: horizon
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
