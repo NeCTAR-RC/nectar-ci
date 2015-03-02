@@ -20,7 +20,7 @@
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'Debian 7 (Wheezy) x86_64'
+         image_name: 'Debian 7 (Wheezy) amd64'
 
 - project:
     name: fedora-21-x86_64
@@ -44,7 +44,7 @@
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 14.04 (Trusty) x86_64'
+         image_name: 'Ubuntu 14.04 (Trusty) amd64'
 
 - project:
     name: ubuntu-14.10-x86_64
@@ -52,7 +52,7 @@
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 14.10 (Utopic) x86_64'
+         image_name: 'Ubuntu 14.10 (Utopic) amd64'
 
 - project:
     name: opensuse-13.2-x86_64
