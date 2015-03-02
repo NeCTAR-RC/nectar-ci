@@ -168,8 +168,8 @@
           KS_PASSWORD=`echo $KEYSTONE_CREDS | cut -f2 -d:`
 
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v2.0/
-          export OS_TENANT_ID=2f6f7e75fc0f453d9c127b490b02e9e3
-          export OS_TENANT_NAME=NeCTAR-Devs
+          export OS_TENANT_ID=28eadf5ad64b42a4929b2fb7df99275c
+          export OS_TENANT_NAME=NeCTAR-Images
           export OS_USERNAME="$KS_USERNAME"
           export OS_PASSWORD="$KS_PASSWORD"
           export OS_NO_CACHE=True
