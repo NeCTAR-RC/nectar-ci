@@ -175,3 +175,8 @@
           export OS_NO_CACHE=True
 
           glance image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER
+
+- builder:
+    name: 'dummy'
+    builders:
+      - shell: 'exit 0'

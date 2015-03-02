@@ -1,4 +1,11 @@
 - project:
+    name: nectar-images
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: centos-6-x86_64
     jobs:
       - 'image-build-{name}':
