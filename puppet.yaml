@@ -160,6 +160,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-mariadb
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-melbourne
     jobs:
       - '{name}-puppet-unit':
