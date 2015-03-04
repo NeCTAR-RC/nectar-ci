@@ -173,9 +173,10 @@
           export OS_USERNAME="$KS_USERNAME"
           export OS_PASSWORD="$KS_PASSWORD"
           export OS_NO_CACHE=True
-
-          glance image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER
-
+          IMAGE_ID=`glance image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER | grep " id " | awk -F "|" '{print $3}'`;
+          echo "Image ID is $IMAGE_ID"
+          wget http://admin.mgmt.melbourne.rc.nectar.org.au/image-building/image-build.yaml
+          nova boot --image $IMAGE_ID --flavor m1.small --user-data image-build.yaml {job_name}
 - builder:
     name: 'dummy'
     builders:
