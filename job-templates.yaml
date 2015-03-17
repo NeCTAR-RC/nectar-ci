@@ -10,6 +10,7 @@
           default: refs/heads/master
           description: "The default branch to test."
 
+
     properties:
       - authorization:
           '{access}':
@@ -23,9 +24,11 @@
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
-              branches:
+              branches:         
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
