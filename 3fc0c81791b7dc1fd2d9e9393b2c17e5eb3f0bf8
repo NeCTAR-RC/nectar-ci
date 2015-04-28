@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_c8c4af61",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000105
+      },
+      "writtenOn": "2015-04-28T02:40:32Z",
+      "side": 1,
+      "message": "is this syntax correct? This value should be substituted in each particular job?",
+      "revId": "3fc0c81791b7dc1fd2d9e9393b2c17e5eb3f0bf8",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
