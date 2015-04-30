@@ -30,6 +30,14 @@
          image_name: 'Debian 7 (Wheezy) amd64'
 
 - project:
+    name: debian-8-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Debian 8 (Jessie) amd64'
+
+- project:
     name: fedora-21-x86_64
     jobs:
       - 'image-build-{name}':
