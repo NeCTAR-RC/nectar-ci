@@ -157,6 +157,7 @@
     builders:
       - shell: |
           DESC="NeCTAR {image_name}"
+          export PACKER_LOG="True"
 
           [ -d output-{job_name} ] && rm -fr output-{job_name}
           packer build -color=false {job_name}.json
