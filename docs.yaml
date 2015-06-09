@@ -1,0 +1,13 @@
+- project:
+    name: nectarcloud-tier0doco
+    jobs:
+      - '{name}-dummy':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-specs
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'internal'
