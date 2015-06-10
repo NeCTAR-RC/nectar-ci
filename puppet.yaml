@@ -300,6 +300,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-melbourne
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
