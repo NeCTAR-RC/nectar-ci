@@ -307,6 +307,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-nectar
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
