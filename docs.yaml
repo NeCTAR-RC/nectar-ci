@@ -1,7 +1,7 @@
 - project:
     name: nectarcloud-tier0doco
     jobs:
-      - '{name}-dummy':
+      - '{name}-markdown':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 

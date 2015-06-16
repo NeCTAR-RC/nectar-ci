@@ -193,3 +193,14 @@
     name: 'dummy'
     builders:
       - shell: 'exit 0'
+
+- builder:
+    name: markdown-lint
+    builders:
+      - shell: |
+          mkdir -p /tmp/vendor
+          export GEM_HOME=/tmp/vendor
+          gem install mdl
+          echo "Checking following files"
+          find . -iname *.md
+          find . -iname *.md | xargs /tmp/vendor/bin/mdl
