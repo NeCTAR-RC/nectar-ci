@@ -418,19 +418,19 @@
 
     triggers:
       - gerrit:
-        trigger-on-patchset-uploaded-event: true
-        trigger-on-draft-published-event: true
-        projects:
-          - project-compare-type: 'PLAIN'
-            project-pattern: '{organisation}/{name}'
-            branches:
-              - branch-compare-type: 'PLAIN'
-                branch-pattern: 'master'
-              - branch-compare-type: 'REG_EXP'
-                branch-pattern: 'nectar/.*'
-        silent: false
-        escape-quotes: true
-        trigger-for-unreviewed-patches: true
+          trigger-on-patchset-uploaded-event: true
+          trigger-on-draft-published-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
 
     scm:
       - git:

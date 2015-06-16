@@ -363,8 +363,8 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-  name: hiera-melbourne
-  jobs:
-    - '{name}-yaml':
-      access: 'nobody'
-      organisation: 'internal'
+    name: hiera-melbourne
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
