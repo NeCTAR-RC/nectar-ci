@@ -361,3 +361,10 @@
       - '{name}-puppet-unit':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+  name: hiera-melbourne
+  jobs:
+    - '{name}-yaml':
+      access: 'nobody'
+      organisation: 'internal'

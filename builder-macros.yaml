@@ -177,6 +177,18 @@
           echo "Image ID is $IMAGE_ID"
           wget http://admin.mgmt.melbourne.rc.nectar.org.au/image-building/image-build.yaml
           nova boot --image $IMAGE_ID --flavor m1.small --key-name root-jenkins-rc-nectar-org-au {job_name}
+
+- builder:
+  name: yaml-lint
+  builders:
+    - shell: |
+        mkdir -p /tmp/yamls
+        export GEM_HOME=/tmp/yamls
+        gem install --no-ri --no-rdoc yaml-lint
+        echo "Checking following files"
+        find . -type f -iname "*.yaml" -o -iname "*.eyaml"
+        find . -type f -iname "*.yaml" -o -iname "*.eyaml" | xargs /tmp/yamls/bin/yaml-lint
+
 - builder:
     name: 'dummy'
     builders:
