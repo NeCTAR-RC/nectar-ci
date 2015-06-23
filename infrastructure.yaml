@@ -1,4 +1,33 @@
 - job:
+    name: testcloud-rally
+    project-type: freestyle
+    defaults: global
+    node: upgrader
+    concurrent: false
+    quiet-period: 30
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+    builders:
+      - shell: |
+          . /var/lib/jenkins/rally/bin/activate
+          rally task start /var/lib/jenkins/rally-tasks/verify.json
+          rally task report --html --out output.html
+          rally task report --junit --out output.xml
+          rally task delete
+    publishers:
+      - html-publisher:
+          name: "Rally Report"
+          dir: "."
+          files: "output.html"
+          keep-all: true
+          allow-missing: true
+      - junit:
+          results: output.xml
+
+- job:
     name: testcloud-upgrade
     project-type: freestyle
     defaults: global
@@ -8,3 +37,7 @@
       - shell: 'hivemind -R test-cloud upgrade.upgrade --unattended'
     triggers:
       - timed: "@daily"
+    publishers:
+      - trigger:
+          project: testcloud-rally
+          threshold: SUCCESS
