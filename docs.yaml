@@ -9,5 +9,5 @@
     name: nectar-specs
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
