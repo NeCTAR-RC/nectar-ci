@@ -305,6 +305,17 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: keystone
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'nobody'
+         organisation: 'internal'
+         environment: 'py27'
+      - '{name}-os-deb-package':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: rc-servicecheck
     jobs:
       - '{name}-python-tox-{environment}':
