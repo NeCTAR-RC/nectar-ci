@@ -314,6 +314,17 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-rctest
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+
+
+- project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
