@@ -125,7 +125,7 @@
 - job-group:
     name: 'deb-package'
     os_release:
-      - icehouse
+      - juno
       - havana
     jobs:
       - '{name}-{os_release}-deb-package'
