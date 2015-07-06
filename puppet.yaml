@@ -314,6 +314,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-ntp
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-site-rctest
     jobs:
       - '{name}-puppet-unit':
