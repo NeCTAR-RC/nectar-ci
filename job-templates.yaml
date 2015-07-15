@@ -52,12 +52,6 @@
       - warnings:
           console-log-parsers:
             - Puppet-Lint
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
 
 
 - job-template:
@@ -110,12 +104,6 @@
       - python-tox-{environment}
 
     publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
       - cobertura:
           report-file: "coverage.xml"
           only-stable: "true"
@@ -199,13 +187,6 @@
       - pbuilder-buildpackage:
           os_release: "{os_release}"
 
-    publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
 
 - job-template:
     name: '{name}-os-deb-package'
@@ -265,13 +246,6 @@
       - os-pbuilder-create
       - os-pbuilder-buildpackage
 
-    publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
 
 - job-template:
     name: '{name}-run-tests'
@@ -323,16 +297,11 @@
       - run-tests
 
     publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
       - cobertura:
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
+
 
 - job-template:
     name: 'image-build-{name}'
@@ -398,6 +367,7 @@
            credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
            variable: KEYSTONE_CREDS
 
+
 - job-template:
     name: '{name}-yaml'
     project-type: freestyle
@@ -445,14 +415,6 @@
 
     builders:
       - yaml-lint
-
-    publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
 
 
 - job-template:
@@ -504,13 +466,6 @@
     builders:
       - dummy
 
-    publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
 
 - job-template:
     name: '{name}-markdown'
@@ -560,11 +515,3 @@
 
     builders:
       - markdown-lint
-
-    publishers:
-      - ircbot:
-          strategy: all
-          message-type: summary-scm
-          channels:
-            - name: '#nectar-builds'
-              notify-only: true
