@@ -1,0 +1,13 @@
+- project:
+    name: rally-jobs
+    jobs:
+      - '{name}-dummy':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: puppet-library
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'internal'
