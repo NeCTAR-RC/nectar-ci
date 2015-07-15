@@ -272,6 +272,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-profile
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-rabbitmq
     jobs:
       - '{name}-puppet-unit':
@@ -284,6 +291,13 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
+
+- project:
+    name: puppet-role
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-rsyslog
