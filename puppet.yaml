@@ -69,6 +69,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-mongo
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-facts
     jobs:
       - '{name}-puppet-unit':
