@@ -5,9 +5,55 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
-- project:
-    name: puppet-library
-    jobs:
-      - '{name}-dummy':
-         access: 'nobody'
-         organisation: 'internal'
+- job:
+    name: 'librarian-verify'
+    project-type: freestyle
+    concurrent: false
+    defaults: global
+
+    node: upgrader
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+    triggers:
+      - gerrit:
+          trigger-on-patchset-uploaded-event: true
+          trigger-on-draft-published-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-library'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean: true
+         choosing-strategy: gerrit
+
+
+    builders:
+      - shell: |
+          export http_proxy=http://wwwproxy.unimelb.edu.au:8000
+          export https_proxy=http://wwwproxy.unimelb.edu.au:8000
+          cd testing
+          librarian-puppet install --path ~/puppet-modules-cache/
