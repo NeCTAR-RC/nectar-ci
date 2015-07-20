@@ -199,4 +199,4 @@
           mkdir -p /tmp/vendor
           export GEM_HOME=/tmp/vendor
           gem install mdl
-          find . -iname *.md | xargs /tmp/vendor/bin/mdl
+          find . -iname '*.md' | xargs /tmp/vendor/bin/mdl
