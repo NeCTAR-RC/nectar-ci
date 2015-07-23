@@ -201,4 +201,5 @@
           mkdir -p /tmp/vendor
           export GEM_HOME=/tmp/vendor
           gem install mdl
-          git diff --name-only HEAD~1 | grep -i .md | xargs /tmp/vendor/bin/mdl
+          git diff --name-only HEAD~1 | grep -i .md | xargs \
+                  --no-run-if-empty /tmp/vendor/bin/mdl
