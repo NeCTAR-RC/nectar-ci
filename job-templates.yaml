@@ -16,6 +16,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -52,6 +61,7 @@
       - warnings:
           console-log-parsers:
             - Puppet-Lint
+      - slack
 
 
 - job-template:
@@ -71,6 +81,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -108,7 +127,7 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-
+      - slack
 
 - job-group:
     name: 'deb-package'
@@ -148,6 +167,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -186,7 +214,8 @@
           os_release: "{os_release}"
       - pbuilder-buildpackage:
           os_release: "{os_release}"
-
+    publishers:
+      - slack
 
 - job-template:
     name: '{name}-os-deb-package'
@@ -209,6 +238,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -246,6 +284,9 @@
       - os-pbuilder-create
       - os-pbuilder-buildpackage
 
+    publishers:
+      - slack
+
 
 - job-template:
     name: '{name}-run-tests'
@@ -264,6 +305,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -301,7 +351,7 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-
+      - slack
 
 - job-template:
     name: 'image-build-{name}'
@@ -324,6 +374,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -367,6 +426,9 @@
            credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
            variable: KEYSTONE_CREDS
 
+    publishers:
+      - slack
+
 
 - job-template:
     name: '{name}-yaml'
@@ -385,6 +447,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -415,6 +486,9 @@
 
     builders:
       - yaml-lint
+
+    publishers:
+      - slack
 
 
 - job-template:
@@ -484,6 +558,15 @@
           '{access}':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -515,3 +598,6 @@
 
     builders:
       - markdown-lint
+
+    publishers:
+      - slack

@@ -24,6 +24,15 @@
           'nobody':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -50,10 +59,12 @@
          clean: true
          choosing-strategy: gerrit
 
-
     builders:
       - shell: |
           export http_proxy=http://wwwproxy.unimelb.edu.au:8000
           export https_proxy=http://wwwproxy.unimelb.edu.au:8000
           cd testing
           librarian-puppet install --path ~/puppet-modules-cache/
+
+    publishers:
+      - slack
