@@ -10,6 +10,16 @@
           'anonymous':
             - job-read
             - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
     builders:
       - shell: |
           . /var/lib/jenkins/rally/bin/activate
@@ -27,6 +37,7 @@
           allow-missing: true
       - junit:
           results: output.xml
+      - slack
 
 - job:
     name: testcloud-upgrade
@@ -42,3 +53,14 @@
       - trigger:
           project: testcloud-rally
           threshold: SUCCESS
+      - slack
+    properties:
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
