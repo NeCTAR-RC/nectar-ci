@@ -62,14 +62,6 @@
          image_name: 'Ubuntu 14.04 (Trusty) amd64'
 
 - project:
-    name: ubuntu-14.10-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 14.10 (Utopic) amd64'
-
-- project:
     name: ubuntu-15.04-x86_64
     jobs:
       - 'image-build-{name}':
