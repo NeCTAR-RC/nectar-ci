@@ -202,5 +202,16 @@
       - shell: |
           mkdir -p /tmp/vendor
           export GEM_HOME=/tmp/vendor
+          cat > /tmp/vendor/md_style.rb << EOF
+          all
+          exclude_tag :whitespace
+          exclude_tag :line_length
+          
+          exclude_rule 'MD006' # Lists at beginning of line
+          exclude_rule 'MD007' # List indentation
+          exclude_rule 'MD033' # Inline HTML
+          exclude_rule 'MD034' # Bare URL used
+          exclude_rule 'MD040' # Fenced code blocks should have a language specified
+          EOF
           gem install mdl
-          git diff --name-status HEAD~1 | grep '^[^D].*\.md' | cut -f2- | xargs -I filename /tmp/vendor/bin/mdl "filename"
+          git diff --name-status HEAD~1 | grep '^[^D].*\.md' | cut -f2- | xargs -I filename /tmp/vendor/bin/mdl -s /tmp/vendor/md_style.rb "filename"
