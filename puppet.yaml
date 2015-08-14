@@ -216,6 +216,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-neutron
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-nginx
     jobs:
       - '{name}-puppet-unit':
