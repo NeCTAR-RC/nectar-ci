@@ -330,6 +330,7 @@
 - project:
     name: wp2-pipeline
     jobs:
-      - '{name}-dummy':
+      - '{name}-python-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'flake8'
