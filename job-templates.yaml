@@ -601,3 +601,44 @@
 
     publishers:
       - slack
+
+- job-template:
+    name: '{name}-rally'
+    project-type: freestyle
+    defaults: global
+    node: upgrader
+    concurrent: false
+    quiet-period: 30
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+    builders:
+      - shell: |
+          . /var/lib/jenkins/rally/bin/activate
+          rally deployment use RCTest
+          rally task start /var/lib/jenkins/rally-jobs/test/{name}.json
+          rally task report --html --out output.html
+          rally task report --junit --out output.xml
+          rally task delete
+    publishers:
+      - html-publisher:
+          name: "Rally Report"
+          dir: "."
+          files: "output.html"
+          keep-all: true
+          allow-missing: true
+      - junit:
+          results: output.xml
+      - slack

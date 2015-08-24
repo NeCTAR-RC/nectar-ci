@@ -1,43 +1,33 @@
-- job:
-    name: testcloud-rally
-    project-type: freestyle
-    defaults: global
-    node: upgrader
-    concurrent: false
-    quiet-period: 30
-    properties:
-      - authorization:
-          'anonymous':
-            - job-read
-            - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
-    builders:
-      - shell: |
-          . /var/lib/jenkins/rally/bin/activate
-          rally deployment use RCTest
-          rally task start /var/lib/jenkins/rally-jobs/test/verify.json
-          rally task report --html --out output.html
-          rally task report --junit --out output.xml
-          rally task delete
-    publishers:
-      - html-publisher:
-          name: "Rally Report"
-          dir: "."
-          files: "output.html"
-          keep-all: true
-          allow-missing: true
-      - junit:
-          results: output.xml
-      - slack
+- project:
+    name: testcloud-nova
+    jobs:
+      - '{name}-rally':
+        deployment: 'RCTest'
+
+- project:
+    name: testcloud-cinder
+    jobs:
+      - '{name}-rally':
+        deployment: 'RCTest'
+
+- project:
+    name: testcloud-keystone
+    jobs:
+      - '{name}-rally':
+        deployment: 'RCTest'
+
+- project:
+    name: testcloud-swift
+    jobs:
+      - '{name}-rally':
+        deployment: 'RCTest'
+
+- project:
+    name: testcloud-glance
+    jobs:
+      - '{name}-rally':
+        deployment: 'RCTest'
 
 - job:
     name: testcloud-upgrade
@@ -51,7 +41,7 @@
       - timed: "@daily"
     publishers:
       - trigger:
-          project: testcloud-rally
+          project: testcloud-nova-rally,testcloud-cinder-rally,testcloud-keystone-rally,testcloud-glance-rally,testcloud-swift-rally
           threshold: SUCCESS
       - slack
     properties:
