@@ -414,3 +414,10 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
+
+- project:
+    name: hiera-nectar
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
