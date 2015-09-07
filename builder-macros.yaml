@@ -176,6 +176,8 @@
           export OS_PASSWORD="$KS_PASSWORD"
           export OS_NO_CACHE=True
           IMAGE_ID=`glance image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" | grep " id " |  cut -d '|' -f3`;
+          IMAGE_ID="$(echo -e $IMAGE_ID | sed -e 's/^[[:space:]]*//')"
+          IMAGE_ID="$(echo -e $IMAGE_ID | sed -e 's/[[:space:]]*$//')"
           echo "Image ID is $IMAGE_ID"
           RALLY_TENANT=701ec49454e64791b00fdf8a80fd14d8
           glance member-create "$IMAGE_ID" "$RALLY_TENANT"
