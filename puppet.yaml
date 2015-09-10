@@ -76,6 +76,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-murano
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-facts
     jobs:
       - '{name}-puppet-unit':
@@ -149,8 +156,8 @@
     name: puppet-keystone
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-logrotate
