@@ -125,7 +125,7 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: puppet-iptables
+    name: puppet-iptables_templates
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
