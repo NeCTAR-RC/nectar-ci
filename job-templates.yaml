@@ -386,6 +386,7 @@
 
     triggers:
       - gerrit:
+          trigger-on-patchset-uploaded-event: false
           trigger-on-change-merged-event: false
           projects:
             - project-compare-type: 'PLAIN'
