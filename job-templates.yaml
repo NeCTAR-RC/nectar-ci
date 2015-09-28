@@ -386,8 +386,7 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: false
-          trigger-on-change-merged-event: false
+          trigger-on-change-merged-event: true
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/nectar-images'
