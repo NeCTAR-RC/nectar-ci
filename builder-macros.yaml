@@ -76,7 +76,14 @@
 - builder:
     name: 'python-tox-py27'
     builders:
-      - shell: 'tox -e py27'
+      - shell: |
+            TMP=$(mktemp -d)
+            virtualenv $TMP/pip
+            source $TMP/pip/bin/activate
+            pip install pip==7.1.0
+            tox -e py27
+            deactivate
+            rm -rf $TMP
 
 - builder:
     name: 'python-tox-py27-dj16'
