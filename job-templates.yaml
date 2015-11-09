@@ -121,6 +121,7 @@
 
     builders:
       - python-tox-{environment}
+      - python-tox-{environment}-newpip
 
     publishers:
       - cobertura:
