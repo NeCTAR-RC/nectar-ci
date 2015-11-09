@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_6c494a8b",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-11-09T21:00:32Z",
+      "side": 1,
+      "message": "should this line be quoted still?",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 84,
+        "endChar": 25
+      },
+      "revId": "1fb0a6539d3bb590be67ea39928eb16d6b6e853f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
