@@ -388,6 +388,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-tas
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-ubuntu
     jobs:
       - '{name}-puppet-unit':
