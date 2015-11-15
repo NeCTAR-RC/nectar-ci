@@ -76,11 +76,7 @@
 - builder:
     name: 'python-tox-py27'
     builders:
-      - shell: |
-            virtualenv /tmp/pip
-            source /tmp/pip/bin/activate
-            pip install pip==7.1.0
-            tox -e py27
+      - shell: 'tox -e py27'
 
 - builder:
     name: 'python-tox-py27-dj16'
