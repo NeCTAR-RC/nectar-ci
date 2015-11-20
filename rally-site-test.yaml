@@ -1,0 +1,72 @@
+- project:
+    name: site-test
+    deployment: RCProd
+    site:
+        - intersect-01:
+            availability-zone: intersect-01
+        - intersect-02:
+            availability-zone: intersect-02
+        - melbourne-np:
+            availability-zone: melbourne-np
+        - melbourne-qh2:
+            availability-zone: melbourne-qh2
+        - monash-01:
+            availability-zone: monash-01
+        - monash-02:
+            availability-zone: monash-02
+        - nci:
+            availability-zone: NCI
+        - pawsey:
+            availability-zone: pawsey
+        - qld:
+            availability-zone: QRISCloud
+        - sa:
+            availability-zone: sa
+        - tasmania:
+            availability-zone: tasmania
+    jobs:
+      - 'rally-{name}-{site}'
+
+- job-template:
+    name: 'rally-{name}-{site}'
+    project-type: freestyle
+    defaults: global
+    node: upgrader
+    concurrent: false
+    quiet-period: 30
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /var/lib/jenkins/rally/bin/activate
+          rally deployment use {deployment}
+          rally task start /var/lib/jenkins/rally-jobs/test/{name}.json --task-args "{{\"availability_zone\":\"{availability-zone}\"}}"
+          rally task report --html --out output.html
+          rally task report --junit --out output.xml
+          rally task sla_check
+          RET=$?
+          rally task delete
+          exit $RET
+    publishers:
+      - html-publisher:
+          name: "Rally Report"
+          dir: "."
+          files: "output.html"
+          keep-all: true
+          allow-missing: true
+      - junit:
+          results: output.xml
+      - slack
