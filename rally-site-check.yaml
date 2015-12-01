@@ -1,0 +1,176 @@
+- project:
+    name: site-check
+    deployment: monitoring
+    site:
+        - intersect-01:
+            availability-zone: intersect-01
+        - intersect-02:
+            availability-zone: intersect-02
+        - melbourne-np:
+            availability-zone: melbourne-np
+        - melbourne-qh2:
+            availability-zone: melbourne-qh2
+        - monash-01:
+            availability-zone: monash-01
+        - monash-02:
+            availability-zone: monash-02
+        - nci:
+            availability-zone: NCI
+        - pawsey:
+            availability-zone: pawsey
+        - qld:
+            availability-zone: QRIScloud
+        - sa:
+            availability-zone: sa
+        - tasmania:
+            availability-zone: tasmania
+    jobs:
+      - 'rally-{name}-{site}'
+
+- job-template:
+    name: 'rally-{name}-{site}'
+    project-type: freestyle
+    defaults: global
+    node: rally
+    concurrent: false
+
+    parameters:
+      - string:
+          name: 'IMAGE_ID'
+          default: 'eeedf697-5a41-4d91-a478-01bb21e32cbe'
+          description: 'The ID of the glance image to test with.'
+      - string:
+          name: 'FLAVOR_NAME'
+          default: 'm2.tiny'
+          description: 'The name of the flavor to test with.'
+
+    triggers:
+      - timed: 'H */2 * * *'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+    scm:
+      - git:
+         url: https://github.com/NeCTAR-RC/rally-jobs.git
+         skip-tag: true
+         wipe-workspace: false
+         clean: true
+
+    builders:
+      - shell: |
+          #!/bin/bash
+          cd monitoring
+          rally deployment use {deployment}
+          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"{availability-zone}\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"$FLAVOR_NAME\"}}"
+          cd ..
+          rally task report --html --out output.html
+          rally task report --junit --out output.xml
+          rally task sla_check
+          RET=$?
+          rally task delete
+          exit $RET
+
+    publishers:
+      - html-publisher:
+          name: "Rally Report"
+          dir: "."
+          files: "output.html"
+          keep-all: true
+          allow-missing: true
+      - junit:
+          results: output.xml
+      - slack
+
+
+- project:
+    name: flavor-check
+    deployment: monitoring
+    flavor:
+        - 'm2.xsmall'
+        - 'm2.small'
+        - 'm2.medium'
+        - 'm2.large'
+        - 'm2.xlarge'
+    jobs:
+      - 'rally-{name}-{flavor}'
+
+- job-template:
+    name: 'rally-{name}-{flavor}'
+    project-type: freestyle
+    defaults: global
+    node: rally
+    concurrent: false
+
+    parameters:
+      - string:
+          name: 'IMAGE_ID'
+          default: 'eeedf697-5a41-4d91-a478-01bb21e32cbe'
+          description: 'The ID of the glance image to test with.'
+
+    triggers:
+      - timed: 'H */12 * * *'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+    scm:
+      - git:
+         url: https://github.com/NeCTAR-RC/rally-jobs.git
+         skip-tag: true
+         wipe-workspace: false
+         clean: true
+
+    builders:
+      - shell: |
+          #!/bin/bash
+          cd monitoring
+          rally deployment use {deployment}
+          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\"}}"
+          cd ..
+          rally task report --html --out output.html
+          rally task report --junit --out output.xml
+          rally task sla_check
+          RET=$?
+          rally task delete
+          exit $RET
+
+    publishers:
+      - html-publisher:
+          name: "Rally Report"
+          dir: "."
+          files: "output.html"
+          keep-all: true
+          allow-missing: true
+      - junit:
+          results: output.xml
+      - slack
+
+
+
+
+
