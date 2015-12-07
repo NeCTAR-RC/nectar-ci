@@ -354,6 +354,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-ntp
@@ -431,13 +434,6 @@
 
 - project:
     name: hiera-melbourne
-    jobs:
-      - '{name}-yaml':
-         access: 'nobody'
-         organisation: 'internal'
-
-- project:
-    name: hiera-nectar
     jobs:
       - '{name}-yaml':
          access: 'nobody'
