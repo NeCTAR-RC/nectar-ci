@@ -70,6 +70,14 @@
          image_name: 'Ubuntu 15.04 (Vivid) amd64'
 
 - project:
+    name: ubuntu-15.10-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 15.10 (Wily) amd64'
+
+- project:
     name: opensuse-13.2-x86_64
     jobs:
       - 'image-build-{name}':
