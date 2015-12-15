@@ -1,0 +1,19 @@
+- project:
+    name: freshdesk-pip
+    jobs:
+      - '{name}-nodejs-lint':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-test':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: freshdesk-openstack
+    jobs:
+      - '{name}-nodejs-lint':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-test':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
