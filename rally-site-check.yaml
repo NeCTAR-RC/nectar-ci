@@ -99,11 +99,21 @@
     name: flavor-check
     deployment: monitoring
     flavor:
-        - 'm2.xsmall'
-        - 'm2.small'
-        - 'm2.medium'
-        - 'm2.large'
-        - 'm2.xlarge'
+        - 'm2.xsmall':
+            avg_time: 150
+            max_time: 300
+        - 'm2.small':
+            avg_time: 150
+            max_time: 300
+        - 'm2.medium':
+            avg_time: 150
+            max_time: 300
+        - 'm2.large':
+            avg_time: 350
+            max_time: 600
+        - 'm2.xlarge':
+            avg_time: 1200
+            max_time: 2000
     jobs:
       - 'rally-{name}-{flavor}'
 
@@ -150,7 +160,7 @@
           #!/bin/bash
           cd monitoring
           rally deployment use {deployment}
-          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\"}}"
+          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\", \"max_avg_duration\":{avg_time}, \"max_seconds_per_iteration\":{max_time}}}"
           cd ..
           rally task report --html --out output.html
           rally task report --junit --out output.xml
@@ -169,8 +179,4 @@
       - junit:
           results: output.xml
       - slack
-
-
-
-
 
