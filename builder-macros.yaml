@@ -175,7 +175,7 @@
           export OS_USERNAME="$KS_USERNAME"
           export OS_PASSWORD="$KS_PASSWORD"
           export OS_NO_CACHE=True
-          IMAGE_ID=`glance image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" | grep " id " |  cut -d '|' -f3`;
+          IMAGE_ID=`glance --os-image-api-version=1 image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" | grep " id " |  cut -d '|' -f3`;
           IMAGE_ID="$(echo $IMAGE_ID | sed -e 's/^[[:space:]]*//')"
           IMAGE_ID="$(echo $IMAGE_ID | sed -e 's/[[:space:]]*$//')"
           echo "Image ID is $IMAGE_ID"
