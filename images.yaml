@@ -84,3 +84,11 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'OpenSuSE 13.2 x86_64'
+
+- project:
+    name: jenkins-slave-ubuntu-14.04-x86_64
+    jobs:
+      - 'image-build-rctest-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Jenkins Build Slave (Ubuntu 14.04 Trusty amd64)'

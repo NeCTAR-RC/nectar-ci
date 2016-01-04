@@ -429,6 +429,81 @@
     publishers:
       - slack
 
+- job-template:
+    name: 'image-build-rctest-{name}'
+    project-type: freestyle
+    defaults: global
+    node: trusty-icehouse
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+    triggers:
+      - gerrit:
+          trigger-on-change-merged-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/nectar-images'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean: true
+         choosing-strategy: gerrit
+
+    builders:
+      - image-builder-rctest:
+         image_name: "{image_name}"
+         job_name: "{name}"
+
+    wrappers:
+      - credentials-binding:
+        - username-password:
+           credential-id: 5c8f1b5c-2739-465e-ab10-e674b3fb884a
+           variable: KEYSTONE_CREDS
+
+    publishers:
+      - slack
 
 - job-template:
     name: '{name}-yaml'
