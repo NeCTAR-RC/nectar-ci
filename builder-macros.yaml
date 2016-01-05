@@ -191,21 +191,17 @@
           [ -d output-{job_name} ] && rm -fr output-{job_name}
           packer build -color=false {job_name}.json
           cd output-{job_name}
-          mv {job_name} {job_name}-orig.qcow2
-          qemu-img convert -c -o compat=0.10 -O qcow2 {job_name}-orig.qcow2 {job_name}.qcow2
-          rm {job_name}-orig.qcow2
-          KS_USERNAME=`echo $KEYSTONE_CREDS | cut -f1 -d:`
-          KS_PASSWORD=`echo $KEYSTONE_CREDS | cut -f2 -d:`
+          qemu-img convert -c -o compat=0.10 -O qcow2 {job_name} {job_name}.qcow2
+          rm {job_name}
 
           export OS_AUTH_URL=https://keystone.test.rc.nectar.org.au:5000/v2.0/
-          export OS_TENANT_ID=869bb83215514c56b95bbfb4cfa4704f
-          export OS_TENANT_NAME=image-builder
-          export OS_USERNAME="$KS_USERNAME"
-          export OS_PASSWORD="$KS_PASSWORD"
+          export OS_TENANT_ID=704fdb05a2f645ac8dbf4fb1222bf267
+          export OS_TENANT_NAME=nectar-ci
+          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
+          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
           export OS_NO_CACHE=True
-          IMAGE_ID=`glance --os-image-api-version=1 image-create --disk-format qcow2 --container-format bare --name "{image_name}_$BUILD_NUMBER" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" | grep " id " |  cut -d '|' -f3`;
-          IMAGE_ID="$(echo $IMAGE_ID | sed -e 's/^[[:space:]]*//')"
-          IMAGE_ID="$(echo $IMAGE_ID | sed -e 's/[[:space:]]*$//')"
+
+          IMAGE_ID=$(glance --os-image-api-version=1 image-create --disk-format qcow2 --container-format bare --name "{image_name}-v$BUILD_NUMBER" --file "{job_name}.qcow2" | grep " id " |  cut -d '|' -f3 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//');
           echo "Image ID is $IMAGE_ID"
 
 - builder:
