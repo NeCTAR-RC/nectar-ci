@@ -91,4 +91,4 @@
       - 'image-build-rctest-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'Jenkins Build Slave (Ubuntu 14.04 Trusty amd64)'
+         image_name: '{name}'
