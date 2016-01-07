@@ -46,6 +46,22 @@
          image_name: 'Fedora 21 x86_64'
 
 - project:
+    name: fedora-22-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 22 x86_64'
+
+- project:
+    name: fedora-23-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 23 x86_64'
+
+- project:
     name: scientific-6-x86_64
     jobs:
       - 'image-build-{name}':
