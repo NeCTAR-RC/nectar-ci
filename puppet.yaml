@@ -6,6 +6,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-anu
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-ceilometer
     jobs:
       - '{name}-puppet-unit':
@@ -301,6 +308,13 @@
 
 - project:
     name: puppet-profile
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
+    name: puppet-qld
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
