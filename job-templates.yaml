@@ -358,6 +358,7 @@
     project-type: freestyle
     defaults: global
     node: trusty-icehouse
+    quiet-period: 30
 
     parameters:
       - string:
@@ -434,6 +435,7 @@
     project-type: freestyle
     defaults: global
     node: trusty-icehouse
+    quiet-period: 30
 
     parameters:
       - string:
