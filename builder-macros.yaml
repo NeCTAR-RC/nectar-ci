@@ -158,32 +158,43 @@
     name: 'image-builder'
     builders:
       - shell: |
-          DESC="NeCTAR {image_name}"
-
           [ -d output-{job_name} ] && rm -fr output-{job_name}
           packer build -color=false {job_name}.json
           cd output-{job_name}
-          mv {job_name} {job_name}-orig.qcow2
-          qemu-img convert -c -o compat=0.10 -O qcow2 {job_name}-orig.qcow2 {job_name}.qcow2
-          rm {job_name}-orig.qcow2
-          KS_USERNAME=`echo $KEYSTONE_CREDS | cut -f1 -d:`
-          KS_PASSWORD=`echo $KEYSTONE_CREDS | cut -f2 -d:`
-
+          qemu-img convert -c -o compat=0.10 -O qcow2 {job_name} {job_name}.qcow2
+          rm {job_name}
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v2.0/
           export OS_TENANT_ID=28eadf5ad64b42a4929b2fb7df99275c
           export OS_TENANT_NAME=NeCTAR-Images
-          export OS_USERNAME="$KS_USERNAME"
-          export OS_PASSWORD="$KS_PASSWORD"
           export OS_NO_CACHE=True
-          IMAGE_ID=`glance --os-image-api-version=1 image-create --disk-format qcow2 --container-format bare --name "$DESC" --file "{job_name}.qcow2" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" | grep " id " |  cut -d '|' -f3`;
-          IMAGE_ID="$(echo $IMAGE_ID | sed -e 's/^[[:space:]]*//')"
-          IMAGE_ID="$(echo $IMAGE_ID | sed -e 's/[[:space:]]*$//')"
-          echo "Image ID is $IMAGE_ID"
-          RALLY_TENANT=701ec49454e64791b00fdf8a80fd14d8
-          glance member-create "$IMAGE_ID" "$RALLY_TENANT"
-          wget http://admin.mgmt.melbourne.rc.nectar.org.au/image-building/image-build.yaml
-          nova boot --image $IMAGE_ID --flavor m1.small --key-name root-jenkins-rc-nectar-org-au {job_name}
-
+          set +x
+          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
+          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
+          set -x
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file {job_name}.qcow2 --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          set +e
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m2.tiny --key-name jenkins-image-testing "test_{job_name}_$BUILD_NUMBER")
+          i=0
+          while [ $i -le 50 ]; do
+              [ "$(openstack server show -f value -c status $INSTANCE_ID)" = "ACTIVE" ] && break
+              [ $i -eq 50 ] && exit 1
+              i=$((i+1))
+              sleep 5
+          done
+          IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
+          chmod 600 $SSH_TESTING_KEY
+          j=0
+          while [ $j -le 50 ]; do
+              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS exit
+              [ $? -eq 0 ] && break
+              [ $j -eq 50 ] && exit 1
+              j=$((j+1))
+              sleep 5
+          done
+          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS '/bin/bash /tmp/testing/run_tests.sh'
+          EXIT_CODE=$?
+          openstack server delete $INSTANCE_ID
+          exit $EXIT_CODE
 - builder:
     name: 'image-builder-rctest'
     builders:

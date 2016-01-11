@@ -12,6 +12,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'CentOS 6 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: centos-7-x86_64
@@ -20,6 +21,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'CentOS 7 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: debian-7-x86_64
@@ -28,6 +30,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Debian 7 (Wheezy) amd64'
+         default_user: 'debian'
 
 - project:
     name: debian-8-x86_64
@@ -36,6 +39,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Debian 8 (Jessie) amd64'
+         default_user: 'debian'
 
 - project:
     name: fedora-21-x86_64
@@ -44,6 +48,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Fedora 21 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: fedora-22-x86_64
@@ -52,6 +57,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Fedora 22 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: fedora-23-x86_64
@@ -60,6 +66,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Fedora 23 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: scientific-6-x86_64
@@ -68,6 +75,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Scientific Linux 6 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: ubuntu-14.04-x86_64
@@ -76,6 +84,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 14.04 (Trusty) amd64'
+         default_user: 'ubuntu'
 
 - project:
     name: ubuntu-15.04-x86_64
@@ -84,6 +93,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 15.04 (Vivid) amd64'
+         default_user: 'ubuntu'
 
 - project:
     name: ubuntu-15.10-x86_64
@@ -92,6 +102,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 15.10 (Wily) amd64'
+         default_user: 'ubuntu'
 
 - project:
     name: opensuse-13.2-x86_64
@@ -100,6 +111,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'OpenSuSE 13.2 x86_64'
+         default_user: 'ec2-user'
 
 - project:
     name: jenkins-slave-ubuntu-14.04-x86_64
@@ -108,3 +120,4 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: '{name}'
+         default_user: 'ubuntu'

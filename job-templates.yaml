@@ -419,12 +419,16 @@
       - image-builder:
          image_name: "{image_name}"
          job_name: "{name}"
+         default_user: "{default_user}"
 
     wrappers:
       - credentials-binding:
         - username-password:
            credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
            variable: KEYSTONE_CREDS
+        - file:
+           credential-id: 10270abc-f1f9-47c7-ae66-114ae8246a71
+           variable: SSH_TESTING_KEY
 
     publishers:
       - slack
