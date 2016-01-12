@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_a9940545",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-01-12T23:40:39Z",
+      "side": 1,
+      "message": "Can we use m2 flavour here. Maybe m2.small if m2.tiny too small",
+      "range": {
+        "startLine": 176,
+        "startChar": 90,
+        "endLine": 176,
+        "endChar": 98
+      },
+      "revId": "c1cca8d62ca77519a02e4aa6a708a127ab4f6362",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
