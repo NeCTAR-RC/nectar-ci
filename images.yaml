@@ -110,7 +110,16 @@
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'OpenSuSE 13.2 x86_64'
+         image_name: 'openSUSE 13.2 x86_64'
+         default_user: 'ec2-user'
+
+- project:
+    name: opensuse-leap-42.1-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'openSUSE Leap 42.1 x86_64'
          default_user: 'ec2-user'
 
 - project:
