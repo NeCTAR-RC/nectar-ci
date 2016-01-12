@@ -173,25 +173,30 @@
           set -x
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file {job_name}.qcow2 --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           set +e
-          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m2.tiny --key-name jenkins-image-testing "test_{job_name}_$BUILD_NUMBER")
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing "test_{job_name}_$BUILD_NUMBER")
           i=0
-          while [ $i -le 50 ]; do
+          while [ $i -le 10 ]; do
               [ "$(openstack server show -f value -c status $INSTANCE_ID)" = "ACTIVE" ] && break
-              [ $i -eq 50 ] && exit 1
+              if [ $i -eq 10 ]; then
+                  openstack server delete $INSTANCE_ID
+                  exit 1
+              fi
               i=$((i+1))
-              sleep 5
+              sleep 30
           done
           IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
           chmod 600 $SSH_TESTING_KEY
           j=0
-          while [ $j -le 50 ]; do
-              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS exit
-              [ $? -eq 0 ] && break
-              [ $j -eq 50 ] && exit 1
+          while [ $j -le 10 ]; do
+              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS exit && break
+              if [ $j -eq 10 ]; then
+                  openstack server delete $INSTANCE_ID
+                  exit 1
+              fi
               j=$((j+1))
-              sleep 5
+              sleep 30
           done
-          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS '/bin/bash /tmp/testing/run_tests.sh'
+          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
           EXIT_CODE=$?
           openstack server delete $INSTANCE_ID
           exit $EXIT_CODE
