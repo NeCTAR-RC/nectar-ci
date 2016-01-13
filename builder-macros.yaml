@@ -8,12 +8,25 @@
     builders:
       - shell: |
           if [ -f Gemfile ]; then
-            mkdir .bundled_gems
-            export GEM_HOME=`pwd`/.bundled_gems
+            mkdir -p /tmp/rake-lint
+            export GEM_HOME=/tmp/rake-lint
             bundle install
             bundle exec rake lint 2>&1
           else
             rake lint 2>&1
+          fi
+
+- builder:
+    name: rake-test
+    builders:
+      - shell: |
+          if [ -f Gemfile ]; then
+            mkdir -p /tmp/rake-test
+            export GEM_HOME=/tmp/rake-test
+            bundle install
+            bundle exec rake test 2>&1
+          else
+            rake test 2>&1
           fi
 
 - builder:
@@ -267,3 +280,27 @@
       - shell: |
           npm install
           npm run test
+
+- builder:
+    name: jekyll-deploy
+    builders:
+      - shell: |
+          mkdir -p /tmp/jekyll-vendor
+          export GEM_HOME=/tmp/jekyll-vendor
+          bundle install
+          bundle exec jekyll build
+          GH_USERNAME=`echo $GITHUB_CREDS | cut -f1 -d:`
+          GH_PASSWORD=`echo $GITHUB_CREDS | cut -f2 -d:`
+
+          rm -rf /tmp/_site
+          mv _site /tmp/
+          git remote add github https://$GH_USERNAME:$GH_PASSWORD@github.com/NeCTAR-RC/nectar-training.git
+          git symbolic-ref HEAD refs/heads/gh-pages
+          rm .git/index
+          git clean -fdx
+          mv /tmp/_site/* .
+          git add --all
+          git config --global user.email "jenkins@rc.nectar.org.au"
+          git config --global user.name "Jenkins"
+          git commit -m "Auto upload"
+          git push --force github gh-pages
