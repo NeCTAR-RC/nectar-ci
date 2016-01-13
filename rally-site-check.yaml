@@ -160,7 +160,7 @@
           #!/bin/bash
           cd monitoring
           rally deployment use {deployment}
-          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\", \"max_avg_duration\":{avg_time}, \"max_seconds_per_iteration\":{max_time}}}"
+          rally task start flavor-check.yaml --task-args "{{\"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\", \"max_avg_duration\":{avg_time}, \"max_seconds_per_iteration\":{max_time}}}"
           cd ..
           rally task report --html --out output.html
           rally task report --junit --out output.xml
