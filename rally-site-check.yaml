@@ -71,16 +71,17 @@
 
     builders:
       - shell: |
-          #!/bin/bash
+          #!/bin/bash -xe
           cd monitoring
           rally deployment use {deployment}
-          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"{availability-zone}\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"$FLAVOR_NAME\"}}"
+          rally task start site-check.yaml --task-args "{{\"availability_zone\":\"{availability-zone}\", \"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"$FLAVOR_NAME\"}}" --tag "$BUILD_TAG"
+          TASK=$(rally task list | awk "/$BUILD_TAG/ {{print \$2}}")
           cd ..
-          rally task report --html --out output.html
-          rally task report --junit --out output.xml
-          rally task sla_check
+          rally task report --tasks $TASK --html --out output.html
+          rally task report --tasks $TASK --junit --out output.xml
+          rally task sla_check --uuid $TASK
           RET=$?
-          rally task delete
+          rally task delete --uuid $TASK
           exit $RET
 
     publishers:
@@ -157,16 +158,17 @@
 
     builders:
       - shell: |
-          #!/bin/bash
+          #!/bin/bash -xe
           cd monitoring
           rally deployment use {deployment}
-          rally task start flavor-check.yaml --task-args "{{\"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\", \"max_avg_duration\":{avg_time}, \"max_seconds_per_iteration\":{max_time}}}"
+          rally task start flavor-check.yaml --task-args "{{\"image_id\":\"$IMAGE_ID\", \"flavor_name\":\"{flavor}\", \"max_avg_duration\":{avg_time}, \"max_seconds_per_iteration\":{max_time}}}" --tag "$BUILD_TAG"
+          TASK=$(rally task list | awk "/$BUILD_TAG/ {{print \$2}}")
           cd ..
-          rally task report --html --out output.html
-          rally task report --junit --out output.xml
-          rally task sla_check
+          rally task report --tasks $TASK --html --out output.html
+          rally task report --tasks $TASK --junit --out output.xml
+          rally task sla_check --uuid $TASK
           RET=$?
-          rally task delete
+          rally task delete --uuid $TASK
           exit $RET
 
     publishers:
