@@ -234,6 +234,14 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'functional'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
