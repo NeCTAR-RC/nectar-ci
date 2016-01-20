@@ -12,6 +12,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'CentOS 6 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'centos'
+         os_version: '6'
          default_user: 'ec2-user'
 
 - project:
@@ -21,6 +24,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'CentOS 7 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'centos'
+         os_version: '7'
          default_user: 'ec2-user'
 
 - project:
@@ -30,6 +36,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Debian 7 (Wheezy) amd64'
+         architecture: 'x86_64'
+         os_distro: 'debian'
+         os_version: '7'
          default_user: 'debian'
 
 - project:
@@ -39,6 +48,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Debian 8 (Jessie) amd64'
+         architecture: 'x86_64'
+         os_distro: 'debian'
+         os_version: '8'
          default_user: 'debian'
 
 - project:
@@ -48,6 +60,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Fedora 22 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '22'
          default_user: 'ec2-user'
 
 - project:
@@ -57,6 +72,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Fedora 23 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '23'
          default_user: 'ec2-user'
 
 - project:
@@ -66,6 +84,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Scientific Linux 6 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'scientific'
+         os_version: '6'
          default_user: 'ec2-user'
 
 - project:
@@ -75,6 +96,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 14.04 (Trusty) amd64'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '14.04'
          default_user: 'ubuntu'
 
 - project:
@@ -84,6 +108,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 15.10 (Wily) amd64'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '15.10'
          default_user: 'ubuntu'
 
 - project:
@@ -93,6 +120,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'openSUSE 13.2 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'opensuse'
+         os_version: '13.2'
          default_user: 'ec2-user'
 
 - project:
@@ -102,6 +132,9 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'openSUSE Leap 42.1 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'opensuse'
+         os_version: '42.1'
          default_user: 'ec2-user'
 
 - project:
