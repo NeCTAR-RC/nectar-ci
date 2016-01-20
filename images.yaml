@@ -42,15 +42,6 @@
          default_user: 'debian'
 
 - project:
-    name: fedora-21-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 21 x86_64'
-         default_user: 'ec2-user'
-
-- project:
     name: fedora-22-x86_64
     jobs:
       - 'image-build-{name}':
@@ -84,15 +75,6 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 14.04 (Trusty) amd64'
-         default_user: 'ubuntu'
-
-- project:
-    name: ubuntu-15.04-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 15.04 (Vivid) amd64'
          default_user: 'ubuntu'
 
 - project:
