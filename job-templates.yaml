@@ -399,6 +399,9 @@
       - image-builder:
          image_name: "{image_name}"
          job_name: "{name}"
+         architecture: "{architecture}"
+         os_distro: "{os_distro}"
+         os_version: "{os_version}"
          default_user: "{default_user}"
 
     wrappers:
