@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_35bcc26c",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-01-21T02:58:18Z",
+      "side": 1,
+      "message": "bad",
+      "range": {
+        "startLine": 383,
+        "startChar": 9,
+        "endLine": 383,
+        "endChar": 29
+      },
+      "revId": "1ba9d4f688d02a228a8c5c9841e0359eea59d9d5",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
