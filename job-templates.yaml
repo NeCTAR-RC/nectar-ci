@@ -447,26 +447,6 @@
           notify-backtonormal: true
           notify-repeatedfailure: true
 
-    triggers:
-      - gerrit:
-          trigger-on-change-merged-event: true
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/nectar-images'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-          silent: false
-          escape-quotes: true
-
-          skip-vote:
-            successful: true
-            failed: true
-            unstable: true
-            notbuilt: true
-
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
