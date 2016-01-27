@@ -103,18 +103,23 @@
         - 'm2.xsmall':
             avg_time: 150
             max_time: 300
+            run_freq: 2
         - 'm2.small':
             avg_time: 150
             max_time: 300
+            run_freq: 2
         - 'm2.medium':
             avg_time: 150
             max_time: 300
+            run_freq: 2
         - 'm2.large':
             avg_time: 350
             max_time: 600
+            run_freq: 2
         - 'm2.xlarge':
             avg_time: 1200
             max_time: 2000
+            run_freq: 6
     jobs:
       - 'rally-{name}-{flavor}'
 
@@ -132,7 +137,7 @@
           description: 'The ID of the glance image to test with.'
 
     triggers:
-      - timed: 'H */12 * * *'
+      - timed: 'H */{run_freq} * * *'
 
     properties:
       - authorization:
