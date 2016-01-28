@@ -338,8 +338,8 @@
     name: puppet-reporting
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+        access: 'anonymous'
+        organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-role
