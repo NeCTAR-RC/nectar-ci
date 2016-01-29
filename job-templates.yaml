@@ -289,6 +289,73 @@
 
 
 - job-template:
+    name: '{name}-os-deb-package-test'
+    project-type: freestyle
+    defaults: global
+    node: trusty-icehouse
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+    triggers:
+      - gerrit:
+          trigger-on-patchset-uploaded-event: true
+          trigger-on-draft-published-event: true
+          trigger-for-unreviewed-patches: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'debian/.*'
+          silent: false
+          escape-quotes: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean: true
+         choosing-strategy: gerrit
+
+    builders:
+      - os-pbuilder-checkout
+      - os-pbuilder-create
+      - os-pbuilder-buildpackage-no-upload
+
+    publishers:
+      - slack
+
+
+- job-template:
     name: '{name}-run-tests'
     project-type: freestyle
     defaults: global
