@@ -117,7 +117,7 @@
             max_time: 600
             run_freq: 2
         - 'm2.xlarge':
-            avg_time: 1200
+            avg_time: 1500
             max_time: 2000
             run_freq: 6
     jobs:
