@@ -363,6 +363,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-tempest
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-site-melbourne
     jobs:
       - '{name}-puppet-unit':
