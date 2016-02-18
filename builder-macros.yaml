@@ -226,7 +226,7 @@
               j=$((j+1))
               sleep 30
           done
-          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS '/bin/bash /var/lib/packer/build/run_tests.sh'
+          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
           EXIT_CODE=$?
           if [ $EXIT_CODE -eq 0 ]; then
               echo "================================================================================"
