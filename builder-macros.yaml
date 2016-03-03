@@ -306,18 +306,11 @@
           git diff --name-status HEAD~1 | grep '^[^D].*\.md' | cut -f2- | xargs -I filename /tmp/vendor/bin/mdl -s /tmp/vendor/md_style.rb "filename"
 
 - builder:
-    name: nodejs-lint
-    builders:
-      - shell: |
-          npm install
-          npm run lint
-
-- builder:
     name: nodejs-test
     builders:
       - shell: |
           npm install
-          npm run test
+          npm test
 
 - builder:
     name: jekyll-deploy
