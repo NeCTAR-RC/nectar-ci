@@ -473,3 +473,12 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
+
+
+- project:
+    name: puppet-monash
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
