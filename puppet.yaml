@@ -83,6 +83,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-midonet
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-mongo
     jobs:
       - '{name}-puppet-unit':
