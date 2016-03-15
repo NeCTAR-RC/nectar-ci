@@ -203,6 +203,7 @@
           export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
           set -x
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file {job_name}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          [ "{job_name}" = "ubuntu-14.04-x86_64" ] && glance image-update --property murano_image_info='{{"title": "NeCTAR {image_name}", "type": "linux"}}' $IMAGE_ID
           set +e
           INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing "test_{job_name}_$BUILD_NUMBER")
           i=0
@@ -249,7 +250,7 @@
           cd output-{job_name}
           qemu-img convert -c -o compat=0.10 -O qcow2 {job_name} {job_name}.qcow2
           rm {job_name}
-
+          set +x
           export OS_AUTH_URL=https://keystone.test.rc.nectar.org.au:5000/v2.0/
           export OS_TENANT_ID=704fdb05a2f645ac8dbf4fb1222bf267
           export OS_TENANT_NAME=nectar-ci
