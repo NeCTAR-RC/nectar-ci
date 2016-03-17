@@ -370,6 +370,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-spartan
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-tempest
     jobs:
       - '{name}-puppet-unit':
