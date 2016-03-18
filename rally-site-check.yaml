@@ -45,7 +45,7 @@
           description: 'The name of the flavor to test with.'
 
     triggers:
-      - timed: 'H */2 * * *'
+      - timed: 'H */6 * * *'
 
     properties:
       - authorization:
