@@ -240,7 +240,7 @@
               echo ""
               echo "================================================================================"
           fi
-          exit -x
+          set -x
           openstack server delete $INSTANCE_ID
           exit $EXIT_CODE
 - builder:
