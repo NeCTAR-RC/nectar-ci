@@ -190,7 +190,7 @@
     builders:
       - shell: |
           [ -d output-{job_name} ] && rm -fr output-{job_name}
-          packer build -color=false {job_name}.json
+          packer build -color=false -var-file=variables-nectar.json {job_name}.json
           cd output-{job_name}
           qemu-img convert -c -o compat=0.10 -O qcow2 {job_name} {job_name}.qcow2
           rm {job_name}
@@ -229,6 +229,7 @@
           done
           ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
           EXIT_CODE=$?
+          exit +x
           if [ $EXIT_CODE -eq 0 ]; then
               echo "================================================================================"
               echo ""
@@ -239,6 +240,7 @@
               echo ""
               echo "================================================================================"
           fi
+          exit -x
           openstack server delete $INSTANCE_ID
           exit $EXIT_CODE
 - builder:
