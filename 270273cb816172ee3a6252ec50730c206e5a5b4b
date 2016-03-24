@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_5e9cf069",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-03-24T04:47:17Z",
+      "side": 1,
+      "message": "Not capitals like others",
+      "range": {
+        "startLine": 369,
+        "startChar": 24,
+        "endLine": 369,
+        "endChar": 33
+      },
+      "revId": "270273cb816172ee3a6252ec50730c206e5a5b4b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
