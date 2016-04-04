@@ -301,6 +301,7 @@
           exclude_rule 'MD002' # First header should be a h1 header
           exclude_rule 'MD006' # Lists at beginning of line
           exclude_rule 'MD007' # List indentation
+          exclude_rule 'MD014' # Dollar signs used before commands without showing output
           exclude_rule 'MD033' # Inline HTML
           exclude_rule 'MD034' # Bare URL used
           exclude_rule 'MD040' # Fenced code blocks should have a language specified
