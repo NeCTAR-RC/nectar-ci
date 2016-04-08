@@ -370,14 +370,6 @@
          environment: 'py27'
 
 - project:
-    name: tempest-lib
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-
-- project:
     name: rc-servicecheck
     jobs:
       - '{name}-python-tox-{environment}':
