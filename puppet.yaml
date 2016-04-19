@@ -177,8 +177,8 @@
     name: puppet-keystone
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-logrotate
