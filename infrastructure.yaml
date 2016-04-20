@@ -41,7 +41,7 @@
       - timed: "@midnight"
     publishers:
       - trigger:
-          project: testcloud-nova-rally,testcloud-cinder-rally,testcloud-keystone-rally,testcloud-glance-rally,testcloud-swift-rally
+          project: testcloud-nova-rally,testcloud-cinder-rally,testcloud-keystone-rally,testcloud-glance-rally,testcloud-swift-rally,testcloud-neutron-rally
           threshold: SUCCESS
       - slack
     properties:
