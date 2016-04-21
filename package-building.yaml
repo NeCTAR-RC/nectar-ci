@@ -1,0 +1,83 @@
+
+- job-group:
+    name: '{name}-deb-package'
+    jobs:
+      - '{name}-{ubuntu_release}-{os_release}-deb-package':
+            ubuntu_release: 'trusty'
+            os_release: 'kilo'
+      - '{name}-{ubuntu_release}-{os_release}-deb-package':
+            ubuntu_release: 'trusty'
+            os_release: 'liberty'
+      - '{name}-{ubuntu_release}-{os_release}-deb-package':
+            ubuntu_release: 'xenial'
+            os_release: 'mitaka'
+
+- job-template:
+    name: '{name}-{ubuntu_release}-{os_release}-deb-package'
+    project-type: freestyle
+    defaults: global
+    node: '{ubuntu_release}-{os_release}'
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+    triggers:
+      - gerrit:
+          trigger-on-change-merged-event: true
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/{os_release}'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'debian/{os_release}'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean: true
+         choosing-strategy: gerrit
+
+    builders:
+      - os-pbuilder-checkout
+      - os-pbuilder-create
+      - os-pbuilder-buildpackage
+
+    publishers:
+      - slack
