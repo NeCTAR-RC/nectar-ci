@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_12040d7a",
+        "filename": "rally-site-check.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-05-04T06:32:25Z",
+      "side": 1,
+      "message": "lets leave it at 6 hours, we have tempest so this doesn\u0027t need to happen a lot. Even once a day would be fine",
+      "range": {
+        "startLine": 48,
+        "startChar": 20,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "58e483f08668004b781e054e407c3f1e6543ad2a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
