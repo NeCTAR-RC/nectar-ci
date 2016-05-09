@@ -37,7 +37,7 @@
     parameters:
       - string:
           name: 'IMAGE_ID'
-          default: 'ed01445a-792e-4a69-8868-9ffa5e7e0c06'
+          default: 'eeedf697-5a41-4d91-a478-01bb21e32cbe'
           description: 'The ID of the glance image to test with.'
       - string:
           name: 'FLAVOR_NAME'
@@ -133,7 +133,7 @@
     parameters:
       - string:
           name: 'IMAGE_ID'
-          default: 'ed01445a-792e-4a69-8868-9ffa5e7e0c06'
+          default: 'eeedf697-5a41-4d91-a478-01bb21e32cbe'
           description: 'The ID of the glance image to test with.'
 
     triggers:
