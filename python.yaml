@@ -436,3 +436,40 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: crams-api
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py35'
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: crams-rc-provisioning
+    jobs:
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py35'
+      - '{name}-python-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: crams-rc-frontend
+    jobs:
+     - '{name}-nodejs-test':
+        access: 'anonymous'
+        organisation: 'NeCTAR-RC'
