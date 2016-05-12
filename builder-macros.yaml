@@ -92,6 +92,11 @@
       - shell: 'tox -e py27'
 
 - builder:
+    name: 'python-tox-py35'
+    builders:
+      - shell: 'tox -e py35'
+
+- builder:
     name: 'python-tox-pep8'
     builders:
       - shell: 'tox -e pep8'

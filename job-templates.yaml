@@ -68,7 +68,7 @@
     name: '{name}-python-tox-{environment}'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
