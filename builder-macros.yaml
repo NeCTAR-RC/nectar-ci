@@ -92,6 +92,11 @@
       - shell: 'tox -e py27'
 
 - builder:
+    name: 'python-tox-py35'
+    builders:
+      - shell: 'tox -e py35'
+
+- builder:
     name: 'python-tox-pep8'
     builders:
       - shell: 'tox -e pep8'
@@ -113,6 +118,11 @@
           wget https://raw.githubusercontent.com/NeCTAR-RC/flake8-diff/master/lint.py
           chmod +x lint.py
           ./lint.py --linter flake8 -- tox -e flake8
+
+- builder:
+    name: 'python-tox-flake8-py3'
+    builders:
+      - shell: 'tox -e flake8'
 
 - builder:
     name: 'python-tox-jshint'
