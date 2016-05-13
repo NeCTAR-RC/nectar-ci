@@ -2,7 +2,7 @@
     name: '{name}-puppet-unit'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
@@ -545,7 +545,7 @@
     name: '{name}-yaml'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
@@ -606,7 +606,7 @@
     name: '{name}-dummy'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
@@ -656,7 +656,7 @@
     name: '{name}-markdown'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
@@ -819,7 +819,7 @@
     name: '{name}-jekyll-build'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
@@ -880,7 +880,7 @@
     name: '{name}-jekyll-deploy'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
