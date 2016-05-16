@@ -67,7 +67,8 @@
          url: https://github.com/NeCTAR-RC/rally-jobs.git
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
 
     builders:
       - shell: |
@@ -159,7 +160,8 @@
          url: https://github.com/NeCTAR-RC/rally-jobs.git
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
 
     builders:
       - shell: |

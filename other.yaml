@@ -58,7 +58,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
