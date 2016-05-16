@@ -52,7 +52,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
@@ -119,7 +120,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
 
@@ -210,7 +212,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: true
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
@@ -284,7 +287,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: true
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
@@ -352,7 +356,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: true
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
@@ -417,7 +422,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
 
@@ -470,7 +476,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: true
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
@@ -533,7 +540,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: true
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
@@ -603,7 +611,8 @@
             - origin/$GERRIT_BRANCH
           skip-tag: true
           wipe-workspace: false
-          clean: true
+          clean:
+           after: true
           choosing-strategy: gerrit
 
     builders:
@@ -657,7 +666,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
 
@@ -718,7 +728,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
 
@@ -822,7 +833,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
 
@@ -885,7 +897,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: false
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
 
@@ -955,7 +968,8 @@
           - origin/$GERRIT_BRANCH
          skip-tag: true
          wipe-workspace: true
-         clean: true
+         clean:
+           after: true
          choosing-strategy: gerrit
 
     builders:
