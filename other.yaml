@@ -36,8 +36,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-library'
