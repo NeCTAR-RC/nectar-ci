@@ -28,12 +28,14 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
-              branches:         
+              branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
@@ -93,8 +95,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -179,7 +183,8 @@
 
     triggers:
       - gerrit:
-          trigger-on-change-merged-event: true
+          trigger-on:
+              - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -250,7 +255,8 @@
 
     triggers:
       - gerrit:
-          trigger-on-change-merged-event: true
+          trigger-on:
+              - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -323,9 +329,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
-          trigger-for-unreviewed-patches: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -386,8 +393,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -570,8 +579,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -622,8 +633,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -681,8 +694,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -783,8 +798,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -844,8 +861,10 @@
 
     triggers:
       - gerrit:
-          trigger-on-patchset-uploaded-event: true
-          trigger-on-draft-published-event: true
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -909,7 +928,8 @@
 
     triggers:
       - gerrit:
-          trigger-on-change-merged-event: true
+          trigger-on:
+              - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
