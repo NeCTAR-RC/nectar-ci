@@ -27,6 +27,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-crams
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-dashboard
     jobs:
       - '{name}-puppet-unit':
