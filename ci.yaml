@@ -2,7 +2,7 @@
     name: '{name}-ruby-lint'
     project-type: freestyle
     defaults: global
-    node: trusty-icehouse
+    node: xenial-mitaka
 
     parameters:
       - string:
