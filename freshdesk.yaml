@@ -4,6 +4,10 @@
       - '{name}-nodejs-test':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
 
 - project:
     name: freshdesk-openstack
@@ -11,3 +15,7 @@
       - '{name}-nodejs-test':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+

@@ -9,7 +9,10 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - 'icehouse-deb-package':
+      - '{name}-trusty-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -24,7 +27,10 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - 'icehouse-deb-package':
+      - '{name}-trusty-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -54,7 +60,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'jshint'
-      - 'icehouse-deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -69,82 +75,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - 'icehouse-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: karaage
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - 'icehouse-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: karaage-keystone
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - 'icehouse-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: karaage-user
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - 'icehouse-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: karaage-auth
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - 'icehouse-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: karaage-terms
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-python-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - 'icehouse-deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -159,7 +90,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - 'deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -182,24 +113,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - 'deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-
-- project:
-    name: rcportal
-    jobs:
-      - '{name}-python-tox-{environment}':
-         access: 'nobody'
-         organisation: 'internal'
-         environment: 'flake8'
-      - '{name}-python-tox-{environment}':
-         access: 'nobody'
-         organisation: 'internal'
-         environment: 'py27'
-      - '{name}-os-deb-package':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: rcshibboleth
@@ -227,7 +143,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - 'deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -452,7 +368,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8-py3'
-      - '{name}-os-deb-package':
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -467,7 +383,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8-py3'
-      - '{name}-os-deb-package':
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
