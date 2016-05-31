@@ -1,0 +1,23 @@
+- job:
+    name: tempest-site-check
+    project-type: freestyle
+    defaults: global
+    node: upgrader
+    concurrent: false
+    builders:
+      - shell: '/usr/local/lib/nagios/plugins/check_tempest.py -t tempest.api.compute.servers.test_create_server.ServersTestJSON.test_verify_created_server_vcpus -s $AVAILABILITY_ZONE --host $HOST'
+    parameters:
+      - string:
+          name: 'AVAILABILITY_ZONE'
+      - string:
+          name: 'HOST'
+    properties:
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
