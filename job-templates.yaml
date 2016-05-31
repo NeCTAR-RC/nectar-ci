@@ -178,6 +178,8 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
 
@@ -252,6 +254,8 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
 
