@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_4e88a61f",
+        "filename": "tempest.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-06-01T04:53:19Z",
+      "side": 1,
+      "message": "hypervisor",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "bc02c8eb1c4760423c3ef4498ed4fb9cac982c96",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bad4c104_6e7c8a21",
+        "filename": "tempest.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-06-01T04:53:19Z",
+      "side": 1,
+      "message": "I would add something like:\n  description: \u0027The hostname of the hypervisor to check\u0027",
+      "revId": "bc02c8eb1c4760423c3ef4498ed4fb9cac982c96",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
