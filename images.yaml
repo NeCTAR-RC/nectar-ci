@@ -30,6 +30,18 @@
          default_user: 'ec2-user'
 
 - project:
+    name: centos-7-x86_64-murano-agent
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'CentOS 7 x86_64 (pre-installed murano-agent)'
+         architecture: 'x86_64'
+         os_distro: 'centos'
+         os_version: '7'
+         default_user: 'ec2-user'
+
+- project:
     name: debian-7-x86_64
     jobs:
       - 'image-build-{name}':
@@ -102,6 +114,18 @@
          default_user: 'ubuntu'
 
 - project:
+    name: ubuntu-14.04-x86_64-murano-agent
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 14.04 (Trusty) amd64 (pre-installed murano-agent)'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '14.04'
+         default_user: 'ubuntu'
+
+- project:
     name: ubuntu-15.10-x86_64
     jobs:
       - 'image-build-{name}':
@@ -120,6 +144,18 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 16.04 LTS (Xenial) amd64'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '16.04'
+         default_user: 'ubuntu'
+
+- project:
+    name: ubuntu-16.04-x86_64-murano-agent
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 16.04 LTS (Xenial) amd64 (pre-installed murano-agent)'
          architecture: 'x86_64'
          os_distro: 'ubuntu'
          os_version: '16.04'
