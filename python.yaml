@@ -328,7 +328,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-os-deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -343,7 +343,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-os-deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -353,7 +353,7 @@
       - '{name}-run-tests':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-os-deb-package':
+      - '{name}-trusty-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
