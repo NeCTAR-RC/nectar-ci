@@ -71,3 +71,10 @@
 
     publishers:
       - slack
+
+- project:
+    name: nectar-testing
+    jobs:
+      - '{name}-yaml':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
