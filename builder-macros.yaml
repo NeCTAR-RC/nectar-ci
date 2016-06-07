@@ -199,6 +199,7 @@
     name: 'image-builder'
     builders:
       - shell: |
+          #!/bin/bash -xe
           [ -d output-{job_name} ] && rm -fr output-{job_name}
           packer build -color=false -var-file=variables-nectar.json {job_name}.json
           cd output-{job_name}
