@@ -1,11 +1,11 @@
 - project:
     name: hivemind
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -19,11 +19,11 @@
 - project:
     name: hivemind_contrib
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -44,19 +44,19 @@
 - project:
     name: langstroth
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27-dj16'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'jshint'
@@ -67,11 +67,11 @@
 - project:
     name: nectar-tools
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -82,11 +82,11 @@
 - project:
     name: nectar-metrics
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -97,7 +97,7 @@
 - project:
     name: cookiecutter-pypackage
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -105,11 +105,11 @@
 - project:
     name: nectar-reporting
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -120,11 +120,11 @@
 - project:
     name: rcshibboleth
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
          environment: 'flake8'
@@ -135,11 +135,11 @@
 - project:
     name: external_naginator
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -150,15 +150,15 @@
 - project:
     name: nova
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'functional'
@@ -169,7 +169,7 @@
 - project:
     name: cinder
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -180,7 +180,7 @@
 - project:
     name: horizon
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -191,11 +191,11 @@
 - project:
     name: nectar-dashboard
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -206,7 +206,7 @@
 - project:
     name: heat
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -217,7 +217,7 @@
 - project:
     name: designate
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -228,7 +228,7 @@
 - project:
     name: ceilometer
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -239,7 +239,7 @@
 - project:
     name: murano
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -250,11 +250,11 @@
 - project:
     name: neutron
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -265,7 +265,7 @@
 - project:
     name: keystone
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
          environment: 'py27'
@@ -276,7 +276,7 @@
 - project:
     name: ospurge
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -284,7 +284,7 @@
 - project:
     name: tempest
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -292,7 +292,7 @@
 - project:
     name: glance_store
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -300,11 +300,11 @@
 - project:
     name: rc-servicecheck
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -312,7 +312,7 @@
 - project:
     name: wp2-pipeline
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -320,11 +320,11 @@
 - project:
     name: reporting-api
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -335,11 +335,11 @@
 - project:
     name: reporting-pollster
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-python-tox-{environment}':
+      - '{name}-trusty-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -360,11 +360,11 @@
 - project:
     name: crams-api
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py35'
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8-py3'
@@ -375,11 +375,11 @@
 - project:
     name: crams-rc-provisioning
     jobs:
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py35'
-      - '{name}-python-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8-py3'
