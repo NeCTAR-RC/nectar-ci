@@ -269,6 +269,10 @@
          access: 'nobody'
          organisation: 'internal'
          environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'nobody'
+         organisation: 'internal'
+         environment: 'pep8'
       - '{name}-os-deb-package':
          access: 'nobody'
          organisation: 'internal'
