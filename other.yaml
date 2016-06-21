@@ -78,3 +78,10 @@
       - '{name}-yaml':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-testing
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
