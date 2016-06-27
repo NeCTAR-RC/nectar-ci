@@ -53,6 +53,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
