@@ -143,6 +143,12 @@
           os_release: "liberty"
       - pbuilder-buildpackage:
           os_release: "liberty"
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+
     publishers:
       - slack
 
@@ -222,6 +228,12 @@
           os_release: "mitaka"
       - pbuilder-buildpackage:
           os_release: "mitaka"
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+
     publishers:
       - slack
 
