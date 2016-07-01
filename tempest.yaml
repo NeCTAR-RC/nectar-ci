@@ -4,15 +4,29 @@
     defaults: global
     node: tempest
     concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
-      - shell: '/usr/local/lib/nagios/plugins/check_tempest.py -t tempest.api.compute.servers.test_create_server.ServersTestJSON.test_verify_created_server_vcpus -s $AVAILABILITY_ZONE --host $HOST'
+      - shell: |
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $tmpdir
+          tempest init -c $WORKSPACE/tempest/check_compute_host/prod
+          $WORKSPACE/tempest/setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE .
+          ostestr --serial -w etc/whitelist.yaml
+          rm -rf $tmpdir
     parameters:
       - string:
           name: 'AVAILABILITY_ZONE'
           description: "Nova availability zone."
       - string:
           name: 'HOST'
-          description: "Nova host to test. Host must be in AVAILABILITY_ZONE, if not nova will return a 'No Valid Host' error."
+          description: |
+                Nova host to test. <br>
+                - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+                - Leave blank to let scheduler choose a host.
     properties:
       - slack:
           notify-start: true
