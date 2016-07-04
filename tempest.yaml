@@ -27,7 +27,7 @@
           description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
       - string:
           name: 'AVAILABILITY_ZONE'
-          description: "Nova availability zone."
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
       - string:
           name: 'HOST'
           description: |
@@ -78,7 +78,7 @@
           description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
       - string:
           name: 'AVAILABILITY_ZONE'
-          description: "Cinder availability zone."
+          description: 'Cinder availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
     properties:
       - slack:
           notify-start: true
