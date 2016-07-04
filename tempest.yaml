@@ -49,3 +49,48 @@
             - job-read
             - job-discover
 
+- job:
+    name: tempest-cinder-check
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $tmpdir
+          tempest init -c $WORKSPACE/tempest/check_cinder/$CLOUD
+          $WORKSPACE/tempest/setup_tempest.py -s $AVAILABILITY_ZONE .
+          ostestr --serial -w etc/whitelist.yaml
+          rm -rf $tmpdir
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - prod
+            - test
+            - dev
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: "Cinder availability zone."
+    properties:
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
