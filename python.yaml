@@ -296,10 +296,13 @@
 - project:
     name: glance_store
     jobs:
-      - '{name}-trusty-tox-{environment}':
+      - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: rc-servicecheck
