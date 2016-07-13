@@ -15,6 +15,7 @@
           cd $tmpdir
           tempest init -c $WORKSPACE/tempest/check_compute_host/$CLOUD
           $WORKSPACE/tempest/setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE .
+          export PYTHONWARNINGS="ignore:Unverified HTTPS request,ignore:a true SSLContext object"
           ostestr --serial -w etc/whitelist.yaml
           rm -rf $tmpdir
     parameters:
@@ -66,6 +67,7 @@
           cd $tmpdir
           tempest init -c $WORKSPACE/tempest/check_cinder/$CLOUD
           $WORKSPACE/tempest/setup_tempest.py -s $AVAILABILITY_ZONE .
+          export PYTHONWARNINGS="ignore:Unverified HTTPS request,ignore:a true SSLContext object"
           ostestr --serial -w etc/whitelist.yaml
           rm -rf $tmpdir
     parameters:
