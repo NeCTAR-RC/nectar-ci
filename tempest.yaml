@@ -94,3 +94,57 @@
             - job-read
             - job-discover
 
+- project:
+    name: tempest-nagios
+    site:
+        - intersect-01
+        - intersect-02
+        - melbourne-np
+        - melbourne-qh2
+        - monash-01
+        - monash-02
+        - nci
+        - pawsey
+        - qld
+        - sa
+        - tasmania
+    test:
+        - compute
+    jobs:
+      - 'tempest-nagios-{site}-{test}'
+
+- job-template:
+    name: 'tempest-nagios-{site}-{test}'
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    builders:
+      - shell: '$WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test}'
+
+    triggers:
+      - timed: 'H */30 * * *'
+
+    publishers:
+      - slack
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
