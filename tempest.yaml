@@ -119,6 +119,8 @@
     defaults: global
     node: tempest
     concurrent: true
+    logrotate:
+      daysToKeep: 2
 
     scm:
       - git:
@@ -134,8 +136,10 @@
     publishers:
       - slack
       - naginator:
-          fixed-delay: 60
-          max-failed-builds: 4
+          max-retries: 4
+          delay:
+            fixed:
+              delay: 120
 
     properties:
       - authorization:
