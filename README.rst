@@ -1,6 +1,17 @@
 Jenkins Job Builder Repository for NeCTAR
 =========================================
 
+Installation
+------------
+Jenkins Job Builder has issues building its configuration with newer
+versions of modules, so the recommended installation is in a virtualenv
+with a specific set of versions.
+
+`pip install -r requirements.txt`
+
+
+Configuration
+-------------
 Example /etc/jenkins_jobs/jenkins_jobs.ini::
 
    [job_builder]
@@ -14,6 +25,8 @@ Example /etc/jenkins_jobs/jenkins_jobs.ini::
    url=https://jenkins.mgmt.rc.nectar.org.au
 
 
+Usage
+-----
 To delete a single job::
 
    $ jenkins-jobs delete . puppet-openvpn-puppet-unit

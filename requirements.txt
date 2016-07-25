@@ -1,0 +1,5 @@
+jenkins-job-builder==1.2.0
+jenkins-job-builder-naginator==0.0.1
+jenkins-jobs-slack==0.3.2
+python-jenkins==0.4.13
+pbr>=0.11
