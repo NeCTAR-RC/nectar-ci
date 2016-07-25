@@ -133,6 +133,9 @@
 
     publishers:
       - slack
+      - naginator:
+          fixed-delay: 60
+          max-failed-builds: 4
 
     properties:
       - authorization:
