@@ -129,7 +129,7 @@
       - shell: '$WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test}'
 
     triggers:
-      - timed: 'H */30 * * *'
+      - timed: 'H/30 * * * *'
 
     publishers:
       - slack
