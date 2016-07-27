@@ -475,6 +475,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-trove
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-ubuntu
     jobs:
       - '{name}-puppet-unit':
