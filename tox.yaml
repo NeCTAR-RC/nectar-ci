@@ -44,7 +44,7 @@
           trigger-on:
               - patchset-created-event
               - comment-added-contains-event:
-                   comment-contains-value: 'recheck'    
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -112,13 +112,15 @@
           trigger-on:
               - patchset-created-event
               - comment-added-contains-event:
-                   comment-contains-value: 'recheck'    
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
@@ -179,13 +181,15 @@
           trigger-on:
               - patchset-created-event
               - comment-added-contains-event:
-                   comment-contains-value: 'recheck'    
+                   comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
