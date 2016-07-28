@@ -305,6 +305,17 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: gnocchi
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: rc-servicecheck
     jobs:
       - '{name}-trusty-tox-{environment}':
