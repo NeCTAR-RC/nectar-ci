@@ -87,47 +87,9 @@
           grep -l -R ${WORKSPACE} * | while read fname; do sed -i "s@${WORKSPACE}/@/@g" $fname; done;
 
 - builder:
-    name: 'python-tox-py27'
+    name: 'python-tox'
     builders:
-      - shell: 'tox -e py27'
-
-- builder:
-    name: 'python-tox-py35'
-    builders:
-      - shell: 'tox -e py35'
-
-- builder:
-    name: 'python-tox-pep8'
-    builders:
-      - shell: 'tox -e pep8'
-
-- builder:
-    name: 'python-tox-functional'
-    builders:
-      - shell: 'tox -e functional'
-
-- builder:
-    name: 'python-tox-py27-dj16'
-    builders:
-      - shell: 'tox -e py27-dj16'
-
-- builder:
-    name: 'python-tox-flake8'
-    builders:
-      - shell: |
-          wget https://raw.githubusercontent.com/NeCTAR-RC/flake8-diff/master/lint.py
-          chmod +x lint.py
-          ./lint.py --linter flake8 -- tox -e flake8
-
-- builder:
-    name: 'python-tox-flake8-py3'
-    builders:
-      - shell: 'tox -e flake8'
-
-- builder:
-    name: 'python-tox-jshint'
-    builders:
-      - shell: 'tox -e jshint'
+      - shell: 'tox -e {environment}'
 
 - builder:
     name: 'pbuilder-create'

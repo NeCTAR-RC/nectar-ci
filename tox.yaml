@@ -68,9 +68,9 @@
            after: true
          choosing-strategy: gerrit
 
-
     builders:
-      - python-tox-{environment}
+      - python-tox:
+          environment: '{environment}'
 
     publishers:
       - cobertura:
@@ -140,7 +140,8 @@
 
 
     builders:
-      - python-tox-{environment}
+      - python-tox:
+          environment: '{environment}'
 
     publishers:
       - cobertura:
@@ -207,9 +208,9 @@
            after: true
          choosing-strategy: gerrit
 
-
     builders:
-      - python-tox-{environment}
+      - python-tox:
+          environment: '{environment}'
 
     publishers:
       - cobertura:
