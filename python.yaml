@@ -184,6 +184,10 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
