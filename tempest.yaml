@@ -108,19 +108,17 @@
         - qld
         - sa
         - tasmania
-    test:
-        - compute
     jobs:
-      - 'tempest-nagios-{site}-{test}'
+      - 'tempest-nagios-{site}-{test}':
+          test:
+            - 'compute'
+      - 'tempest-cleanup-{site}'
 
 - job-template:
     name: 'tempest-nagios-{site}-{test}'
     project-type: freestyle
     defaults: global
     node: tempest
-    concurrent: true
-    logrotate:
-      daysToKeep: 2
 
     scm:
       - git:
@@ -155,3 +153,26 @@
           notify-failure: true
           notify-backtonormal: true
           notify-repeatedfailure: true
+
+- job-template:
+    name: 'tempest-cleanup-{site}'
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+    logrotate:
+      daysToKeep: 2
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    builders:
+      - shell: '$WORKSPACE/nagios/tempest_purge.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} --no-dry-run'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
