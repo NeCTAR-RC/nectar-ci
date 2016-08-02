@@ -1,12 +1,19 @@
 - project:
-    name: puppet-apache
+    name: puppet-aodh
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: puppet-anu
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
 
 - project:
-    name: puppet-anu
+    name: puppet-apache
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
