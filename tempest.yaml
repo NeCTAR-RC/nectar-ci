@@ -95,7 +95,7 @@
             - job-discover
 
 - project:
-    name: tempest-nagios
+    name: tempest-nagios-site
     site:
         - intersect-01
         - intersect-02
@@ -109,13 +109,29 @@
         - sa
         - tasmania
     jobs:
-      - 'tempest-nagios-{site}-{test}':
+      - 'tempest-nagios-site-{site}-{test}':
           test:
             - 'compute'
-      - 'tempest-cleanup-{site}'
+      - 'tempest-cleanup-site-{site}'
+
+
+- project:
+    name: tempest-nagios-flavor
+    flavor:
+        - tiny
+        - xsmall
+        - small
+        - medium
+        - large
+        - xlarge
+    jobs:
+      - 'tempest-nagios-flavor-{flavor}-{test}':
+          test:
+            - 'compute'
+
 
 - job-template:
-    name: 'tempest-nagios-{site}-{test}'
+    name: 'tempest-nagios-site-{site}-{test}'
     project-type: freestyle
     defaults: global
     node: tempest
@@ -138,6 +154,15 @@
           delay:
             fixed:
               delay: 120
+      - trigger:
+          project: 'tempest-cleanup-site-{site}'
+          threshold: 'SUCCESS'
+      - trigger:
+          project: 'tempest-cleanup-site-{site}'
+          threshold: 'UNSTABLE'
+      - trigger:
+          project: 'tempest-cleanup-site-{site}'
+          threshold: 'FAILURE'
 
     properties:
       - authorization:
@@ -154,8 +179,59 @@
           notify-backtonormal: true
           notify-repeatedfailure: true
 
+
 - job-template:
-    name: 'tempest-cleanup-{site}'
+    name: 'tempest-nagios-flavor-{flavor}-{test}'
+    project-type: freestyle
+    defaults: global
+    node: tempest
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    builders:
+      - shell: '$WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e prod'
+
+    triggers:
+      - timed: 'H/30 * * * *'
+
+    publishers:
+      - slack
+      - naginator:
+          max-retries: 4
+          delay:
+            fixed:
+              delay: 120
+      - trigger:
+          project: 'tempest-cleanup'
+          threshold: 'SUCCESS'
+      - trigger:
+          project: 'tempest-cleanup'
+          threshold: 'UNSTABLE'
+      - trigger:
+          project: 'tempest-cleanup'
+          threshold: 'FAILURE'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
+
+
+- job-template:
+    name: 'tempest-cleanup-site-{site}'
     project-type: freestyle
     defaults: global
     node: tempest
@@ -170,6 +246,30 @@
 
     builders:
       - shell: '$WORKSPACE/nagios/tempest_purge.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} --no-dry-run'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+
+
+- job-template:
+    name: 'tempest-cleanup'
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+    logrotate:
+      daysToKeep: 2
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    builders:
+      - shell: '$WORKSPACE/nagios/tempest_purge.py -c $WORKSPACE/nagios/tempest_nagios.conf -e prod --no-dry-run'
 
     properties:
       - authorization:
