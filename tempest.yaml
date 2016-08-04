@@ -236,8 +236,6 @@
     defaults: global
     node: tempest
     concurrent: true
-    logrotate:
-      daysToKeep: 2
 
     scm:
       - git:
@@ -252,16 +250,19 @@
           'anonymous':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-nagios-site-{site}-.*"
+          block_level: 'GLOBAL'
+          queue-scanning: 'ALL'
 
 
-- job-template:
+- job:
     name: 'tempest-cleanup'
     project-type: freestyle
     defaults: global
     node: tempest
     concurrent: true
-    logrotate:
-      daysToKeep: 2
 
     scm:
       - git:
@@ -276,3 +277,8 @@
           'anonymous':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-nagios-flavor-.*"
+          block_level: 'GLOBAL'
+          queue-scanning: 'ALL'
