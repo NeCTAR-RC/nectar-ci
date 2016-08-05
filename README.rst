@@ -3,11 +3,11 @@ Jenkins Job Builder Repository for NeCTAR
 
 Installation
 ------------
-Jenkins Job Builder has issues building its configuration with newer
-versions of modules, so the recommended installation is in a virtualenv
-with a specific set of versions.
+We no longer require any extra packages to be installed, or any specific
+version of JJB, tested up to v1.6.3
 
-`pip install -r requirements.txt`
+All you need to do is:
+`pip install jenkins-job-builder`
 
 
 Configuration

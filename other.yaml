@@ -24,15 +24,6 @@
           'nobody':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -71,7 +62,15 @@
           librarian-puppet install --path ~/puppet-modules-cache/
 
     publishers:
-      - slack
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
 - project:
     name: nectar-testing

@@ -29,15 +29,6 @@
           '{access}':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -77,8 +68,15 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack
-
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-trusty-tox-{environment}'
@@ -97,15 +95,6 @@
           '{access}':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -148,7 +137,15 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-xenial-tox-{environment}'
@@ -167,15 +164,6 @@
           '{access}':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
     triggers:
       - gerrit:
@@ -217,4 +205,12 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true

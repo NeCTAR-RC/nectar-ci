@@ -35,15 +35,6 @@
                 - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
                 - Leave blank to let scheduler choose a host.
     properties:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
       - authorization:
           'nobody':
             - job-read
@@ -80,15 +71,6 @@
           name: 'AVAILABILITY_ZONE'
           description: 'Cinder availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
     properties:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
       - authorization:
           'nobody':
             - job-read
@@ -148,7 +130,15 @@
       - timed: 'H/30 * * * *'
 
     publishers:
-      - slack
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
       - naginator:
           max-retries: 4
           delay:
@@ -169,16 +159,6 @@
           'anonymous':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 
 - job-template:
     name: 'tempest-nagios-flavor-{flavor}-{test}'
@@ -198,7 +178,15 @@
       - timed: 'H * * * *'
 
     publishers:
-      - slack
+      - slack:
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
       - naginator:
           max-retries: 4
           delay:
@@ -219,16 +207,6 @@
           'anonymous':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 
 - job-template:
     name: 'tempest-cleanup-site-{site}'
