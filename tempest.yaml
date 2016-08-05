@@ -231,6 +231,7 @@
       - build-blocker:
           blocking-jobs:
             - "^tempest-nagios-site-{site}-.*"
+            - "tempest-compute-host-check"
           block_level: 'GLOBAL'
           queue-scanning: 'ALL'
 
