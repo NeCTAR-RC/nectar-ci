@@ -52,15 +52,6 @@
           'anonymous':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
     scm:
       - git:
@@ -94,7 +85,18 @@
           allow-missing: true
       - junit:
           results: output.xml
-      - slack
+      - slack:
+          team-domain: 'researchcloud'
+          auth-token: 'x8QkGgv2L4rl6pjN9DFeeaUo'
+          room: '#dev'
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 
 
 - project:
@@ -145,15 +147,6 @@
           'anonymous':
             - job-read
             - job-discover
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
     scm:
       - git:
@@ -187,5 +180,16 @@
           allow-missing: true
       - junit:
           results: output.xml
-      - slack
+      - slack:
+          team-domain: 'researchcloud'
+          auth-token: 'x8QkGgv2L4rl6pjN9DFeeaUo'
+          room: '#dev'
+          notify-start: true
+          notify-success: true
+          notify-aborted: true
+          notify-notbuilt: true
+          notify-unstable: true
+          notify-failure: true
+          notify-backtonormal: true
+          notify-repeatedfailure: true
 

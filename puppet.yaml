@@ -5,7 +5,7 @@
          access: 'nobody'
          organisation: 'internal'
 
- - project:
+- project:
     name: puppet-aodh
     jobs:
       - '{name}-puppet-unit':

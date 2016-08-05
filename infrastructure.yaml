@@ -43,9 +43,10 @@
       - trigger:
           project: testcloud-nova-rally,testcloud-cinder-rally,testcloud-keystone-rally,testcloud-glance-rally,testcloud-swift-rally,testcloud-neutron-rally
           threshold: SUCCESS
-      - slack
-    properties:
       - slack:
+          team-domain: 'researchcloud'
+          auth-token: 'x8QkGgv2L4rl6pjN9DFeeaUo'
+          room: '#dev'
           notify-start: true
           notify-success: true
           notify-aborted: true
