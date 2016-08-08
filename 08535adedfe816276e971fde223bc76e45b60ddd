@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_534fa692",
+        "filename": "infrastructure.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000105
+      },
+      "writtenOn": "2016-08-08T23:29:22Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be in a public repo.",
+      "revId": "08535adedfe816276e971fde223bc76e45b60ddd",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
