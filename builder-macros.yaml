@@ -217,6 +217,63 @@
           openstack server delete $INSTANCE_ID
           exit $EXIT_CODE
 - builder:
+    name: 'image-builder-openstack'
+    builders:
+      - shell: |
+          #!/bin/bash -xe
+          [ -d output-{job_name} ] && rm -fr output-{job_name}
+          set +x
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3.0/
+          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
+          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
+          export OS_TENANT_ID=28eadf5ad64b42a4929b2fb7df99275c
+          export OS_DOMAIN_NAME=Default
+          export OS_NO_CACHE=True
+          set -x
+          OUTFILE=$(mktemp)
+          packer build -color=false -var-file=variables-nectar.json {job_name}.json -machine-readable | tee ${OUTFILE}
+          IMAGE_ID=$(tail -n5 < ${OUTFILE} | head -n1 | cut -d ',' -f6 )
+          set +e
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing "test_{job_name}_$BUILD_NUMBER")
+          i=0
+          while [ $i -le 10 ]; do
+              STATUS=$(openstack server show -f value -c status $INSTANCE_ID)
+              [ "$STATUS" = "ACTIVE" ] && break
+              if [ $i -ge 10 ] || [ "$STATUS" = "ERROR" ]; then
+                  openstack server delete $INSTANCE_ID; exit 1
+              fi
+              i=$((i+1))
+              sleep 30
+          done
+          IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
+          chmod 600 $SSH_TESTING_KEY
+          j=0
+          while [ $j -le 20 ]; do
+              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS exit && break
+              if [ $j -ge 20 ]; then
+                  openstack server delete $INSTANCE_ID; exit 1
+              fi
+              j=$((j+1))
+              sleep 30
+          done
+          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS 'sleep 120; /bin/bash /usr/nectar/run_tests.sh'
+          EXIT_CODE=$?
+          set +x
+          if [ $EXIT_CODE -eq 0 ]; then
+              echo "================================================================================"
+              echo ""
+              echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
+              echo ""
+              echo "  To promote this image to PROD:"
+              echo "    $ hivemind glance.promote $IMAGE_ID"
+              echo ""
+              echo "================================================================================"
+          fi
+          set -x
+          openstack server delete $INSTANCE_ID
+          exit $EXIT_CODE
+
+- builder:
     name: 'image-builder-rctest'
     builders:
       - shell: |
