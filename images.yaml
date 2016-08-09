@@ -102,6 +102,18 @@
          default_user: 'ec2-user'
 
 - project:
+    name: fedora-24-x86_64
+    jobs:
+      - 'image-build-openstackbuilder-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 24 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '24'
+         default_user: 'ec2-user'
+
+- project:
     name: scientific-6-x86_64
     jobs:
       - 'image-build-{name}':
