@@ -140,10 +140,8 @@
           notify-backtonormal: true
           notify-repeatedfailure: true
       - naginator:
-          max-retries: 4
-          delay:
-            fixed:
-              delay: 120
+          max-failed-builds: 4
+          fixed-delay: 120
       - trigger:
           project: 'tempest-cleanup-site-{site}'
           threshold: 'SUCCESS'
@@ -188,10 +186,8 @@
           notify-backtonormal: true
           notify-repeatedfailure: true
       - naginator:
-          max-retries: 4
-          delay:
-            fixed:
-              delay: 120
+          max-failed-builds: 4
+          fixed-delay: 120
       - trigger:
           project: 'tempest-cleanup'
           threshold: 'SUCCESS'
