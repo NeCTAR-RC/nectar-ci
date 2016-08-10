@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_052f91a2",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000105
+      },
+      "writtenOn": "2016-08-10T23:22:38Z",
+      "side": 1,
+      "message": "openstack builder outputs a glance image, not a file, so this bit will need to change a bit.",
+      "range": {
+        "startLine": 233,
+        "startChar": 10,
+        "endLine": 238,
+        "endChar": 31
+      },
+      "revId": "74a81b11dca986f8e963a2da585b8c0e60866b01",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
