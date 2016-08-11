@@ -209,7 +209,6 @@
     project-type: freestyle
     defaults: global
     node: tempest
-    concurrent: true
 
     scm:
       - git:
@@ -237,7 +236,6 @@
     project-type: freestyle
     defaults: global
     node: tempest
-    concurrent: true
 
     scm:
       - git:
