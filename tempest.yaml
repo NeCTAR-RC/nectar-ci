@@ -253,5 +253,6 @@
       - build-blocker:
           blocking-jobs:
             - "^tempest-nagios-flavor-.*"
+            - "*tempest-compute-host-check"
           block_level: 'GLOBAL'
           queue-scanning: 'ALL'
