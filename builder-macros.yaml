@@ -308,7 +308,7 @@
           echo "      https://jenkins.rc.nectar.org.au/configure"
           echo ""
           echo "  and set the 'Cloud Instance Templates Image ID' value to:"
-          echo "      Melbourne/$IMAGE_ID"
+          echo "      {image_name}"
           echo ""
           echo "================================================================================"
 
