@@ -144,12 +144,6 @@
           fixed-delay: 120
       - trigger:
           project: 'tempest-cleanup-site-{site}'
-          threshold: 'SUCCESS'
-      - trigger:
-          project: 'tempest-cleanup-site-{site}'
-          threshold: 'UNSTABLE'
-      - trigger:
-          project: 'tempest-cleanup-site-{site}'
           threshold: 'FAILURE'
 
     properties:
@@ -188,12 +182,6 @@
       - naginator:
           max-failed-builds: 4
           fixed-delay: 120
-      - trigger:
-          project: 'tempest-cleanup'
-          threshold: 'SUCCESS'
-      - trigger:
-          project: 'tempest-cleanup'
-          threshold: 'UNSTABLE'
       - trigger:
           project: 'tempest-cleanup'
           threshold: 'FAILURE'
