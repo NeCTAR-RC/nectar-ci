@@ -85,16 +85,6 @@
           allow-missing: true
       - junit:
           results: output.xml
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 
 - project:
     name: flavor-check
@@ -177,13 +167,3 @@
           allow-missing: true
       - junit:
           results: output.xml
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-

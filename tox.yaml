@@ -68,15 +68,6 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-trusty-tox-{environment}'
@@ -137,15 +128,6 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-xenial-tox-{environment}'
@@ -205,12 +187,3 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true

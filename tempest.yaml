@@ -130,15 +130,6 @@
       - timed: 'H/30 * * * *'
 
     publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
       - naginator:
           max-failed-builds: 4
           fixed-delay: 120
@@ -170,15 +161,6 @@
       - timed: 'H * * * *'
 
     publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
       - naginator:
           max-failed-builds: 4
           fixed-delay: 120

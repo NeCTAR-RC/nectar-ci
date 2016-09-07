@@ -43,12 +43,3 @@
       - trigger:
           project: testcloud-nova-rally,testcloud-cinder-rally,testcloud-keystone-rally,testcloud-glance-rally,testcloud-swift-rally,testcloud-neutron-rally
           threshold: SUCCESS
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true

@@ -10,7 +10,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-
     properties:
       - authorization:
           '{access}':
@@ -56,15 +55,6 @@
       - warnings:
           console-log-parsers:
             - Puppet-Lint
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-trusty-deb-package'
@@ -138,17 +128,6 @@
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 - job-template:
     name: '{name}-xenial-deb-package'
     project-type: freestyle
@@ -221,17 +200,6 @@
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 - job-template:
     name: '{name}-os-deb-package'
     project-type: freestyle
@@ -300,17 +268,6 @@
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 - job-template:
     name: '{name}-run-tests'
     project-type: freestyle
@@ -360,7 +317,6 @@
            after: true
          choosing-strategy: gerrit
 
-
     builders:
       - run-tests
 
@@ -369,15 +325,6 @@
           report-file: "coverage.xml"
           only-stable: "true"
           targets: {}
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: 'image-build-{name}'
@@ -432,17 +379,6 @@
            credential-id: 10270abc-f1f9-47c7-ae66-114ae8246a71
            variable: SSH_TESTING_KEY
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 - job-template:
     name: 'image-build-rctest-{name}'
     project-type: freestyle
@@ -488,21 +424,6 @@
         - username-password:
            credential-id: 60a2f67f-93d4-4e72-900f-39cec212f07b
            variable: KEYSTONE_CREDS
-
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
-
-
-
 
 - job-template:
     name: 'image-build-openstackbuilder-{name}'
@@ -557,22 +478,6 @@
            credential-id: 10270abc-f1f9-47c7-ae66-114ae8246a71
            variable: SSH_TESTING_KEY
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
-
-
-
-
-
 - job-template:
     name: '{name}-yaml'
     project-type: freestyle
@@ -625,17 +530,6 @@
     builders:
       - yaml-lint
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 - job-template:
     name: '{name}-dummy'
     project-type: freestyle
@@ -685,10 +579,8 @@
            after: true
          choosing-strategy: gerrit
 
-
     builders:
       - dummy
-
 
 - job-template:
     name: '{name}-markdown'
@@ -743,17 +635,6 @@
     builders:
       - markdown-lint
 
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
-
 - job-template:
     name: '{name}-rally'
     project-type: freestyle
@@ -784,15 +665,6 @@
           allow-missing: true
       - junit:
           results: output.xml
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-nodejs-test'
@@ -843,20 +715,8 @@
            after: true
          choosing-strategy: gerrit
 
-
     builders:
       - nodejs-test
-
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-jekyll-build'
@@ -907,20 +767,8 @@
            after: true
          choosing-strategy: gerrit
 
-
     builders:
       - rake-test
-
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
 
 - job-template:
     name: '{name}-jekyll-deploy'
@@ -986,14 +834,3 @@
         - username-password:
            credential-id: 6f958f1d-d42f-48c4-a8a5-72c37ae6e340
            variable: GITHUB_CREDS
-
-    publishers:
-      - slack:
-          notify-start: true
-          notify-success: true
-          notify-aborted: true
-          notify-notbuilt: true
-          notify-unstable: true
-          notify-failure: true
-          notify-backtonormal: true
-          notify-repeatedfailure: true
