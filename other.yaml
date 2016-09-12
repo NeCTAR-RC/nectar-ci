@@ -59,7 +59,7 @@
           export http_proxy=http://wwwproxy.unimelb.edu.au:8000
           export https_proxy=http://wwwproxy.unimelb.edu.au:8000
           cd testing
-          librarian-puppet install --path ~/puppet-modules-cache/
+          librarian-puppet install --verbose --path ~/puppet-modules-cache/
 
 - project:
     name: nectar-testing
