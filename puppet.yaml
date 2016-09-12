@@ -537,6 +537,12 @@
          access: 'nobody'
          organisation: 'internal'
 
+- project:
+    name: hieradata
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-monash
