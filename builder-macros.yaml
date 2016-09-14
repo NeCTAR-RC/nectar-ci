@@ -89,7 +89,7 @@
 - builder:
     name: 'python-tox'
     builders:
-      - shell: 'tox -e {environment}'
+      - shell: 'export OS_TEST_TIMEOUT=300; tox -e {environment}'
 
 - builder:
     name: 'pbuilder-create'

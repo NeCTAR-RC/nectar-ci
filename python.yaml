@@ -314,7 +314,11 @@
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27-mysql'
+         environment: 'py27-mysql-file'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27-mysql-influxdb'
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
