@@ -172,8 +172,8 @@
           export OS_TENANT_ID=28eadf5ad64b42a4929b2fb7df99275c
           export OS_TENANT_NAME=NeCTAR-Images
           export OS_NO_CACHE=True
-          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
-          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
+          export OS_USERNAME=$(echo $IMAGE_BUILDER_CREDS | cut -f1 -d:)
+          export OS_PASSWORD=$(echo $IMAGE_BUILDER_CREDS | cut -f2 -d:)
           set -x
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file {job_name}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           [[ "{job_name}" =~ "murano" ]] && glance image-update --property murano_image_info='{{"title": "NeCTAR {image_name}", "type": "linux"}}' $IMAGE_ID
@@ -201,21 +201,7 @@
               sleep 30
           done
           ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS 'sleep 120; /bin/bash /usr/nectar/run_tests.sh'
-          EXIT_CODE=$?
-          set +x
-          if [ $EXIT_CODE -eq 0 ]; then
-              echo "================================================================================"
-              echo ""
-              echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
-              echo ""
-              echo "  To promote this image to PROD:"
-              echo "    $ hivemind glance.promote $IMAGE_ID"
-              echo ""
-              echo "================================================================================"
-          fi
-          set -x
-          openstack server delete $INSTANCE_ID
-          exit $EXIT_CODE
+
 - builder:
     name: 'image-builder-openstack'
     builders:
@@ -224,8 +210,8 @@
           [ -d output-{job_name} ] && rm -fr output-{job_name}
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/
           set +x
-          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
-          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
+          export OS_USERNAME=$(echo $IMAGE_BUILDER_CREDS | cut -f1 -d:)
+          export OS_PASSWORD=$(echo $IMAGE_BUILDER_CREDS | cut -f2 -d:)
           export OS_TENANT_ID=28eadf5ad64b42a4929b2fb7df99275c
           export OS_NO_CACHE=True
           set -x
@@ -239,8 +225,6 @@
           rm /tmp/largeimage
           du -hs {job_name}.qcow2
           time IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file {job_name}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
-
-
           set +e
           INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing "test_{job_name}_$BUILD_NUMBER")
           i=0
@@ -265,21 +249,23 @@
               sleep 30
           done
           ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY {default_user}@$IP_ADDRESS 'sleep 120; /bin/bash /usr/nectar/run_tests.sh'
-          EXIT_CODE=$?
+          TEST_RESULT=$?
+          openstack server delete $INSTANCE_ID
           set +x
-          if [ $EXIT_CODE -eq 0 ]; then
+          if [ $TEST_RESULT -eq 0 ]; then
+              export OS_USERNAME=$(echo $IMAGE_PROMOTE_CREDS | cut -f1 -d:)
+              export OS_PASSWORD=$(echo $IMAGE_PROMOTE_CREDS | cut -f2 -d:)
               echo "================================================================================"
               echo ""
               echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
               echo ""
-              echo "  To promote this image to PROD:"
-              echo "    $ hivemind glance.promote $IMAGE_ID"
+              echo "  Image ID: $IMAGE_ID"
               echo ""
               echo "================================================================================"
+              set -xe
+              hivemind glance.promote -t NeCTAR-Images-Archive $IMAGE_ID && exit 0
           fi
-          set -x
-          openstack server delete $INSTANCE_ID
-          exit $EXIT_CODE
+          exit 1
 
 - builder:
     name: 'image-builder-rctest'
@@ -294,8 +280,8 @@
           export OS_AUTH_URL=https://keystone.test.rc.nectar.org.au:5000/v2.0/
           export OS_TENANT_ID=704fdb05a2f645ac8dbf4fb1222bf267
           export OS_TENANT_NAME=nectar-ci
-          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
-          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
+          export OS_USERNAME=$(echo $IMAGE_BUILDER_CREDS | cut -f1 -d:)
+          export OS_PASSWORD=$(echo $IMAGE_BUILDER_CREDS | cut -f2 -d:)
           export OS_NO_CACHE=True
 
           IMAGE_ID=$(glance --os-image-api-version=1 image-create --disk-format qcow2 --container-format bare --name "{image_name}-v$BUILD_NUMBER" --file "{job_name}.qcow2" | grep " id " |  cut -d '|' -f3 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//');
