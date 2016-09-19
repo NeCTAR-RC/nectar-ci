@@ -5,6 +5,13 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
+- project:
+    name: nectar-images
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+
 - job:
     name: 'librarian-verify'
     project-type: freestyle
