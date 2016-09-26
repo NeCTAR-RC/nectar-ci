@@ -34,13 +34,6 @@
     builders:
       - shell: |
           MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
-          if [ -f Modulefile ]; then
-            MODULE=$(awk '/^name/ {print $NF}' Modulefile |tr -d \"\')
-            if [ -z "$MODULE" ]; then
-              echo "Module name not defined in Modulefile"
-            fi
-          fi
-
           if [ -n "$MODULE" ]; then
             rm -rf $MODULE
             git clone . $MODULE
