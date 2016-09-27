@@ -118,6 +118,8 @@
     defaults: global
     node: tempest
     concurrent: false
+    logrotate:
+      daysToKeep: 7
 
     scm:
       - git:
@@ -143,6 +145,8 @@
           'anonymous':
             - job-read
             - job-discover
+      - build-discarder:
+          days-to-keep: 7
 
 - job-template:
     name: 'tempest-nagios-flavor-{flavor}-{test}'
@@ -150,6 +154,8 @@
     defaults: global
     node: tempest
     concurrent: false
+    logrotate:
+      daysToKeep: 7
 
     scm:
       - git:
@@ -175,6 +181,8 @@
           'anonymous':
             - job-read
             - job-discover
+      - build-discarder:
+          days-to-keep: 7
 
 - job-template:
     name: 'tempest-cleanup-site-{site}'
@@ -200,7 +208,8 @@
           blocking-jobs:
             - "^tempest-nagios-site-{site}-.*"
             - "tempest-compute-host-check"
-          block_level: 'GLOBAL'
+          block-level: 'GLOBAL'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -227,4 +236,5 @@
           blocking-jobs:
             - "^tempest-nagios-flavor-.*"
             - "^.*tempest-compute-host-check"
-          block_level: 'GLOBAL'
+          block-level: 'GLOBAL'
+          queue-scanning: 'ALL'
