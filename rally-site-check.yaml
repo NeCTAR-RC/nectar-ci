@@ -44,9 +44,6 @@
           default: 'm2.tiny'
           description: 'The name of the flavor to test with.'
 
-    triggers:
-      - timed: 'H */6 * * *'
-
     properties:
       - authorization:
           'anonymous':
@@ -125,9 +122,6 @@
           name: 'IMAGE_ID'
           default: 'eeedf697-5a41-4d91-a478-01bb21e32cbe'
           description: 'The ID of the glance image to test with.'
-
-    triggers:
-      - timed: 'H */{run_freq} * * *'
 
     properties:
       - authorization:
