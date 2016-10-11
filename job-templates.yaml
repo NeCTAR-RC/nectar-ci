@@ -623,6 +623,7 @@
     project-type: freestyle
     defaults: global
     node: xenial-mitaka
+    quiet-period: 60
 
     parameters:
       - string:
