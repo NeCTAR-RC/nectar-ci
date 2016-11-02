@@ -3,9 +3,6 @@
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'trusty'
-            os_release: 'kilo'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'trusty'
             os_release: 'liberty'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
