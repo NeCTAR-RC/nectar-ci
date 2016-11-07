@@ -74,3 +74,7 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-xenial-tox-{environment}':
+         access: 'nobody'
+         environment: 'pep8'
+         organisation: 'internal'
