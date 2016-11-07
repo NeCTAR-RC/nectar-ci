@@ -7,6 +7,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
             os_release: 'mitaka'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'xenial'
+            os_release: 'newton'
 
 
 - job-template:
