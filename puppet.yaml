@@ -307,7 +307,21 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-openstacklib
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-openvpn
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: puppet-oslo
     jobs:
       - '{name}-puppet-unit':
          access: 'anonymous'
