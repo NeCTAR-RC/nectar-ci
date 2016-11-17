@@ -74,6 +74,9 @@
       - '{name}-puppet-unit':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-puppet4-non-voting':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-elk
@@ -368,6 +371,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-puppet4-non-voting':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-qld
@@ -470,6 +476,9 @@
          access: 'nobody'
          organisation: 'internal'
       - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
