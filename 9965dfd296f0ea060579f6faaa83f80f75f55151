@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_a2ff8f00",
+        "filename": "job-templates.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-11-18T00:37:34Z",
+      "side": 1,
+      "message": "can we call this puppet4-non-voting",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 35
+      },
+      "revId": "9965dfd296f0ea060579f6faaa83f80f75f55151",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
