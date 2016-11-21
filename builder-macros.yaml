@@ -53,7 +53,7 @@
           fi
 
 - builder:
-    name: puppet-syntax
+    name: puppet3-syntax
     builders:
       - shell: |
           MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
@@ -64,10 +64,10 @@
           done
 
 - builder:
-    name: puppet-future-syntax
+    name: puppet-syntax
     builders:
       - shell: |
-          MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet4-non-voting/\1/')
+          MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
           cd "$MODULE"
           find . -iname *.pp -not -path "./.bundled_gems/*" | xargs puppet parser --parser future validate --modulepath=`pwd`/modules
           for f in `find . -iname *.erb -not -path "./.bundled_gems/*"` ; do
