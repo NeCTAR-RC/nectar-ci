@@ -2,8 +2,8 @@
     name: puppet-anu
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-aodh
@@ -81,9 +81,6 @@
       - '{name}-puppet-unit':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-puppet4-non-voting':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-elk
@@ -187,8 +184,8 @@
     name: puppet-intersect
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-iptables_templates
@@ -201,8 +198,8 @@
     name: puppet-ivec
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-karaage
@@ -378,9 +375,6 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-puppet4-non-voting':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-qld
@@ -455,17 +449,20 @@
 - project:
     name: puppet-site-melbourne
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-site-nectar
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-yaml':
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -479,16 +476,12 @@
 - project:
     name: puppet-site-rctest
     jobs:
-      - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
-      - '{name}-yaml':
+      - '{name}-puppet3-unit':
          access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
-
 
 - project:
     name: puppet-snmp
@@ -515,8 +508,8 @@
     name: puppet-tas
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-trove
@@ -578,6 +571,6 @@
     name: puppet-monash
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
