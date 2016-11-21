@@ -76,6 +76,43 @@
             - job-read
             - job-discover
 
+- job:
+    name: tempest-community-image-check
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          git clone https://github.com/NeCTAR-RC/nectar-images.git
+          cd nectar-images/community_image_tests
+          sudo pip install -e .
+          cd $HOME
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $tmpdir
+          tempest init -c $WORKSPACE/tempest/check_community_images/prod
+          $WORKSPACE/tempest/setup_tempest.py -s $AVAILABILITY_ZONE --image $IMAGE_ID .
+          ostestr --serial -w etc/whitelist.yaml
+          rm -rf $tmpdir
+    parameters:
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+      - string:
+          name: 'IMAGE_ID'
+          description: |
+                Id of the image to test. <br>
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
 - project:
     name: tempest-nagios-site
     site:
