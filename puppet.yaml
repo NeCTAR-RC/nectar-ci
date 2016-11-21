@@ -1,7 +1,10 @@
 - project:
     name: puppet-anu
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -81,9 +84,6 @@
       - '{name}-puppet-unit':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-puppet4-non-voting':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-elk
@@ -186,7 +186,10 @@
 - project:
     name: puppet-intersect
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -200,7 +203,10 @@
 - project:
     name: puppet-ivec
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -378,14 +384,14 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-puppet4-non-voting':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-qld
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -455,7 +461,10 @@
 - project:
     name: puppet-site-melbourne
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -485,10 +494,6 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-puppet4-non-voting':
-         access: 'nobody'
-         organisation: 'internal'
-
 
 - project:
     name: puppet-snmp
@@ -514,7 +519,10 @@
 - project:
     name: puppet-tas
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
@@ -577,7 +585,10 @@
 - project:
     name: puppet-monash
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
