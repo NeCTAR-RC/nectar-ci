@@ -91,7 +91,7 @@
           . /opt/tempest/bin/activate
           git clone https://github.com/NeCTAR-RC/nectar-images.git
           cd nectar-images/community_image_tests
-          sudo pip install -e .
+          pip install -e .
           cd $HOME
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $tmpdir
