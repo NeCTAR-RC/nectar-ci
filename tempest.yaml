@@ -89,16 +89,12 @@
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          git clone https://github.com/NeCTAR-RC/nectar-images.git
-          cd nectar-images/community_image_tests
-          sudo pip install -e .
-          cd $HOME
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $tmpdir
           tempest init -c $WORKSPACE/tempest/check_community_images/prod
           $WORKSPACE/tempest/setup_tempest.py --image $IMAGE_ID .
           ostestr --serial -w etc/whitelist.yaml
-          rm -rf $tmpdir nectar-images
+          rm -rf $tmpdir
     parameters:
       - string:
           name: 'IMAGE_ID'
