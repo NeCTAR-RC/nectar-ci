@@ -107,6 +107,18 @@
          default_user: 'fedora'
 
 - project:
+    name: fedora-25-x86_64
+    jobs:
+      - 'image-build-openstackbuilder-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 25 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '25'
+         default_user: 'fedora'
+
+- project:
     name: scientific-6-x86_64
     jobs:
       - 'image-build-{name}':
