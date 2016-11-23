@@ -71,30 +71,6 @@
          default_user: 'debian'
 
 - project:
-    name: fedora-22-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 22 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'fedora'
-         os_version: '22'
-         default_user: 'ec2-user'
-
-- project:
-    name: fedora-23-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 23 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'fedora'
-         os_version: '23'
-         default_user: 'ec2-user'
-
-- project:
     name: fedora-24-x86_64
     jobs:
       - 'image-build-openstackbuilder-{name}':
@@ -140,18 +116,6 @@
          architecture: 'x86_64'
          os_distro: 'ubuntu'
          os_version: '14.04'
-         default_user: 'ubuntu'
-
-- project:
-    name: ubuntu-15.10-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 15.10 (Wily) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '15.10'
          default_user: 'ubuntu'
 
 - project:
