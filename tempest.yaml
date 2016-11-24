@@ -92,7 +92,7 @@
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $tmpdir
           tempest init -c $WORKSPACE/tempest/check_community_images/prod
-          $WORKSPACE/tempest/setup_tempest.py --image $IMAGE_ID .
+          $WORKSPACE/tempest/setup_tempest.py -s $AVAILABILITY_ZONE --image $IMAGE_ID .
           ostestr --serial -w etc/whitelist.yaml
           rm -rf $tmpdir
     parameters:
@@ -100,6 +100,9 @@
           name: 'IMAGE_ID'
           description: |
                 Id of the image to test. <br>
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
     properties:
       - authorization:
           'nobody':
