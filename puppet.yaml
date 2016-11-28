@@ -69,6 +69,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-ec2api
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-elasticsearch
     jobs:
       - '{name}-puppet-unit':
