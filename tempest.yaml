@@ -12,18 +12,18 @@
       - shell: |
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check_compute_host $tmpdir
           cd $tmpdir
-          tempest init -c $WORKSPACE/tempest/check_compute_host/$CLOUD
-          $WORKSPACE/tempest/setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE .
           ostestr --serial -w etc/whitelist.yaml
           rm -rf $tmpdir
     parameters:
       - choice:
           name: 'CLOUD'
           choices:
-            - prod
-            - test
-            - dev
+            - production
+            - testing
+            - development
           description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
       - string:
           name: 'AVAILABILITY_ZONE'
@@ -54,18 +54,18 @@
       - shell: |
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check_cinder $tmpdir
           cd $tmpdir
-          tempest init -c $WORKSPACE/tempest/check_cinder/$CLOUD
-          $WORKSPACE/tempest/setup_tempest.py -s $AVAILABILITY_ZONE .
           ostestr --serial -w etc/whitelist.yaml
           rm -rf $tmpdir
     parameters:
       - choice:
           name: 'CLOUD'
           choices:
-            - prod
-            - test
-            - dev
+            - production
+            - testing
+            - development
           description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
       - string:
           name: 'AVAILABILITY_ZONE'
@@ -90,9 +90,9 @@
       - shell: |
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py --image $IMAGE_ID -e production -j community-images $tmpdir
           cd $tmpdir
-          tempest init -c $WORKSPACE/tempest/check_community_images/prod
-          $WORKSPACE/tempest/setup_tempest.py --image $IMAGE_ID .
           ostestr --serial -w etc/whitelist.yaml
           rm -rf $tmpdir
     parameters:
