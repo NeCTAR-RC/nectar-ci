@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_3f8471d3",
+        "filename": "job-templates.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-12-08T04:22:28Z",
+      "side": 1,
+      "message": "ok on jakes advice just add the puppet3 builder here too",
+      "revId": "fa3d640f8615541c8fe754fbd11eb96617b42504",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
