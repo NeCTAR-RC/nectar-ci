@@ -459,7 +459,7 @@
 - project:
     name: puppet-site-nectar
     jobs:
-       - '{name}-yaml':
+      - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet3-unit':
@@ -479,7 +479,7 @@
 - project:
     name: puppet-site-rctest
     jobs:
-       - '{name}-yaml':
+      - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet3-unit':
