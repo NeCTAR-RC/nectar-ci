@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_5fb69dda",
+        "filename": "puppet.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-12-08T03:37:46Z",
+      "side": 0,
+      "message": "Do you want to drop the YAML tests?",
+      "range": {
+        "startLine": 482,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 22
+      },
+      "revId": "215958b1e05436d2f7eb453adf04a2170032505a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
