@@ -253,7 +253,10 @@
 - project:
     name: puppet-melbourne
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-puppet3-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet4-non-voting':
          access: 'nobody'
          organisation: 'internal'
 
