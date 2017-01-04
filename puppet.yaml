@@ -489,10 +489,7 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-puppet3-unit':
-         access: 'nobody'
-         organisation: 'internal'
-      - '{name}-puppet4-non-voting':
+      - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
 
