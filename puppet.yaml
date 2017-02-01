@@ -450,6 +450,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-sut
+    jobs:
+      - '{name}-puppet-unit':
+        access: 'nobody'
+        organisation: 'internal'
+
+- project:
     name: puppet-tempest
     jobs:
       - '{name}-puppet-unit':
@@ -475,6 +482,13 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
+
+- project:
+    name: puppet-site-sut
+    jobs:
+      - '{name}-puppet-unit':
+        access: 'nobody'
+        organisation: 'internal'
 
 - project:
     name: puppet-ntp
@@ -569,6 +583,13 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
+
+- project:
+    name: hiera-sut
+    jobs:
+      - '{name}-yaml':
+        access: 'nobody'
+        organisation: 'internal'
 
 - project:
     name: hieradata
