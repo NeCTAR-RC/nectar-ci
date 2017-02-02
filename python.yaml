@@ -44,23 +44,19 @@
 - project:
     name: langstroth
     jobs:
-      - '{name}-trusty-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27-dj16'
-      - '{name}-trusty-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-trusty-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'jshint'
-      - '{name}-trusty-deb-package':
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -82,15 +78,15 @@
 - project:
     name: nectar-metrics
     jobs:
-      - '{name}-trusty-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-trusty-tox-{environment}':
+      - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-trusty-deb-package':
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
