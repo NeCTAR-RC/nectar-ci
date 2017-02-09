@@ -90,6 +90,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-ersa
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-etckeeper
     jobs:
       - '{name}-puppet-unit':
