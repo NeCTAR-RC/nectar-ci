@@ -78,3 +78,10 @@
          access: 'nobody'
          environment: 'pep8'
          organisation: 'internal'
+
+- project:
+    name: uom-ceph1-qh2
+    jobs:
+      - '{name}-dummy':
+        access: 'nobody'
+        organisation: 'internal'
