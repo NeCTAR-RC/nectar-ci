@@ -228,3 +228,13 @@
           git config --global user.name "Jenkins"
           git commit -m "Auto upload"
           git push --force github gh-pages
+
+- builder:
+    name: puppet-prod-review
+    builders:
+      - shell: |
+          git config gitreview.username jenkins
+          git branch change
+          git checkout production
+          git cherry-pick change
+          git review production
