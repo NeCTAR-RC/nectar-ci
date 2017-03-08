@@ -10,6 +10,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
             os_release: 'newton'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'xenial'
+            os_release: 'ocata'
 
 
 - job-template:
