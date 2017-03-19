@@ -20,7 +20,7 @@
          architecture: 'x86_64'
          os_distro: 'centos'
          os_version: '6'
-         default_user: 'ec2-user'
+         default_user: 'centos'
 
 - project:
     name: centos-7-x86_64
@@ -32,7 +32,7 @@
          architecture: 'x86_64'
          os_distro: 'centos'
          os_version: '7'
-         default_user: 'ec2-user'
+         default_user: 'centos'
 
 - project:
     name: centos-7-x86_64-murano-agent
@@ -44,7 +44,7 @@
          architecture: 'x86_64'
          os_distro: 'centos'
          os_version: '7'
-         default_user: 'ec2-user'
+         default_user: 'centos'
 
 - project:
     name: debian-7-x86_64
@@ -378,7 +378,7 @@
           export OS_NO_CACHE=True
           jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
           [ -d output-${{BUILD_NAME}} ] && rm -fr output-${{BUILD_NAME}}
-          packer build -color=false -var-file=variables-nectar.json ${{BUILD_NAME}}.json
+          packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
           cd output-${{BUILD_NAME}}
           qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
