@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ae8d1ca_06aa3b19",
+        "filename": "images.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2017-03-22T03:58:15Z",
+      "side": 1,
+      "message": "why do we want this? my guess is to dump console-log for debugging?",
+      "range": {
+        "startLine": 330,
+        "startChar": 18,
+        "endLine": 330,
+        "endChar": 47
+      },
+      "revId": "9b6fb9150c702f5ee211aba0db8c88e1859dd4d3",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
