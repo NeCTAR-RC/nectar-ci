@@ -439,6 +439,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-screen
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-sahara
     jobs:
       - '{name}-puppet-unit':
