@@ -309,6 +309,7 @@
           qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}}_large.qcow2 ${{BUILD_NAME}}.qcow2
           rm ${{BUILD_NAME}}_large.qcow2
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          [[ "{job_name}" =~ "murano" ]] && openstack image set --property murano_image_info='{{"title": "NeCTAR {image_name}", "type": "linux"}}' $IMAGE_ID
           INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing "test_$BUILD_NAME")
           set +e
           i=0
