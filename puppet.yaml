@@ -622,3 +622,9 @@
          access: 'nobody'
          organisation: 'internal'
 
+- project:
+    name: hiera-test
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'nectar-monash'
