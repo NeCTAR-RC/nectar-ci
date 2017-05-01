@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ae5cdf2_1b745b9b",
+        "filename": "puppet.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2017-05-01T01:00:43Z",
+      "side": 1,
+      "message": "Is repo for hiera? If so, it might be more useful to use the \u0027{name}-yaml\u0027 job",
+      "range": {
+        "startLine": 628,
+        "startChar": 8,
+        "endLine": 628,
+        "endChar": 28
+      },
+      "revId": "484f224e61219df5270e6e8541721322b9eb33cd",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
