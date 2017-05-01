@@ -22,6 +22,30 @@
       "revId": "484f224e61219df5270e6e8541721322b9eb33cd",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ae5cdf2_5b6ee3ca",
+        "filename": "puppet.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000169
+      },
+      "writtenOn": "2017-05-01T01:31:32Z",
+      "side": 1,
+      "message": "Yup, that\u0027s correct, will do that now.",
+      "parentUuid": "1ae5cdf2_1b745b9b",
+      "range": {
+        "startLine": 628,
+        "startChar": 8,
+        "endLine": 628,
+        "endChar": 28
+      },
+      "revId": "484f224e61219df5270e6e8541721322b9eb33cd",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
