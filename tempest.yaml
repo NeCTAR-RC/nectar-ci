@@ -148,8 +148,6 @@
     defaults: global
     node: tempest
     concurrent: false
-    logrotate:
-      daysToKeep: 7
 
     scm:
       - git:
@@ -184,8 +182,6 @@
     defaults: global
     node: tempest
     concurrent: false
-    logrotate:
-      daysToKeep: 7
 
     scm:
       - git:

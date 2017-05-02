@@ -13,6 +13,7 @@
       </p>
     project-type: freestyle
     concurrent: true
+    properties:
+        - build-discarder:
+            num-to-keep: 20
 
-    logrotate:
-      numToKeep: 20
