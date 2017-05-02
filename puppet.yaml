@@ -525,6 +525,16 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-undertest
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
