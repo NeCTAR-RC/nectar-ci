@@ -59,6 +59,18 @@
          default_user: 'debian'
 
 - project:
+    name: debian-9-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Debian 9 (Stretch) amd64'
+         architecture: 'x86_64'
+         os_distro: 'debian'
+         os_version: '9'
+         default_user: 'debian'
+
+- project:
     name: fedora-25-x86_64
     jobs:
       - 'image-build-{name}':
