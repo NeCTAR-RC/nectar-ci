@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ae5cdf2_76180485",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-07-18T08:47:47Z",
+      "side": 1,
+      "message": "same comment as below",
+      "range": {
+        "startLine": 94,
+        "startChar": 30,
+        "endLine": 94,
+        "endChar": 50
+      },
+      "revId": "6d420f152917f6074f52900c6ff1cf8b7eaa4595",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ae5cdf2_562ce8ab",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-07-18T08:47:47Z",
+      "side": 1,
+      "message": "because this is testing just the api we prob don\u0027t need to pass in the availability zone attribute at all here",
+      "range": {
+        "startLine": 106,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 152
+      },
+      "revId": "6d420f152917f6074f52900c6ff1cf8b7eaa4595",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ae5cdf2_961d9076",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-07-18T08:47:47Z",
+      "side": 1,
+      "message": "We should take the same arguments as the check-compute-host job so we can if needed run this on a specific host or else just a specific AZ",
+      "range": {
+        "startLine": 142,
+        "startChar": 3,
+        "endLine": 145,
+        "endChar": 3
+      },
+      "revId": "6d420f152917f6074f52900c6ff1cf8b7eaa4595",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
