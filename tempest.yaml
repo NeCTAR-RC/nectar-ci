@@ -77,6 +77,81 @@
             - job-discover
 
 - job:
+    name: tempest-neutron-check
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -e $CLOUD -j check_neutron $tmpdir
+          cd $tmpdir
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml
+          rm -rf $tmpdir
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
+    name: tempest-scenario-check
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check_neutron $tmpdir
+          cd $tmpdir
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml
+          rm -rf $tmpdir
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+      - string:
+          name: 'HOST'
+          description: |
+                Nova host to test. <br>
+                - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+                - Leave blank to let scheduler choose a host.
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
     name: tempest-community-image-check
     project-type: freestyle
     defaults: global
