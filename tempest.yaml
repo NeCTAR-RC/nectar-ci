@@ -184,6 +184,7 @@
 - project:
     name: tempest-nagios-site
     site:
+        - auckland
         - intersect-01
         - intersect-02
         - melbourne-np
@@ -191,9 +192,9 @@
         - monash-01
         - monash-02
         - nci
-        - pawsey
         - qld
         - sa
+        - swinburne
         - tasmania
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
