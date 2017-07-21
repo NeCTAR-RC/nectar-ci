@@ -332,7 +332,7 @@
     name: '{name}-os-deb-package'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial-ocata
 
     parameters:
       - string:
