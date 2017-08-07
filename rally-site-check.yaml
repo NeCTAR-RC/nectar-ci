@@ -16,8 +16,6 @@
             availability-zone: monash-02
         - nci:
             availability-zone: NCI
-        - pawsey:
-            availability-zone: pawsey
         - qld:
             availability-zone: QRIScloud
         - sa:
