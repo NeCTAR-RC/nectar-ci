@@ -136,7 +136,7 @@
     name: '{name}-xenial-tox-{environment}'
     project-type: freestyle
     defaults: global
-    node: 'xenial-mitaka'
+    node: 'xenial-ocata'
 
     parameters:
       - string:

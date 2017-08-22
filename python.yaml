@@ -387,7 +387,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-xenial-deb-package':
+      - '{name}-ocata-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
