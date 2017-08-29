@@ -1,34 +1,4 @@
 
-- project:
-    name: testcloud-nova
-    jobs:
-      - '{name}-rally':
-        deployment: 'RCTest'
-
-- project:
-    name: testcloud-cinder
-    jobs:
-      - '{name}-rally':
-        deployment: 'RCTest'
-
-- project:
-    name: testcloud-keystone
-    jobs:
-      - '{name}-rally':
-        deployment: 'RCTest'
-
-- project:
-    name: testcloud-swift
-    jobs:
-      - '{name}-rally':
-        deployment: 'RCTest'
-
-- project:
-    name: testcloud-glance
-    jobs:
-      - '{name}-rally':
-        deployment: 'RCTest'
-
 - job:
     name: testcloud-upgrade
     project-type: freestyle
@@ -39,7 +9,3 @@
       - shell: 'hivemind -R test-cloud upgrade.upgrade --unattended'
     triggers:
       - timed: "@midnight"
-    publishers:
-      - trigger:
-          project: testcloud-nova-rally,testcloud-cinder-rally,testcloud-keystone-rally,testcloud-glance-rally,testcloud-swift-rally,testcloud-neutron-rally
-          threshold: SUCCESS
