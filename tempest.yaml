@@ -91,7 +91,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -e $CLOUD -j check_neutron $tmpdir
+          ./setup_tempest.py -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
           ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml
           rm -rf $tmpdir
@@ -124,7 +124,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check_neutron $tmpdir
+          ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
           ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml
           rm -rf $tmpdir
@@ -200,6 +200,7 @@
       - 'tempest-nagios-site-{site}-{test}':
           test:
             - 'compute'
+            - 'network'
       - 'tempest-cleanup-site-{site}'
 
 
@@ -265,7 +266,7 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 45m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e prod'
+      - shell: 'timeout 45m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production'
 
     triggers:
       - timed: 'H * * * *'
@@ -299,7 +300,7 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 5m $WORKSPACE/nagios/tempest_purge.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} --no-dry-run'
+      - shell: 'timeout 5m $WORKSPACE/nagios/tempest_purge.py -s {site} --no-dry-run'
 
     properties:
       - authorization:
@@ -327,7 +328,7 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 5m $WORKSPACE/nagios/tempest_purge.py -c $WORKSPACE/nagios/tempest_nagios.conf -e prod --no-dry-run'
+      - shell: 'timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production --no-dry-run'
 
     properties:
       - authorization:
