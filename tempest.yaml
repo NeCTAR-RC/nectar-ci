@@ -232,7 +232,9 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 20m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production'
+      - shell: |
+          . /opt/tempest/bin/activate
+          timeout 20m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production
 
     triggers:
       - timed: 'H/30 * * * *'
@@ -266,7 +268,9 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 45m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production'
+      - shell: |
+          . /opt/tempest/bin/activate
+          timeout 45m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production
 
     triggers:
       - timed: 'H * * * *'
@@ -300,7 +304,9 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production -s {site} --no-dry-run'
+      - shell: |
+          . /opt/tempest/bin/activate
+          timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production -s {site} --no-dry-run
 
     properties:
       - authorization:
@@ -328,7 +334,9 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     builders:
-      - shell: 'timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production --no-dry-run'
+      - shell: |
+          . /opt/tempest/bin/activate
+          timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production --no-dry-run
 
     properties:
       - authorization:
