@@ -200,9 +200,20 @@
       - 'tempest-nagios-site-{site}-{test}':
           test:
             - 'compute'
-            - 'network'
       - 'tempest-cleanup-site-{site}'
 
+- project:
+    name: tempest-nagios-site
+    site:
+        - melbourne-np
+        - melbourne-qh2
+        - qld
+        - tasmania
+    jobs:
+      - 'tempest-nagios-site-{site}-{test}':
+          test:
+            - 'network'
+      - 'tempest-cleanup-site-{site}'
 
 - project:
     name: tempest-nagios-flavor
@@ -254,6 +265,7 @@
             - job-discover
       - build-discarder:
           days-to-keep: 7
+
 
 - job-template:
     name: 'tempest-nagios-flavor-{flavor}-{test}'
