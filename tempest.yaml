@@ -200,9 +200,17 @@
       - 'tempest-nagios-site-{site}-{test}':
           test:
             - 'compute'
-            - 'network'
       - 'tempest-cleanup-site-{site}'
 
+- project:
+    name: tempest-nagios-site-network
+    site:
+        - melbourne-np
+        - melbourne-qh2
+        - qld
+        - tasmania
+    jobs:
+      - 'tempest-nagios-site-{site}-network':
 
 - project:
     name: tempest-nagios-flavor
@@ -252,6 +260,41 @@
             - job-discover
       - build-discarder:
           days-to-keep: 7
+
+- job-template:
+    name: 'tempest-nagios-site-{site}-network'
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: false
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    builders:
+      - shell: 'timeout 20m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t network -e production'
+
+    triggers:
+      - timed: 'H/45 * * * *'
+
+    publishers:
+      - naginator:
+          max-failed-builds: 4
+          fixed-delay: 120
+      - trigger:
+          project: 'tempest-cleanup-site-{site}'
+          threshold: 'FAILURE'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - build-discarder:
+          days-to-keep: 7
+
 
 - job-template:
     name: 'tempest-nagios-flavor-{flavor}-{test}'
