@@ -15,7 +15,7 @@
           cd $WORKSPACE/tempest
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-compute-host.yaml
+          tempest run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host.yaml
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -57,7 +57,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check_cinder $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml
+          tempest run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-cinder.yaml
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -93,7 +93,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml
+          tempest run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-neutron.yaml
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -126,7 +126,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml
+          tempest run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-scenario.yaml
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -168,7 +168,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --image $IMAGE_ID -e production -j community-images $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/community-images.yaml
+          tempest run --serial --whitelist-file $WORKSPACE/tempest/whitelists/community-images.yaml
           rm -rf $tmpdir
     parameters:
       - string:
