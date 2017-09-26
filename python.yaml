@@ -74,17 +74,6 @@
       - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py34'
-      - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - '{name}-trusty-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-metrics
