@@ -182,7 +182,7 @@
             - job-discover
 
 - project:
-    name: tempest-nagios-site
+    name: tempest-nagios-site-compute
     site:
         - auckland
         - intersect-01
@@ -203,7 +203,7 @@
       - 'tempest-cleanup-site-{site}'
 
 - project:
-    name: tempest-nagios-site
+    name: tempest-nagios-site-network
     site:
         - melbourne-np
         - melbourne-qh2
@@ -213,7 +213,6 @@
       - 'tempest-nagios-site-{site}-{test}':
           test:
             - 'network'
-      - 'tempest-cleanup-site-{site}'
 
 - project:
     name: tempest-nagios-flavor
