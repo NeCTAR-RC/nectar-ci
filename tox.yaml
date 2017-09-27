@@ -13,6 +13,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
             os_release: 'ocata'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'xenial'
+            os_release: 'pike'
 
 
 - job-template:
