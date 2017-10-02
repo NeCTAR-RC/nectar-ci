@@ -2,7 +2,7 @@
     name: '{name}-puppet4-non-voting'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -68,7 +68,7 @@
     name: '{name}-puppet3-unit'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -127,7 +127,7 @@
     name: '{name}-puppet-unit'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -530,7 +530,7 @@
     name: '{name}-yaml'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -582,7 +582,7 @@
     name: '{name}-dummy'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: openstack
 
     parameters:
       - string:
@@ -634,7 +634,7 @@
     name: '{name}-markdown'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -718,7 +718,7 @@
     name: '{name}-nodejs-test'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -770,7 +770,7 @@
     name: '{name}-jekyll-build'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -822,7 +822,7 @@
     name: '{name}-jekyll-deploy'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
     quiet-period: 60
 
     parameters:
@@ -889,7 +889,7 @@
     name: '{name}-puppet-prod-review'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
