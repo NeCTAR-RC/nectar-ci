@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfefc32f_5738a4fa",
+        "filename": "tempest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-10-09T21:51:10Z",
+      "side": 1,
+      "message": "No such site called tempest-operator.\n\nI think it should pass in a job argument and start with \"check\" Could just so -j check-operator-cleanup\n\nCode:\n    if job and job.startswith(\"check\"):\n        accounts_file \u003d os.path.join(dir_path,\n                                     \u0027accounts/tempest-operator.yaml\u0027)",
+      "range": {
+        "startLine": 380,
+        "startChar": 70,
+        "endLine": 380,
+        "endChar": 90
+      },
+      "revId": "ae14634a04e977886ac0b4187090690b09338a13",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
