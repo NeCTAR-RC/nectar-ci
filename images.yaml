@@ -177,7 +177,7 @@
     name: 'image-build-{name}'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
@@ -236,7 +236,7 @@
     name: 'image-build-rctest-{name}'
     project-type: freestyle
     defaults: global
-    node: xenial-mitaka
+    node: xenial
 
     parameters:
       - string:
