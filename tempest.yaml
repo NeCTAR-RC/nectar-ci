@@ -360,3 +360,36 @@
             - "^.*tempest-compute-host-check"
           block-level: 'GLOBAL'
           queue-scanning: 'ALL'
+
+
+- job:
+    name: 'tempest-cleanup-operator'
+    project-type: freestyle
+    defaults: global
+    node: tempest
+    concurrent: false
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production -s tempest-operator --no-dry-run
+
+    triggers:
+      - timed: '30 2 * * *'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-nagios-flavor-.*"
+            - "^.*tempest-compute-host-check"
+          block-level: 'GLOBAL'
+          queue-scanning: 'ALL'
