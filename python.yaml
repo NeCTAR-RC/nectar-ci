@@ -456,7 +456,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-xenial-deb-package':
+      - '{name}-ocata-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -471,7 +471,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-xenial-deb-package':
+      - '{name}-ocata-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -481,7 +481,7 @@
       - '{name}-run-tests':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
+      - '{name}-ocata-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
