@@ -71,15 +71,15 @@
          default_user: 'debian'
 
 - project:
-    name: fedora-25-x86_64
+    name: fedora-26-x86_64
     jobs:
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 25 x86_64'
+         image_name: 'Fedora 26 x86_64'
          architecture: 'x86_64'
          os_distro: 'fedora'
-         os_version: '25'
+         os_version: '26'
          default_user: 'fedora'
 
 - project:
@@ -143,15 +143,27 @@
          default_user: 'ubuntu'
 
 - project:
-    name: opensuse-leap-42.1-x86_64
+    name: ubuntu-17.10-x86_64
     jobs:
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'openSUSE Leap 42.1 x86_64'
+         image_name: 'Ubuntu 17.10 LTS (Artful) amd64'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '17.10'
+         default_user: 'ubuntu'
+
+- project:
+    name: opensuse-leap-42.3-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'openSUSE Leap 43.1 x86_64'
          architecture: 'x86_64'
          os_distro: 'opensuse'
-         os_version: '42.1'
+         os_version: '42.3'
          default_user: 'ec2-user'
 
 - project:
@@ -188,6 +200,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          default: ''
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
 
     properties:
       - authorization:
@@ -238,16 +254,6 @@
     defaults: global
     node: xenial
 
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
-
     properties:
       - authorization:
           '{access}':
@@ -283,16 +289,20 @@
     name: 'image-builder'
     builders:
       - shell: |
-          #!/bin/bash -xe
+          #!/bin/bash -e
           BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
-          set +x
           export OS_USERNAME=$IMAGE_BUILDER_USERNAME
           export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
-          set -x
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/
-          export OS_TENANT_ID=28eadf5ad64b42a4929b2fb7df99275c
-          export OS_TENANT_NAME=NeCTAR-Images
-          export OS_NO_CACHE=True
+          export OS_PROJECT_DOMAIN_NAME=Default
+          export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
+          if [[ "{job_name}" =~ "murano" ]]; then
+              export OS_PROJECT_NAME=murano
+          else
+              export OS_PROJECT_NAME=NeCTAR-Images
+          fi
+          export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
           BUILDER_TYPE=$(jq -r ".builders[0].type" {job_name}.json)
           if [ "$BUILDER_TYPE" == "qemu" ]; then
               jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
@@ -314,47 +324,70 @@
               qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}}_large.qcow2 ${{BUILD_NAME}}.qcow2
               rm ${{BUILD_NAME}}_large.qcow2
           fi
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
-          [[ "{job_name}" =~ "murano" ]] && openstack image set --property murano_image_info='{{"title": "NeCTAR {image_name}", "type": "linux"}}' $IMAGE_ID
-          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing "test_$BUILD_NAME")
-          set +e
-          i=0
-          while [ $i -le 20 ]; do
+          echo "Creating image..."
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          echo "Image $IMAGE_ID created!"
+          if [[ "{job_name}" =~ "murano" ]]; then
+              echo "Adding Murano properties to image ..."
+              openstack image set --property murano_image_info='{{"title": "NeCTAR {image_name}", "type": "linux"}}' $IMAGE_ID
+          fi
+          openstack image show $IMAGE_ID
+          echo "Creating instance..."
+          [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
+          echo "Found instance ID: $INSTANCE_ID"
+          RETRIES=10
+          i=1
+          while [ $i -le $RETRIES ]; do
               STATUS=$(openstack server show -f value -c status $INSTANCE_ID)
+              echo "Instance is $STATUS ($i/$RETRIES)..."
               [ "$STATUS" = "ACTIVE" ] && break
-              if [ $i -ge 20 ] || [ "$STATUS" = "ERROR" ]; then
-                  openstack server delete $INSTANCE_ID; exit 1
+              if [ $i -ge $RETRIES ]; then
+                  echo "ERROR: Limit reached, cleaning up..."
+                  openstack image delete $IMAGE_ID
+                  openstack server delete $INSTANCE_ID
+                  exit 1
+              fi
+              if [ "$STATUS" = "ERROR" ]; then
+                  echo "Recreating instance due to error: $(openstack server show -f value -c fault $INSTANCE_ID)"
+                  openstack server delete $INSTANCE_ID
+                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
+                  echo "Found instance ID: $INSTANCE_ID"
               fi
               i=$((i+1))
-              sleep 10
+              sleep 30
           done
+          openstack server show $INSTANCE_ID
           IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
           chmod 600 $SSH_TESTING_KEY
           sleep 120 # time to settle for SSH key/fail2ban
-          j=0
-          while [ $j -le 5 ]; do
-              ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
-              if [ $j -ge 5 ]; then
+          RETRIES=5
+          j=1
+          while [ $j -le $RETRIES ]; do
+              echo "Checking for SSH to $IP_ADDRESS ($j/$RETRIES)..."
+              ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
+              if [ $j -ge $RETRIES ]; then
                   nova console-log $INSTANCE_ID
-                  openstack server delete $INSTANCE_ID; exit 1
+                  echo "ERROR: Limit reached, cleaning up..."
+                  openstack image delete $IMAGE_ID
+                  openstack server delete $INSTANCE_ID
+                  exit 1
               fi
               j=$((j+1))
               sleep 60
           done
+          echo "Running tests..."
           sleep 120 # time for cloud-init to complete
-          ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
+          ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
           TEST_RESULT=$?
           openstack server delete $INSTANCE_ID
-          set +x
           if [ $TEST_RESULT -eq 0 ]; then
-              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/
               export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
               export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
               echo "================================================================================"
               echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
               echo "  Image ID: $IMAGE_ID"
               echo "================================================================================"
-              set -x
               hivemind glance.promote --no-dry-run -t NeCTAR-Images-Archive $IMAGE_ID && exit 0
           fi
           exit 1
