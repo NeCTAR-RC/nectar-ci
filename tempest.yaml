@@ -194,7 +194,7 @@
         - nci
         - qld
         - sa
-        - swinburne
+        - swinburne-01
         - tasmania
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
