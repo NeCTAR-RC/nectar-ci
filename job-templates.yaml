@@ -177,7 +177,6 @@
     builders:
       - puppet-lint
       - puppet-syntax
-      - puppet3-syntax
 
     publishers:
       - warnings:
