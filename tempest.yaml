@@ -10,12 +10,22 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
       - shell: |
+          #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD: $CLOUD"
+          echo "                   AZ:    $AVAILABILITY_ZONE"
+          echo "                   HOST:  $HOST"
+          echo
+          echo "================================================================="
+          echo
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-compute-host.yaml
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -57,7 +67,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check_cinder $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -93,7 +103,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -126,7 +136,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
           rm -rf $tmpdir
     parameters:
       - choice:
@@ -168,7 +178,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --image $IMAGE_ID -e production -j community-images $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/community-images.yaml
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/community-images.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
           rm -rf $tmpdir
     parameters:
       - string:
