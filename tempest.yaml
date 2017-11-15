@@ -25,8 +25,10 @@
           cd $WORKSPACE/tempest
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
+          exit $RET
     parameters:
       - choice:
           name: 'CLOUD'
@@ -62,13 +64,16 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
       - shell: |
+          #!/bin/bash
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check_cinder $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
+          exit $RET
     parameters:
       - choice:
           name: 'CLOUD'
@@ -98,13 +103,16 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
       - shell: |
+          #!/bin/bash
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
+          exit $RET
     parameters:
       - choice:
           name: 'CLOUD'
@@ -131,13 +139,16 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
       - shell: |
+          #!/bin/bash
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j nagios_network $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
+          exit $RET
     parameters:
       - choice:
           name: 'CLOUD'
@@ -173,13 +184,16 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
       - shell: |
+          #!/bin/bash
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --image $IMAGE_ID -e production -j community-images $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/community-images.yaml 2>&1 | stdbuf -o0 grep -vE ' \w+Warning: |self._sock = None'
+          ostestr --serial -w $WORKSPACE/tempest/whitelists/community-images.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
+          exit $RET
     parameters:
       - string:
           name: 'IMAGE_ID'
