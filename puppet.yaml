@@ -498,10 +498,10 @@
     jobs:
       - '{name}-yaml':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'nectar-monash'
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'nectar-monash'
 
 - project:
     name: puppet-site-nectar
