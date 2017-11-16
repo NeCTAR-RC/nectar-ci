@@ -494,6 +494,16 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-monashtest
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-site-nectar
     jobs:
       - '{name}-yaml':
