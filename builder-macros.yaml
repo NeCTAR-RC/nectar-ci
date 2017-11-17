@@ -238,3 +238,15 @@
           git checkout production
           git cherry-pick change
           git review production
+
+- builder:
+    name: jenkins-jobs-test
+    builders:
+      - shell: |
+          jenkins-jobs test .
+
+- builder:
+    name: jenkins-jobs-update
+    builders:
+      - shell: |
+          jenkins-jobs update .
