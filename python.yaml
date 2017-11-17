@@ -576,3 +576,18 @@
       - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: sahara
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-os-deb-package':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
