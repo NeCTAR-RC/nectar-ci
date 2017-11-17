@@ -403,7 +403,7 @@
     name: '{name}-os-deb-package'
     project-type: freestyle
     defaults: global
-    node: xenial-ocata
+    node: xenial-pike
 
     parameters:
       - string:
