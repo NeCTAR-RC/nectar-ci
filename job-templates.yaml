@@ -10,12 +10,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           skip-vote:
@@ -76,12 +70,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -134,12 +122,6 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:
@@ -198,12 +180,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:
@@ -271,12 +247,6 @@
           default: master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -342,12 +312,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:
@@ -415,12 +379,6 @@
           default: master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -479,12 +437,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -537,12 +489,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -589,12 +535,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -640,12 +580,6 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:
@@ -725,12 +659,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -776,12 +704,6 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:
@@ -833,12 +755,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:
@@ -899,12 +815,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
 
     triggers:
       - gerrit:

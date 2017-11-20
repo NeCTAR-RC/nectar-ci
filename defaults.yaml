@@ -14,6 +14,9 @@
     project-type: freestyle
     concurrent: true
     properties:
-        - build-discarder:
-            num-to-keep: 20
-
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+      - build-discarder:
+          num-to-keep: 20
