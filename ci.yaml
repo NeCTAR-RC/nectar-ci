@@ -1,6 +1,5 @@
 - job-template:
     name: '{name}-ruby-lint'
-    project-type: freestyle
     defaults: global
     node: xenial-mitaka
 
@@ -51,7 +50,6 @@
 
 - job-template:
     name: '{name}-jenkins-jobs-test'
-    project-type: freestyle
     defaults: global
     node: upgrader
 
@@ -102,7 +100,6 @@
 
 - job-template:
     name: '{name}-jenkins-jobs-update'
-    project-type: freestyle
     defaults: global
     node: upgrader
 

@@ -1,6 +1,5 @@
 - job:
     name: tempest-compute-host-check
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: true
@@ -54,7 +53,6 @@
 
 - job:
     name: tempest-cinder-check
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: true
@@ -93,7 +91,6 @@
 
 - job:
     name: tempest-neutron-check
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: true
@@ -129,7 +126,6 @@
 
 - job:
     name: tempest-scenario-check
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: true
@@ -174,7 +170,6 @@
 
 - job:
     name: tempest-community-image-check
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: true
@@ -255,7 +250,6 @@
 
 - job-template:
     name: 'tempest-nagios-site-{site}-{test}'
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: false
@@ -292,7 +286,6 @@
 
 - job-template:
     name: 'tempest-nagios-flavor-{flavor}-{test}'
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: false
@@ -328,7 +321,6 @@
 
 - job-template:
     name: 'tempest-cleanup-site-{site}'
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: false
@@ -360,7 +352,6 @@
 
 - job:
     name: 'tempest-cleanup'
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: false
@@ -390,7 +381,6 @@
 
 - job:
     name: 'tempest-cleanup-operator'
-    project-type: freestyle
     defaults: global
     node: tempest
     concurrent: false

@@ -20,7 +20,6 @@
 
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
-    project-type: freestyle
     defaults: global
     node: '{ubuntu_release}-{os_release}'
 
@@ -79,7 +78,6 @@
 
 - job-template:
     name: '{name}-trusty-tox-{environment}'
-    project-type: freestyle
     defaults: global
     node: 'trusty-liberty'
 
@@ -141,7 +139,6 @@
 
 - job-template:
     name: '{name}-xenial-tox-{environment}'
-    project-type: freestyle
     defaults: global
     node: 'xenial-ocata'
 

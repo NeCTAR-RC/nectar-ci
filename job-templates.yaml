@@ -1,6 +1,5 @@
 - job-template:
     name: '{name}-puppet4-non-voting'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -60,7 +59,6 @@
 
 - job-template:
     name: '{name}-puppet3-unit'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -113,7 +111,6 @@
 
 - job-template:
     name: '{name}-puppet-unit'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -167,7 +164,6 @@
 
 - job-template:
     name: '{name}-trusty-deb-package'
-    project-type: freestyle
     defaults: global
     node: trusty-liberty
 
@@ -233,7 +229,6 @@
 
 - job-template:
     name: '{name}-xenial-deb-package'
-    project-type: freestyle
     defaults: global
     node: xenial-mitaka
 
@@ -299,7 +294,6 @@
 
 - job-template:
     name: '{name}-ocata-deb-package'
-    project-type: freestyle
     defaults: global
     node: xenial-ocata
 
@@ -365,7 +359,6 @@
 
 - job-template:
     name: '{name}-os-deb-package'
-    project-type: freestyle
     defaults: global
     node: xenial-pike
 
@@ -427,7 +420,6 @@
 
 - job-template:
     name: '{name}-run-tests'
-    project-type: freestyle
     defaults: global
     node: trusty-icehouse
 
@@ -479,7 +471,6 @@
 
 - job-template:
     name: '{name}-yaml'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -525,7 +516,6 @@
 
 - job-template:
     name: '{name}-dummy'
-    project-type: freestyle
     defaults: global
     node: openstack
 
@@ -571,7 +561,6 @@
 
 - job-template:
     name: '{name}-markdown'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -616,40 +605,9 @@
     builders:
       - markdown-lint
 
-- job-template:
-    name: '{name}-rally'
-    project-type: freestyle
-    defaults: global
-    node: upgrader
-    concurrent: false
-    quiet-period: 30
-    properties:
-      - authorization:
-          'anonymous':
-            - job-read
-            - job-discover
-
-    builders:
-      - shell: |
-          . /var/lib/jenkins/rally/bin/activate
-          rally deployment use RCTest
-          rally task start /var/lib/jenkins/rally-jobs/test/{name}.json
-          rally task report --html --out output.html
-          rally task report --junit --out output.xml
-          rally task delete
-    publishers:
-      - html-publisher:
-          name: "Rally Report"
-          dir: "."
-          files: "output.html"
-          keep-all: true
-          allow-missing: true
-      - junit:
-          results: output.xml
 
 - job-template:
     name: '{name}-nodejs-test'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -695,7 +653,6 @@
 
 - job-template:
     name: '{name}-jekyll-build'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -741,7 +698,6 @@
 
 - job-template:
     name: '{name}-jekyll-deploy'
-    project-type: freestyle
     defaults: global
     node: xenial
     quiet-period: 60
@@ -802,7 +758,6 @@
 
 - job-template:
     name: '{name}-puppet-prod-review'
-    project-type: freestyle
     defaults: global
     node: xenial
 

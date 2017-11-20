@@ -215,7 +215,6 @@
 
 - job-template:
     name: 'image-build-{name}'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -278,7 +277,6 @@
 
 - job-template:
     name: 'image-build-trove-{name}'
-    project-type: freestyle
     defaults: global
     node: xenial
 
@@ -331,7 +329,6 @@
 
 - job-template:
     name: 'image-build-rctest-{name}'
-    project-type: freestyle
     defaults: global
     node: xenial
 

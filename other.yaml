@@ -1,9 +1,3 @@
-- project:
-    name: rally-jobs
-    jobs:
-      - '{name}-dummy':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-images
@@ -14,7 +8,6 @@
 
 - job:
     name: 'librarian-verify'
-    project-type: freestyle
     concurrent: false
     defaults: global
 
