@@ -511,8 +511,8 @@
           echo ""
           echo "  To use this new image in Trove, from a controller run:"
           echo "     trove-manage datastore_update {datastore_name} ''"
-          echo "     trove-manage datastore_version_update {datastore_name} {datastore_version} {datastore_type} $IMAGE_ID '' 1"
-          echo "     trove-manage datastore_update {datastore_name} {datastore_version}"
+          echo "     trove-manage datastore_version_update {datastore_name} {datastore_version}-$BUILD_NUMBER {datastore_type} $IMAGE_ID '' 1"
+          echo "     trove-manage datastore_update {datastore_name} {datastore_version}-$BUILD_NUMBER"
           echo ""
           echo "================================================================================"
 
