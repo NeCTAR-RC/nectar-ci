@@ -393,6 +393,10 @@
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'py35'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
@@ -591,3 +595,19 @@
       - '{name}-os-deb-package':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: sahara-tests
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py35'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
