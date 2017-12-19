@@ -393,6 +393,10 @@
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'py35'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
