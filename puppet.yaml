@@ -521,6 +521,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-spartan
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-site-sut
     jobs:
       - '{name}-puppet-unit':
