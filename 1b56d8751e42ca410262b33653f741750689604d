@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27057eee_f5af31a2",
+        "filename": "python.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-01-11T22:45:19Z",
+      "side": 1,
+      "message": "should we have a py27 or py35 job as well?",
+      "range": {
+        "startLine": 617,
+        "startChar": 0,
+        "endLine": 620,
+        "endChar": 28
+      },
+      "revId": "1b56d8751e42ca410262b33653f741750689604d",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
