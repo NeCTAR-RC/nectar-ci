@@ -476,7 +476,7 @@
               echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
               echo "  Image ID: $IMAGE_ID"
               echo "================================================================================"
-              hivemind glance.promote --no-dry-run -t NeCTAR-Images-Archive $IMAGE_ID && exit 0
+              hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
           fi
           exit 1
 
