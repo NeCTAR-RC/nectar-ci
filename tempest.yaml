@@ -262,7 +262,7 @@
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 20m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production
+          timeout 20m $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production
 
     triggers:
       - timed: 'H/30 * * * *'
@@ -298,7 +298,7 @@
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 45m $WORKSPACE/nagios/tempest_nagios.py -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production
+          timeout 45m $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production
 
     triggers:
       - timed: 'H * * * *'
