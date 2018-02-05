@@ -104,7 +104,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -e $CLOUD -j nagios_network $tmpdir
+          ./setup_tempest.py -e $CLOUD -j nagios-network $tmpdir
           cd $tmpdir
           ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -139,7 +139,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j nagios_network $tmpdir
+          ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j nagios-network $tmpdir
           cd $tmpdir
           ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
