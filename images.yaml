@@ -83,6 +83,18 @@
          default_user: 'fedora'
 
 - project:
+    name: fedora-27-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 26 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '27'
+         default_user: 'fedora'
+
+- project:
     name: scientific-6-x86_64
     jobs:
       - 'image-build-{name}':
@@ -160,7 +172,7 @@
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'openSUSE Leap 43.1 x86_64'
+         image_name: 'openSUSE Leap 43.3 x86_64'
          architecture: 'x86_64'
          os_distro: 'opensuse'
          os_version: '42.3'
