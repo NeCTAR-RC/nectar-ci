@@ -425,7 +425,7 @@
               rm ${{BUILD_NAME}}_large.qcow2
           fi
           echo "Creating image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
           if [[ "{job_name}" =~ "murano" ]]; then
               echo "Adding Murano properties to image ..."
