@@ -611,8 +611,17 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
+
 - project:
     name: murano-tempest-plugin
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
+    name: sahara-image-elements
     jobs:
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
