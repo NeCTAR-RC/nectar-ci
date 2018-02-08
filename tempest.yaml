@@ -169,6 +169,131 @@
             - job-discover
 
 - job:
+    name: tempest-murano-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-murano $tmpdir
+          cd $tmpdir
+          ostestr -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-trove-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-trove $tmpdir
+          cd $tmpdir
+          ostestr -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-sahara-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          timeout 45m $WORKSPACE/nagios/tempest_nagios.py sahara -c $WORKSPACE/nagios/tempest_nagios.conf -s $AVAILABILITY_ZONE -e $CLOUD -p $PLUGIN -pv $PLUGIN_VERSION
+
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - choice:
+          name: 'PLUGIN'
+          choices:
+            - spark
+            - vanilla
+          description: "Sahara plugin (spark, vanilla etc.). Leave as Spark for now."
+      - choice:
+          name: 'PLUGIN_VERSION'
+          choices:
+            - 2.1.0
+            - 1.6.0
+            - 1.3.1
+            - 2.7.1
+          description: "Sahara plugin version (spark(2.1.0/1.6.0/1.3.1), vanilla(2.7.1) etc.). Leave as Spark version for now."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
     name: tempest-community-image-check
     defaults: global
     node: tempest
