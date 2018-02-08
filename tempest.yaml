@@ -117,7 +117,7 @@
             - production
             - testing
             - development
-          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+          description: "Cloud to run tempest on (production, testing or development). Leave as Production if unsure."
     properties:
       - authorization:
           'nobody':
