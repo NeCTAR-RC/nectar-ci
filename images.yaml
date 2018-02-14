@@ -363,11 +363,11 @@
     parameters:
       - string:
           name: GERRIT_REFSPEC
-          default: refs/heads/master
+          default: refs/heads/nectar/pike
           description: "The default ref to test."
       - string:
           name: GERRIT_BRANCH
-          default: master
+          default: nectar/pike
           description: "The default branch to test."
 
     properties:
@@ -398,6 +398,7 @@
          os_version: "{os_version}"
          plugin: "{plugin}"
          spark_version: "{spark_version}"
+         hadoop_version: "{hadoop_version}"
          cloud_user: "{cloud_user}"
          build_name: "{build_name}"
 
@@ -650,12 +651,12 @@
           cd $WORKSPACE
           case "{plugin}" in
               "spark"*)
-                  export VERSION=$spark_version
-                  export OPTS="-s $spark_version"
+                  export VERSION="{spark_version}"
+                  export OPTS="-s {spark_version}"
                   ;;
               "vanilla"*)
-                  export VERSION=$hadoop_version
-                  export OPTS="-v $hadoop_version"
+                  export VERSION="{hadoop_version}"
+                  export OPTS="-v {hadoop_version}"
                   ;;
               *)
                   echo -e "plugin name error"
