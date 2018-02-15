@@ -29,6 +29,15 @@
             rake test 2>&1
           fi
 
+
+- builder:
+    name: librarian-install
+    builders:
+      - ssh-builder:
+          ssh-user-ip: puppet172.26.21.75:22
+          command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh
+
+
 - builder:
     name: puppet-lint
     builders:
