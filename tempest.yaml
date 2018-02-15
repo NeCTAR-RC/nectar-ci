@@ -66,7 +66,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check_cinder $tmpdir
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-cinder $tmpdir
           cd $tmpdir
           ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
