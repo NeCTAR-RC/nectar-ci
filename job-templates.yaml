@@ -1,4 +1,55 @@
 - job-template:
+    name: '{name}-librarian-install'
+    defaults: global
+    node: upgrader
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - librarian-install
+
+
+- job-template:
     name: '{name}-puppet4-non-voting'
     defaults: global
     node: xenial
