@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db59f79a_458a38bc",
+        "filename": "job-templates.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-02-15T23:42:14Z",
+      "side": 1,
+      "message": "Don\u0027t think this is correct, should be on submit",
+      "range": {
+        "startLine": 19,
+        "startChar": 15,
+        "endLine": 19,
+        "endChar": 38
+      },
+      "revId": "4c4343ed3acca986763465c867e71323358dcf79",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
