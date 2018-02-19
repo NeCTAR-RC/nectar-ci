@@ -71,3 +71,17 @@
          access: 'nobody'
          environment: 'pep8'
          organisation: 'internal'
+
+- project:
+    name: spartan-resplat
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
+    name: spartan-slurmconf
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'internal'
