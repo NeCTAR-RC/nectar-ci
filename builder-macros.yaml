@@ -252,10 +252,12 @@
     name: jenkins-jobs-test
     builders:
       - shell: |
+          git checkout $GERRIT_NEWREV
           jenkins-jobs test .
 
 - builder:
     name: jenkins-jobs-update
     builders:
       - shell: |
+          git checkout $GERRIT_NEWREV
           jenkins-jobs update .
