@@ -249,4 +249,5 @@
     name: jenkins-jobs-update
     builders:
       - shell: |
+          git checkout $GERRIT_NEWREV
           jenkins-jobs update .
