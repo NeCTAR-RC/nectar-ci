@@ -255,11 +255,15 @@
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
     builders:
       - shell: |
           #!/bin/bash
           . /opt/tempest/bin/activate
-          timeout 45m $WORKSPACE/nagios/tempest_nagios.py sahara -c $WORKSPACE/nagios/tempest_nagios.conf -s $AVAILABILITY_ZONE -e $CLOUD -p $PLUGIN -pv $PLUGIN_VERSION
+          $WORKSPACE/nagios/tempest_nagios.py sahara -c $WORKSPACE/nagios/tempest_nagios.conf -s $AVAILABILITY_ZONE -e $CLOUD -p $PLUGIN -pv $PLUGIN_VERSION
 
     parameters:
       - choice:
@@ -384,10 +388,15 @@
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
+    wrappers:
+      - timeout:
+          timeout: 20
+          fail: true
+
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 20m $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production
+          $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production
 
     triggers:
       - timed: 'H/30 * * * *'
@@ -420,10 +429,15 @@
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 45m $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production
+          $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production
 
     triggers:
       - timed: 'H * * * *'
@@ -455,10 +469,15 @@
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
+    wrappers:
+      - timeout:
+          timeout: 5
+          fail: true
+
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production -s {site} --no-dry-run
+          $WORKSPACE/nagios/tempest_purge.py -e production -s {site} --no-dry-run
 
     properties:
       - authorization:
@@ -486,10 +505,15 @@
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
+    wrappers:
+      - timeout:
+          timeout: 5
+          fail: true
+
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production --no-dry-run
+          $WORKSPACE/nagios/tempest_purge.py -e production --no-dry-run
 
     properties:
       - authorization:
@@ -515,10 +539,15 @@
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
+    wrappers:
+      - timeout:
+          timeout: 5
+          fail: true
+
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          timeout 5m $WORKSPACE/nagios/tempest_purge.py -e production -s tempest-operator --no-dry-run
+          $WORKSPACE/nagios/tempest_purge.py -e production -s tempest-operator --no-dry-run
 
     triggers:
       - timed: '30 2 * * *'
