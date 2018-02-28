@@ -511,6 +511,16 @@
          organisation: 'nectar-monash'
 
 - project:
+    name: puppet-site-monash
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+
+- project:
     name: puppet-site-nectar
     jobs:
       - '{name}-yaml':
