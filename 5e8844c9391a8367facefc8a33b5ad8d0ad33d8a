@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f75ea63_08a643dc",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-03-06T00:45:45Z",
+      "side": 1,
+      "message": "should add py27 tox test too?",
+      "range": {
+        "startLine": 634,
+        "startChar": 3,
+        "endLine": 637,
+        "endChar": 28
+      },
+      "revId": "5e8844c9391a8367facefc8a33b5ad8d0ad33d8a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
