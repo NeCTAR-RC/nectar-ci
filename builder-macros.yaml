@@ -34,7 +34,7 @@
     name: librarian-install
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet172.26.21.75:22
+          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh
 
 
