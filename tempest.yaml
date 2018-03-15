@@ -247,6 +247,42 @@
 
 
 - job:
+    name: tempest-designate-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -e $CLOUD -j check-designate $tmpdir
+          cd $tmpdir
+          ostestr -n designate_tempest_plugin.tests.scenario.v2.test_recordsets.RecordsetsTest 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
     name: tempest-sahara-check
     defaults: global
     node: tempest
