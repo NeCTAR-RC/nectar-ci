@@ -83,7 +83,7 @@
               - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
+              project-pattern: 'internal/puppet-library'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
