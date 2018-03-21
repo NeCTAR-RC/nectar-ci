@@ -83,7 +83,7 @@
               - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
+              project-pattern: 'internal/puppet-library'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
@@ -98,7 +98,7 @@
 
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
          refspec: $GERRIT_REFSPEC
          branches:
