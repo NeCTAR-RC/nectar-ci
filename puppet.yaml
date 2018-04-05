@@ -392,6 +392,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-puppetboard
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-profile
     jobs:
       - '{name}-puppet-unit':
@@ -400,6 +407,13 @@
       - '{name}-puppet-prod-review':
          access: 'nobody'
          organisation: 'internal'
+
+- project:
+    name: puppet-python
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-qld
