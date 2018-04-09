@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22bb55d2_9f4166be",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-04-09T05:44:00Z",
+      "side": 1,
+      "message": "does this update all envs?",
+      "range": {
+        "startLine": 270,
+        "startChar": 19,
+        "endLine": 270,
+        "endChar": 52
+      },
+      "revId": "ae3832a00114d4121832a373b02d4815858bece9",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
