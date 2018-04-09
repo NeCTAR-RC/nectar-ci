@@ -263,6 +263,13 @@
           jenkins-jobs update .
 
 - builder:
+    name: site-deploy
+    builders:
+      - ssh-builder:
+          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          command: /usr/local/sbin/update-all-env.sh $GERRIT_PROJECT
+
+- builder:
     name: r10k-deploy
     builders:
       - shell: |

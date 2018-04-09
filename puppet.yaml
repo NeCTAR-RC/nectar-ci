@@ -561,6 +561,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-ntp
