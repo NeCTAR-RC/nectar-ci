@@ -283,6 +283,45 @@
 
 
 - job:
+    name: tempest-fwaas-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-scenario $tmpdir
+          cd $tmpdir
+          ostestr --regex neutron_fwaas.tests.tempest_plugin.tests.scenario.test_fwaas.TestFWaaS.test_firewall_insert_rule --serial  2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - string:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
     name: tempest-sahara-check
     defaults: global
     node: tempest
