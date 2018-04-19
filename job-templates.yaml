@@ -771,6 +771,7 @@
     name: '{name}-site-deploy'
     defaults: global
     node: upgrader
+    quiet-period: 60
 
     parameters:
       - string:
@@ -826,6 +827,7 @@
     name: '{name}-r10k-deploy'
     defaults: global
     node: upgrader
+    quiet-period: 60
 
     parameters:
       - string:
