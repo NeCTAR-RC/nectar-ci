@@ -496,6 +496,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-sysctl
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-tempest
     jobs:
       - '{name}-puppet-unit':
