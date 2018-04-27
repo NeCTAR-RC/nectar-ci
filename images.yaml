@@ -35,18 +35,6 @@
          default_user: 'ec2-user'
 
 - project:
-    name: debian-7-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Debian 7 (Wheezy) amd64'
-         architecture: 'x86_64'
-         os_distro: 'debian'
-         os_version: '7'
-         default_user: 'debian'
-
-- project:
     name: debian-8-x86_64
     jobs:
       - 'image-build-{name}':
