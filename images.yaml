@@ -484,6 +484,7 @@
               USER_ACCOUNT=$(jq -r '.builders[0].ssh_username' {job_name}.json)
               [ "$USER_ACCOUNT" == "centos" ] && USER_ACCOUNT=ec2-user
           fi
+          rm -fr ansible/.facts
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
           if [ "$BUILDER_TYPE" == "qemu" ]; then
@@ -499,6 +500,12 @@
           echo "Creating image..."
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
+          if [ -d ansible/.facts ]; do
+              for PROP in $(ls ansible/.facts); do
+                  echo "Adding $PROP property to image ..."
+                  openstack image set --property $PROP="$(cat ansible/.facts/$PROP)" $IMAGE_ID
+              done
+          fi
           if [[ "{job_name}" =~ "murano" ]]; then
               echo "Adding Murano properties to image ..."
               openstack image set --property murano_image_info='{{"title": "NeCTAR {image_name}", "type": "linux"}}' $IMAGE_ID
