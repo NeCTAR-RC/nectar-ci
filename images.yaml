@@ -167,6 +167,18 @@
          default_user: 'ubuntu'
 
 - project:
+    name: ubuntu-18.04-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '16.04'
+         default_user: 'ubuntu'
+
+- project:
     name: opensuse-leap-42.3-x86_64
     jobs:
       - 'image-build-{name}':
