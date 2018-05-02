@@ -842,7 +842,9 @@
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
+            - patchset-created-event:
+                exclude-no-code-change: true
+            - change-restored-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -897,7 +899,8 @@
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
+            - change-abandoned-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
