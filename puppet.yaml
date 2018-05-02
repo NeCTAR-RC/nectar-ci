@@ -676,6 +676,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-grafana
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: hiera-melbourne
     jobs:
       - '{name}-yaml':
