@@ -163,7 +163,7 @@
          image_name: 'Ubuntu 18.04 LTS (Bionic) amd64'
          architecture: 'x86_64'
          os_distro: 'ubuntu'
-         os_version: '16.04'
+         os_version: '18.04'
          default_user: 'ubuntu'
 
 - project:
