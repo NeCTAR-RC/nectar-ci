@@ -463,6 +463,7 @@
       - shell: |
           #!/bin/bash -e
           BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
+          FACT_DIR=$WORKSPACE/ansible/.facts
           export OS_USERNAME=$IMAGE_BUILDER_USERNAME
           export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/
@@ -500,10 +501,10 @@
           echo "Creating image..."
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
-          if [ -d ansible/.facts ]; do
-              for PROP in $(ls ansible/.facts); do
-                  echo "Adding $PROP property to image ..."
-                  openstack image set --property $PROP="$(cat ansible/.facts/$PROP)" $IMAGE_ID
+          if [ -d $FACT_DIR ]; then
+              for FACT in $(ls $FACT_DIR); do
+                  echo "Adding $FACT property to image ..."
+                  openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
               done
           fi
           if [[ "{job_name}" =~ "murano" ]]; then
