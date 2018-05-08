@@ -59,27 +59,27 @@
          default_user: 'debian'
 
 - project:
-    name: fedora-26-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 26 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'fedora'
-         os_version: '26'
-         default_user: 'fedora'
-
-- project:
     name: fedora-27-x86_64
     jobs:
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 26 x86_64'
+         image_name: 'Fedora 27 x86_64'
          architecture: 'x86_64'
          os_distro: 'fedora'
          os_version: '27'
+         default_user: 'fedora'
+
+- project:
+    name: fedora-28-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 28 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '28'
          default_user: 'fedora'
 
 - project:
@@ -161,6 +161,18 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 18.04 LTS (Bionic) amd64'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '18.04'
+         default_user: 'ubuntu'
+
+- project:
+    name: ubuntu-18.04-x86_64-murano-agent
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent)'
          architecture: 'x86_64'
          os_distro: 'ubuntu'
          os_version: '18.04'
