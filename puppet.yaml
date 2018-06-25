@@ -34,6 +34,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-ceph
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-cinder
     jobs:
       - '{name}-puppet-unit':
