@@ -606,7 +606,7 @@
           qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
           rm -f ${{BUILD_NAME}}
           echo "Creating OpenStack image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property datastore_type="{datastore_type}" --property datastore_version="{datastore_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property datastore_type="{datastore_type}" --property datastore_version="{datastore_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
           openstack image show $IMAGE_ID
           echo "================================================================================"
@@ -617,6 +617,9 @@
           echo "     trove-manage datastore_update {datastore_name} ''"
           echo "     trove-manage datastore_version_update {datastore_name} {datastore_version}-$BUILD_NUMBER {datastore_type} $IMAGE_ID '' 1"
           echo "     trove-manage datastore_update {datastore_name} {datastore_version}-$BUILD_NUMBER"
+          echo ""
+          echo "  For steps on how to clean up the older images, see the instuctions at:"
+          echo "     https://wiki.rc.nectar.org.au/wiki/Trove"
           echo ""
           echo "================================================================================"
 
