@@ -100,6 +100,10 @@
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-pike-deb-package':
          access: 'anonymous'
