@@ -97,7 +97,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
