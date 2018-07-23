@@ -264,6 +264,15 @@
          image_name: '{name}'
          default_user: 'ubuntu'
 
+- project:
+    name: jenkins-slave-ubuntu-18.04-x86_64
+    jobs:
+      - 'image-build-rctest-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: '{name}'
+         default_user: 'ubuntu'
+
 
 - job-template:
     name: 'image-build-{name}'
