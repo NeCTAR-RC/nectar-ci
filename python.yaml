@@ -9,7 +9,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-trusty-deb-package':
+      - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-deb-package':
@@ -27,7 +27,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-trusty-deb-package':
+      - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-deb-package':
@@ -71,7 +71,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-pike-deb-package':
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -86,7 +86,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-pike-deb-package':
+      - '{name}-ocata-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -105,7 +105,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-pike-deb-package':
+      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
