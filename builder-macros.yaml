@@ -279,6 +279,7 @@
           if [ $retval -eq 1 ]; then
             git remote add r10k git@git.melbourne.nectar.org.au:r10k/$GERRIT_PROJECT
           fi
+          git push r10k origin/master:refs/heads/master
           git ls-remote | grep "refs/changes/.*/${GERRIT_CHANGE_NUMBER}/" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT
       - ssh-builder:
           ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
