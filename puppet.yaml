@@ -539,6 +539,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'nectar-monash'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'nectar-monash'
 
 - project:
     name: puppet-site-monash
@@ -547,6 +550,9 @@
          access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
 
