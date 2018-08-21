@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4011213_f73ebe3f",
+        "filename": "images.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-08-21T04:50:06Z",
+      "side": 1,
+      "message": "OS_PROJECT_NAME",
+      "range": {
+        "startLine": 761,
+        "startChar": 17,
+        "endLine": 761,
+        "endChar": 31
+      },
+      "revId": "2961f74d4a4e3ebb9bb0f5f80a478c603e5f2365",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90604cd8_1485c856",
+        "filename": "images.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-08-21T04:50:06Z",
+      "side": 1,
+      "message": "not needed as default",
+      "range": {
+        "startLine": 762,
+        "startChar": 10,
+        "endLine": 762,
+        "endChar": 33
+      },
+      "revId": "2961f74d4a4e3ebb9bb0f5f80a478c603e5f2365",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
