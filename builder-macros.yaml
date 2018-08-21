@@ -256,7 +256,7 @@
     builders:
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
-          command: /usr/local/sbin/update-env.sh $GERRIT_PROJECT
+          command: /usr/local/sbin/deploy-control-repo.sh $GERRIT_PROJECT
 
 - builder:
     name: r10k-deploy
