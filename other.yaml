@@ -124,6 +124,24 @@
          environment: 'pep8'
          organisation: 'internal'
 
+
+- project:
+    name: murano-docker-apps
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'nobody'
+         environment: 'yamllint'
+         organisation: 'NeCTAR-RC'
+      - '{name}-xenial-tox-{environment}':
+         access: 'nobody'
+         environment: 'shellcheck'
+         organisation: 'NeCTAR-RC'
+      - '{name}-xenial-tox-{environment}':
+         access: 'nobody'
+         environment: 'murano-pkg-check'
+         organisation: 'NeCTAR-RC'
+
+
 - project:
     name: spartan-resplat
     jobs:
