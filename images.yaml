@@ -760,6 +760,7 @@
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3/
           export OS_PROJECT_DOMAIN_NAME=Default
           export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Devs
 
           jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
