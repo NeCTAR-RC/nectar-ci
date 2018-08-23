@@ -724,3 +724,18 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
+
+- project:
+    name: uom-cloud-dashboard
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'resplat-cloud'
+         environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'resplat-cloud'
+         environment: 'flake8'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'resplat-cloud'
