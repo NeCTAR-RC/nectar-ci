@@ -745,3 +745,126 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'nectar-monash'
+
+
+- job:
+    name: 'puppet-module-deploy-testing'
+    defaults: global
+    node: xenial
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+          projects:
+            - project-compare-type: 'REG_EXP'
+              project-pattern: 'internal/puppet-.*'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'REG_EXP'
+              project-pattern: 'NeCTAR-RC/puppet-.*'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    builders:
+      - ssh-builder:
+          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          command: /var/lib/puppet/update-test-modules.sh $GERRIT_PROJECT
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+
+- job:
+    name: 'puppet-module-deploy-production'
+    defaults: global
+    node: xenial
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-role'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'production'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-profile'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'production'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-anu'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-intersect'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-qld'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-tas'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    builders:
+      - ssh-builder:
+          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          command: /var/lib/puppet/librarian/bin/update-prod-module-jenkins.sh $GERRIT_PROJECT
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
