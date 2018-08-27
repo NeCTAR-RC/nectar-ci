@@ -571,6 +571,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-site-spartan
@@ -614,6 +617,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-site-undertest
@@ -622,6 +628,9 @@
          access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
 
