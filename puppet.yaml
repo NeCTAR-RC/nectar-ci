@@ -529,6 +529,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-site-monashtest
@@ -571,6 +574,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-site-spartan
@@ -579,6 +585,9 @@
          access: 'nobody'
          organisation: 'internal'
       - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
 
@@ -614,6 +623,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-site-undertest
@@ -622,6 +634,9 @@
          access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
 
