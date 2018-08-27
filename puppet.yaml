@@ -750,7 +750,7 @@
 - job:
     name: 'puppet-module-deploy-testing'
     defaults: global
-    node: xenial
+    node: upgrader
 
     parameters:
       - string:
@@ -803,7 +803,7 @@
 - job:
     name: 'puppet-module-deploy-production'
     defaults: global
-    node: xenial
+    node: upgrader
 
     parameters:
       - string:
