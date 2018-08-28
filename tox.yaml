@@ -49,6 +49,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'nectar/{os_release}'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'uom/{os_release}'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
@@ -230,6 +232,8 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
