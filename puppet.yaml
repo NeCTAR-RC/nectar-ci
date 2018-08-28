@@ -751,6 +751,7 @@
     name: 'puppet-module-deploy-testing'
     defaults: global
     node: upgrader
+    quiet-period: 20
 
     parameters:
       - string:
@@ -804,6 +805,7 @@
     name: 'puppet-module-deploy-production'
     defaults: global
     node: upgrader
+    quiet-period: 20
 
     parameters:
       - string:
