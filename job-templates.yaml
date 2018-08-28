@@ -342,6 +342,8 @@
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
                 - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'uom/.*'
+                - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
