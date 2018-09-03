@@ -1,3 +1,9 @@
+- project:
+    name: lab-kubernetes
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-images
