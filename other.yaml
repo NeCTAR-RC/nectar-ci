@@ -72,6 +72,7 @@
     name: 'librarian-install'
     defaults: global
     node: upgrader
+    quiet-period: 20
 
     parameters:
       - string:
