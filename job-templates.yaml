@@ -317,7 +317,7 @@
 - job-template:
     name: '{name}-os-deb-package'
     defaults: global
-    node: xenial-pike
+    node: bionic-queens
 
     parameters:
       - string:
