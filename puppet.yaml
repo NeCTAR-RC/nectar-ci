@@ -535,7 +535,7 @@
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-cloud'
 
 - project:
     name: puppet-site-monashtest
