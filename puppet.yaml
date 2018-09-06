@@ -531,6 +531,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-melbournetest
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-site-monashtest
     jobs:
       - '{name}-yaml':
