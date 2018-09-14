@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65137441_d0ff404a",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-09-14T16:15:15Z",
+      "side": 1,
+      "message": "we really need yo fix up nectar-testing to use the real AZ names to avoid confusion. Once this goes in we can change nectar-testing and then update these",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "615e622da27a344372c90ba1f8224ab322ef0fb6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
