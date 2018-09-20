@@ -154,11 +154,11 @@
     jobs:
       - '{name}-dummy':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-hpc'
 
 - project:
     name: spartan-slurmconf
     jobs:
       - '{name}-dummy':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-hpc'
