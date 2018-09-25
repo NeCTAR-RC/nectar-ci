@@ -500,7 +500,7 @@
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-hpc'
 
 - project:
     name: puppet-sut
@@ -593,10 +593,10 @@
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-hpc'
       - '{name}-yaml':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-hpc'
 
 - project:
     name: puppet-site-sut
