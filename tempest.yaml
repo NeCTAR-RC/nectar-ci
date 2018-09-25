@@ -671,17 +671,11 @@
         - melbourne-qh2
         - monash-01
         - monash-02
-        - monash-03
         - nci
         - qld
         - sa
         - swinburne-01
         - tasmania
-        - tasmania-s
-        - coreservices
-        - qh2-test
-        - cn
-        - elk
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
           test:
@@ -691,7 +685,6 @@
 - project:
     name: tempest-nagios-site-network
     site:
-        - auckland
         - melbourne-np
         - melbourne-qh2
         - qld
