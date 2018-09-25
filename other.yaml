@@ -133,6 +133,15 @@
 
 
 - project:
+    name: nectar-reports
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'nobody'
+         environment: 'pep8'
+         organisation: 'internal'
+
+
+- project:
     name: murano-docker-apps
     jobs:
       - '{name}-xenial-tox-{environment}':
