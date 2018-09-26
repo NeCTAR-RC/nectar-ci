@@ -481,6 +481,21 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: trove-dashboard
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-os-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: glance
     jobs:
       - '{name}-os-tox-{environment}':
