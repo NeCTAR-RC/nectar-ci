@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "033e4a97_3a00df9f",
+        "filename": "tox.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000190
+      },
+      "writtenOn": "2018-09-27T06:14:59Z",
+      "side": 1,
+      "message": "need to remove this as well?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 26
+      },
+      "revId": "6f117e9a4a11d010edd6b0262f60bbd26fce9356",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
