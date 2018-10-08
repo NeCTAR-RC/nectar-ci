@@ -290,8 +290,7 @@
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
-         organisation: 'internal'
+         organisation: 'resplat-cloud'
 
 - project:
     name: puppet-mongodb
