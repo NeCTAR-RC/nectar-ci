@@ -143,18 +143,6 @@
          default_user: 'ubuntu'
 
 - project:
-    name: ubuntu-17.10-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 17.10 (Artful) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '17.10'
-         default_user: 'ubuntu'
-
-- project:
     name: ubuntu-18.04-x86_64
     jobs:
       - 'image-build-{name}':
