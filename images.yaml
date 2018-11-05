@@ -59,18 +59,6 @@
          default_user: 'debian'
 
 - project:
-    name: fedora-27-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 27 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'fedora'
-         os_version: '27'
-         default_user: 'fedora'
-
-- project:
     name: fedora-28-x86_64
     jobs:
       - 'image-build-{name}':
@@ -80,6 +68,18 @@
          architecture: 'x86_64'
          os_distro: 'fedora'
          os_version: '28'
+         default_user: 'fedora'
+
+- project:
+    name: fedora-29-x86_64
+    jobs:
+      - 'image-build-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Fedora 29 x86_64'
+         architecture: 'x86_64'
+         os_distro: 'fedora'
+         os_version: '29'
          default_user: 'fedora'
 
 - project:
