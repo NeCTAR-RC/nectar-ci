@@ -563,7 +563,7 @@
           FACT_DIR=$WORKSPACE/ansible/.facts
           export OS_USERNAME=$IMAGE_BUILDER_USERNAME
           export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
           export OS_PROJECT_DOMAIN_NAME=Default
           export OS_USER_DOMAIN_NAME=Default
           export OS_IDENTITY_API_VERSION=3
@@ -720,11 +720,11 @@
           export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
           export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
           set -x
-          export OS_AUTH_URL=https://keystone.test.rc.nectar.org.au:5000/v2.0/
-          export OS_TENANT_ID=704fdb05a2f645ac8dbf4fb1222bf267
-          export OS_TENANT_NAME=nectar-ci
-          export OS_NO_CACHE=True
-
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+          export OS_PROJECT_DOMAIN_NAME=Default
+          export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
+          export OS_PROJECT_NAME=nectar-ci
           jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
