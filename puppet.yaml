@@ -607,6 +607,25 @@
          organisation: 'resplat-hpc'
 
 - project:
+    name: puppet-site-thespian
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+
+- project:
     name: puppet-site-sut
     jobs:
       - '{name}-puppet-unit':
