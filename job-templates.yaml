@@ -404,11 +404,11 @@
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
+                  branch-pattern: 'nectar/queens'
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'uom/.*'
+                  branch-pattern: 'uom/queens'
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'debian/.*'
+                  branch-pattern: 'debian/queens'
           silent: false
           escape-quotes: true
 
