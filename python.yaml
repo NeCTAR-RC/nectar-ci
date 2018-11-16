@@ -282,6 +282,10 @@
       - '{name}-os-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py35'
 
 - project:
     name: ceilometer
