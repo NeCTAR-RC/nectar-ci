@@ -279,7 +279,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-os-xenial-deb-package':
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-os-tox-{environment}':
