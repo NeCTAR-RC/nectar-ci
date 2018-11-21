@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff9d85b7_8a945d03",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2018-11-21T06:12:57Z",
+      "side": 1,
+      "message": "just change this back to  - \u0027{name}-os-deb-package\u0027: and it will pick bionic automatically for rocky",
+      "range": {
+        "startLine": 282,
+        "startChar": 6,
+        "endLine": 282,
+        "endChar": 39
+      },
+      "revId": "27f9fc628e92d037f24a8e6b2dae037c4b419979",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
