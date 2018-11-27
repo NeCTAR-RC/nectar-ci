@@ -41,7 +41,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -105,7 +104,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -163,7 +161,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -256,7 +253,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -320,7 +316,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -379,7 +374,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -474,7 +468,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -533,7 +526,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -604,7 +596,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-02
             - melbourne-np
             - melbourne-qh2
             - melbourne-qh2-uom
@@ -666,7 +657,6 @@
     site:
         - auckland
         - intersect-01
-        - intersect-02
         - melbourne-np
         - melbourne-qh2
         - monash-01
