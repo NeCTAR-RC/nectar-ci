@@ -811,7 +811,6 @@
       - build-blocker:
           blocking-jobs:
             - "^tempest-nagios-site-{site}-.*"
-            - "tempest-compute-host-check"
           block-level: 'GLOBAL'
           queue-scanning: 'ALL'
       - build-discarder:
@@ -847,7 +846,6 @@
       - build-blocker:
           blocking-jobs:
             - "^tempest-nagios-flavor-.*"
-            - "^.*tempest-compute-host-check"
           block-level: 'GLOBAL'
           queue-scanning: 'ALL'
 
