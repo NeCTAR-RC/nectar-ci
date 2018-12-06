@@ -306,10 +306,27 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-      - string:
+      - choice:
           name: 'AVAILABILITY_ZONE'
-          default: ''
-          description: 'Nova availability zone. <a href="https://wiki.rc.nectar.org.au/wiki/Tempest#AVAILABILITY_ZONES">List of Availability Zones</a>'
+          choices:
+            - auckland
+            - intersect-01
+            - intersect
+            - melbourne
+            - melbourne-np
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - monash
+            - NCI
+            - QRIScloud
+            - sa
+            - swinburne-01
+            - swinburne
+            - tasmania
+            - tasmania-s
 
     properties:
       - authorization:
