@@ -881,7 +881,6 @@
             - job-discover
       - build-blocker:
           blocking-jobs:
-            - "^tempest-nagios-flavor-.*"
             - "^.*tempest-compute-host-check"
           block-level: 'GLOBAL'
           queue-scanning: 'ALL'
