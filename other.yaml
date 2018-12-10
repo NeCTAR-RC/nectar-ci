@@ -171,3 +171,10 @@
       - '{name}-dummy':
          access: 'nobody'
          organisation: 'resplat-hpc'
+
+- project:
+    name: midonet
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
