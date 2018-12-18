@@ -718,13 +718,16 @@
         - intersect-01
         - melbourne-np
         - melbourne-qh2
+        - melbourne-qh2-uom
         - monash-01
         - monash-02
+        - monash-03
         - nci
         - qld
         - sa
         - swinburne-01
         - tasmania
+        - tasmania-s
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
           test:
