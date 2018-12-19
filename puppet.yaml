@@ -527,7 +527,13 @@
     jobs:
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'resplat-cloud'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
 
 - project:
     name: puppet-site-melbournetest
