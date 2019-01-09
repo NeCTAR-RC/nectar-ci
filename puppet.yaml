@@ -291,6 +291,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'resplat-cloud'
+      - '{name}-puppet-prod-review':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
 
 - project:
     name: puppet-mongodb
@@ -893,6 +896,11 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'resplat-cloud/puppet-melbourne'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'production'
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-qld'
               branches:
