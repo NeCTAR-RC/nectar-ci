@@ -374,6 +374,17 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: murano-dashboard
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-os-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: neutron
     jobs:
       - '{name}-os-tox-{environment}':
