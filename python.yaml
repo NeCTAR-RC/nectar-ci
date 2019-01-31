@@ -113,6 +113,22 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: vendordata
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+
+- project:
     name: python-placementclient
     jobs:
       - '{name}-xenial-tox-{environment}':
