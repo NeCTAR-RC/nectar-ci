@@ -115,7 +115,7 @@
 - project:
     name: vendordata
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -123,7 +123,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
