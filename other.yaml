@@ -126,7 +126,7 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'nobody'
          environment: 'pep8'
          organisation: 'internal'

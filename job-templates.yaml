@@ -495,7 +495,7 @@
 - job-template:
     name: '{name}-yaml'
     defaults: global
-    node: xenial
+    node: bionic
 
     parameters:
       - string:
