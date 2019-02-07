@@ -1,7 +1,7 @@
 - job-template:
     name: '{name}-puppet-unit'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
@@ -585,7 +585,7 @@
 - job-template:
     name: '{name}-markdown'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
@@ -782,7 +782,7 @@
 - job-template:
     name: '{name}-puppet-prod-review'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
