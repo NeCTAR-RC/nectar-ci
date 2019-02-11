@@ -181,6 +181,21 @@
          organisation: 'internal'
 
 - project:
+    name: blazar
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: ec2-api
     jobs:
       - '{name}-os-tox-{environment}':
