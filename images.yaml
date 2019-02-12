@@ -737,7 +737,7 @@
           export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
           export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
           set -x
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+          export OS_AUTH_URL=https://keystone.test.rc.nectar.org.au:5000/v3
           export OS_PROJECT_DOMAIN_NAME=Default
           export OS_USER_DOMAIN_NAME=Default
           export OS_IDENTITY_API_VERSION=3
