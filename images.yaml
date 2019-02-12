@@ -295,7 +295,7 @@
 - job-template:
     name: 'image-build-{name}'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
@@ -374,7 +374,7 @@
 - job-template:
     name: 'image-build-trove-{name}'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
@@ -427,7 +427,7 @@
 - job-template:
     name: 'image-build-sahara-{name}'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
@@ -482,7 +482,7 @@
 - job-template:
     name: 'image-build-rctest-{name}'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
@@ -528,7 +528,7 @@
 - job-template:
     name: 'image-build-undercloud-{name}'
     defaults: global
-    node: xenial
+    node: openstack
 
     parameters:
       - string:
