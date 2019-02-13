@@ -27,6 +27,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-blazar
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-ceilometer
     jobs:
       - '{name}-puppet-unit':
