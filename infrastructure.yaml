@@ -1,6 +1,10 @@
 
 - job:
     name: testcloud-upgrade
+    description: |
+        Configuration for this job is stored in the Hivemind config file on
+        <b>jenkins-upgrader.mgmt.rc.nectar.org.au</b> at
+        <b>/var/lib/jenkins/.hivemind/hivemind/config.py</b>
     defaults: global
     node: upgrader
     concurrent: false
