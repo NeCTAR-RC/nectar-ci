@@ -23,18 +23,6 @@
          default_user: 'ec2-user'
 
 - project:
-    name: centos-7-x86_64-murano-agent
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'CentOS 7 x86_64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'centos'
-         os_version: '7'
-         default_user: 'ec2-user'
-
-- project:
     name: debian-8-x86_64
     jobs:
       - 'image-build-{name}':
@@ -107,18 +95,6 @@
          default_user: 'ubuntu'
 
 - project:
-    name: ubuntu-14.04-x86_64-murano-agent
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 14.04 (Trusty) amd64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '14.04'
-         default_user: 'ubuntu'
-
-- project:
     name: ubuntu-16.04-x86_64
     jobs:
       - 'image-build-{name}':
@@ -131,48 +107,12 @@
          default_user: 'ubuntu'
 
 - project:
-    name: ubuntu-16.04-x86_64-murano-agent
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 16.04 LTS (Xenial) amd64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '16.04'
-         default_user: 'ubuntu'
-
-- project:
     name: ubuntu-18.04-x86_64
     jobs:
       - 'image-build-{name}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          image_name: 'Ubuntu 18.04 LTS (Bionic) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
-
-- project:
-    name: ubuntu-18.04-x86_64-murano-agent
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
-
-- project:
-    name: ubuntu-18.04-x86_64-murano-docker
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent with Docker)'
          architecture: 'x86_64'
          os_distro: 'ubuntu'
          os_version: '18.04'
@@ -201,6 +141,71 @@
          os_distro: 'opensuse'
          os_version: '42.3'
          default_user: 'ec2-user'
+
+- project:
+    name: centos-7-x86_64-murano-agent
+    jobs:
+      - 'image-build-murano-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'CentOS 7 x86_64 (pre-installed murano-agent)'
+         architecture: 'x86_64'
+         os_distro: 'centos'
+         os_version: '7'
+         default_user: 'ec2-user'
+         murano_type: 'linux.centos'
+
+- project:
+    name: ubuntu-14.04-x86_64-murano-agent
+    jobs:
+      - 'image-build-murano-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 14.04 (Trusty) amd64 (pre-installed murano-agent)'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '14.04'
+         default_user: 'ubuntu'
+         murano_type: 'linux'
+
+- project:
+    name: ubuntu-16.04-x86_64-murano-agent
+    jobs:
+      - 'image-build-murano-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 16.04 LTS (Xenial) amd64 (pre-installed murano-agent)'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '16.04'
+         default_user: 'ubuntu'
+         murano_type: 'linux.ubuntu'
+
+- project:
+    name: ubuntu-18.04-x86_64-murano-agent
+    jobs:
+      - 'image-build-murano-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent)'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '18.04'
+         default_user: 'ubuntu'
+         murano_type: 'linux.ubuntu'
+
+- project:
+    name: ubuntu-18.04-x86_64-murano-docker
+    jobs:
+      - 'image-build-murano-{name}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent with Docker)'
+         architecture: 'x86_64'
+         os_distro: 'ubuntu'
+         os_version: '18.04'
+         default_user: 'ubuntu'
+         murano_type: 'linux.docker'
 
 - project:
     name: mysql-5.7-ubuntu-16.04-x86_64
@@ -355,6 +360,86 @@
          os_distro: "{os_distro}"
          os_version: "{os_version}"
          default_user: "{default_user}"
+
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
+           username: IMAGE_BUILDER_USERNAME
+           password: IMAGE_BUILDER_PASSWORD
+        - username-password-separated:
+           credential-id: 6c8091b5-0e7d-4be5-8458-4e5a999acdd6
+           username: IMAGE_PROMOTE_USERNAME
+           password: IMAGE_PROMOTE_PASSWORD
+        - file:
+           credential-id: 10270abc-f1f9-47c7-ae66-114ae8246a71
+           variable: SSH_TESTING_KEY
+
+
+- job-template:
+    name: 'image-build-murano-{name}'
+    defaults: global
+    node: openstack
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - auckland
+            - intersect-01
+            - intersect
+            - melbourne
+            - melbourne-np
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - monash
+            - NCI
+            - QRIScloud
+            - sa
+            - swinburne-01
+            - swinburne
+            - tasmania
+            - tasmania-s
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - image-builder-murano:
+         image_name: "{image_name}"
+         job_name: "{name}"
+         architecture: "{architecture}"
+         os_distro: "{os_distro}"
+         os_version: "{os_version}"
+         default_user: "{default_user}"
+         murano_type: "{murano_type}"
 
     wrappers:
       - credentials-binding:
@@ -584,34 +669,17 @@
           export OS_PROJECT_DOMAIN_NAME=Default
           export OS_USER_DOMAIN_NAME=Default
           export OS_IDENTITY_API_VERSION=3
-          if [[ "{job_name}" =~ "murano" ]]; then
-              export OS_PROJECT_NAME=murano
-          else
-              export OS_PROJECT_NAME=NeCTAR-Images
-          fi
+          export OS_PROJECT_NAME=NeCTAR-Images
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
-          BUILDER_TYPE=$(jq -r ".builders[0].type" {job_name}.json)
-          if [ "$BUILDER_TYPE" == "qemu" ]; then
-              jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-              USER_ACCOUNT={default_user}
-          else
-              jq ".builders[0].image_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-              USER_ACCOUNT=$(jq -r '.builders[0].ssh_username' {job_name}.json)
-              [ "$USER_ACCOUNT" == "centos" ] && USER_ACCOUNT=ec2-user
-          fi
+          jq ".builders[0].image_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
+          USER_ACCOUNT=$(jq -r '.builders[0].ssh_username' {job_name}.json)
+          [ "$USER_ACCOUNT" == "centos" ] && USER_ACCOUNT=ec2-user
           rm -fr ansible/.facts
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
-          if [ "$BUILDER_TYPE" == "qemu" ]; then
-              cd output-${{BUILD_NAME}}
-              qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
-              rm -f ${{BUILD_NAME}}
-          else
-              openstack image save --file ${{BUILD_NAME}}_large.qcow2 $BUILD_NAME
-              openstack image delete $BUILD_NAME
-              qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}}_large.qcow2 ${{BUILD_NAME}}.qcow2
-              rm ${{BUILD_NAME}}_large.qcow2
-          fi
+          cd output-${{BUILD_NAME}}
+          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
+          rm -f ${{BUILD_NAME}}
           echo "Creating image..."
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
@@ -621,11 +689,100 @@
                   openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
               done
           fi
-          if [[ "{job_name}" =~ "murano" ]]; then
-              echo "Adding Murano properties to image ..."
-              MURANO_TYPE=linux
-              [[ "{job_name}" =~ "docker" ]] && MURANO_TYPE="linux.docker"
-              openstack image set --property murano_image_info="{{\"title\": \"NeCTAR {image_name}\", \"type\": \"$MURANO_TYPE\"}}" $IMAGE_ID
+          openstack image show $IMAGE_ID
+          echo "Creating instance..."
+          [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
+          echo "Found instance ID: $INSTANCE_ID"
+          RETRIES=10
+          i=1
+          while [ $i -le $RETRIES ]; do
+              STATUS=$(openstack server show -f value -c status $INSTANCE_ID)
+              echo "Instance is $STATUS ($i/$RETRIES)..."
+              [ "$STATUS" = "ACTIVE" ] && break
+              if [ $i -ge $RETRIES ]; then
+                  echo "ERROR: Limit reached, cleaning up..."
+                  openstack image delete $IMAGE_ID
+                  openstack server delete $INSTANCE_ID
+                  exit 1
+              fi
+              if [ "$STATUS" = "ERROR" ]; then
+                  echo "Recreating instance due to error: $(openstack server show -f value -c fault $INSTANCE_ID)"
+                  openstack server delete $INSTANCE_ID
+                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
+                  echo "Found instance ID: $INSTANCE_ID"
+              fi
+              i=$((i+1))
+              sleep 30
+          done
+          openstack server show $INSTANCE_ID
+          IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
+          chmod 600 $SSH_TESTING_KEY
+          sleep 120 # time to settle for SSH key/fail2ban
+          RETRIES=5
+          j=1
+          while [ $j -le $RETRIES ]; do
+              echo "Checking for SSH to $IP_ADDRESS ($j/$RETRIES)..."
+              ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
+              if [ $j -ge $RETRIES ]; then
+                  nova console-log $INSTANCE_ID
+                  echo "ERROR: Limit reached, cleaning up..."
+                  openstack image delete $IMAGE_ID
+                  openstack server delete $INSTANCE_ID
+                  exit 1
+              fi
+              j=$((j+1))
+              sleep 60
+          done
+          echo "Running tests..."
+          sleep 120 # time for cloud-init to complete
+          ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
+          TEST_RESULT=$?
+          openstack server delete $INSTANCE_ID
+          if [ $TEST_RESULT -eq 0 ]; then
+              export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
+              export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
+              echo "================================================================================"
+              echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
+              echo "  Image ID: $IMAGE_ID"
+              echo "================================================================================"
+              hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
+          fi
+          exit 1
+
+
+- builder:
+    name: 'image-builder-murano'
+    builders:
+      - shell: |
+          #!/bin/bash -e
+          BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
+          FACT_DIR=$WORKSPACE/ansible/.facts
+          export OS_USERNAME=$IMAGE_BUILDER_USERNAME
+          export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+          export OS_PROJECT_DOMAIN_NAME=Default
+          export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
+          export OS_PROJECT_NAME=murano
+          export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
+          jq ".builders[0].image_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
+          USER_ACCOUNT=$(jq -r '.builders[0].ssh_username' {job_name}.json)
+          [ "$USER_ACCOUNT" == "centos" ] && USER_ACCOUNT=ec2-user
+          rm -fr ansible/.facts
+          packer build -color=false ${{BUILD_NAME}}.json
+          rm ${{BUILD_NAME}}.json
+          cd output-${{BUILD_NAME}}
+          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
+          rm -f ${{BUILD_NAME}}
+          echo "Creating image..."
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" --property murano_image_info="{{\"title\": \"NeCTAR {image_name}\", \"type\": \"{murano_type}\"}}" "NeCTAR {image_name}")
+          echo "Image $IMAGE_ID created!"
+          if [ -d $FACT_DIR ]; then
+              for FACT in $(ls $FACT_DIR); do
+                  echo "Adding $FACT property to image ..."
+                  openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
+              done
           fi
           openstack image show $IMAGE_ID
           echo "Creating instance..."
