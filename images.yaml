@@ -671,9 +671,8 @@
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Images
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
-          jq ".builders[0].image_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-          USER_ACCOUNT=$(jq -r '.builders[0].ssh_username' {job_name}.json)
-          [ "$USER_ACCOUNT" == "centos" ] && USER_ACCOUNT=ec2-user
+          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
+          USER_ACCOUNT={default_user}
           rm -fr ansible/.facts
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
@@ -766,9 +765,8 @@
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=murano
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
-          jq ".builders[0].image_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-          USER_ACCOUNT=$(jq -r '.builders[0].ssh_username' {job_name}.json)
-          [ "$USER_ACCOUNT" == "centos" ] && USER_ACCOUNT=ec2-user
+          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
+          USER_ACCOUNT={default_user}
           rm -fr ansible/.facts
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
