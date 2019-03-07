@@ -97,19 +97,19 @@
     name: nectar-openstack
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         access: 'nobody'
+         organisation: 'internal'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         access: 'nobody'
+         organisation: 'internal'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         access: 'nobody'
+         organisation: 'internal'
       - '{name}-xenial-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: python-nectarallocationclient
