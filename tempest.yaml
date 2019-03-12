@@ -24,7 +24,7 @@
           cd $WORKSPACE/tempest
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -87,7 +87,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-cinder $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -144,7 +144,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-magnum $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -202,7 +202,7 @@
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-ec2api $tmpdir
           ./setup_ec2api_image.py $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-ec2api.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None|@test\.'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-ec2api.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -260,7 +260,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e $CLOUD -j check-scenario $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -295,7 +295,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-scenario $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -358,7 +358,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-murano $tmpdir
           cd $tmpdir
-          ostestr -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -416,7 +416,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-trove $tmpdir
           cd $tmpdir
-          ostestr -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -474,7 +474,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e $CLOUD -j check-designate $tmpdir
           cd $tmpdir
-          ostestr -n designate_tempest_plugin.tests.scenario.v2.test_recordsets.RecordsetsTest 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run -n designate_tempest_plugin.tests.scenario.v2.test_recordsets.RecordsetsTest 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -510,7 +510,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-scenario $tmpdir
           cd $tmpdir
-          ostestr --regex neutron_fwaas.tests.tempest_plugin.tests.scenario.test_fwaas.TestFWaaS.test_firewall_insert_rule --serial  2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run neutron_fwaas.tests.tempest_plugin.tests.scenario.test_fwaas.TestFWaaS.test_firewall_insert_rule --serial  2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -568,7 +568,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-scenario $tmpdir
           cd $tmpdir
-          ostestr -n neutron_lbaas.tests.tempest.v2.scenario.test_load_balancer_basic.TestLoadBalancerBasic.test_load_balancer_basic 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run -n neutron_lbaas.tests.tempest.v2.scenario.test_load_balancer_basic.TestLoadBalancerBasic.test_load_balancer_basic 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
@@ -696,7 +696,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py --image $IMAGE_ID -e production -j community-images $tmpdir
           cd $tmpdir
-          ostestr --serial -w $WORKSPACE/tempest/whitelists/community-images.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/community-images.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
