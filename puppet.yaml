@@ -314,6 +314,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-nag
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-nagios
     jobs:
       - '{name}-puppet-unit':
