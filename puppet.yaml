@@ -181,6 +181,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-gitea
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-glance
     jobs:
       - '{name}-puppet-unit':
