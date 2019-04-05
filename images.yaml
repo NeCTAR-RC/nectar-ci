@@ -83,18 +83,6 @@
          default_user: 'ec2-user'
 
 - project:
-    name: ubuntu-14.04-x86_64
-    jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 14.04 (Trusty) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '14.04'
-         default_user: 'ubuntu'
-
-- project:
     name: ubuntu-16.04-x86_64
     jobs:
       - 'image-build-{name}':
@@ -154,19 +142,6 @@
          os_version: '7'
          default_user: 'ec2-user'
          murano_type: 'linux.centos'
-
-- project:
-    name: ubuntu-14.04-x86_64-murano-agent
-    jobs:
-      - 'image-build-murano-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 14.04 (Trusty) amd64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '14.04'
-         default_user: 'ubuntu'
-         murano_type: 'linux'
 
 - project:
     name: ubuntu-16.04-x86_64-murano-agent
@@ -250,15 +225,6 @@
          hadoop_version: 'N/A'
          cloud_user: 'ubuntu'
          build_name: 'ubuntu_sahara_spark_latest'
-
-- project:
-    name: jenkins-slave-ubuntu-14.04-x86_64
-    jobs:
-      - 'image-build-rctest-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: '{name}'
-         default_user: 'ubuntu'
 
 - project:
     name: jenkins-slave-ubuntu-16.04-x86_64
