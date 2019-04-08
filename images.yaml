@@ -654,7 +654,7 @@
                   openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
               done
           fi
-          openstack image show $IMAGE_ID
+          openstack image show --max-width=120 $IMAGE_ID
           echo "Creating instance..."
           [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
           INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
@@ -680,7 +680,7 @@
               i=$((i+1))
               sleep 30
           done
-          openstack server show $INSTANCE_ID
+          openstack server show --max-width=120 $INSTANCE_ID
           IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
           chmod 600 $SSH_TESTING_KEY
           sleep 120 # time to settle for SSH key/fail2ban
@@ -690,8 +690,9 @@
               echo "Checking for SSH to $IP_ADDRESS ($j/$RETRIES)..."
               ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
               if [ $j -ge $RETRIES ]; then
-                  nova console-log $INSTANCE_ID
-                  echo "ERROR: Limit reached, cleaning up..."
+                  echo "ERROR: Limit reached. Showing console log..."
+                  openstack console log show $INSTANCE_ID
+                  echo "ERROR: Cleaning up instance and image..."
                   openstack image delete $IMAGE_ID
                   openstack server delete $INSTANCE_ID
                   exit 1
@@ -748,7 +749,7 @@
                   openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
               done
           fi
-          openstack image show $IMAGE_ID
+          openstack image show --max-width=120 $IMAGE_ID
           echo "Creating instance..."
           [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
           INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
@@ -774,7 +775,7 @@
               i=$((i+1))
               sleep 30
           done
-          openstack server show $INSTANCE_ID
+          openstack server show --max-width=120 $INSTANCE_ID
           IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
           chmod 600 $SSH_TESTING_KEY
           sleep 120 # time to settle for SSH key/fail2ban
@@ -784,8 +785,9 @@
               echo "Checking for SSH to $IP_ADDRESS ($j/$RETRIES)..."
               ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
               if [ $j -ge $RETRIES ]; then
-                  nova console-log $INSTANCE_ID
-                  echo "ERROR: Limit reached, cleaning up..."
+                  echo "ERROR: Limit reached. Showing console log..."
+                  openstack console log show $INSTANCE_ID
+                  echo "ERROR: Cleaning up instance and image..."
                   openstack image delete $IMAGE_ID
                   openstack server delete $INSTANCE_ID
                   exit 1
@@ -833,7 +835,7 @@
           echo "Creating OpenStack image..."
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property datastore_type="{datastore_type}" --property datastore_version="{datastore_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
-          openstack image show $IMAGE_ID
+          openstack image show --max-width=120 $IMAGE_ID
           echo "================================================================================"
           echo ""
           echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
@@ -949,7 +951,7 @@
           echo "Creating OpenStack image..."
           IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file "{build_name}".qcow2 --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
           echo "Image $IMAGE_ID created!"
-          openstack image show $IMAGE_ID
+          openstack image show --max-width=120 $IMAGE_ID
           SAHARA_REG_STATUS=$(openstack dataprocessing image register $IMAGE_ID --username "{cloud_user}" -f value -c Status)
           echo "Sahara image is registered with status: $SAHARA_REG_STATUS !"
           SAHARA_TAG_STATUS=$(openstack dataprocessing image tags add $IMAGE_ID --tags "{plugin}" $VERSION -f value -c Status)
