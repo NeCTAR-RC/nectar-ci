@@ -280,12 +280,12 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - melbourne-qh2
             - auckland
             - intersect-01
             - intersect
             - melbourne
             - melbourne-np
-            - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
             - monash-02
@@ -359,12 +359,12 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - melbourne-qh2
             - auckland
             - intersect-01
             - intersect
             - melbourne
             - melbourne-np
-            - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
             - monash-02
