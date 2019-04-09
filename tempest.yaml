@@ -607,6 +607,9 @@
           'nobody':
             - job-read
             - job-discover
+    triggers:
+      - parameterized-timer:
+          cron: "@midnight % CLOUD=testing; AVAILABILITY_ZONE=coreservices"
 
 
 - job:
