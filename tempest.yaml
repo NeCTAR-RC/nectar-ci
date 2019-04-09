@@ -711,6 +711,344 @@
             - job-read
             - job-discover
 
+
+- job:
+    name: tempest-rctest-compute-host-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD: testing"
+          echo "                   AZ:    coreservices"
+          echo
+          echo "================================================================="
+          echo
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          ./setup_tempest.py -s coreservices -e testing -j check-compute-host $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
+    name: tempest-rctest-cinder-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-cinder $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
+    name: tempest-rctest-magnum-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-magnum $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
+    name: tempest-rctest-ec2api-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-ec2api $tmpdir
+          ./setup_ec2api_image.py $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-ec2api.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-rctest-neutron-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -e testing -j check-scenario $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
+    name: tempest-rctest-scenario-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
+    name: tempest-rctest-murano-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-murano $tmpdir
+          cd $tmpdir
+          stestr run -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-rctest-trove-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-trove $tmpdir
+          cd $tmpdir
+          stestr run -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-rctest-designate-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -e testing -j check-designate $tmpdir
+          cd $tmpdir
+          stestr run -n designate_tempest_plugin.tests.scenario.v2.test_recordsets.RecordsetsTest 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-rctest-fwaas-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
+          cd $tmpdir
+          stestr run neutron_fwaas.tests.tempest_plugin.tests.scenario.test_fwaas.TestFWaaS.test_firewall_insert_rule --serial  2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-rctest-lbaas-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
+          cd $tmpdir
+          stestr run -n neutron_lbaas.tests.tempest.v2.scenario.test_load_balancer_basic.TestLoadBalancerBasic.test_load_balancer_basic 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job:
+    name: tempest-rctest-sahara-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          $WORKSPACE/nagios/tempest_nagios.py sahara -c $WORKSPACE/nagios/tempest_nagios.conf -s coreservices -e testing -p spark -pv 2.1.0
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
 - project:
     name: tempest-nagios-site-compute
     site:

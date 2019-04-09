@@ -12,3 +12,29 @@
       - shell: 'hivemind -R test-cloud upgrade.upgrade --unattended'
     triggers:
       - timed: "@midnight"
+    publishers:
+      - trigger:
+          project: tempest-rctest-cinder-check
+          threshold: SUCCESS
+          project: tempest-rctest-compute-host-check
+          threshold: SUCCESS
+          project: tempest-rctest-designate-check
+          threshold: SUCCESS
+          project: tempest-rctest-ec2api-check
+          threshold: SUCCESS
+          project: tempest-rctest-fwaas-check
+          threshold: SUCCESS
+          project: tempest-rctest-lbaas-check
+          threshold: SUCCESS
+          project: tempest-rctest-magnum-check
+          threshold: SUCCESS
+          project: tempest-rctest-murano-check
+          threshold: SUCCESS
+          project: tempest-rctest-neutron-check
+          threshold: SUCCESS
+          project: tempest-rctest-sahara-check
+          threshold: SUCCESS
+          project: tempest-rctest-scenario-check
+          threshold: SUCCESS
+          project: tempest-rctest-trove-check
+          threshold: SUCCESS
