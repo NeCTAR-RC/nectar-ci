@@ -746,11 +746,11 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
+
 
 - job:
     name: tempest-rctest-cinder-check
@@ -778,11 +778,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -811,11 +810,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -845,11 +843,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -878,11 +875,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -911,11 +907,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -944,11 +939,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -977,11 +971,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -1010,11 +1003,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -1043,11 +1035,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -1076,11 +1067,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - job:
@@ -1106,11 +1096,10 @@
           'nobody':
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - "^tempest-rctest.*"
-          block-level: 'NODE'
-          queue-scanning: 'ALL'
+      - throttle:
+          categories:
+            - tempest-rctest
+          option: category
 
 
 - project:
