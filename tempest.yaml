@@ -746,6 +746,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 - job:
     name: tempest-rctest-cinder-check
@@ -773,6 +778,12 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
+
 
 - job:
     name: tempest-rctest-magnum-check
@@ -800,6 +811,12 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
+
 
 - job:
     name: tempest-rctest-ec2api-check
@@ -828,6 +845,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -856,6 +878,12 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
+
 
 - job:
     name: tempest-rctest-scenario-check
@@ -883,6 +911,12 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
+
 
 - job:
     name: tempest-rctest-murano-check
@@ -910,6 +944,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -938,6 +977,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -966,6 +1010,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -994,6 +1043,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -1022,6 +1076,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - job:
@@ -1047,6 +1106,11 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-rctest.*"
+          block-level: 'NODE'
+          queue-scanning: 'ALL'
 
 
 - project:
