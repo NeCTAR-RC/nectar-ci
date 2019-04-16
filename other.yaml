@@ -12,6 +12,13 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
 
+- project:
+    name: gitea-theme-ardc
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+
 - job:
     name: 'librarian-verify'
     concurrent: false
