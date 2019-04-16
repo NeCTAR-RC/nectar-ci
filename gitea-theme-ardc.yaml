@@ -1,0 +1,6 @@
+- project:
+    name: gitea-theme-ardc
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
