@@ -1,0 +1,111 @@
+- project:
+    name: rstudio
+    jobs:
+      - 'murano-package-{name}':
+         access: 'nobody'
+         target: 'au.org.nectar.RStudio'
+         category: 'Big Data'
+         image: 'NeCTAR R-Studio (Ubuntu 18.04 LTS Bionic)'
+         trigger: 'image-build-extra-rstudio-ubuntu-18.04-x86_64'
+         git_url: 'https://github.com/NeCTAR-RC/murano-rstudio.git'
+
+- project:
+    name: jupyternotebook
+    jobs:
+      - 'murano-package-{name}':
+         access: 'nobody'
+         target: 'au.org.nectar.JupyterNotebook'
+         category: 'Big Data'
+         image: 'NeCTAR Jupyter Notebook (Ubuntu 18.04 LTS Bionic)'
+         trigger: 'image-build-extra-jupyternotebook-ubuntu-18.04-x86_64'
+         git_url: 'https://github.com/NeCTAR-RC/murano-jupyternotebook.git'
+
+
+- job-template:
+    name: 'murano-package-{name}'
+    defaults: global
+    node: openstack
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+      - string:
+          name: IMAGE
+          default: "{image}"
+          description: "Optional image to set in package"
+
+    properties:
+      - authorization:
+          '{access}':
+            - job-read
+            - job-discover
+
+    scm:
+      - git:
+         url: "{git_url}"
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    triggers:
+      - reverse:
+          jobs: '{trigger}'
+          result: 'unstable'
+
+    builders:
+      - murano-package-build:
+         target: "{target}"
+         category: "{category}"
+         image: "{image}"
+
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
+           username: IMAGE_BUILDER_USERNAME
+           password: IMAGE_BUILDER_PASSWORD
+        - username-password-separated:
+           credential-id: 6c8091b5-0e7d-4be5-8458-4e5a999acdd6
+           username: IMAGE_PROMOTE_USERNAME
+           password: IMAGE_PROMOTE_PASSWORD
+
+- builder:
+    name: 'murano-package-build'
+    builders:
+      - shell: |
+          #!/bin/bash -e
+          export OS_USERNAME=$IMAGE_BUILDER_USERNAME
+          export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+          export OS_PROJECT_DOMAIN_NAME=Default
+          export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
+          export OS_PROJECT_NAME=murano
+          if [ "$IMAGE" != "" ]; then
+              echo "Searching for image $IMAGE..."
+              IMAGE_ID=$(openstack image show -f value -c id "$IMAGE")
+              if [ -z $IMAGE_ID ]; then
+                echo "Image not found"
+                exit 1
+              fi
+              echo "Found image ID: $IMAGE_ID"
+              sed -i "s/image:.*/image: $IMAGE_ID/g" {target}/UI/ui.yaml
+          fi
+          echo "Zipping package..."
+          cd {target}
+          zip ../{target}.zip -r *
+          cd ..
+          export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
+          export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
+          murano package-import -c "{category}" --is-public --exists-action u {target}.zip
