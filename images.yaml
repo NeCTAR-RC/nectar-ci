@@ -1,249 +1,103 @@
 - project:
     name: centos-6-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'CentOS 6 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'centos'
-         os_version: '6'
-         default_user: 'ec2-user'
+      - 'image-build-{name}'
 
 - project:
     name: centos-7-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'CentOS 7 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'centos'
-         os_version: '7'
-         default_user: 'ec2-user'
+      - 'image-build-{name}'
 
 - project:
     name: debian-8-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Debian 8 (Jessie) amd64'
-         architecture: 'x86_64'
-         os_distro: 'debian'
-         os_version: '8'
-         default_user: 'debian'
+      - 'image-build-{name}'
 
 - project:
     name: debian-9-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Debian 9 (Stretch) amd64'
-         architecture: 'x86_64'
-         os_distro: 'debian'
-         os_version: '9'
-         default_user: 'debian'
+      - 'image-build-{name}'
 
 - project:
     name: fedora-28-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 28 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'fedora'
-         os_version: '28'
-         default_user: 'fedora'
+      - 'image-build-{name}'
 
 - project:
     name: fedora-29-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Fedora 29 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'fedora'
-         os_version: '29'
-         default_user: 'fedora'
+      - 'image-build-{name}'
+
+- project:
+    name: fedora-30-x86_64
+    jobs:
+      - 'image-build-{name}'
 
 - project:
     name: scientific-6-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Scientific Linux 6 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'scientific'
-         os_version: '6'
-         default_user: 'ec2-user'
+      - 'image-build-{name}'
 
 - project:
     name: ubuntu-16.04-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 16.04 LTS (Xenial) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '16.04'
-         default_user: 'ubuntu'
+      - 'image-build-{name}'
 
 - project:
     name: ubuntu-18.04-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
+      - 'image-build-{name}'
 
 - project:
     name: ubuntu-18.10-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 18.10 (Cosmic) amd64'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.10'
-         default_user: 'ubuntu'
+      - 'image-build-{name}'
+
+- project:
+    name: ubuntu-19.04-x86_64
+    jobs:
+      - 'image-build-{name}'
 
 - project:
     name: opensuse-leap-42.3-x86_64
     jobs:
-      - 'image-build-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'openSUSE Leap 42.3 x86_64'
-         architecture: 'x86_64'
-         os_distro: 'opensuse'
-         os_version: '42.3'
-         default_user: 'ec2-user'
+      - 'image-build-{name}'
 
 - project:
-    name: centos-7-x86_64-murano-agent
+    name: ubuntu-18.04-x86_64-docker
     jobs:
-      - 'image-build-murano-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'CentOS 7 x86_64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'centos'
-         os_version: '7'
-         default_user: 'ec2-user'
-         murano_type: 'linux.centos'
-
-- project:
-    name: ubuntu-16.04-x86_64-murano-agent
-    jobs:
-      - 'image-build-murano-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 16.04 LTS (Xenial) amd64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '16.04'
-         default_user: 'ubuntu'
-         murano_type: 'linux.ubuntu'
-
-- project:
-    name: ubuntu-18.04-x86_64-murano-agent
-    jobs:
-      - 'image-build-murano-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
-         murano_type: 'linux.ubuntu'
-
-- project:
-    name: ubuntu-18.04-x86_64-murano-docker
-    jobs:
-      - 'image-build-murano-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent with Docker)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
-         murano_type: 'linux.docker'
+      - 'image-build-{name}'
 
 - project:
     name: mysql-5.7-ubuntu-16.04-x86_64
     jobs:
-      - 'image-build-trove-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Trove MySQL 5.7 (Ubuntu 16.04 LTS)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '16.04'
-         datastore_name: 'MySQL'
-         datastore_type: 'mysql'
-         datastore_version: '5.7'
+      - 'image-build-trove-{name}'
 
 - project:
     name: postgresql-9.6-ubuntu-16.04-x86_64
     jobs:
-      - 'image-build-trove-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         image_name: 'Trove PostgreSQL 9.6 (Ubuntu 16.04 LTS)'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '16.04'
-         datastore_name: 'PostgreSQL'
-         datastore_type: 'postgresql'
-         datastore_version: '9.6'
+      - 'image-build-trove-{name}'
 
 - project:
     name: rstudio-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-extra-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: 'R-Studio (Ubuntu 18.04 LTS Bionic)'
-         source_image: 'NeCTAR Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent)'
+         source_image: 'NeCTAR Ubuntu 18.04 LTS (Bionic) amd64'
          git_url: 'https://github.com/NeCTAR-RC/packer-rstudio.git'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
 
 - project:
     name: jupyternotebook-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-extra-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: 'Jupyter Notebook (Ubuntu 18.04 LTS Bionic)'
-         source_image: 'NeCTAR Ubuntu 18.04 LTS (Bionic) amd64 (pre-installed murano-agent)'
+         source_image: 'NeCTAR Ubuntu 18.04 LTS (Bionic) amd64'
          git_url: 'https://github.com/NeCTAR-RC/packer-jupyternotebook.git'
-         architecture: 'x86_64'
-         os_distro: 'ubuntu'
-         os_version: '18.04'
-         default_user: 'ubuntu'
 
 - project:
     name: spark-2.1.0-ubuntu-14.04-x86_64
     jobs:
       - 'image-build-sahara-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: 'Sahara Spark 2.1.0 (Ubuntu 14.04 LTS)'
          architecture: 'x86_64'
          os_distro: 'ubuntu'
@@ -258,8 +112,6 @@
     name: jenkins-slave-ubuntu-16.04-x86_64
     jobs:
       - 'image-build-rctest-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: '{name}'
          default_user: 'ubuntu'
 
@@ -267,8 +119,6 @@
     name: jenkins-slave-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-rctest-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: '{name}'
          default_user: 'ubuntu'
 
@@ -276,8 +126,6 @@
     name: undercloud-ubuntu-16.04-x86_64
     jobs:
       - 'image-build-undercloud-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: '{name}'
          default_user: 'root'
 
@@ -285,8 +133,6 @@
     name: undercloud-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-undercloud-{name}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
          image_name: '{name}'
          default_user: 'root'
 
@@ -329,7 +175,7 @@
 
     properties:
       - authorization:
-          '{access}':
+          nobody:
             - job-read
             - job-discover
 
@@ -347,93 +193,7 @@
          choosing-strategy: gerrit
 
     builders:
-      - image-builder:
-         image_name: "{image_name}"
-         job_name: "{name}"
-         architecture: "{architecture}"
-         os_distro: "{os_distro}"
-         os_version: "{os_version}"
-         default_user: "{default_user}"
-
-    wrappers:
-      - credentials-binding:
-        - username-password-separated:
-           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
-           username: IMAGE_BUILDER_USERNAME
-           password: IMAGE_BUILDER_PASSWORD
-        - username-password-separated:
-           credential-id: 6c8091b5-0e7d-4be5-8458-4e5a999acdd6
-           username: IMAGE_PROMOTE_USERNAME
-           password: IMAGE_PROMOTE_PASSWORD
-        - file:
-           credential-id: 10270abc-f1f9-47c7-ae66-114ae8246a71
-           variable: SSH_TESTING_KEY
-
-
-- job-template:
-    name: 'image-build-murano-{name}'
-    defaults: global
-    node: openstack
-
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
-      - choice:
-          name: 'AVAILABILITY_ZONE'
-          choices:
-            - melbourne-qh2
-            - auckland
-            - intersect-01
-            - intersect
-            - melbourne
-            - melbourne-np
-            - melbourne-qh2-uom
-            - monash-01
-            - monash-02
-            - monash-03
-            - monash
-            - NCI
-            - QRIScloud
-            - sa
-            - swinburne-01
-            - swinburne
-            - tasmania
-            - tasmania-s
-
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
-    scm:
-      - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
-    builders:
-      - image-builder-murano:
-         image_name: "{image_name}"
-         job_name: "{name}"
-         architecture: "{architecture}"
-         os_distro: "{os_distro}"
-         os_version: "{os_version}"
-         default_user: "{default_user}"
-         murano_type: "{murano_type}"
+      - image-builder
 
     wrappers:
       - credentials-binding:
@@ -467,7 +227,7 @@
 
     properties:
       - authorization:
-          '{access}':
+          nobody:
             - job-read
             - job-discover
 
@@ -485,15 +245,7 @@
          choosing-strategy: gerrit
 
     builders:
-      - image-builder-trove:
-         image_name: "{image_name}"
-         job_name: "{name}"
-         architecture: "{architecture}"
-         os_distro: "{os_distro}"
-         os_version: "{os_version}"
-         datastore_name: "{datastore_name}"
-         datastore_type: "{datastore_type}"
-         datastore_version: "{datastore_version}"
+      - image-builder-trove
 
     wrappers:
       - credentials-binding:
@@ -520,7 +272,7 @@
 
     properties:
       - authorization:
-          '{access}':
+          nobody:
             - job-read
             - job-discover
 
@@ -595,7 +347,7 @@
 
     properties:
       - authorization:
-          '{access}':
+          nobody:
             - job-read
             - job-discover
 
@@ -616,10 +368,6 @@
          job_name: "{name}"
          image_name: "{image_name}"
          source_image: "{source_image}"
-         architecture: "{architecture}"
-         os_distro: "{os_distro}"
-         os_version: "{os_version}"
-         default_user: "{default_user}"
 
     wrappers:
       - credentials-binding:
@@ -650,7 +398,7 @@
 
     properties:
       - authorization:
-          '{access}':
+          nobody:
             - job-read
             - job-discover
 
@@ -696,7 +444,7 @@
 
     properties:
       - authorization:
-          '{access}':
+          nobody:
             - job-read
             - job-discover
 
@@ -730,8 +478,6 @@
     builders:
       - shell: |
           #!/bin/bash -e
-          BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
-          FACT_DIR=$WORKSPACE/ansible/.facts
           export OS_USERNAME=$IMAGE_BUILDER_USERNAME
           export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
@@ -740,27 +486,35 @@
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Images
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
-          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-          USER_ACCOUNT={default_user}
-          rm -fr ansible/.facts
-          packer build -color=false ${{BUILD_NAME}}.json
-          rm ${{BUILD_NAME}}.json
-          cd output-${{BUILD_NAME}}
-          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
-          rm -f ${{BUILD_NAME}}
-          echo "Creating image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          NAME=${JOB_NAME#image-build-}
+          OUTPUT_DIR=$WORKSPACE/output-${BUILD_TAG}
+          FACT_DIR=$OUTPUT_DIR/.facts
+          rm -fr $FACT_DIR
+          jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" ${NAME}.json > ${BUILD_TAG}.json
+          echo "Starting packer build..."
+          packer build -color=false ${BUILD_TAG}.json
+          IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
+          USER_ACCOUNT=$(cat $FACT_DIR/default_user)
+          rm ${BUILD_TAG}.json
+          cd $OUTPUT_DIR
+          echo "Shrinking image..."
+          echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG ${BUILD_TAG}.qcow2"
+          qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG ${BUILD_TAG}.qcow2
+          rm -f ${BUILD_TAG}
+          echo "Creating image $IMAGE_NAME..."
+          echo "==> openstack image create --disk-format qcow2 --container-format bare --file ${BUILD_TAG}.qcow2 \"NeCTAR $IMAGE_NAME\""
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${BUILD_TAG}.qcow2 "NeCTAR $IMAGE_NAME")
           echo "Image $IMAGE_ID created!"
-          if [ -d $FACT_DIR ]; then
-              for FACT in $(ls $FACT_DIR); do
-                  echo "Adding $FACT property to image ..."
-                  openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
-              done
-          fi
-          openstack image show --max-width=120 $IMAGE_ID
+          echo "Applying properties..."
+          for FACT in $(ls $FACT_DIR); do
+              VAL=$(cat $FACT_DIR/$FACT)
+              echo "  -> $FACT: '$VAL'..."
+              openstack image set --property $FACT=$"$VAL" $IMAGE_ID
+          done
           echo "Creating instance..."
           [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
-          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
+          echo "==> openstack server create --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT test_$BUILD_TAG"
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
           echo "Found instance ID: $INSTANCE_ID"
           RETRIES=10
           i=1
@@ -777,7 +531,7 @@
               if [ "$STATUS" = "ERROR" ]; then
                   echo "Recreating instance due to error: $(openstack server show -f value -c fault $INSTANCE_ID)"
                   openstack server delete $INSTANCE_ID
-                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
+                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
                   echo "Found instance ID: $INSTANCE_ID"
               fi
               i=$((i+1))
@@ -804,112 +558,24 @@
               sleep 60
           done
           echo "Running tests..."
+          echo "==> ssh $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'"
           sleep 120 # time for cloud-init to complete
+          set +e
           ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
           TEST_RESULT=$?
           openstack server delete $INSTANCE_ID
           if [ $TEST_RESULT -eq 0 ]; then
               export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
               export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
+              openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
+              openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID
               echo "================================================================================"
-              echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
+              echo "  NeCTAR $IMAGE_NAME v$BUILD_NUMBER build successful!"
               echo "  Image ID: $IMAGE_ID"
               echo "================================================================================"
-              hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
-          fi
-          exit 1
-
-
-- builder:
-    name: 'image-builder-murano'
-    builders:
-      - shell: |
-          #!/bin/bash -e
-          BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
-          FACT_DIR=$WORKSPACE/ansible/.facts
-          export OS_USERNAME=$IMAGE_BUILDER_USERNAME
-          export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
-          export OS_PROJECT_DOMAIN_NAME=Default
-          export OS_USER_DOMAIN_NAME=Default
-          export OS_IDENTITY_API_VERSION=3
-          export OS_PROJECT_NAME=murano
-          export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
-          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-          USER_ACCOUNT={default_user}
-          rm -fr ansible/.facts
-          packer build -color=false ${{BUILD_NAME}}.json
-          rm ${{BUILD_NAME}}.json
-          cd output-${{BUILD_NAME}}
-          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
-          rm -f ${{BUILD_NAME}}
-          echo "Creating image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" --property murano_image_info="{{\"title\": \"NeCTAR {image_name}\", \"type\": \"{murano_type}\"}}" "NeCTAR {image_name}")
-          echo "Image $IMAGE_ID created!"
-          if [ -d $FACT_DIR ]; then
-              for FACT in $(ls $FACT_DIR); do
-                  echo "Adding $FACT property to image ..."
-                  openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
-              done
-          fi
-          openstack image show --max-width=120 $IMAGE_ID
-          echo "Creating instance..."
-          [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
-          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
-          echo "Found instance ID: $INSTANCE_ID"
-          RETRIES=10
-          i=1
-          while [ $i -le $RETRIES ]; do
-              STATUS=$(openstack server show -f value -c status $INSTANCE_ID)
-              echo "Instance is $STATUS ($i/$RETRIES)..."
-              [ "$STATUS" = "ACTIVE" ] && break
-              if [ $i -ge $RETRIES ]; then
-                  echo "ERROR: Limit reached, cleaning up..."
-                  openstack image delete $IMAGE_ID
-                  openstack server delete $INSTANCE_ID
-                  exit 1
-              fi
-              if [ "$STATUS" = "ERROR" ]; then
-                  echo "Recreating instance due to error: $(openstack server show -f value -c fault $INSTANCE_ID)"
-                  openstack server delete $INSTANCE_ID
-                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_NAME")
-                  echo "Found instance ID: $INSTANCE_ID"
-              fi
-              i=$((i+1))
-              sleep 30
-          done
-          openstack server show --max-width=120 $INSTANCE_ID
-          IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
-          chmod 600 $SSH_TESTING_KEY
-          sleep 120 # time to settle for SSH key/fail2ban
-          RETRIES=5
-          j=1
-          while [ $j -le $RETRIES ]; do
-              echo "Checking for SSH to $IP_ADDRESS ($j/$RETRIES)..."
-              ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
-              if [ $j -ge $RETRIES ]; then
-                  echo "ERROR: Limit reached. Showing console log..."
-                  openstack console log show $INSTANCE_ID
-                  echo "ERROR: Cleaning up instance and image..."
-                  openstack image delete $IMAGE_ID
-                  openstack server delete $INSTANCE_ID
-                  exit 1
-              fi
-              j=$((j+1))
-              sleep 60
-          done
-          echo "Running tests..."
-          sleep 120 # time for cloud-init to complete
-          ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
-          TEST_RESULT=$?
-          openstack server delete $INSTANCE_ID
-          if [ $TEST_RESULT -eq 0 ]; then
-              export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
-              export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
-              echo "================================================================================"
-              echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
-              echo "  Image ID: $IMAGE_ID"
-              echo "================================================================================"
+              openstack image show --max-width=120 $IMAGE_ID
+              echo "Promoting image to public..."
+              echo "==> hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID"
               hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
           fi
           exit 1
@@ -927,21 +593,38 @@
           export OS_USER_DOMAIN_NAME=Default
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=trove
-          BUILD_NAME="trove-{job_name}_build_$BUILD_NUMBER"
-          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" trove-{job_name}.json > ${{BUILD_NAME}}.json
-          packer build -color=false ${{BUILD_NAME}}.json
-          rm ${{BUILD_NAME}}.json
-          cd output-${{BUILD_NAME}}
-          echo "Converting image to qcow2..."
-          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
-          rm -f ${{BUILD_NAME}}
-          echo "Creating OpenStack image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property datastore_type="{datastore_type}" --property datastore_version="{datastore_version}" --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" "NeCTAR {image_name}")
+          NAME=${JOB_NAME#image-build-}
+          OUTPUT_DIR=$WORKSPACE/output-${BUILD_TAG}
+          FACT_DIR=$OUTPUT_DIR/.facts
+          rm -fr $FACT_DIR
+          jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" ${NAME}.json > ${BUILD_TAG}.json
+          echo "Starting packer build..."
+          packer build -color=false ${BUILD_TAG}.json
+          IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
+
+          rm ${BUILD_TAG}.json
+          cd $OUTPUT_DIR
+          echo "Shrinking image..."
+          echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG ${BUILD_TAG}.qcow2"
+          qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG ${BUILD_TAG}.qcow2
+          rm -f ${BUILD_TAG}
+          echo "Creating image $IMAGE_NAME..."
+          echo "==> openstack image create --disk-format qcow2 --container-format bare --file ${BUILD_TAG}.qcow2 \"NeCTAR $IMAGE_NAME\""
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${BUILD_TAG}.qcow2 "NeCTAR $IMAGE_NAME")
           echo "Image $IMAGE_ID created!"
+          echo "Applying properties..."
+          for FACT in $(ls $FACT_DIR); do
+              VAL=$(cat $FACT_DIR/$FACT)
+              echo "  -> $FACT: '$VAL'..."
+              openstack image set --property $FACT=$"$VAL" $IMAGE_ID
+          done
+          openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
+          openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID
+          echo "================================================================================"
+          echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
+          echo "================================================================================"
           openstack image show --max-width=120 $IMAGE_ID
           echo "================================================================================"
-          echo ""
-          echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
           echo ""
           echo "  To use this new image in Trove, from a controller run:"
           echo "     trove-manage datastore_update {datastore_name} ''"
@@ -967,30 +650,36 @@
           export OS_PROJECT_NAME=murano
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # packer fix
           export OS_DOMAIN_NAME=$OS_PROJECT_DOMAIN_NAME  # packer fix
-          BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
-          FACT_DIR=$WORKSPACE/ansible/.facts
+          OUTPUT_DIR=$WORKSPACE/output-${BUILD_TAG}
+          FACT_DIR=$OUTPUT_DIR/.facts
+          rm -fr $FACT_DIR
           SOURCE_ID=$(openstack image show -f value -c id "{source_image}")
           echo "Found base image {source_image} ($SOURCE_ID)..."
-          jq ".builders[0].source_image = \"$SOURCE_ID\" | .builders[0].image_name = \"$BUILD_NAME\"" packer.json > ${{BUILD_NAME}}.json
+          jq ".builders[0].source_image = \"$SOURCE_ID\" | .builders[0].image_name = \"$BUILD_TAG\"" packer.json > ${BUILD_TAG}.json
+          echo "Starting packer build..."
           rm -fr ansible/.facts
-          packer build -color=false ${{BUILD_NAME}}.json
-          openstack image save --file ${{BUILD_NAME}}-large.qcow2 ${{BUILD_NAME}}
-          openstack image delete $BUILD_NAME
+          packer build -color=false ${BUILD_TAG}.json
+          IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
+          USER_ACCOUNT=$(cat $FACT_DIR/default_user)
+          openstack image save --file ${BUILD_TAG}-large.qcow2 $BUILD_TAG
+          openstack image delete $BUILD_TAG
           echo "Shrinking image..."
-          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}}-large.qcow2 ${{BUILD_NAME}}.qcow2
-          rm -f ${{BUILD_NAME}}.json ${{BUILD_NAME}}-large.qcow2
+          echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG ${BUILD_TAG}.qcow2"
+          qemu-img convert -c -o compat=0.10 -O qcow2 ${BUILD_TAG}-large.qcow2 ${BUILD_TAG}.qcow2
+          rm -f ${BUILD_TAG}.json ${BUILD_TAG}-large.qcow2
           echo "Creating final image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 --property hw_qemu_guest_agent=yes --property architecture="{architecture}" --property os_distro="{os_distro}" --property os_version="{os_version}" --property default_user="{default_user}" "NeCTAR {image_name}")
+          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${BUILD_TAG}.qcow2 "NeCTAR $IMAGE_NAME")
           echo "Image $IMAGE_ID created!"
-          if [ -d $FACT_DIR ]; then
-              for FACT in $(ls $FACT_DIR); do
-                  echo "Adding $FACT property to image ..."
-                  openstack image set --property $FACT="$(cat $FACT_DIR/$FACT)" $IMAGE_ID
-              done
-          fi
+          echo "Applying properties..."
+          for FACT in $(ls $FACT_DIR); do
+              VAL=$(cat $FACT_DIR/$FACT)
+              echo "  -> $FACT: '$VAL'..."
+              openstack image set --property $FACT=$"$VAL" $IMAGE_ID
+          done
           export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
           export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
-          openstack image set --property nectar_build=$BUILD_NUMBER --property nectar_name="{image_name}" $IMAGE_ID  # protected properties require admin
+          openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
+          openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID  # protected properties require admin
           echo "================================================================================"
           echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
           echo "  Image ID: $IMAGE_ID"
