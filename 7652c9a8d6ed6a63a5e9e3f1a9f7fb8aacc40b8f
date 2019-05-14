@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c4fbcc8_01ac60ac",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad50f6d6_c5b92f93",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbe98b8f_43a1d516",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 94,
+        "endChar": 34
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aebe9a41_9c09ee20",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 33
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51d044fd_10e277e2",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 34
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe5ffe6_9316ec0d",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 34
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f71335a5_89dd3d1f",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 282,
+        "startChar": 1,
+        "endLine": 284,
+        "endChar": 34
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "750f985f_b4b5a069",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-05-14T06:10:48Z",
+      "side": 0,
+      "message": "keep",
+      "range": {
+        "startLine": 458,
+        "startChar": 7,
+        "endLine": 458,
+        "endChar": 39
+      },
+      "revId": "7652c9a8d6ed6a63a5e9e3f1a9f7fb8aacc40b8f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
