@@ -569,7 +569,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-os-xenial-deb-package':
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -584,7 +584,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-os-xenial-deb-package':
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
