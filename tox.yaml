@@ -3,12 +3,6 @@
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
-            os_release: 'newton'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'xenial'
-            os_release: 'ocata'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'xenial'
             os_release: 'pike'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
@@ -19,6 +13,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'bionic'
             os_release: 'rocky'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'bionic'
+            os_release: 'stein'
 
 
 - job-template:
