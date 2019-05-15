@@ -905,6 +905,11 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
+      - credentials:
+          name: GITEA_TOKEN
+          type: secrettext
+          required: true
+          default: 'gitea token'
 
     triggers:
       - gerrit:
@@ -962,6 +967,11 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
+      - credentials:
+          name: GITEA_TOKEN
+          type: secrettext
+          required: true
+          default: 'gitea token'
 
     triggers:
       - gerrit:
