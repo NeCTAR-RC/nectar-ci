@@ -117,7 +117,7 @@
             git remote -v | grep '29418/internal' > /dev/null && retval=0 || retval=1
             if [ $retval -eq 0 ]; then
               URL=$(git remote -v | grep 29418 | sed 's/.*29418\/\(.*\) .*/\1/' | head -1)
-              git remote add alt-origin git@git.melbourne.nectar.org.au:$URL
+              git remote add alt-origin git@git.rc.nectar.org.au:$URL
             fi
 
             git remote -v | grep '29418/resplat-cloud' > /dev/null && retval=0 || retval=1
@@ -285,7 +285,7 @@
       - shell: |
           git remote | grep 'r10k' > /dev/null && retval=0 || retval=1
           if [ $retval -eq 1 ]; then
-            git remote add r10k git@git.melbourne.nectar.org.au:r10k/$GERRIT_PROJECT
+            git remote add r10k git@git.rc.nectar.org.au:r10k/$GERRIT_PROJECT
           fi
           git push r10k HEAD:refs/heads/$GERRIT_PATCHSET_REVISION
       - ssh-builder:
@@ -298,7 +298,7 @@
       - shell: |
           git remote | grep 'r10k' > /dev/null && retval=0 || retval=1
           if [ $retval -eq 1 ]; then
-            git remote add r10k git@git.melbourne.nectar.org.au:r10k/$GERRIT_PROJECT
+            git remote add r10k git@git.rc.nectar.org.au:r10k/$GERRIT_PROJECT
           fi
           git push r10k origin/master:refs/heads/master
           git ls-remote | grep "refs/changes/.*/${GERRIT_CHANGE_NUMBER}/" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT
