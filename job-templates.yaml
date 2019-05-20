@@ -952,6 +952,11 @@
       - ssh-agent-credentials:
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+      - credentials-binding:
+        - text:
+           credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
+           variable: TOKEN
+
 
 - job-template:
     name: '{name}-r10k-cleanup'
@@ -967,11 +972,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-      - credentials:
-          name: GITEA_TOKEN
-          type: secrettext
-          required: true
-          default: 'gitea token'
 
     triggers:
       - gerrit:

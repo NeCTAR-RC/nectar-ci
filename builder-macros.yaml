@@ -285,9 +285,9 @@
       - shell: |
           REPO=`echo $GERRIT_PROJECT | cut -f2 -d'/'`
           # Creates repo to hold r10k branches if it doesn't exist
-          respcode=`curl -H "Authorization: token $GITEA_TOKEN" "https://git.rc.nectar.org.au/api/v1/repos/r10k/${REPO}" -w "%{http_code}" -o /dev/null -s`
+          respcode=`curl -H "Authorization: token $TOKEN" "https://git.rc.nectar.org.au/api/v1/repos/r10k/${REPO}" -w "%{http_code}" -o /dev/null -s`
           if [ $respcode = '404' ]; then
-            curl -H "Authorization: token $GITEA_TOKEN" https://git.rc.nectar.org.au/api/v1/org/r10k/repos -X POST -d name=$REPO
+            curl -H "Authorization: token $TOKEN" https://git.rc.nectar.org.au/api/v1/org/r10k/repos -X POST -d name=$REPO
           fi
           # Adds r10k remote
           git remote | grep 'r10k' > /dev/null && retval=0 || retval=1
