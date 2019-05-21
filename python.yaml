@@ -312,6 +312,9 @@
       - '{name}-os-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-dashboard
@@ -325,6 +328,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-os-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -458,6 +464,9 @@
       - '{name}-os-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: neutron
@@ -516,6 +525,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -585,6 +597,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
