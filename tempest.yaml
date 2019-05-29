@@ -1289,6 +1289,8 @@
             - "^tempest-nagios-flavor-.*"
           block-level: 'GLOBAL'
           queue-scanning: 'ALL'
+      - build-discarder:
+          days-to-keep: 7
 
 
 - job:
