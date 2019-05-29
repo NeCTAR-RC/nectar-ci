@@ -1,7 +1,7 @@
 - job-template:
     name: '{name}-puppet-unit'
     defaults: global
-    node: openstack
+    node: puppet
 
     parameters:
       - string:
