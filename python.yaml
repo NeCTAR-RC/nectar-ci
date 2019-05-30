@@ -35,13 +35,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: hive_master
-    jobs:
-      - '{name}-run-tests':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: langstroth
     jobs:
       - '{name}-xenial-tox-{environment}':
