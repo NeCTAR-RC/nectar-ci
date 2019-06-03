@@ -1,9 +1,4 @@
 - builder:
-    name: run-tests
-    builders:
-      - shell: "./run_tests.sh"
-
-- builder:
     name: rake-lint
     builders:
       - shell: |
