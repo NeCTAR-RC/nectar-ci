@@ -79,6 +79,11 @@
       - 'image-build-trove-{name}'
 
 - project:
+    name: postgresql-11.3-ubuntu-18.04-x86_64
+    jobs:
+      - 'image-build-trove-{name}'
+
+- project:
     name: rstudio-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-extra-{name}':
