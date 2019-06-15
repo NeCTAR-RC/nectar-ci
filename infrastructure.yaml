@@ -14,5 +14,5 @@
       - timed: "@midnight"
     publishers:
       - trigger:
-          project: tempest-rctest-cinder-check,tempest-rctest-compute-host-check,tempest-rctest-designate-check,tempest-rctest-ec2api-check,tempest-rctest-fwaas-check,tempest-rctest-lbaas-check,tempest-rctest-magnum-check,tempest-rctest-murano-check,tempest-rctest-neutron-check,tempest-rctest-sahara-check,tempest-rctest-scenario-check,tempest-rctest-trove-check
+          project: tempest-rctest-cinder-check,tempest-rctest-compute-host-check,tempest-rctest-compute-host-check-advanced,tempest-rctest-designate-check,tempest-rctest-ec2api-check,tempest-rctest-fwaas-check,tempest-rctest-lbaas-check,tempest-rctest-magnum-check,tempest-rctest-murano-check,tempest-rctest-neutron-check,tempest-rctest-sahara-check,tempest-rctest-scenario-check,tempest-rctest-trove-check
           threshold: SUCCESS
