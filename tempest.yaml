@@ -70,6 +70,84 @@
             - job-discover
 
 - job:
+    name: tempest-compute-host-check-advanced
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD: $CLOUD"
+          echo "                   AZ:    $AVAILABILITY_ZONE"
+          echo "                   HOST:  $HOST"
+          echo "                   DEST_HOST: $DEST_HOST"
+          echo
+          echo "================================================================="
+          echo
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          ./setup_tempest.py --host $HOST --dest_host $DEST_HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host-advanced $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - auckland
+            - intersect-01
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - nci
+            - qld
+            - sa
+            - swinburne-01
+            - tasmania
+            - tasmania-s
+            - coreservices
+            - qh2-test
+            - cn
+            - elk
+          description: 'Availability zone.'
+      - string:
+          name: 'HOST'
+          description: |
+                Nova host to test. <br>
+                - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+                - Leave blank to let scheduler choose a host.
+      - string:
+          name: 'DEST HOST'
+          description: |
+                Nova target host used by migration tests. <br>
+                - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+                - Leave blank to let scheduler choose a host.
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
     name: tempest-cinder-check
     defaults: global
     node: tempest
@@ -740,6 +818,42 @@
           categories:
             - tempest-rctest
           option: category
+
+
+- job:
+    name: tempest-rctest-compute-host-check-advanced
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD: testing"
+          echo "                   AZ:    coreservices"
+          echo
+          echo "================================================================="
+          echo
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          ./setup_tempest.py -s coreservices -e testing -j check-compute-host-advanced $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
 
 
 - job:
