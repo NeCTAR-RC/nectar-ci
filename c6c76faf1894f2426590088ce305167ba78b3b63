@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dcaa983_e95435b1",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-06-18T05:29:08Z",
+      "side": 1,
+      "message": "can we use target host for all of these things",
+      "range": {
+        "startLine": 139,
+        "startChar": 17,
+        "endLine": 139,
+        "endChar": 26
+      },
+      "revId": "c6c76faf1894f2426590088ce305167ba78b3b63",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
