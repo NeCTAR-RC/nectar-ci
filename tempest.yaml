@@ -766,38 +766,6 @@
             - job-discover
 
 
-- job:
-    name: tempest-community-image-check
-    defaults: global
-    node: tempest
-    concurrent: true
-    scm:
-      - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
-    builders:
-      - shell: |
-          #!/bin/bash
-          . /opt/tempest/bin/activate
-          tmpdir=`mktemp -d --suffix=_tempest`
-          cd $WORKSPACE/tempest/
-          ./setup_tempest.py --image $IMAGE_ID -e production -j community-images $tmpdir
-          cd $tmpdir
-          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/community-images.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${PIPESTATUS[0]}
-          rm -rf $tmpdir
-          exit $RET
-    parameters:
-      - string:
-          name: 'IMAGE_ID'
-          description: |
-                Id of the image to test. <br>
-    properties:
-      - authorization:
-          'nobody':
-            - job-read
-            - job-discover
-
 
 - job:
     name: tempest-rctest-compute-host-check
