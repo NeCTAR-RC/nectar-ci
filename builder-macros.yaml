@@ -308,3 +308,18 @@
       - ssh-builder:
           ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
           command: r10k-cleanup.sh $GERRIT_PATCHSET_REVISION
+
+
+- builder:
+    name: tempest-trove-check
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-trove-{datastore} $tmpdir
+          cd $tmpdir
+          stestr run --whitelist-file $WORKSPACE/tempest/whitelists/check-trove.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${{PIPESTATUS[0]}}
+          rm -rf $tmpdir
+          exit $RET

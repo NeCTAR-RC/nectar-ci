@@ -533,6 +533,20 @@
             - job-discover
 
 
+- project:
+    name: mysql-default
+    jobs:
+      - 'tempest-trove-{name}-check':
+         datastore: 'mysql'
+         version: ''
+      
+- project:
+    name: postgresql-default
+    jobs:
+      - 'tempest-trove-{name}-check':
+         datastore: 'postgresql'
+         version: ''
+
 - job:
     name: tempest-designate-check
     defaults: global
