@@ -961,7 +961,7 @@
 
 
 - job-template:
-    name: tempest-trove-{name}-check
+    name: tempest-{name}-check
     defaults: global
     node: tempest
     concurrent: true
@@ -970,8 +970,9 @@
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
-      - tempest-trove-check:
-          datastore: '{datastore}'
+      - tempest-check-whitelist:
+          check: '{name}'
+          whitelist: '{whitelist}'
     parameters:
       - choice:
           name: 'CLOUD'
