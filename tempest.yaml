@@ -534,18 +534,32 @@
 
 
 - project:
-    name: mysql-default
+    name: trove-mysql
     jobs:
-      - 'tempest-trove-{name}-check':
+      - 'tempest-{name}-check':
          datastore: 'mysql'
          version: ''
       
 - project:
-    name: postgresql-default
+    name: trove-postgresql
     jobs:
-      - 'tempest-trove-{name}-check':
+      - 'tempest-{name}-check':
          datastore: 'postgresql'
          version: ''
+
+- project:
+    name: trove-mysql-5.7
+    jobs:
+      - 'tempest-{name}-check':
+         datastore: 'mysql'
+         version: '5.7'
+      
+- project:
+    name: trove-postgresql-9.6
+    jobs:
+      - 'tempest-{name}-check':
+         datastore: 'postgresql'
+         version: '9.6'
 
 - job:
     name: tempest-designate-check
