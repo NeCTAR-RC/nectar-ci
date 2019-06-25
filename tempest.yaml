@@ -533,6 +533,63 @@
             - job-discover
 
 
+- job:
+    name: tempest-heat-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-heat $tmpdir
+          cd $tmpdir
+          stestr run -n heat_tempest_plugin.tests.scenario.test_base_resources.BasicResourcesTest.test_base_resources_integration 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - auckland
+            - intersect-01
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - nci
+            - qld
+            - sa
+            - swinburne-01
+            - tasmania
+            - tasmania-s
+            - coreservices
+            - qh2-test
+            - cn
+            - elk
+          description: 'Availability zone.'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
 - project:
     name: mysql-default
     jobs:
