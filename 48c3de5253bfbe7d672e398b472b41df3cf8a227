@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec26190_eb06befd",
+        "filename": "tempest.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2019-06-25T03:31:41Z",
+      "side": 1,
+      "message": "ws?",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 541,
+        "endChar": 6
+      },
+      "revId": "48c3de5253bfbe7d672e398b472b41df3cf8a227",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
