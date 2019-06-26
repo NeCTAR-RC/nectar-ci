@@ -717,6 +717,14 @@
          environment: 'pep8'
 
 - project:
+    name: heat-tempest-plugin
+    jobs:
+      - '{name}-xenial-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: uom-cloud-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
