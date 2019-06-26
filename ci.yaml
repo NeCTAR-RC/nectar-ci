@@ -154,6 +154,8 @@
     builders:
       - jenkins-jobs-update
 
+    publishers:
+      <<: *slack_notifier
 
 - project:
     name: nectar-ci

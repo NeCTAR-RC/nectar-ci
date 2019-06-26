@@ -111,6 +111,9 @@
       - pbuilder-buildpackage:
           os_release: "trusty"
 
+    publishers:
+      <<: *slack_notifier
+
     wrappers:
       - ssh-agent-credentials:
           users:
@@ -175,6 +178,9 @@
           os_release: "xenial"
       - pbuilder-buildpackage:
           os_release: "xenial"
+
+    publishers:
+      <<: *slack_notifier
 
     wrappers:
       - ssh-agent-credentials:
@@ -243,6 +249,9 @@
       - pbuilder-buildpackage:
           os_release: "bionic"
 
+    publishers:
+      <<: *slack_notifier
+
     wrappers:
       - ssh-agent-credentials:
           users:
@@ -308,6 +317,9 @@
       - pbuilder-buildpackage:
           os_release: "ocata"
 
+    publishers:
+      <<: *slack_notifier
+
     wrappers:
       - ssh-agent-credentials:
           users:
@@ -372,6 +384,9 @@
       - os-pbuilder-create
       - os-pbuilder-buildpackage
 
+    publishers:
+      <<: *slack_notifier
+
     wrappers:
       - ssh-agent-credentials:
           users:
@@ -435,6 +450,9 @@
       - os-pbuilder-checkout
       - os-pbuilder-create-xenial
       - os-pbuilder-buildpackage-xenial
+
+    publishers:
+      <<: *slack_notifier
 
     wrappers:
       - ssh-agent-credentials:
@@ -721,6 +739,9 @@
     builders:
       - jekyll-deploy
 
+    publishers:
+      <<: *slack_notifier
+
     wrappers:
       - credentials-binding:
         - username-password:
@@ -778,6 +799,9 @@
     builders:
       - puppet-prod-review
 
+    publishers:
+      <<: *slack_notifier
+
     wrappers:
       - ssh-agent-credentials:
           users:
@@ -833,6 +857,9 @@
 
     builders:
       - site-deploy
+
+    publishers:
+      <<: *slack_notifier
 
     wrappers:
       - ssh-agent-credentials:
@@ -952,6 +979,9 @@
 
     builders:
       - r10k-cleanup
+
+    publishers:
+      <<: *slack_notifier
 
     wrappers:
       - ssh-agent-credentials:
