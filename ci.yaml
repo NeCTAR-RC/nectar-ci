@@ -1,3 +1,7 @@
+!include: publisher.yaml.inc
+
+
+
 - job-template:
     name: '{name}-ruby-lint'
     defaults: global
@@ -154,6 +158,8 @@
     builders:
       - jenkins-jobs-update
 
+    publishers:
+      <<: *slack_notifier
 
 - project:
     name: nectar-ci
