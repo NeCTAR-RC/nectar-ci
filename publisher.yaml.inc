@@ -1,0 +1,10 @@
+    - slack:
+        room: '#dev'
+        notify-failure: true
+        notify-repeated-failure: true
+        include-test-summary: true
+        include-failed-tests: true
+        include-custom-message: true
+        custom-message: '{name} had a failure.'
+        auth-token-credential-id: 'slack-key'
+        bot-user: false
