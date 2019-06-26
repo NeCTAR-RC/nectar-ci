@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97861e49_d917bfb9",
+        "filename": "tempest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-06-26T00:17:14Z",
+      "side": 1,
+      "message": "can we put this in a whitelist and then we can use the new job-template I created",
+      "range": {
+        "startLine": 558,
+        "startChar": 24,
+        "endLine": 558,
+        "endChar": 129
+      },
+      "revId": "6419a1dc4e9eb421462ea06149ab324263706f39",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
