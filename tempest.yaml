@@ -556,6 +556,12 @@
       - 'tempest-{name}-check':
          whitelist: 'trove'
 
+- project:
+    name: heat
+    jobs:
+      - 'tempest-{name}-check':
+         whitelist: 'heat'
+
 - job:
     name: tempest-designate-check
     defaults: global
