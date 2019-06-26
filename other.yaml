@@ -126,6 +126,9 @@
     builders:
       - librarian-install
 
+    publishers:
+      <<: *slack_notifier
+
 
 - project:
     name: nectar-testing

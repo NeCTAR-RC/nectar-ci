@@ -154,6 +154,7 @@
     builders:
       - jenkins-jobs-update
 
+      <<: *slack_notifier
 
 - project:
     name: nectar-ci
@@ -164,4 +165,3 @@
           access: 'anonymous'
       - '{name}-jenkins-jobs-update':
           access: 'anonymous'
-
