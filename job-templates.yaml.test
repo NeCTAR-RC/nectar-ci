@@ -112,7 +112,7 @@
           os_release: "trusty"
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -180,7 +180,7 @@
           os_release: "xenial"
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -250,7 +250,7 @@
           os_release: "bionic"
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -318,7 +318,7 @@
           os_release: "ocata"
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -385,7 +385,7 @@
       - os-pbuilder-buildpackage
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -452,7 +452,7 @@
       - os-pbuilder-buildpackage-xenial
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -740,7 +740,7 @@
       - jekyll-deploy
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - credentials-binding:
@@ -800,7 +800,7 @@
       - puppet-prod-review
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -859,7 +859,7 @@
       - site-deploy
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -981,7 +981,7 @@
       - r10k-cleanup
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:

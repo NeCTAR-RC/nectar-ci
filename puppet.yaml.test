@@ -886,7 +886,7 @@
           command: /var/lib/puppet/update-test-modules.sh $GERRIT_PROJECT
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
@@ -960,7 +960,7 @@
 
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:

@@ -127,7 +127,7 @@
       - librarian-install
 
     publishers:
-      <<: *slack_notifier
+      !include: publisher.yaml.inc
 
 
 - project:
