@@ -885,6 +885,9 @@
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /var/lib/puppet/update-test-modules.sh $GERRIT_PROJECT
 
+    publishers:
+      !include: publisher.yaml.inc
+
     wrappers:
       - ssh-agent-credentials:
           users:
@@ -954,6 +957,10 @@
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/update-prod-module-jenkins.sh $GERRIT_PROJECT
+
+
+    publishers:
+      !include: publisher.yaml.inc
 
     wrappers:
       - ssh-agent-credentials:
