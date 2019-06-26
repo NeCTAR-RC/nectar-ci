@@ -154,6 +154,8 @@
     builders:
       - jenkins-jobs-update
 
+    publishers:
+        !include: publisher.yaml.inc
 
 - project:
     name: nectar-ci
@@ -164,4 +166,3 @@
           access: 'anonymous'
       - '{name}-jenkins-jobs-update':
           access: 'anonymous'
-
