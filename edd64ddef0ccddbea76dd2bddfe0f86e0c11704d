@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21bbcb3f_c2707e91",
+        "filename": "job-templates.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-06-27T05:23:37Z",
+      "side": 1,
+      "message": "keep the newline",
+      "revId": "edd64ddef0ccddbea76dd2bddfe0f86e0c11704d",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
