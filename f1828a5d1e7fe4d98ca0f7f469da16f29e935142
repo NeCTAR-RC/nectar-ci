@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69d9e9f3_535dc2da",
+        "filename": "job-templates.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-06-27T05:23:37Z",
+      "side": 1,
+      "message": "keep newline",
+      "revId": "f1828a5d1e7fe4d98ca0f7f469da16f29e935142",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7be1697f_11a664d9",
+        "filename": "publisher.yaml.inc",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-06-27T05:23:37Z",
+      "side": 1,
+      "message": "think this should be notify-unstable",
+      "range": {
+        "startLine": 3,
+        "startChar": 8,
+        "endLine": 3,
+        "endChar": 24
+      },
+      "revId": "f1828a5d1e7fe4d98ca0f7f469da16f29e935142",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61edce55_f77c8abe",
+        "filename": "publisher.yaml.inc",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-06-27T05:23:37Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "f1828a5d1e7fe4d98ca0f7f469da16f29e935142",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
