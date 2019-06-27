@@ -323,3 +323,19 @@
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
+
+- builder:
+    name: octocatalog-diff
+    builders:
+      - env-script: |
+          PUPPET_NODES=`cat nectar-ci.yaml | yq -r '.nodes | @csv'`
+          PUPPET_FROM_ENVIRONMENT=`echo $GERRIT_PROJECT | cut -f2 -d'/' | sed 's/puppet-site-//'`
+          echo "PUPPET_NODES=$PUPPET_NODES"
+          echo "PUPPET_FROM_ENVIRONMENT=$PUPPET_FROM_ENVIRONMENT"
+      - ssh-builder:
+          ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
+          command: |
+            if [ -z "$PUPPET_NODES" ]; then
+              exit 0
+            fi
+            octocatalog-diff --no-color --puppet-master r10k.rc.nectar.org.au -f $PUPPET_FROM_ENVIRONMENT -t $GERRIT_PATCHSET_REVISION --no-parallel --ignore "Notify[Config environment differs from running environment! Update puppet.conf if this is incorrect.]" -n $PUPPET_NODES
