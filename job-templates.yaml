@@ -843,7 +843,6 @@
     name: '{name}-r10k-deploy'
     defaults: global
     node: upgrader
-    quiet-period: 60
 
     parameters:
       - string:
