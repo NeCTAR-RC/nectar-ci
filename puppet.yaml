@@ -701,6 +701,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-octocatalog-diff':
+         access: 'nobody'
+         organisation: 'internal'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
