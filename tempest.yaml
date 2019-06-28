@@ -95,7 +95,12 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py --host $HOST --target_host $TARGET_HOST --block_migration $BLOCK_MIGRATION -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host-advanced $tmpdir
+          if [ $BLOCK_MIGRATION = true ]
+          then
+            ./setup_tempest.py --host $HOST --target_host $TARGET_HOST --block_migration -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host-advanced $tmpdir
+          else
+            ./setup_tempest.py --host $HOST --target_host $TARGET_HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host-advanced $tmpdir
+          fi
           cd $tmpdir
           stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -845,7 +850,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py -s coreservices -e testing -j check-compute-host-advanced $tmpdir
+          ./setup_tempest.py -s coreservices -e testing -j check-compute-host-advanced --block_migration $tmpdir
           cd $tmpdir
           stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
