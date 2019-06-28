@@ -1096,3 +1096,31 @@
       - ssh-agent-credentials:
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+
+
+- job-template:
+    name: tempest-{name}-check-site-agnostic
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - tempest-check-whitelist-site-agnostic:
+          check: '{name}'
+          whitelist: '{whitelist}'
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover

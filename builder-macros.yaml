@@ -332,3 +332,17 @@
           rm -rf $tmpdir
           exit $RET
 
+- builder:
+    name: tempest-check-whitelist-site-agnostic
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py -e $CLOUD -j check-{check} $tmpdir
+          cd $tmpdir
+          stestr run --whitelist-file $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${{PIPESTATUS[0]}}
+          rm -rf $tmpdir
+          exit $RET

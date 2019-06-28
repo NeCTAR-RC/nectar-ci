@@ -562,6 +562,12 @@
       - 'tempest-{name}-check':
          whitelist: 'heat'
 
+- project:
+    name: glance-scenario
+    jobs:
+      - 'tempest-{name}-check-site-agnostic':
+         whitelist: 'glance'
+
 - job:
     name: tempest-designate-check
     defaults: global
