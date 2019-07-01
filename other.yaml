@@ -126,6 +126,9 @@
     builders:
       - librarian-install
 
+    publishers:
+      !include: publisher.yaml.inc
+
 
 - project:
     name: nectar-testing
