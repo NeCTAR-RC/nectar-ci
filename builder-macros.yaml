@@ -32,7 +32,6 @@
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh
 
-
 - builder:
     name: puppet-lint
     builders:
