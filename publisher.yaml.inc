@@ -1,5 +1,5 @@
     - slack:
-        room: '#dev'
+        room: '#coreservices'
         notify-unstable: true
         notify-failure: true
         notify-repeated-failure: true
