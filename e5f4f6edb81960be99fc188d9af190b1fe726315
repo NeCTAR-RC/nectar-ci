@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10db93d6_edcfc25b",
+        "filename": "builder-macros.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-07-02T01:46:32Z",
+      "side": 1,
+      "message": "no need to make this separate to the job as it will only be used by this one job",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 63
+      },
+      "revId": "e5f4f6edb81960be99fc188d9af190b1fe726315",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7748149_d73c3c1d",
+        "filename": "other.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-07-02T01:46:32Z",
+      "side": 1,
+      "message": "maybe call this global-hierdata-deploy",
+      "range": {
+        "startLine": 134,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 36
+      },
+      "revId": "e5f4f6edb81960be99fc188d9af190b1fe726315",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54e26289_72d87a3e",
+        "filename": "other.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-07-02T01:46:32Z",
+      "side": 1,
+      "message": "just add the stuff here as opposed to separate it",
+      "range": {
+        "startLine": 182,
+        "startChar": 8,
+        "endLine": 182,
+        "endChar": 33
+      },
+      "revId": "e5f4f6edb81960be99fc188d9af190b1fe726315",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
