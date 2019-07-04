@@ -627,6 +627,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'internal'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
