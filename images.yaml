@@ -19,6 +19,11 @@
       - 'image-build-{name}'
 
 - project:
+    name: debian-10-x86_64
+    jobs:
+      - 'image-build-{name}'
+
+- project:
     name: fedora-28-x86_64
     jobs:
       - 'image-build-{name}'
