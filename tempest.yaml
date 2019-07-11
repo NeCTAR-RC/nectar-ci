@@ -595,6 +595,12 @@
       - 'tempest-{name}-check-site-agnostic':
          whitelist: 'glance'
 
+- project:
+    name: swift-scenario
+    jobs:
+      - 'tempest-{name}-check-site-agnostic':
+         whitelist: 'swift'
+
 - job:
     name: tempest-designate-check
     defaults: global
