@@ -572,6 +572,24 @@
          whitelist: 'heat'
 
 - project:
+    name: manila-scenario
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: 'manila'
+
+- project:
+    name: manila-nfs
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: 'manila-nfs'
+
+- project:
+    name: manila-cephfs
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: 'manila-cephfs'
+
+- project:
     name: glance-scenario
     jobs:
       - 'tempest-{name}-check-site-agnostic':
