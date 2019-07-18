@@ -1,7 +1,11 @@
-    - slack:
-        room: '#coreservices'
-        notify-unstable: true
-        notify-failure: true
-        notify-repeated-failure: true
-        include-test-summary: true
-        auth-token-credential-id: 'slack-key'
+- slack:
+    room: '#coreservices'
+    notify-unstable: true
+    notify-failure: true
+    notify-repeated-failure: true
+    include-test-summary: true
+    auth-token-credential-id: 'slack-key'
+- archive:
+    artifacts: '*.deb'
+    allow-empty: 'true'
+    only-if-success: true

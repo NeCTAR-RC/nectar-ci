@@ -386,7 +386,6 @@
 
     publishers:
       !include: publisher.yaml.inc
-
     wrappers:
       - ssh-agent-credentials:
           users:
