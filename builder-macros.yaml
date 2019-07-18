@@ -139,7 +139,9 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -f *.deb
           hivemind packaging.buildpackage --os-release {os_release}
+          cp ../../build-area/*/*.deb .
 
 - builder:
     name: 'pbuilder-buildpackage-no-upload'
@@ -147,7 +149,9 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -f *.deb
           hivemind packaging.buildpackage --os-release {os_release} --no-upload
+          cp ../../build-area/*/*.deb .
 
 - builder:
     name: 'os-pbuilder-create'
@@ -160,7 +164,9 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -f *.deb
           hivemind packaging.buildpackage
+          cp ../../build-area/*/*.deb .
 
 # Temp to support xenial-queens
 - builder:
@@ -175,7 +181,9 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -f *.deb
           hivemind packaging.buildpackage --ubuntu-release xenial
+          cp ../../build-area/*/*.deb .
 
 - builder:
     name: yaml-lint
