@@ -139,6 +139,7 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -rf $WORKSPACE/build-area/
           hivemind packaging.buildpackage --os-release {os_release}
 
 - builder:
@@ -147,6 +148,7 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -rf $WORKSPACE/build-area/
           hivemind packaging.buildpackage --os-release {os_release} --no-upload
 
 - builder:
@@ -160,6 +162,7 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -rf $WORKSPACE/build-area/
           hivemind packaging.buildpackage
 
 # Temp to support xenial-queens
@@ -175,6 +178,7 @@
       - shell: |
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
+          rm -rf $WORKSPACE/build-area/
           hivemind packaging.buildpackage --ubuntu-release xenial
 
 - builder:
