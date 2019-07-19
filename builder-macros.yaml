@@ -286,6 +286,7 @@
     name: r10k-deploy
     builders:
       - shell: |
+          # strips 'internal/puppet-site-nectar' to 'puppet-site-nectar'
           REPO=`echo $GERRIT_PROJECT | cut -f2 -d'/'`
           # Creates repo to hold r10k branches if it doesn't exist
           respcode=`curl -H "Authorization: token $TOKEN" "https://git.rc.nectar.org.au/api/v1/repos/r10k/${REPO}" -w "%{http_code}" -o /dev/null -s`
@@ -306,12 +307,16 @@
     name: r10k-cleanup
     builders:
       - shell: |
+          # strips 'internal/puppet-site-nectar' to 'puppet-site-nectar'
           REPO=`echo $GERRIT_PROJECT | cut -f2 -d'/'`
+          # strips 'puppet-site-nectar' to 'nectar'
+          PUPPET_ENV=`echo $REPO | cut -f3 -d'-'`
           git remote | grep 'r10k' > /dev/null && retval=0 || retval=1
           if [ $retval -eq 1 ]; then
             git remote add r10k git@git.rc.nectar.org.au:r10k/$REPO
           fi
           git push r10k origin/master:refs/heads/master
+          git push r10k origin/master:refs/heads/r10k_diff_catalog_${PUPPET_ENV}
           git ls-remote | grep "refs/changes/.*/${GERRIT_CHANGE_NUMBER}/" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT
       - ssh-builder:
           ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
