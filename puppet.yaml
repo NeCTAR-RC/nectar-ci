@@ -564,6 +564,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-cloud'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'resplat-cloud'
