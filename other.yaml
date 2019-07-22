@@ -76,6 +76,64 @@
 
 
 - job:
+    name: 'librarian-diff-library'
+    concurrent: false
+    defaults: global
+
+    node: upgrader
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-library'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - r10k-diff-catalog-puppet-library
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+      - ansicolor
+
+
+- job:
     name: 'librarian-install'
     defaults: global
     node: upgrader
