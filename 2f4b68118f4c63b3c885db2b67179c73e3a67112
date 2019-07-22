@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5308f05_ffef0b27",
+        "filename": "other.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-07-22T23:38:31Z",
+      "side": 1,
+      "message": "is this meant to be voting?",
+      "range": {
+        "startLine": 97,
+        "startChar": 13,
+        "endLine": 98,
+        "endChar": 15
+      },
+      "revId": "2f4b68118f4c63b3c885db2b67179c73e3a67112",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
