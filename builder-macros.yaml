@@ -331,6 +331,14 @@
             r10k-diff-catalog.py test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
 
 - builder:
+    name: r10k-diff-catalog-puppet-library
+    builders:
+      - ssh-builder:
+          ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
+          command: |
+            r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
+
+- builder:
     name: tempest-check-whitelist
     builders:
       - shell: |
