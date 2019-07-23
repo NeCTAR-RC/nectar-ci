@@ -464,13 +464,6 @@
          organisation: 'internal'
 
 - project:
-    name: puppet-reporting
-    jobs:
-      - '{name}-puppet-unit':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: puppet-role
     jobs:
       - '{name}-puppet-unit':
