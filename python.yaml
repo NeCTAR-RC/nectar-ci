@@ -78,6 +78,10 @@
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
          access: 'anonymous'
