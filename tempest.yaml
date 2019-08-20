@@ -1279,12 +1279,12 @@
 - project:
     name: tempest-nagios-flavor
     flavor:
-        - tiny
         - xsmall
         - small
         - medium
         - large
         - xlarge
+        - xxlarge
     jobs:
       - 'tempest-nagios-flavor-{flavor}-{test}':
           test:
