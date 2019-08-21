@@ -532,6 +532,9 @@
 - project:
     name: puppet-site-melbourne
     jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'resplat-cloud'
@@ -551,6 +554,9 @@
 - project:
     name: puppet-site-melbournetest
     jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'resplat-cloud'
