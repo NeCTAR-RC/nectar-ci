@@ -189,7 +189,7 @@
       - '{name}-os-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
