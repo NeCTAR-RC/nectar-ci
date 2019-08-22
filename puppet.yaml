@@ -582,10 +582,20 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'nectar-monash'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'nectar-monash'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
 
+- project:
     name: puppet-site-monashunder
     jobs:
       - '{name}-yaml':
@@ -600,6 +610,9 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'nectar-monash'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'nectar-monash'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
@@ -611,6 +624,15 @@
          access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+      - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-site-deploy':
