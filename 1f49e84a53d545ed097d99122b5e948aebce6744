@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d45e7da_cacf51b1",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1544,
+      "author": {
+        "id": 1000190
+      },
+      "writtenOn": "2019-08-27T05:53:27Z",
+      "side": 1,
+      "message": "think the job name should be `check-image`?",
+      "range": {
+        "startLine": 1544,
+        "startChar": 108,
+        "endLine": 1544,
+        "endChar": 124
+      },
+      "revId": "1f49e84a53d545ed097d99122b5e948aebce6744",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
