@@ -9,22 +9,12 @@
       - 'image-build-{name}'
 
 - project:
-    name: debian-8-x86_64
-    jobs:
-      - 'image-build-{name}'
-
-- project:
     name: debian-9-x86_64
     jobs:
       - 'image-build-{name}'
 
 - project:
     name: debian-10-x86_64
-    jobs:
-      - 'image-build-{name}'
-
-- project:
-    name: fedora-28-x86_64
     jobs:
       - 'image-build-{name}'
 
@@ -54,17 +44,7 @@
       - 'image-build-{name}'
 
 - project:
-    name: ubuntu-18.10-x86_64
-    jobs:
-      - 'image-build-{name}'
-
-- project:
     name: ubuntu-19.04-x86_64
-    jobs:
-      - 'image-build-{name}'
-
-- project:
-    name: opensuse-leap-42.3-x86_64
     jobs:
       - 'image-build-{name}'
 
