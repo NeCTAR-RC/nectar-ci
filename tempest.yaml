@@ -1477,3 +1477,79 @@
             - "^.*tempest-compute-host-check-advanced"
           block-level: 'GLOBAL'
           queue-scanning: 'ALL'
+
+
+- job:
+    name: tempest-image-check-run-all
+    defaults: global
+    node: tempest
+    concurrent: true
+    builders:
+      - shell: |
+          #!/bin/bash -e
+          export OS_USERNAME=$OS_USERNAME
+          export OS_PASSWORD=$OS_PASSWORD
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+          export OS_PROJECT_DOMAIN_NAME=Default
+          export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
+          export OS_PROJECT_NAME=NeCTAR-Images
+          IMAGES=$(openstack image list --public --property owner=28eadf5ad64b42a4929b2fb7df99275c -c ID -f value)
+          for IMAGE in $IMAGES; do
+            echo "==> Triggering tempest-image-check job for $IMAGE..."
+            curl -s -X POST https://jenkins.rc.nectar.org.au/job/tempest-image-check/build \
+              --user $JENKINS_API_USER:$JENKINS_API_TOKEN \
+              --data-urlencode json="{'parameter': [{'name':'IMAGE', 'value':'$IMAGE'}]}"
+          done
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
+           username: OS_USERNAME
+           password: OS_PASSWORD
+        - username-password-separated:
+           credential-id: jenkins-api
+           username: JENKINS_API_USER
+           password: JENKINS_API_TOKEN
+
+
+- job:
+    name: tempest-image-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    parameters:
+      - string:
+          name: 'IMAGE'
+          description: "Image ID to test."
+    builders:
+      - shell: |
+          #!/bin/bash -e
+          export OS_USERNAME=$OS_USERNAME
+          export OS_PASSWORD=$OS_PASSWORD
+          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+          export OS_PROJECT_DOMAIN_NAME=Default
+          export OS_USER_DOMAIN_NAME=Default
+          export OS_IDENTITY_API_VERSION=3
+          export OS_PROJECT_NAME=NeCTAR-Images
+          openstack image show --max-width=120 $IMAGE
+          eval $(openstack image show -f value -c properties $IMAGE | sed 's/, /\n/g' | grep default_user)
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e production --image $IMAGE --username $default_user -j community-images $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-image.yaml 2>&1 | grep --line-buffered -vE '   \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
+           username: OS_USERNAME
+           password: OS_PASSWORD
