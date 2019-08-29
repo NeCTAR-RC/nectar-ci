@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed6e1fa0_24eda752",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-08-29T22:45:06Z",
+      "side": 1,
+      "message": "Maybe change this to \"Any zone\"? I think that is what the dashboard does",
+      "range": {
+        "startLine": 1491,
+        "startChar": 14,
+        "endLine": 1491,
+        "endChar": 21
+      },
+      "revId": "376eb9b0127a3ebddc12bd7ae97b52a6d5849d65",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
