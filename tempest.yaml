@@ -1483,7 +1483,24 @@
     name: tempest-image-check-run-all
     defaults: global
     node: tempest
-    concurrent: true
+    parameters:
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Availability zone. Use DEFAULT to allow the scheduler to choose.'
+          choices:
+            - DEFAULT
+            - auckland
+            - intersect-01
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - nci
+            - qld
+            - swinburne-01
+            - tasmania
+            - tasmania-s
     builders:
       - shell: |
           #!/bin/bash -e
@@ -1499,7 +1516,7 @@
             echo "==> Triggering tempest-image-check job for $IMAGE..."
             curl -s -X POST https://jenkins.rc.nectar.org.au/job/tempest-image-check/build \
               --user $JENKINS_API_USER:$JENKINS_API_TOKEN \
-              --data-urlencode json="{'parameter': [{'name':'IMAGE', 'value':'$IMAGE'}]}"
+              --data-urlencode json="{'parameter': [{'name':'IMAGE', 'value':'$IMAGE'}, {'name':'AVAILABILITY_ZONE', 'value':'$AVAILABILITY_ZONE'}]}"
           done
     wrappers:
       - credentials-binding:
@@ -1526,6 +1543,23 @@
       - string:
           name: 'IMAGE'
           description: "Image ID to test."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          description: 'Availability zone. Use DEFAULT to allow the scheduler to choose.'
+          choices:
+            - DEFAULT
+            - auckland
+            - intersect-01
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - nci
+            - qld
+            - swinburne-01
+            - tasmania
+            - tasmania-s
     builders:
       - shell: |
           #!/bin/bash -e
@@ -1541,7 +1575,8 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py -s $AVAILABILITY_ZONE -e production --image $IMAGE --username $default_user -j check-image $tmpdir
+          [ "$AVAILABILITY_ZONE" != "DEFAULT" ] && SET_AZ="-s $AVAILABILITY_ZONE"
+          ./setup_tempest.py $SET_AZ -e production --image $IMAGE --username $default_user -j check-image $tmpdir
           cd $tmpdir
           stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-image.yaml 2>&1 | grep --line-buffered -vE '   \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
