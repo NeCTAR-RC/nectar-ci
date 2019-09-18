@@ -1403,7 +1403,6 @@
           blocking-jobs:
             - "^tempest-nagios-site-{site}-.*"
           block-level: 'GLOBAL'
-          queue-scanning: 'ALL'
       - build-discarder:
           days-to-keep: 7
 
@@ -1477,7 +1476,6 @@
             - "^.*tempest-compute-host-check"
             - "^.*tempest-compute-host-check-advanced"
           block-level: 'GLOBAL'
-          queue-scanning: 'ALL'
 
 
 - job:
