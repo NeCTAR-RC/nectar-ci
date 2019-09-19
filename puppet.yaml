@@ -356,6 +356,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-ntp
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-openstack
     jobs:
       - '{name}-puppet-unit':
@@ -664,16 +671,19 @@
 - project:
     name: puppet-site-spartan
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-yaml':
          access: 'nobody'
          organisation: 'resplat-hpc'
-      - '{name}-yaml':
+      - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+      - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-site-deploy':
@@ -683,16 +693,19 @@
 - project:
     name: puppet-site-thespian
     jobs:
-      - '{name}-puppet-unit':
+      - '{name}-yaml':
          access: 'nobody'
          organisation: 'resplat-hpc'
-      - '{name}-yaml':
+      - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+      - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-site-deploy':
@@ -702,17 +715,22 @@
 - project:
     name: puppet-site-sut
     jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
       - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'internal'
       - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
-
-- project:
-    name: puppet-ntp
-    jobs:
-      - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'internal'
 
