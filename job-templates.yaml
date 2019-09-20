@@ -1026,8 +1026,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:

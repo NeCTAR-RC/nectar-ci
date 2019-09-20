@@ -53,8 +53,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
       - string:
           name: 'HOST'
@@ -130,8 +130,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
       - string:
           name: 'HOST'
@@ -205,8 +205,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -260,8 +260,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -316,8 +316,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -407,8 +407,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
       - string:
           name: 'HOST'
@@ -468,8 +468,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -524,8 +524,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -681,8 +681,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -737,8 +737,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
@@ -805,8 +805,8 @@
             - tasmania-s
             - coreservices
             - qh2-test
-            - cn
-            - elk
+            - lani
+            - luna
           description: 'Availability zone.'
     properties:
       - authorization:
