@@ -639,8 +639,7 @@
           export OS_PROJECT_NAME=murano
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # packer fix
           export OS_DOMAIN_NAME=$OS_PROJECT_DOMAIN_NAME  # packer fix
-          OUTPUT_DIR=$WORKSPACE/output-$BUILD_TAG
-          FACT_DIR=$OUTPUT_DIR/.facts
+          FACT_DIR=$WORKSPACE/ansible/.facts
           rm -fr $FACT_DIR
           SOURCE_ID=$(openstack image show -f value -c id "{source_image}")
           echo "Found base image {source_image} ($SOURCE_ID)..."
