@@ -691,6 +691,28 @@
          organisation: 'resplat-hpc'
 
 - project:
+    name: puppet-site-tasunder
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-site-thespian
     jobs:
       - '{name}-yaml':
