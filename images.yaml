@@ -9,6 +9,11 @@
       - 'image-build-{name}'
 
 - project:
+    name: centos-8-x86_64
+    jobs:
+      - 'image-build-{name}'
+
+- project:
     name: debian-9-x86_64
     jobs:
       - 'image-build-{name}'
