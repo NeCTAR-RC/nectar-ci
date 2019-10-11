@@ -570,6 +570,17 @@
          whitelist: 'heat'
 
 - project:
+    name: heat-scenario-rctest
+    site:
+        - coreservices
+        - qh2-test
+    jobs:
+      - 'tempest-{name}-check-{site}':
+         whitelist: 'heat'
+         cloud: 'testing'
+         site: '{site}'
+
+- project:
     name: manila-scenario
     jobs:
       - 'tempest-{name}-check':

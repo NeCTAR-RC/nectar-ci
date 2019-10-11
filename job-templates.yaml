@@ -1037,6 +1037,28 @@
 
 
 - job-template:
+    name: tempest-{name}-check-{site}
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - tempest-check-whitelist-noparam:
+          check: '{name}'
+          whitelist: '{whitelist}'
+          cloud: '{cloud}'
+          site: '{site}'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
+- job-template:
     name: '{name}-r10k-diff-catalog'
     defaults: global
     node: upgrader
