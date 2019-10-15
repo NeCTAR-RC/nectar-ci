@@ -571,14 +571,14 @@
 
 - project:
     name: heat-scenario-rctest
-    site:
-        - coreservices
-        - qh2-test
     jobs:
       - 'tempest-{name}-check-{site}':
+         job: 'heat-scenario'
          whitelist: 'heat'
          cloud: 'testing'
-         site: '{site}'
+         site:
+           - coreservices
+           - qh2-test
 
 - project:
     name: manila-scenario

@@ -1047,7 +1047,7 @@
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
     builders:
       - tempest-check-whitelist-noparam:
-          check: '{name}'
+          check: '{job}'
           whitelist: '{whitelist}'
           cloud: '{cloud}'
           site: '{site}'
