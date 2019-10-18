@@ -198,7 +198,7 @@
 
 
 - project:
-    name: octocatalog
+    name: octocatalog-diff
     jobs:
       - 'octocatalog-diff-test':
          access: 'nobody'
@@ -235,7 +235,7 @@
 
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/octocatalog-diff.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
          refspec: $GERRIT_REFSPEC
          branches:
