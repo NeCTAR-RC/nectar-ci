@@ -26,6 +26,14 @@
 
 
 - builder:
+    name: octocatalog-diff-rake-test
+    builders:
+      - shell: |
+          ./script/bootstrap
+          export PUPPET_VERSION="5.5.8"
+          bundle exec rake test 2>&1
+
+- builder:
     name: librarian-install
     builders:
       - ssh-builder:

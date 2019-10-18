@@ -198,7 +198,7 @@
 
 
 - project:
-    name: octocatalog
+    name: octocatalog-diff
     jobs:
       - 'octocatalog-diff-test':
          access: 'nobody'
@@ -207,7 +207,9 @@
 - job:
     name: 'octocatalog-diff-test'
     defaults: global
-    node: puppet
+    # NOTE(jake): currently rake only can run on Xenial, this is due to
+    # changes in OpenSSL libraries that fails on Bionic
+    node: xenial
 
     parameters:
       - string:
@@ -223,7 +225,7 @@
                    comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
+              project-pattern: 'NeCTAR-RC/octocatalog-diff'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
@@ -235,7 +237,7 @@
 
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/octocatalog-diff.git
          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
          refspec: $GERRIT_REFSPEC
          branches:
@@ -247,7 +249,7 @@
          choosing-strategy: gerrit
 
     builders:
-      - rake-test
+      - octocatalog-diff-rake-test
 
 - job:
     name: 'global-hieradata-deploy'
