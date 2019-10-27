@@ -56,11 +56,11 @@
 - project:
     name: nectar-tools
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py35'
-      - '{name}-xenial-tox-{environment}':
+         environment: 'py36'
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -74,19 +74,12 @@
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
