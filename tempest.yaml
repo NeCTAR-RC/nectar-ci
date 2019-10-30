@@ -599,16 +599,42 @@
           whitelist: 'manila-cephfs'
 
 - project:
+    name: manila-cephfs-rctest
+    jobs:
+      - 'tempest-{name}-check-{site}':
+         job: 'manila-cephfs'
+         whitelist: 'manila-cephfs'
+         cloud: 'testing'
+         site:
+           - coreservices
+
+- project:
     name: glance-scenario
     jobs:
       - 'tempest-{name}-check-site-agnostic':
          whitelist: 'glance'
 
 - project:
+    name: glance-scenario-rctest
+    jobs:
+      - 'tempest-{name}-check-site-agnostic-{cloud}':
+         job: 'glance-scenario'
+         whitelist: 'glance'
+         cloud: 'testing'
+
+- project:
     name: swift-scenario
     jobs:
       - 'tempest-{name}-check-site-agnostic':
          whitelist: 'swift'
+
+- project:
+    name: swift-scenario-rctest
+    jobs:
+      - 'tempest-{name}-check-site-agnostic-{cloud}':
+         job: 'swift-scenario'
+         whitelist: 'swift'
+         cloud: 'testing'
 
 - job:
     name: tempest-designate-check

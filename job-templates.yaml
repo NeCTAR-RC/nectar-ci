@@ -1146,3 +1146,25 @@
           'nobody':
             - job-read
             - job-discover
+
+- job-template:
+    name: tempest-{name}-check-site-agnostic-{cloud}
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - tempest-check-whitelist-site-agnostic-noparam:
+          check: '{job}'
+          whitelist: '{whitelist}'
+          cloud: '{cloud}'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+
