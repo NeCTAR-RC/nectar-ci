@@ -609,6 +609,22 @@
            - coreservices
 
 - project:
+    name: telemetry
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: 'telemetry'
+
+- project:
+    name: telemetry-rctest
+    jobs:
+      - 'tempest-{name}-check-{site}':
+          job: 'telemetry'
+          whitelist: 'telemetry'
+          cloud: 'testing'
+          site:
+            - coreservices
+
+- project:
     name: glance-scenario
     jobs:
       - 'tempest-{name}-check-site-agnostic':
