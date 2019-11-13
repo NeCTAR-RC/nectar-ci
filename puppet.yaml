@@ -514,6 +514,9 @@
       - '{name}-puppet-unit':
          access: 'nobody'
          organisation: 'resplat-hpc'
+      - '{name}-puppet-prod-review':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
 
 - project:
     name: puppet-sut
