@@ -19,4 +19,4 @@
             - job-read
             - job-discover
       - build-discarder:
-          num-to-keep: 20
+          num-to-keep: 50
