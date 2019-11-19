@@ -932,6 +932,10 @@
           default: master
           description: "The default branch to test."
 
+    properties:
+      - build-discarder:
+          num-to-keep: 50
+
     triggers:
       - gerrit:
           trigger-on:
