@@ -3,9 +3,6 @@
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'xenial'
-            os_release: 'pike'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'xenial'
             os_release: 'queens'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'bionic'
@@ -16,6 +13,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'bionic'
             os_release: 'stein'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'bionic'
+            os_release: 'train'
 
 
 - job-template:
