@@ -572,7 +572,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
