@@ -606,6 +606,10 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
          access: 'anonymous'
@@ -618,6 +622,10 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py35'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
