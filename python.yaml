@@ -93,6 +93,10 @@
       - '{name}-bionic-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
+         environment: 'py36'
+      - '{name}-bionic-tox-{environment}':
+         access: 'nobody'
+         organisation: 'internal'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
          access: 'nobody'
