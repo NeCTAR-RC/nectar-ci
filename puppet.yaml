@@ -363,6 +363,13 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-octavia
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-openstack
     jobs:
       - '{name}-puppet-unit':
