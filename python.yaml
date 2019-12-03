@@ -97,9 +97,6 @@
       - '{name}-bionic-deb-package':
          access: 'nobody'
          organisation: 'internal'
-      - '{name}-xenial-deb-package':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: python-nectarallocationclient
