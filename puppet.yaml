@@ -398,6 +398,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-ovn
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-patchman
     jobs:
       - '{name}-puppet-unit':
