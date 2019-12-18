@@ -198,7 +198,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -213,7 +213,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -228,7 +228,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -258,7 +258,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -280,7 +280,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -328,7 +328,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -339,7 +339,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -354,7 +354,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -384,7 +384,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -414,7 +414,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -444,7 +444,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -474,7 +474,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -489,7 +489,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -504,7 +504,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -549,7 +549,7 @@
       - '{name}-os-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
@@ -569,10 +569,6 @@
 - project:
     name: tempest
     jobs:
-      - '{name}-xenial-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -648,11 +644,11 @@
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27-mysql-file'
+         environment: 'py36-mysql-file'
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py27-mysql-influxdb'
+         environment: 'py36-mysql-influxdb'
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -679,7 +675,7 @@
       - '{name}-os-tox-{environment}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
@@ -706,10 +702,6 @@
 - project:
     name: sahara-tests
     jobs:
-      - '{name}-xenial-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
       - '{name}-xenial-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -789,7 +781,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'resplat-cloud'
-         environment: 'py27'
+         environment: 'py36'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'resplat-cloud'
