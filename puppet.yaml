@@ -982,7 +982,7 @@
     builders:
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
-          command: /var/lib/puppet/update-test-modules.sh $GERRIT_PROJECT
+          command: /usr/local/sbin/update-test-modules.sh $GERRIT_PROJECT
 
     publishers:
       !include: publisher.yaml.inc
