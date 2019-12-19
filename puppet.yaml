@@ -708,26 +708,48 @@
          organisation: 'resplat-hpc'
 
 - project:
+    name: puppet-site-tas
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+
+- project:
     name: puppet-site-tasunder
     jobs:
       - '{name}-yaml':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'tas-gerrit'
       - '{name}-puppet-unit':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'tas-gerrit'
       - '{name}-r10k-deploy':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'tas-gerrit'
       - '{name}-r10k-cleanup':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'tas-gerrit'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'tas-gerrit'
       - '{name}-site-deploy':
          access: 'nobody'
-         organisation: 'internal'
+         organisation: 'tas-gerrit'
 
 - project:
     name: puppet-site-thespian
