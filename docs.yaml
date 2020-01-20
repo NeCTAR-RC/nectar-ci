@@ -21,3 +21,10 @@
       - '{name}-jekyll-deploy':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: tutorials
+    jobs:
+      - '{name}-dummy':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
