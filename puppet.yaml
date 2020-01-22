@@ -862,6 +862,28 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-aucklandunder
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'internal'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
