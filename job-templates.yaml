@@ -667,8 +667,6 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
-          silent: false
-          escape-quotes: true
           trigger-for-unreviewed-patches: true
 
     scm:
@@ -721,9 +719,6 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-          silent: false
-          escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true

@@ -243,17 +243,18 @@
           export OS_AUTH_TYPE=v3applicationcredential
           export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
           export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
-          CONTAINER="$GERRIT_CHANGE_NUMBER-$GERRIT_PATCHSET_NUMBER"
-          SITE=$WORKSPACE/_site
+          CONTAINER="$JOB_NAME-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
+          openstack container delete --recursive $CONTAINER || true
           AUTH=$(openstack container create $CONTAINER -f value -c account)
           BASEURL=v1/$AUTH/$CONTAINER
+          bundle install --path vendor/bundle
           bundle exec jekyll build --baseurl="/$BASEURL"
           OS_TOKEN=$(openstack token issue -c id -f value)
           SWIFTURL=https://swift.rc.nectar.org.au/$BASEURL
-          tar -C $SITE -zcf - . | curl -i -H "X-Auth-Token: $OS_TOKEN" -H "X-Detect-Content-Type: true" -H "X-Delete-After: 7776000" -X PUT --data-binary @- $SWIFTURL/?extract-archive=tar.gz
-          curl -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
-          curl -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Listings: true' $SWIFTURL
-          curl -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
+          tar -C $WORKSPACE/_site -zcf - . | curl -s -X PUT -H "X-Auth-Token: $OS_TOKEN" -H "X-Detect-Content-Type: true" -H "X-Delete-After: 7776000" --data-binary @- $SWIFTURL/?extract-archive=tar.gz
+          curl -s -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
+          curl -s -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Listings: true' $SWIFTURL
+          curl -s -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
 
 - builder:
     name: jekyll-test-build-cleanup
@@ -263,7 +264,7 @@
           export OS_AUTH_TYPE=v3applicationcredential
           export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
           export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
-          CONTAINER="$GERRIT_CHANGE_NUMBER-$GERRIT_PATCHSET_NUMBER"
+          CONTAINER="$JOB_NAME-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
           openstack container delete --recursive $CONTAINER
 
 
