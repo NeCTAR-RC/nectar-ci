@@ -641,6 +641,119 @@
     builders:
       - nodejs-test
 
+
+- job-template:
+    name: '{name}-jekyll-test-build'
+    defaults: global
+    node: bionic
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - jekyll-test-build
+
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
+           username: CREDENTIAL_ID
+           password: CREDENTIAL_SECRET
+
+
+- job-template:
+    name: '{name}-jekyll-test-build-cleanup'
+    defaults: global
+    node: upgrader
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+            - change-merged-event
+            - change-abandoned-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - jekyll-test-build-cleanup
+
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
+           username: CREDENTIAL_ID
+           password: CREDENTIAL_SECRET
+
+
 - job-template:
     name: '{name}-jekyll-build'
     defaults: global
