@@ -256,6 +256,7 @@
           curl -s -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
           curl -s -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Listings: true' $SWIFTURL
           curl -s -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
+          curl -s --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Test at: $SWIFTURL'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
 
 - builder:
     name: jekyll-test-build-cleanup
