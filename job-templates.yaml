@@ -691,6 +691,9 @@
            credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
            username: CREDENTIAL_ID
            password: CREDENTIAL_SECRET
+        - username-password:
+           credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
+           variable: GERRIT_API
 
 
 - job-template:
