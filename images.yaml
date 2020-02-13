@@ -49,7 +49,7 @@
       - 'image-build-{name}'
 
 - project:
-    name: ubuntu-19.04-x86_64
+    name: ubuntu-19.10-x86_64
     jobs:
       - 'image-build-{name}'
 
