@@ -1173,7 +1173,7 @@
     name: '{name}-r10k-diff-catalog'
     defaults: global
     node: upgrader
-    quiet-period: 10
+    quiet-period: 30
 
     parameters:
       - string:
