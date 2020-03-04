@@ -645,7 +645,7 @@
 - job-template:
     name: '{name}-jekyll-test-build'
     defaults: global
-    node: bionic
+    node: openstack
 
     parameters:
       - string:
@@ -699,7 +699,7 @@
 - job-template:
     name: '{name}-jekyll-test-build-cleanup'
     defaults: global
-    node: upgrader
+    node: openstack
 
     parameters:
       - string:
