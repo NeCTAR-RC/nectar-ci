@@ -1,11 +1,11 @@
 - project:
     name: hivemind
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -19,11 +19,11 @@
 - project:
     name: hivemind_contrib
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -120,22 +120,15 @@
 - project:
     name: python-nectarallocationclient
     jobs:
-      - '{name}-xenial-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -158,14 +151,11 @@
 - project:
     name: python-placementclient
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -285,9 +275,6 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-os-xenial-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: cinder
@@ -330,9 +317,6 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-os-xenial-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -380,6 +364,21 @@
 
 - project:
     name: octavia
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: octavia-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
@@ -606,7 +605,7 @@
 - project:
     name: ospurge
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
@@ -614,11 +613,11 @@
 - project:
     name: tempest
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py35'
-      - '{name}-xenial-tox-{environment}':
+         environment: 'py36'
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -686,15 +685,15 @@
 - project:
     name: gnocchi
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36-mysql-file'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36-mysql-influxdb'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -747,11 +746,11 @@
 - project:
     name: sahara-tests
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py35'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -759,7 +758,7 @@
 - project:
     name: magnum-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -767,7 +766,7 @@
 - project:
     name: murano-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -775,7 +774,7 @@
 - project:
     name: sahara-image-elements
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -783,7 +782,7 @@
 - project:
     name: trove-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -791,7 +790,7 @@
 - project:
     name: designate-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -799,7 +798,7 @@
 - project:
     name: heat-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -807,7 +806,7 @@
 - project:
     name: telemetry-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -815,7 +814,7 @@
 - project:
     name: manila-tempest-plugin
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -831,9 +830,6 @@
          access: 'anonymous'
          organisation: 'resplat-cloud'
          environment: 'flake8'
-      - '{name}-os-xenial-deb-package':
-         access: 'anonymous'
-         organisation: 'resplat-cloud'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'resplat-cloud'
