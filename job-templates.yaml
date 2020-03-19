@@ -645,7 +645,7 @@
 - job-template:
     name: '{name}-jekyll-test-build'
     defaults: global
-    node: openstack
+    node: bionic
 
     parameters:
       - string:
