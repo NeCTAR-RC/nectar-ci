@@ -121,16 +121,16 @@
     name: openstacksdk
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: python-nectarallocationclient
