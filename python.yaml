@@ -118,6 +118,21 @@
          organisation: 'internal'
 
 - project:
+    name: openstacksdk
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'nobody'
+         organisation: 'internal'
+         environment: 'py36'
+      - '{name}-os-tox-{environment}':
+         access: 'nobody'
+         organisation: 'internal'
+         environment: 'pep8'
+      - '{name}-os-deb-package':
+         access: 'nobody'
+         organisation: 'internal'
+
+- project:
     name: python-nectarallocationclient
     jobs:
       - '{name}-bionic-tox-{environment}':
