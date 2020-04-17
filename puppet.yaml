@@ -125,6 +125,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-manuka
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-memcached
     jobs:
       - '{name}-puppet-unit':
