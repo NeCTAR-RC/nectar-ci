@@ -49,6 +49,11 @@
       - 'image-build-{name}'
 
 - project:
+    name: ubuntu-20.04-x86_64
+    jobs:
+      - 'image-build-{name}'
+
+- project:
     name: ubuntu-18.04-x86_64-docker
     jobs:
       - 'image-build-{name}'
