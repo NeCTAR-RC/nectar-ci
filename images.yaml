@@ -499,6 +499,7 @@
           echo "Image $IMAGE_ID created!"
           echo "Applying properties..."
           for FACT in $(ls $FACT_DIR); do
+              [[ $FACT =~ ^nectar_ ]] && continue
               VAL=$(cat $FACT_DIR/$FACT)
               echo "  -> $FACT: '$VAL'..."
               openstack image set --property $FACT=$"$VAL" $IMAGE_ID
@@ -605,6 +606,7 @@
           echo "Image $IMAGE_ID created!"
           echo "Applying properties..."
           for FACT in $(ls $FACT_DIR); do
+              [[ $FACT =~ ^nectar_ ]] && continue
               VAL=$(cat $FACT_DIR/$FACT)
               echo "  -> $FACT: '$VAL'..."
               openstack image set --property $FACT=$"$VAL" $IMAGE_ID
@@ -665,6 +667,7 @@
           echo "Image $IMAGE_ID created!"
           echo "Applying properties..."
           for FACT in $(ls $FACT_DIR); do
+              [[ $FACT =~ ^nectar_ ]] && continue
               VAL=$(cat $FACT_DIR/$FACT)
               echo "  -> $FACT: '$VAL'..."
               openstack image set --property $FACT=$"$VAL" $IMAGE_ID
