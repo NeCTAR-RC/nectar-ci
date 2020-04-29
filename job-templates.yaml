@@ -1329,7 +1329,6 @@
          choosing-strategy: gerrit
 
     builders:
-      - os-pbuilder-checkout
       - pypi-upload
 
     publishers:

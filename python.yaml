@@ -153,6 +153,9 @@
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: vendordata
@@ -178,6 +181,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
@@ -218,6 +224,9 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: python-manukaclient
@@ -235,6 +244,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-bionic-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
