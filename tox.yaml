@@ -74,7 +74,7 @@
 
     publishers:
       - cobertura:
-          report-file: "coverage.xml"
+          report-file: "cover/coverage.xml"
           only-stable: "true"
           targets: {}
 
@@ -135,7 +135,7 @@
 
     publishers:
       - cobertura:
-          report-file: "coverage.xml"
+          report-file: "cover/coverage.xml"
           only-stable: "true"
           targets: {}
 
@@ -195,7 +195,7 @@
 
     publishers:
       - cobertura:
-          report-file: "coverage.xml"
+          report-file: "cover/coverage.xml"
           only-stable: "true"
           targets: {}
 
@@ -257,6 +257,6 @@
 
     publishers:
       - cobertura:
-          report-file: "coverage.xml"
+          report-file: "cover/coverage.xml"
           only-stable: "true"
           targets: {}
