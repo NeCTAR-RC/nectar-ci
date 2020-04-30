@@ -138,7 +138,7 @@
 - job-template:
     name: 'image-build-{name}'
     defaults: global
-    node: openstack
+    node: bionic
 
     parameters:
       - string:
@@ -209,7 +209,7 @@
 - job-template:
     name: 'image-build-trove-{name}'
     defaults: global
-    node: openstack
+    node: bionic
 
     parameters:
       - string:
@@ -308,7 +308,7 @@
 - job-template:
     name: 'image-build-extra-{name}'
     defaults: global
-    node: openstack
+    node: bionic
 
     parameters:
       - string:
@@ -376,7 +376,7 @@
 - job-template:
     name: 'image-build-rctest-{name}'
     defaults: global
-    node: openstack
+    node: bionic
 
     parameters:
       - string:
@@ -422,7 +422,7 @@
 - job-template:
     name: 'image-build-undercloud-{name}'
     defaults: global
-    node: openstack
+    node: bionic
 
     parameters:
       - string:
