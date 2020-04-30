@@ -745,75 +745,6 @@
 
 
 - job:
-    name: tempest-sahara-check
-    defaults: global
-    node: tempest
-    concurrent: true
-    scm:
-      - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
-    wrappers:
-      - timeout:
-          timeout: 45
-          fail: true
-    builders:
-      - shell: |
-          #!/bin/bash
-          . /opt/tempest/bin/activate
-          $WORKSPACE/nagios/tempest_nagios.py sahara -c $WORKSPACE/nagios/tempest_nagios.conf -s $AVAILABILITY_ZONE -e $CLOUD -p $PLUGIN -pv $PLUGIN_VERSION
-
-    parameters:
-      - choice:
-          name: 'CLOUD'
-          choices:
-            - production
-            - testing
-            - development
-          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
-      - choice:
-          name: 'PLUGIN'
-          choices:
-            - spark
-            - vanilla
-          description: "Sahara plugin (spark, vanilla etc.). Leave as Spark for now."
-      - choice:
-          name: 'PLUGIN_VERSION'
-          choices:
-            - 2.1.0
-            - 1.6.0
-            - 1.3.1
-            - 2.7.1
-          description: "Sahara plugin version (spark(2.1.0/1.6.0/1.3.1), vanilla(2.7.1) etc.). Leave as Spark version for now."
-      - choice:
-          name: 'AVAILABILITY_ZONE'
-          choices:
-            - auckland
-            - intersect-01
-            - melbourne-qh2
-            - melbourne-qh2-uom
-            - monash-01
-            - monash-02
-            - monash-03
-            - nci
-            - qld
-            - swinburne-01
-            - tasmania
-            - tasmania-s
-            - coreservices
-            - qh2-test
-            - lani
-            - luna
-          description: 'Availability zone.'
-    properties:
-      - authorization:
-          'nobody':
-            - job-read
-            - job-discover
-
-
-
-- job:
     name: tempest-rctest-compute-host-check
     defaults: global
     node: tempest
@@ -1167,35 +1098,6 @@
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
-    properties:
-      - authorization:
-          'nobody':
-            - job-read
-            - job-discover
-      - throttle:
-          categories:
-            - tempest-rctest
-          option: category
-
-
-- job:
-    name: tempest-rctest-sahara-check
-    defaults: global
-    node: tempest
-    concurrent: true
-    scm:
-      - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
-    wrappers:
-      - timeout:
-          timeout: 45
-          fail: true
-    builders:
-      - shell: |
-          #!/bin/bash
-          . /opt/tempest/bin/activate
-          $WORKSPACE/nagios/tempest_nagios.py sahara -c $WORKSPACE/nagios/tempest_nagios.conf -s coreservices -e testing -p spark -pv 2.1.0
     properties:
       - authorization:
           'nobody':
