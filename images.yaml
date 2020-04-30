@@ -24,12 +24,12 @@
       - 'image-build-{name}'
 
 - project:
-    name: fedora-30-x86_64
+    name: fedora-31-x86_64
     jobs:
       - 'image-build-{name}'
 
 - project:
-    name: fedora-31-x86_64
+    name: fedora-32-x86_64
     jobs:
       - 'image-build-{name}'
 
