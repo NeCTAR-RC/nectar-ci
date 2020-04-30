@@ -526,13 +526,6 @@
          organisation: 'internal'
 
 - project:
-    name: puppet-sahara
-    jobs:
-      - '{name}-puppet-unit':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: puppet-shibboleth
     jobs:
       - '{name}-puppet-unit':

@@ -798,48 +798,6 @@
          environment: 'py27'
 
 - project:
-    name: sahara
-    jobs:
-      - '{name}-os-tox-{environment}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
-         access: 'nobody'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: sahara-dashboard
-    jobs:
-      - '{name}-os-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: sahara-tests
-    jobs:
-      - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'py35'
-      - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
-- project:
     name: magnum-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
@@ -849,14 +807,6 @@
 
 - project:
     name: murano-tempest-plugin
-    jobs:
-      - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
-- project:
-    name: sahara-image-elements
     jobs:
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
