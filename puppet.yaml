@@ -348,8 +348,8 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-puppet-prod-review':
-         access: 'nobody'
-         organisation: 'internal'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-neutron
