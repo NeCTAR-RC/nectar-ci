@@ -75,7 +75,6 @@
     publishers:
       - cobertura:
           report-file: "cover/coverage.xml"
-          only-stable: "true"
           targets: {}
 
 - job-template:
@@ -136,7 +135,6 @@
     publishers:
       - cobertura:
           report-file: "cover/coverage.xml"
-          only-stable: "true"
           targets: {}
 
 - job-template:
@@ -196,7 +194,6 @@
     publishers:
       - cobertura:
           report-file: "cover/coverage.xml"
-          only-stable: "true"
           targets: {}
 
 - job-template:
@@ -258,5 +255,4 @@
     publishers:
       - cobertura:
           report-file: "cover/coverage.xml"
-          only-stable: "true"
           targets: {}
