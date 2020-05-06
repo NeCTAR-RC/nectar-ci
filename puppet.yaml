@@ -1050,21 +1050,14 @@
               - change-merged-event
           projects:
             - project-compare-type: 'REG_EXP'
-              project-pattern: 'internal/puppet-.*'
+              project-pattern: '(internal|NeCTAR-RC)/puppet-(?!site-|library).*'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
             - project-compare-type: 'REG_EXP'
-              project-pattern: 'NeCTAR-RC/puppet-.*'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-            - project-compare-type: 'REG_EXP'
-              project-pattern: 'resplat-.*/puppet-.*'
+              project-pattern: '.*/puppet-.*'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
