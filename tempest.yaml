@@ -616,13 +616,14 @@
 
 - project:
     name: telemetry-rctest
+    cloud: 'testing'
     jobs:
       - 'tempest-{name}-check-{site}':
           job: 'telemetry'
           whitelist: 'telemetry'
-          cloud: 'testing'
           site:
             - coreservices
+      - 'tempest-cleanup-telemetry-{cloud}'
 
 - project:
     name: glance-scenario
@@ -1269,6 +1270,40 @@
       - build-blocker:
           blocking-jobs:
             - "^tempest-nagios-site-{site}-.*"
+          block-level: 'GLOBAL'
+      - build-discarder:
+          days-to-keep: 7
+
+
+- job-template:
+    name: 'tempest-cleanup-telemetry-{cloud}'
+    defaults: global
+    node: tempest
+    concurrent: false
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    wrappers:
+      - timeout:
+          timeout: 5
+          fail: true
+
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          $WORKSPACE/nagios/tempest_purge.py -e {cloud} -j check-telemetry --no-dry-run
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "^tempest-telemetry-.*"
           block-level: 'GLOBAL'
       - build-discarder:
           days-to-keep: 7
