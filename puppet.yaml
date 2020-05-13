@@ -564,6 +564,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppetlabs-rsync
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-site-melbourne
     jobs:
       - '{name}-yaml':
