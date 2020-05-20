@@ -85,6 +85,10 @@
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'functional'
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-bionic-deb-package':
          access: 'anonymous'
