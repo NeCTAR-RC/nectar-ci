@@ -1172,7 +1172,7 @@
 
     wrappers:
       - timeout:
-          timeout: 20
+          timeout: 10
           fail: true
 
     builders:
@@ -1185,8 +1185,8 @@
 
     publishers:
       - naginator:
-          max-failed-builds: 4
-          fixed-delay: 120
+          max-failed-builds: 2
+          fixed-delay: 30
       - trigger:
           project: 'tempest-cleanup-site-{site}'
           threshold: 'FAILURE'
@@ -1226,8 +1226,8 @@
 
     publishers:
       - naginator:
-          max-failed-builds: 4
-          fixed-delay: 120
+          max-failed-builds: 2
+          fixed-delay: 30
       - trigger:
           project: 'tempest-cleanup'
           threshold: 'FAILURE'
