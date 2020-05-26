@@ -1117,6 +1117,11 @@
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'production'
             - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/puppet-nectar'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'production'
+            - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-anu'
               branches:
                 - branch-compare-type: 'PLAIN'
