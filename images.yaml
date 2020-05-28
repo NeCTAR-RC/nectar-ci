@@ -427,7 +427,8 @@
           NAME=${JOB_NAME#image-build-}
           OUTPUT_DIR=$WORKSPACE/output-$BUILD_TAG
           FACT_DIR=$OUTPUT_DIR/.facts
-          rm -fr $FACT_DIR
+          TAG_DIR=$OUTPUT_DIR/.tags
+          rm -fr $FACT_DIR $TAG_DIR
           jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" $NAME.json > $BUILD_TAG.json
           echo "Starting packer build..."
           packer build -color=false $BUILD_TAG.json
@@ -449,6 +450,11 @@
               VAL=$(cat $FACT_DIR/$FACT)
               echo "  -> $FACT: '$VAL'..."
               openstack image set --property $FACT=$"$VAL" $IMAGE_ID
+          done
+          echo "Applying tags..."
+          for TAG in $(ls $TAG_DIR); do
+              echo "  -> tag: '$TAG'..."
+              openstack image set --tag $TAG $IMAGE_ID
           done
           echo "Creating instance..."
           [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
@@ -535,7 +541,8 @@
           NAME=${JOB_NAME#image-build-}
           OUTPUT_DIR=$WORKSPACE/output-$BUILD_TAG
           FACT_DIR=$OUTPUT_DIR/.facts
-          rm -fr $FACT_DIR
+          TAG_DIR=$OUTPUT_DIR/.tags
+          rm -fr $FACT_DIR $TAG_DIR
           jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" $NAME.json > $BUILD_TAG.json
           echo "Starting packer build..."
           packer build -color=false $BUILD_TAG.json
@@ -557,6 +564,13 @@
               echo "  -> $FACT: '$VAL'..."
               openstack image set --property $FACT=$"$VAL" $IMAGE_ID
           done
+          echo "Applying tags..."
+          for TAG in $(ls $TAG_DIR); do
+              echo "  -> tag: '$TAG'..."
+              openstack image set --tag $TAG $IMAGE_ID
+          done
+          export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
+          export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
           openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
           openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID
           echo "================================================================================"
@@ -593,12 +607,12 @@
           export OS_TENANT_NAME=$OS_PROJECT_NAME  # packer fix
           export OS_DOMAIN_NAME=$OS_PROJECT_DOMAIN_NAME  # packer fix
           FACT_DIR=$WORKSPACE/ansible/.facts
-          rm -fr $FACT_DIR
+          TAG_DIR=WORKSPACE/ansible/.tags
+          rm -fr $FACT_DIR $TAG_DIR
           SOURCE_ID=$(openstack image show -f value -c id "{source_image}")
           echo "Found base image {source_image} ($SOURCE_ID)..."
           jq ".builders[0].source_image = \"$SOURCE_ID\" | .builders[0].image_name = \"$BUILD_TAG\"" packer.json > $BUILD_TAG.json
           echo "Starting packer build..."
-          rm -fr ansible/.facts
           packer build -color=false $BUILD_TAG.json
           IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
           USER_ACCOUNT=$(cat $FACT_DIR/default_user)
@@ -617,6 +631,11 @@
               VAL=$(cat $FACT_DIR/$FACT)
               echo "  -> $FACT: '$VAL'..."
               openstack image set --property $FACT=$"$VAL" $IMAGE_ID
+          done
+          echo "Applying tags..."
+          for TAG in $(ls $TAG_DIR); do
+              echo "  -> tag: '$TAG'..."
+              openstack image set --tag $TAG $IMAGE_ID
           done
           export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
           export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
