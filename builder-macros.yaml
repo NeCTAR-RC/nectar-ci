@@ -74,7 +74,7 @@
           find . -iname *.pp -not -path "./.bundled_gems/*" -execdir /opt/puppetlabs/bin/puppet parser validate --modulepath=`pwd`/modules {} \;
           find . -iname *.pp -not -path "./.bundled_gems/*" -execdir /opt/puppetlabs/bin/puppet parser validate --modulepath=`pwd`/modules {} +
           for f in `find . -iname *.erb -not -path "./.bundled_gems/*"` ; do
-            erb -x -T '-' $f | ruby -c
+            erb -P -x -T '-' $f | ruby -c
           done
 
 - builder:
