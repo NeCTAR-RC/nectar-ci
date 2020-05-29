@@ -875,3 +875,15 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'resplat-cloud'
+
+- project:
+    name: nectar-freshdesk
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
