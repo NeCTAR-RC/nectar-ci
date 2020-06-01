@@ -400,6 +400,11 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'py36-dj1'
+         os_release: 'train'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-os-deb-package':
          access: 'anonymous'
