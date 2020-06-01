@@ -397,6 +397,12 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         ubuntu_release: 'bionic'
+         os_release: 'train'
+         environment: 'py36-dj1'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
