@@ -879,11 +879,11 @@
 - project:
     name: nectar-freshdesk
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
-      - '{name}-os-tox-{environment}':
+      - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
