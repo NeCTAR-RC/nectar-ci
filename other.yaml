@@ -366,3 +366,10 @@
       - '{name}-dummy':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: dashboard-dev
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
