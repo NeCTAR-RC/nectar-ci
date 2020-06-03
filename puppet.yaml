@@ -791,7 +791,7 @@
          organisation: 'resplat-hpc'
 
 - project:
-    name: puppet-site-sut
+    name: puppet-site-swinburne
     jobs:
       - '{name}-yaml':
          access: 'nobody'
