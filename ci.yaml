@@ -51,7 +51,7 @@
 - job-template:
     name: '{name}-jenkins-jobs-test'
     defaults: global
-    node: upgrader
+    node: internal
 
     parameters:
       - string:
@@ -97,11 +97,15 @@
     builders:
       - jenkins-jobs-test
 
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
 - job-template:
     name: '{name}-jenkins-jobs-update'
     defaults: global
-    node: upgrader
+    node: internal
 
     parameters:
       - string:
@@ -156,6 +160,11 @@
 
     publishers:
         !include: publisher.yaml.inc
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
 - project:
     name: nectar-ci

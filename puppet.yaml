@@ -1038,7 +1038,7 @@
 - job:
     name: 'puppet-module-deploy-testing'
     defaults: global
-    node: upgrader
+    node: internal
     quiet-period: 20
 
     parameters:
@@ -1092,7 +1092,7 @@
 - job:
     name: 'puppet-module-deploy-production'
     defaults: global
-    node: upgrader
+    node: internal
     quiet-period: 20
 
     parameters:

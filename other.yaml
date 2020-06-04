@@ -24,7 +24,7 @@
     concurrent: false
     defaults: global
 
-    node: upgrader
+    node: internal
 
     parameters:
       - string:
@@ -74,13 +74,17 @@
           cd testing
           librarian-puppet install --verbose --path ~/puppet-modules-cache/
 
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
 - job:
     name: 'librarian-diff-library'
     concurrent: false
     defaults: global
 
-    node: upgrader
+    node: internal
 
     parameters:
       - string:
@@ -145,7 +149,7 @@
 - job:
     name: 'librarian-install'
     defaults: global
-    node: upgrader
+    node: internal
     quiet-period: 20
 
     parameters:
@@ -196,6 +200,10 @@
     publishers:
       !include: publisher.yaml.inc
 
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
 - project:
     name: octocatalog-diff
@@ -254,7 +262,7 @@
 - job:
     name: 'global-hieradata-deploy'
     defaults: global
-    node: upgrader
+    node: internal
     quiet-period: 20
 
     parameters:
@@ -307,6 +315,10 @@
     publishers:
       !include: publisher.yaml.inc
 
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
 - project:
     name: nectar-testing
