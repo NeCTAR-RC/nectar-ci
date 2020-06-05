@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5c65afa_53241ef6",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-05T05:11:20Z",
+      "side": 1,
+      "message": "I think you want os here",
+      "range": {
+        "startLine": 400,
+        "startChar": 16,
+        "endLine": 400,
+        "endChar": 28
+      },
+      "revId": "480a3f530e9332c598009b337992aca5b5bc62f5",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
