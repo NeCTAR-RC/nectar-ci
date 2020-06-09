@@ -108,6 +108,9 @@
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-dummy-debian':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-openstack
