@@ -254,6 +254,11 @@
            credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
            username: IMAGE_BUILDER_USERNAME
            password: IMAGE_BUILDER_PASSWORD
+        - username-password-separated:
+           credential-id: 6c8091b5-0e7d-4be5-8458-4e5a999acdd6
+           username: IMAGE_PROMOTE_USERNAME
+           password: IMAGE_PROMOTE_PASSWORD
+
 
 
 - job-template:
@@ -299,6 +304,11 @@
            credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
            username: IMAGE_BUILDER_USERNAME
            password: IMAGE_BUILDER_PASSWORD
+        - username-password-separated:
+           credential-id: 6c8091b5-0e7d-4be5-8458-4e5a999acdd6
+           username: IMAGE_PROMOTE_USERNAME
+           password: IMAGE_PROMOTE_PASSWORD
+
 
 
 - job-template:
