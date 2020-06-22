@@ -105,6 +105,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - '{name}-xenial-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
