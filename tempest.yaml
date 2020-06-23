@@ -570,6 +570,12 @@
          whitelist: 'heat'
 
 - project:
+    name: octavia
+    jobs:
+      - 'tempest-{name}-check':
+         whitelist: 'octavia'
+
+- project:
     name: heat-scenario-rctest
     jobs:
       - 'tempest-{name}-check-{site}':
