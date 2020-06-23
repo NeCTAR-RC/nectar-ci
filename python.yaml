@@ -509,6 +509,14 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: octavia-tempest-plugin
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: magnum
     jobs:
       - '{name}-os-tox-{environment}':
