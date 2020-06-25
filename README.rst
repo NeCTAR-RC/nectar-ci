@@ -22,7 +22,7 @@ Example /etc/jenkins_jobs/jenkins_jobs.ini::
    [jenkins]
    user=jenkins
    password=1234567890abcdef1234567890abcdef
-   url=https://jenkins.mgmt.rc.nectar.org.au
+   url=https://jenkins.rc.nectar.org.au
 
 
 Usage
