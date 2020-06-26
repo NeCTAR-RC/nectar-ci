@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86a70dda_2d2d3d19",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-26T00:44:05Z",
+      "side": 1,
+      "message": "should be python-orcid",
+      "range": {
+        "startLine": 909,
+        "startChar": 10,
+        "endLine": 909,
+        "endChar": 15
+      },
+      "revId": "af91a5cb589a82d4480eabcb87d55062a0a5a9a4",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
