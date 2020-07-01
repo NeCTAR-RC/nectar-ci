@@ -465,6 +465,10 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         environment: 'functional'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
          access: 'anonymous'
