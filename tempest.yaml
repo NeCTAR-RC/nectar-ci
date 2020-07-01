@@ -1297,6 +1297,9 @@
           timeout: 5
           fail: true
 
+    triggers:
+      - timed: '30 3 * * *'
+
     builders:
       - shell: |
           . /opt/tempest/bin/activate
