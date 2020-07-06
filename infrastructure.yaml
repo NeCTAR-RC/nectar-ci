@@ -1,15 +1,13 @@
 
 - job:
-    name: testcloud-upgrade
+    name: testcloud-test-trigger
     description: |
-        Configuration for this job is stored in the Hivemind config file on
-        <b>jenkins-upgrader.mgmt.rc.nectar.org.au</b> at
-        <b>/var/lib/jenkins/.hivemind/hivemind/config.py</b>
+        Parent job to trigger all tempest rctest jobs
     defaults: global
-    node: upgrader
+    node: internal
     concurrent: false
     builders:
-      - shell: 'hivemind -R test-cloud upgrade.upgrade --unattended'
+      - shell: '/bin/true'
     triggers:
       - timed: "@midnight"
     publishers:
