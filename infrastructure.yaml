@@ -12,5 +12,5 @@
       - timed: "@midnight"
     publishers:
       - trigger:
-          project: tempest-rctest-cinder-check,tempest-rctest-compute-host-check,tempest-rctest-compute-host-check-advanced,tempest-rctest-designate-check,tempest-rctest-ec2api-check,tempest-rctest-fwaas-check,tempest-rctest-lbaas-check,tempest-rctest-magnum-check,tempest-rctest-murano-check,tempest-rctest-neutron-check,tempest-rctest-scenario-check,tempest-rctest-trove-check,tempest-heat-scenario-rctest-check-coreservices,tempest-glance-scenario-rctest-check-site-agnostic-testing,tempest-swift-scenario-rctest-check-site-agnostic-testing,tempest-manila-cephfs-rctest-check-coreservices,tempest-telemetry-rctest-check-coreservices
+          project: tempest-rctest-cinder-check,tempest-rctest-compute-host-check,tempest-rctest-compute-host-check-advanced,tempest-rctest-designate-check,tempest-rctest-ec2api-check,tempest-octavia-smoke-rctest-check-coreservices,tempest-rctest-magnum-check,tempest-rctest-murano-check,tempest-rctest-neutron-check,tempest-rctest-scenario-check,tempest-rctest-trove-check,tempest-heat-scenario-rctest-check-coreservices,tempest-glance-scenario-rctest-check-site-agnostic-testing,tempest-swift-scenario-rctest-check-site-agnostic-testing,tempest-manila-cephfs-rctest-check-coreservices,tempest-telemetry-rctest-check-coreservices
           threshold: SUCCESS
