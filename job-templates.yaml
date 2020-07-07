@@ -188,6 +188,76 @@
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
 - job-template:
+    name: '{name}-focal-deb-package'
+    defaults: global
+    node: focal-ussuri
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'debian'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'uom/.*'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'debian/.*'
+          silent: false
+          escape-quotes: true
+
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: true
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - os-pbuilder-checkout
+      - pbuilder-create:
+          os_release: "focal"
+      - pbuilder-buildpackage:
+          os_release: "focal"
+
+    publishers:
+      !include: publisher.yaml.inc
+
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+
+- job-template:
     name: '{name}-bionic-deb-package'
     defaults: global
     node: bionic-queens

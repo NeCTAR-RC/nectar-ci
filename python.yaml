@@ -93,6 +93,9 @@
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-focal-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-metrics
@@ -105,6 +108,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - '{name}-focal-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -164,6 +170,9 @@
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-focal-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -192,6 +201,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-focal-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
@@ -263,6 +275,9 @@
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-bionic-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-focal-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
