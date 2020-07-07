@@ -190,7 +190,7 @@
 - job-template:
     name: '{name}-focal-deb-package'
     defaults: global
-    node: focal-ussuri
+    node: bionic-train
 
     parameters:
       - string:
