@@ -737,11 +737,11 @@
 - project:
     name: tempest
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
