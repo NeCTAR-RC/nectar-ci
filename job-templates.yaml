@@ -25,6 +25,8 @@
                   branch-pattern: 'production'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'oldnova'
           silent: false
           escape-quotes: true
           trigger-for-unreviewed-patches: true
