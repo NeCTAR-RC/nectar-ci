@@ -913,7 +913,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -e testing -j check-scenario $tmpdir
+          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
