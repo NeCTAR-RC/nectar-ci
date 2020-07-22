@@ -16,6 +16,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'bionic'
             os_release: 'train'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'focal'
+            os_release: 'ussuri'
 
 
 - job-template:
