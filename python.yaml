@@ -289,21 +289,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: rcshibboleth
-    jobs:
-      - '{name}-os-tox-{environment}':
-         access: 'nobody'
-         organisation: 'internal'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         access: 'nobody'
-         organisation: 'internal'
-         environment: 'flake8'
-      - '{name}-os-deb-package':
-         access: 'nobody'
-         organisation: 'internal'
-
-- project:
     name: blazar
     jobs:
       - '{name}-os-tox-{environment}':
