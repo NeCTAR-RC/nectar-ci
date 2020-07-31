@@ -918,3 +918,11 @@
       - '{name}-dummy':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: pfup
+    jobs:
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
