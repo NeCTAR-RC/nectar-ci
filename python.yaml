@@ -248,6 +248,10 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'functional'
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
