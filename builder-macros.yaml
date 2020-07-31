@@ -200,7 +200,7 @@
           mkdir -p /tmp/yamls
           export GEM_HOME=/tmp/yamls
           gem install --no-ri --no-rdoc yaml-lint
-          find . -type f -iname "*.yml" -o -iname "*.yaml" -o -iname "*.eyaml" | xargs /tmp/yamls/bin/yaml-lint
+          find . -type f -iname "*.yml" -o -iname "*.yaml" -o -iname "*.eyaml" | xargs -d '\n' /tmp/yamls/bin/yaml-lint
 
 - builder:
     name: 'dummy'
