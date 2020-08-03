@@ -345,11 +345,11 @@
     name: puppet-nectar
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         access: 'nobody'
+         organisation: 'internal'
       - '{name}-puppet-prod-review':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: puppet-neutron
