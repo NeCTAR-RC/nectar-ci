@@ -73,6 +73,8 @@
           export https_proxy=http://wwwproxy.unimelb.edu.au:8000
           cd testing
           librarian-puppet install --verbose --path ~/puppet-modules-cache/
+          cd ../production
+          librarian-puppet install --verbose --path ~/puppet-modules-cache/
 
     wrappers:
       - ssh-agent-credentials:
