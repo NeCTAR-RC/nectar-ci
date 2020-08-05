@@ -64,6 +64,11 @@
       - 'image-build-trove-{name}'
 
 - project:
+    name: mysql-5.7-ubuntu-18.04-x86_64
+    jobs:
+      - 'image-build-trove-{name}'
+
+- project:
     name: mysql-8.0-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-trove-{name}'
