@@ -343,7 +343,7 @@
           fi
           git push r10k HEAD:refs/heads/$GERRIT_PATCHSET_REVISION
       - ssh-builder:
-          ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@{r10k_host}:22
           command: r10k-deploy.sh $GERRIT_PATCHSET_REVISION
 
 - builder:
@@ -362,14 +362,14 @@
           git push r10k origin/master:refs/heads/r10k_diff_catalog_${PUPPET_ENV}
           git ls-remote | grep "refs/changes/.*/${GERRIT_CHANGE_NUMBER}/[0-9]" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT
       - ssh-builder:
-          ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@{r10k_host}:22
           command: r10k-cleanup.sh $GERRIT_PATCHSET_REVISION
 
 - builder:
     name: r10k-diff-catalog-control-repo
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@{r10k_host}:22
           command: |
             r10k-diff-catalog.py test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
 

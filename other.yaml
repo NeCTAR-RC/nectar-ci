@@ -140,6 +140,7 @@
 
     builders:
       - r10k-diff-catalog-puppet-library
+      - r10k-diff-catalog-puppet-library-test
 
     wrappers:
       - ssh-agent-credentials:
