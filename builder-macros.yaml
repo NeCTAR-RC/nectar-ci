@@ -377,15 +377,7 @@
     name: r10k-diff-catalog-puppet-library
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@r10k.mgmt.rc.nectar.org.au:22
-          command: |
-            r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
-
-- builder:
-    name: r10k-diff-catalog-puppet-library-test
-    builders:
-      - ssh-builder:
-          ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
+          ssh-user-ip: puppet@{r10k_host}:22
           command: |
             r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
 
