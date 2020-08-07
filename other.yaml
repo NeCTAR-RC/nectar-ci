@@ -165,6 +165,10 @@
           default: master
           description: "The default branch to test."
 
+    properties:
+      - lockable-resources:
+          resources: "puppet-library"
+
     triggers:
       - gerrit:
           trigger-on:

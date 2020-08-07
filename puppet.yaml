@@ -1102,6 +1102,8 @@
     properties:
       - build-discarder:
           num-to-keep: 50
+      - lockable-resources:
+          resources: "puppet-library"
 
     triggers:
       - gerrit:
@@ -1152,6 +1154,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
+
+    properties:
+      - lockable-resources:
+          resources: "puppet-library"
 
     triggers:
       - gerrit:
