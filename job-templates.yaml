@@ -1145,6 +1145,7 @@
 
     builders:
       - r10k-deploy
+          r10k_host: '{r10k_host}'
 
     wrappers:
       - ssh-agent-credentials:
@@ -1206,6 +1207,7 @@
 
     builders:
       - r10k-cleanup
+          r10k_host: '{r10k_host}'
 
     publishers:
       !include: publisher.yaml.inc
@@ -1340,6 +1342,7 @@
 
     builders:
       - r10k-diff-catalog-control-repo
+          r10k_host: '{r10k_host}'
 
     wrappers:
       - ssh-agent-credentials:
