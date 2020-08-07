@@ -1144,7 +1144,8 @@
          choosing-strategy: gerrit
 
     builders:
-      - r10k-deploy
+      - r10k-deploy:
+          r10k_host: '{r10k_host}'
 
     wrappers:
       - ssh-agent-credentials:
@@ -1205,7 +1206,8 @@
          choosing-strategy: gerrit
 
     builders:
-      - r10k-cleanup
+      - r10k-cleanup:
+          r10k_host: '{r10k_host}'
 
     publishers:
       !include: publisher.yaml.inc
@@ -1339,7 +1341,8 @@
          choosing-strategy: gerrit
 
     builders:
-      - r10k-diff-catalog-control-repo
+      - r10k-diff-catalog-control-repo:
+          r10k_host: '{r10k_host}'
 
     wrappers:
       - ssh-agent-credentials:
