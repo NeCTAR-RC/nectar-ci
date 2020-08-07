@@ -1294,6 +1294,12 @@
     node: internal
     quiet-period: 30
 
+    properties:
+      - build-blocker:
+          blocking-jobs:
+            - "{name}-r10k-deploy"
+          block-level: 'GLOBAL'
+
     parameters:
       - string:
           name: GERRIT_REFSPEC
