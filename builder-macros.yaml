@@ -344,7 +344,9 @@
           git push r10k HEAD:refs/heads/$GERRIT_PATCHSET_REVISION
       - ssh-builder:
           ssh-user-ip: puppet@{r10k_host}:22
-          command: r10k-deploy.sh $GERRIT_PATCHSET_REVISION
+          command: |
+            export R10K_HOST={r10k_host}
+            r10k-deploy.sh $GERRIT_PATCHSET_REVISION
 
 - builder:
     name: r10k-cleanup
@@ -363,7 +365,9 @@
           git ls-remote | grep "refs/changes/.*/${{GERRIT_CHANGE_NUMBER}}/[0-9]" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT
       - ssh-builder:
           ssh-user-ip: puppet@{r10k_host}:22
-          command: r10k-cleanup.sh $GERRIT_PATCHSET_REVISION
+          command: |
+            export R10K_HOST={r10k_host}
+            r10k-cleanup.sh $GERRIT_PATCHSET_REVISION
 
 - builder:
     name: r10k-diff-catalog-control-repo
@@ -371,6 +375,7 @@
       - ssh-builder:
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
+            export R10K_HOST={r10k_host}
             r10k-diff-catalog.py test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
 
 - builder:
@@ -379,6 +384,7 @@
       - ssh-builder:
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
+            export R10K_HOST={r10k_host}
             r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
 
 - builder:
