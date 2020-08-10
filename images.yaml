@@ -84,11 +84,6 @@
       - 'image-build-trove-{name}'
 
 - project:
-    name: haproxy-ubuntu-18.04-x86_64
-    jobs:
-      - 'image-build-octavia-{name}'
-
-- project:
     name: rstudio-ubuntu-18.04-x86_64
     jobs:
       - 'image-build-extra-{name}':
@@ -265,55 +260,75 @@
            password: IMAGE_PROMOTE_PASSWORD
 
 
-
-- job-template:
-    name: 'image-build-octavia-{name}'
+- project:
+    name: image-build-octavia-amphora
     defaults: global
-    node: openstack
-
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
-
     properties:
       - authorization:
           nobody:
             - job-read
             - job-discover
-
-    scm:
-      - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
-    builders:
-      - image-builder-octavia
-
-    wrappers:
-      - credentials-binding:
-        - username-password-separated:
-           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
-           username: IMAGE_BUILDER_USERNAME
-           password: IMAGE_BUILDER_PASSWORD
-        - username-password-separated:
-           credential-id: 6c8091b5-0e7d-4be5-8458-4e5a999acdd6
-           username: IMAGE_PROMOTE_USERNAME
-           password: IMAGE_PROMOTE_PASSWORD
-
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {{
+            agent none
+            options {{
+                preserveStashes(buildCount: 1)
+                ansiColor('xterm')
+            }}
+            stages {{
+                stage('Build Image') {{
+                    agent {{ label 'bionic' }}
+                    steps {{
+                        imageBuildQEMU 'octavia-haproxy-ubuntu-18.04-x86_64'
+                    }}
+                }}
+                stage('Deploy to Test Cloud') {{
+                    agent {{ label 'bionic' }}
+                    steps {{
+                        deployImage 'octavia', 'testing'
+                        setImageProperties 'octavia', 'testing'
+                        setImageTag 'octavia', 'octavia', 'testing'
+                    }}
+                }}
+                stage('Test Image in Test Cloud') {{
+                    agent {{ label 'tempest' }}
+                    steps {{
+                        testOctaviaImage 'testing', 'coreservices'
+                    }}
+                }}
+                stage('Deploy to Production Cloud') {{
+                    agent {{ label 'bionic' }}
+                    steps {{
+                        deployImage 'octavia', 'production'
+                        setImageProperties 'octavia', 'production'
+                        setImageTag 'octavia', 'octavia', 'production'
+                    }}
+                }}
+                stage('Test Image in Prod Cloud') {{
+                    agent {{ label 'tempest' }}
+                    steps {{
+                        testOctaviaImage 'production', 'melbourne-qh2'
+                    }}
+                }}
+            }}
+            post {{
+                failure {{
+                    node('bionic') {{
+                        deleteImage 'octavia', 'testing'
+                        deleteImage 'octavia', 'production'
+                        }}
+                    }}
+                cleanup {{
+                    node('bionic') {{
+                        deleteDir() /* clean up our workspace */
+                    }}
+                }}
+            }}
+        }}
 
 
 - job-template:
@@ -657,58 +672,6 @@
           echo ""
           echo "================================================================================"
 
-
-- builder:
-    name: 'image-builder-octavia'
-    builders:
-      - shell: |
-          #!/bin/bash -e
-          export OS_USERNAME=$IMAGE_BUILDER_USERNAME
-          export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
-          export OS_PROJECT_DOMAIN_NAME=Default
-          export OS_USER_DOMAIN_NAME=Default
-          export OS_IDENTITY_API_VERSION=3
-          export OS_PROJECT_NAME=octavia
-          NAME=${JOB_NAME#image-build-}
-          OUTPUT_DIR=$WORKSPACE/output-$BUILD_TAG
-          FACT_DIR=$OUTPUT_DIR/.facts
-          TAG_DIR=$OUTPUT_DIR/.tags
-          rm -fr $FACT_DIR $TAG_DIR
-          jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" $NAME.json > $BUILD_TAG.json
-          echo "Starting packer build..."
-          packer build -color=false $BUILD_TAG.json
-          IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
-          rm $BUILD_TAG.json
-          cd $OUTPUT_DIR
-          echo "Shrinking image..."
-          echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
-          qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2
-          rm -f $BUILD_TAG
-          echo "Creating image $IMAGE_NAME..."
-          echo "==> openstack image create --disk-format qcow2 --container-format bare --file $BUILD_TAG.qcow2 \"NeCTAR $IMAGE_NAME\""
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file $BUILD_TAG.qcow2 "NeCTAR $IMAGE_NAME")
-          echo "Image $IMAGE_ID created!"
-          echo "Applying properties..."
-          for FACT in $(ls $FACT_DIR); do
-              [[ $FACT =~ ^nectar_ ]] && continue
-              VAL=$(cat $FACT_DIR/$FACT)
-              echo "  -> $FACT: '$VAL'..."
-              openstack image set --property $FACT=$"$VAL" $IMAGE_ID
-          done
-          echo "Applying tags..."
-          for TAG in $(ls $TAG_DIR); do
-              echo "  -> tag: '$TAG'..."
-              openstack image set --tag $TAG $IMAGE_ID
-          done
-          export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
-          export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
-          openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
-          openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID
-          echo "================================================================================"
-          echo "  NeCTAR $IMAGE_NAME v$BUILD_NUMBER build successful!"
-          echo "================================================================================"
-          openstack image show --max-width=120 $IMAGE_ID
 
 - builder:
     name: 'image-builder-extra'
