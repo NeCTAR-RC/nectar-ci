@@ -385,6 +385,7 @@
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
             export R10K_HOST={r10k_host}
+            export R10K_BUILD_ENV={r10k_build_env}
             r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
 
 - builder:
