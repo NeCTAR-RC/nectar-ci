@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb442432_27b8fc81",
+        "filename": "images.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-10T01:09:25Z",
+      "side": 1,
+      "message": "Can these inline scripts be pulled out into separate files in a \u0027scripts\u0027 directory? It\u0027ll make it easier to reuse/consolidate them as they don\u0027t seem to be super job-specific.",
+      "revId": "43c7cdc324cd7331a98a022d2c32c6d4895e5f5b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
