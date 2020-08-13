@@ -461,3 +461,10 @@
       - '{name}-yaml':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-loci
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'internal'
