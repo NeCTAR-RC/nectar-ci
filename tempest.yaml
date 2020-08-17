@@ -326,6 +326,12 @@
             - job-discover
 
 
+- project:
+    name: tempest-s3-check
+    jobs:
+      - 'tempest-{name}-check-site-agnostic':
+         whitelist: 's3'
+
 - job:
     name: tempest-neutron-check
     defaults: global
@@ -604,6 +610,14 @@
          cloud: 'testing'
          site:
            - coreservices
+
+- project:
+    name: s3-rctest
+    jobs:
+      - 'tempest-{name}-check-site-agnostic-{cloud}':
+         job: 's3'
+         whitelist: 's3'
+         cloud: 'testing'
 
 - project:
     name: heat-scenario-rctest
