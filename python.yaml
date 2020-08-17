@@ -334,6 +334,14 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: ec2api-tempest-plugin
+    jobs:
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: external_naginator
     jobs:
       - '{name}-trusty-tox-{environment}':
