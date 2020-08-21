@@ -472,3 +472,6 @@
       - '{name}-dummy':
          access: 'nobody'
          organisation: 'internal'
+      - 'requirements-container':
+         access: 'nobody'
+         organisation: 'internal'
