@@ -1,0 +1,235 @@
+- job:
+    name: 'requirements-container'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The Loci ref to use."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The Loci branch to use."
+
+    triggers:
+      - pollscm:
+          cron: "H 8 * * *"
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+              - patchset-created-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/nectar-loci'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    dsl: |
+      pipeline {
+        agent { label 'docker' }
+        options {
+            copyArtifactPermission('*')
+        }
+        stages {
+          stage('Clone') {
+            steps {
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: 'origin/$GERRIT_BRANCH']],
+                    extensions: [
+                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
+                      [$class: 'CleanCheckout'],
+                      [$class: 'WipeWorkspace'],
+                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']],
+                    ],
+                    userRemoteConfigs: [[
+                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      name: 'origin',
+                      refspec: '$GERRIT_REFSPEC',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
+                    ]]
+                  ]
+                )
+                dir('src') {
+                  git(
+                    url: 'https://github.com/openstack/requirements.git',
+                    branch: 'stable/train'
+                  )
+                }
+                sh '''
+                git submodule init
+                git submodule update
+                '''
+            }
+          }
+          stage('Build requirements image') {
+            steps {
+                sh '''
+                export BUILDAH_FORMAT=docker
+                make BUILDER=podman REPO=src requirements
+                mkdir -p artifacts
+                git -C src rev-parse --verify --short HEAD > artifacts/REQUIREMENTS_VERSION
+                git rev-parse --verify --short HEAD > artifacts/LOCI_VERSION
+                '''
+                archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
+            }
+          }
+          stage('Start downstream jobs') {
+            parallel {
+              stage('Nova') {
+                steps {
+                  build(job: 'nova-containers')
+                }
+              }
+              stage('Ceilometer') {
+                steps {
+                  build(job: 'ceilometer-containers')
+                }
+              }
+              stage('Neutron') {
+                steps {
+                  build(job: 'neutron-containers')
+                }
+              }
+            }
+          }
+        }
+      }
+
+- job-template:
+    name: '{name}-containers'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/nectar/train
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: nectar/train
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+              - patchset-created-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/train'
+          silent: false
+          escape-quotes: true
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+
+    dsl: |
+      def copyArtifactSelector = upstream()
+
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Get artifacts') {{
+            steps {{
+              script {{
+                if (currentBuild.upstreamBuilds.size() == 0) {{
+                  build = selectRun(
+                    job: 'requirements-container',
+                    selector: status('SUCCESSFUL'),
+                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/master")]),
+                    verbose: true
+                  )
+                  copyArtifactSelector = specific(build.getId())
+                }}
+                copyArtifacts(
+                  projectName: 'requirements-container',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+              }}
+            }}
+          }}
+          stage('Clone') {{
+            environment {{
+              LOCI_SHA = readFile('artifacts/LOCI_VERSION')
+            }}
+            steps {{
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: env.LOCI_SHA]],
+                    extensions: [
+                      [$class: 'CleanCheckout'],
+                    ],
+                    userRemoteConfigs: [[
+                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      name: 'origin',
+                      refspec: '+refs/heads/*:refs/remotes/origin/* +refs/changes/*:refs/remotes/origin/*',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
+                    ]]
+                  ]
+                )
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: 'origin/$GERRIT_BRANCH']],
+                    extensions: [
+                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
+                      [$class: 'RelativeTargetDirectory', relativeTargetDir: 'src'],
+                      [$class: 'CleanCheckout'],
+                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
+                    ],
+                    userRemoteConfigs: [[
+                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      name: 'origin',
+                      refspec: '$GERRIT_REFSPEC',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
+                    ]]
+                  ]
+                )
+                sh '''
+                git submodule init
+                git submodule update
+                '''
+            }}
+          }}
+          stage('Build') {{
+            steps {{
+                copyArtifacts(
+                  projectName: 'requirements-container',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+                sh '''
+                echo "Building $GERRIT_BRANCH ($GERRIT_REFSPEC)"
+                export BUILDAH_FORMAT=docker
+                export REQUIREMENTS_SHA=`cat artifacts/REQUIREMENTS_VERSION`
+                make BUILDER=podman REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
+                '''
+            }}
+          }}
+        }}
+      }}
