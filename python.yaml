@@ -366,6 +366,10 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-containers':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+
 
 - project:
     name: cinder
@@ -457,6 +461,9 @@
          environment: 'pep8'
       - '{name}-os-deb-package':
          access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-containers':
+         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -638,6 +645,9 @@
          environment: 'pep8'
       - '{name}-os-deb-package':
          access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-containers':
+         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
