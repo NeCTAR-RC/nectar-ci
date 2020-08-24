@@ -552,6 +552,9 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-containers':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: python-magnumclient

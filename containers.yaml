@@ -104,6 +104,11 @@
                   build(job: 'neutron-containers')
                 }
               }
+              stage('Magnum') {
+                steps {
+                  build(job: 'magnum-containers')
+                }
+              }
             }
           }
         }
