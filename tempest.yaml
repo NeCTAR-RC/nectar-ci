@@ -67,10 +67,6 @@
           'nobody':
             - job-read
             - job-discover
-    publishers:
-      - trigger:
-          project: 'tempest-cleanup-operator'
-          threshold: 'FAILURE'
 
 - job:
     name: tempest-compute-host-check-advanced
@@ -154,10 +150,6 @@
           'nobody':
             - job-read
             - job-discover
-    publishers:
-      - trigger:
-          project: 'tempest-cleanup-operator'
-          threshold: 'FAILURE'
 
 - job:
     name: tempest-cinder-check
