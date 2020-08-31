@@ -928,6 +928,16 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: django-select2-forms
+    jobs:
+      - '{name}-bionic-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: pfup
     jobs:
       - '{name}-bionic-tox-{environment}':
