@@ -971,6 +971,31 @@
          organisation: 'internal'
 
 - project:
+    name: puppet-site-qld_ctrl
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-site-deploy':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+
+- project:
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
