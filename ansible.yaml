@@ -140,3 +140,6 @@
            credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
            username: F5_USERNAME
            password: F5_PASSWORD
+        - text:
+           credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
+           variable: ANSIBLE_VAULT_PASSWORD
