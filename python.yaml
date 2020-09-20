@@ -90,7 +90,7 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
-      - '{name}-bionic-deb-package':
+      - '{name}-stein-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
