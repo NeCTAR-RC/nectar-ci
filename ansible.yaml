@@ -28,6 +28,9 @@
           'anonymous':
             - job-read
             - job-discover
+      - lockable-resources:
+          resources: nectar-ansible
+
 
     triggers:
       - gerrit:
@@ -91,6 +94,8 @@
           'anonymous':
             - job-read
             - job-discover
+      - lockable-resources:
+          resources: nectar-ansible
 
     triggers:
       - gerrit:
