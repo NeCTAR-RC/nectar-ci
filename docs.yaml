@@ -13,16 +13,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: nectar-training
-    jobs:
-      - '{name}-jekyll-build':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-      - '{name}-jekyll-deploy':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: tutorials
     jobs:
       - '{name}-jekyll-test-build':
