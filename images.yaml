@@ -523,8 +523,8 @@
           done
           echo "Creating instance..."
           [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
-          echo "==> openstack server create --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT test_$BUILD_TAG"
-          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
+          echo "==> openstack server create --image $IMAGE_ID --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing $AZ_OPT test_$BUILD_TAG"
+          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
           echo "Found instance ID: $INSTANCE_ID"
           RETRIES=10
           i=1
@@ -541,7 +541,7 @@
               if [ "$STATUS" = "ERROR" ]; then
                   echo "Recreating instance due to error: $(openstack server show -f value -c fault $INSTANCE_ID)"
                   openstack server delete $INSTANCE_ID
-                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor m1.small --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
+                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
                   echo "Found instance ID: $INSTANCE_ID"
               fi
               i=$((i+1))
