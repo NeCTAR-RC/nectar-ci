@@ -104,7 +104,7 @@
             - job-read
             - job-discover
       - lockable-resources:
-          resources: 'diff-catalog-{r10k_host}'
+          resources: 'diff-catalog-r10k.mgmt.rc.nectar.org.au'
 
     triggers:
       - gerrit:
@@ -142,7 +142,7 @@
 
     builders:
       - r10k-diff-catalog-puppet-library:
-          r10k_host: 'r10k.rc.nectar.org.au'
+          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
           r10k_build_env: 'production'
 
     wrappers:
@@ -173,6 +173,8 @@
           'nobody':
             - job-read
             - job-discover
+      - lockable-resources:
+          resources: 'diff-catalog-puppet.test.rc.nectar.org.au'
 
     triggers:
       - gerrit:
