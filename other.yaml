@@ -103,6 +103,8 @@
           'nobody':
             - job-read
             - job-discover
+      - lockable-resources:
+          resources: diff-catalog
 
     triggers:
       - gerrit:

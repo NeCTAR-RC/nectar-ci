@@ -1261,6 +1261,9 @@
           blocking-jobs:
             - "{name}-r10k-deploy"
           block-level: 'GLOBAL'
+      - lockable-resources:
+          resources: diff-catalog
+
 
     parameters:
       - string:
