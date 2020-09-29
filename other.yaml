@@ -103,6 +103,8 @@
           'nobody':
             - job-read
             - job-discover
+      - lockable-resources:
+          resources: 'diff-catalog-{r10k_host}'
 
     triggers:
       - gerrit:
