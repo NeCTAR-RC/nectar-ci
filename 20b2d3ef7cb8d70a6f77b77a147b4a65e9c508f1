@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6a52387_958468a3",
+        "filename": "job-templates.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2020-09-29T04:13:07Z",
+      "side": 1,
+      "message": "will diff-catalog-{r10k_host} work?",
+      "range": {
+        "startLine": 1265,
+        "startChar": 21,
+        "endLine": 1265,
+        "endChar": 33
+      },
+      "revId": "20b2d3ef7cb8d70a6f77b77a147b4a65e9c508f1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
