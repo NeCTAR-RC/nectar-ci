@@ -67,6 +67,9 @@
       - '{name}-bionic-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-focal-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
