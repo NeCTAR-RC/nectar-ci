@@ -8,6 +8,7 @@ def call(Map pipelineParams) {
             ls -l
             echo "${imageId}"
             '''
-    }
 
+        }    
+    }
 }
