@@ -9,17 +9,18 @@ def call(Map pipelineParams) {
         rm -fr build
         jq ".builders[0].name = \\"$BUILD_TAG\\" | .builders[0].vm_name = \\"$BUILD_TAG\\"" $NAME.json > $BUILD_TAG.json
         echo "Starting packer build..."
+        echo "Build Tag $BUILD_TAG"
+        echo "Output-dir $OUTPUT_DIR"
         #packer build -color=true $BUILD_TAG.json
         echo "Shrinking image..."
-        #echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
+        echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
         #qemu-img convert -c -o compat=0.10 -O qcow2 $OUTPUT_DIR/$BUILD_TAG $OUTPUT_DIR/image.qcow2
         rm -rf $OUTPUT_DIR/$BUILD_TAG
-        mkdir build
+        mkdir -p build/.facts
+        echo "build-name-sam1" > build/.facts/nectar_name
         touch build/output
+        
         #mv $OUTPUT_DIR build
     '''
-    script {
-        imageId = sh(script: 'uuidgen', returnStdout: true).trim()
-    }
     stash includes: 'build/**', name: 'build'
 }
