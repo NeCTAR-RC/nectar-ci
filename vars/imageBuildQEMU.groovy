@@ -22,5 +22,10 @@ def call(Map pipelineParams) {
         
         #mv $OUTPUT_DIR build
     '''
+    script {
+        imageId = sh(script: 'uuidgen', returnStdout: true).trim()
+        imageName = readFile(file: 'build/.facts/nectar_name').trim()
+    }
+    
     stash includes: 'build/**', name: 'build'
 }
