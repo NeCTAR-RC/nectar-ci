@@ -24,14 +24,7 @@ def call(String project_name = 'default-project-name') {
             #openstack image create -f value -c id --id $IMAGE_ID --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR $IMAGE_NAME" > image_id.txt
             echo "Image $IMAGE_ID created!"
             echo "Applying properties..."
-            for FACT in .facts/*; do 
-                PROP=\${FACT#*/}
-                if ! echo "$PROP" | grep -q '^nectar_'; then
-                    VAL=$(cat $FACT)
-                    echo " -> $PROP: '$VAL'..."
-                    #openstack image set --property $PROP="$VAL" $IMAGE_ID
-                fi
-            done
+
             #openstack image show --max-width=120 $IMAGE_ID
             """
         }    
