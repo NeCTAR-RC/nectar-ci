@@ -8,10 +8,10 @@ def call(Map pipelineParams) {
         rm -fr $OUTPUT_DIR
         jq ".builders[0].name = \\"$BUILD_TAG\\" | .builders[0].vm_name = \\"$BUILD_TAG\\"" $NAME.json > $BUILD_TAG.json
         echo "Starting packer build..."
-        packer build -color=true $BUILD_TAG.json
+        #packer build -color=true $BUILD_TAG.json
         echo "Shrinking image..."
-        echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
-        qemu-img convert -c -o compat=0.10 -O qcow2 $OUTPUT_DIR/$BUILD_TAG $OUTPUT_DIR/image.qcow2
+        #echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
+        #qemu-img convert -c -o compat=0.10 -O qcow2 $OUTPUT_DIR/$BUILD_TAG $OUTPUT_DIR/image.qcow2
         rm -rf $OUTPUT_DIR/$BUILD_TAG
         mv $OUTPUT_DIR build
     '''
