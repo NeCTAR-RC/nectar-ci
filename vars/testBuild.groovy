@@ -5,7 +5,7 @@ def call(Map config) {
     set +x
     echo "\033[34m========== Building ==========\033[0m"
     echo "My shell is $SHELL"
-    echo "Name = ${config.name}"
+    echo "Name = ${env.BUILD_NUMBER}"
     echo "DONE"
     '''
 }
