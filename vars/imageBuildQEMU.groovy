@@ -3,7 +3,7 @@ def call(Map pipelineParams) {
     sh '''
         set +x
         echo "\033[34m========== Building ==========\033[0m"
-        NAME=SAM
+        NAME=trove-mysql-8.0-ubuntu-18.04-x86_64
         OUTPUT_DIR=$WORKSPACE/output-$BUILD_TAG
         rm -fr $OUTPUT_DIR
         jq ".builders[0].name = \\"$BUILD_TAG\\" | .builders[0].vm_name = \\"$BUILD_TAG\\"" $NAME.json > $BUILD_TAG.json
