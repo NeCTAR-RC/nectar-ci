@@ -3,7 +3,7 @@ def call(String name) {
     sh '''
         set +x
         echo "\033[34m========== Building ==========\033[0m"
-        echo ${name}
+        echo '${name}'
     '''
     script {
         imageId = sh(script: 'uuidgen', returnStdout: true).trim()
