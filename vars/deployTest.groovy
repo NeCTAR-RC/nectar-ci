@@ -1,5 +1,9 @@
 def call(Map pipelineParams) {
     unstash 'build'
+    script {
+        imageId = readFile(file: 'build/.image-id').trim()
+        imageName = readFile(file: 'build/.facts/nectar_name').trim()
+    }
     sh "echo $imageId"
     dir('build') {
         withCredentials([usernamePassword(credentialsId: '5c8f1b5c-2739-465e-ab10-e674b3fb884a', usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
@@ -8,6 +12,7 @@ def call(Map pipelineParams) {
             set -x
             find .
             echo $imageId
+            echo $imageName
             """
             sh "echo $imageId"
             

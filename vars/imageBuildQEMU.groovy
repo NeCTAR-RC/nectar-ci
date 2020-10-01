@@ -18,14 +18,10 @@ def call(Map pipelineParams) {
         rm -rf $OUTPUT_DIR/$BUILD_TAG
         mkdir -p build/.facts
         echo "build-name-sam1" > build/.facts/nectar_name
-        touch build/output
+        echo `uuidgen` > build/.image-id
         
         #mv $OUTPUT_DIR build
     '''
-    script {
-        imageId = sh(script: 'uuidgen', returnStdout: true).trim()
-        imageName = readFile(file: 'build/.facts/nectar_name').trim()
-    }
     
     stash includes: 'build/**', name: 'build'
 }
