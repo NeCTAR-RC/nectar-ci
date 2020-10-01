@@ -19,7 +19,7 @@ def call(String project_name) {
        echo "Setting nectar_name='\$IMAGE_NAME'"
        #openstack image set --property nectar_name="\$IMAGE_NAME" \$IMAGE_ID
        echo "Setting nectar_build=\$BUILD_NUMBER"
-       #openstack image set --property nectar_build=\$BUILD_NUMBER $IMAGE_ID
+       #openstack image set --property nectar_build=\$BUILD_NUMBER \$IMAGE_ID
        """
     }
 }
