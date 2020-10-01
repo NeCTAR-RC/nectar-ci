@@ -13,11 +13,13 @@ def call(Map pipelineParams) {
         #echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
         #qemu-img convert -c -o compat=0.10 -O qcow2 $OUTPUT_DIR/$BUILD_TAG $OUTPUT_DIR/image.qcow2
         rm -rf $OUTPUT_DIR/$BUILD_TAG
-        mv $OUTPUT_DIR build
+        mkdir build
+        touch build/output
+        #mv $OUTPUT_DIR build
     '''
     script {
         imageId = sh(script: 'uuidgen', returnStdout: true).trim()
-        imageName = readFile(file: 'build/.facts/nectar_name').trim()
+        #imageName = readFile(file: 'build/.facts/nectar_name').trim()
     }
     stash includes: 'build/**', name: 'build'
 }
