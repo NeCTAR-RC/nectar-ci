@@ -15,9 +15,9 @@ def call(Map pipelineParams) {
         rm -rf $OUTPUT_DIR/$BUILD_TAG
         mv $OUTPUT_DIR build
     '''
-    script {{
+    script {
         imageId = sh(script: 'uuidgen', returnStdout: true).trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
-    }}
+    }
     stash includes: 'build/**', name: 'build'
 }
