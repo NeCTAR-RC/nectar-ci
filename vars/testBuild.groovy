@@ -1,4 +1,4 @@
-def call(String name) {
+def call(String name = 'default-name') {
     git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git'
     sh '''
         set +x
