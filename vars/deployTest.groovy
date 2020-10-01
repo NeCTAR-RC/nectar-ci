@@ -25,7 +25,7 @@ def call(String project_name = 'default-project-name') {
             echo "Image $IMAGE_ID created!"
             echo "Applying properties..."
             for FACT in .facts/*; do 
-                PROP=${FACT#*/}
+                PROP=${FACT\#*/}
                 if ! echo "$PROP" | grep -q '^nectar_'; then
                     VAL=$(cat $FACT)
                     echo " -> $PROP: '$VAL'..."
