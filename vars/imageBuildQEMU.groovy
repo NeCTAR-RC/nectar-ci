@@ -19,7 +19,6 @@ def call(Map pipelineParams) {
     '''
     script {
         imageId = sh(script: 'uuidgen', returnStdout: true).trim()
-        #imageName = readFile(file: 'build/.facts/nectar_name').trim()
     }
     stash includes: 'build/**', name: 'build'
 }
