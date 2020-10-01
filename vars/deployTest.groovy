@@ -11,7 +11,7 @@ def call(Map pipelineParams) {
             #!/bin/bash
             set -x
             find .
-            echo "$imageId"
+            echo $imageId
             '''
             sh "echo $imageId"
             
