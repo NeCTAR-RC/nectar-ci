@@ -18,14 +18,14 @@ def call(String project_name = 'default-project-name') {
             env | grep OS_
             IMAGE_ID="''' + "$imageId" + '''"
             IMAGE_NAME="''' + "$imageName" + '''"
-            [ -z "$IMAGE_NAME" ] && exit 1
-            echo "Creating image $IMAGE_NAME..."
-            echo "==> openstack image create --id $IMAGE_ID --disk-format qcow2 --container-format bare --file image.qcow2 \"NeCTAR $IMAGE_NAME\""
-            #openstack image create -f value -c id --id $IMAGE_ID --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR $IMAGE_NAME" > image_id.txt
-            echo "Image $IMAGE_ID created!"
+            [ -z "\$IMAGE_NAME" ] && exit 1
+            echo "Creating image \$IMAGE_NAME..."
+            echo "==> openstack image create --id \$IMAGE_ID --disk-format qcow2 --container-format bare --file image.qcow2 \"NeCTAR \$IMAGE_NAME\""
+            #openstack image create -f value -c id --id \$IMAGE_ID --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR \$IMAGE_NAME" > image_id.txt
+            echo "Image \$IMAGE_ID created!"
             echo "Applying properties..."
 
-            #openstack image show --max-width=120 $IMAGE_ID
+            #openstack image show --max-width=120 \$IMAGE_ID
             """
         }    
     }
