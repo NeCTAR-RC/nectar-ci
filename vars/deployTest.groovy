@@ -1,10 +1,9 @@
-def call(String project_name = 'default-project-name') {
+def call(String project_name) {
     unstash 'build'
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
     }
-    sh "echo $imageId"
     dir('build') {
         withCredentials([usernamePassword(credentialsId: '5c8f1b5c-2739-465e-ab10-e674b3fb884a', usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
             sh """
@@ -27,6 +26,6 @@ def call(String project_name = 'default-project-name') {
 
             #openstack image show --max-width=120 \$IMAGE_ID
             """
-        }    
+        }
     }
 }
