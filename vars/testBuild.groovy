@@ -8,8 +8,4 @@ def call(Map config) {
     echo "Name = ${config.name}"
     echo "DONE"
     '''
-    script {
-        imageId = sh(script: 'uuidgen', returnStdout: true).trim()
-    }
-    stash includes: 'build/**', name: 'build'
 }
