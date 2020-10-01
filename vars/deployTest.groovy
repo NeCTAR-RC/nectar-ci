@@ -1,5 +1,6 @@
 def call(Map pipelineParams) {
     unstash 'build'
+    sh 'find .'
     script {
         imageId = sh(script: 'uuidgen', returnStdout: true).trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
@@ -9,7 +10,7 @@ def call(Map pipelineParams) {
             sh '''
             #!/bin/bash
             set -x
-            ls -l
+            find .
             echo "${imageId}"
             '''
 
