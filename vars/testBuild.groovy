@@ -3,7 +3,7 @@ def call(Map config) {
     sh '''
     set +x
     echo "\033[34m========== Building ==========\033[0m"
-    echo "Name = ${config}"
+    echo "Name = $${config.name}"
     echo "DONE"
     '''
     script {
