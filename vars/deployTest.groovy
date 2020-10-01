@@ -13,6 +13,8 @@ def call(Map pipelineParams) {
             find .
             echo "$imageId"
             '''
+            sh "echo $imageId"
+            
 
         }    
     }
