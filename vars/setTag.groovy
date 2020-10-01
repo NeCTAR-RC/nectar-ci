@@ -1,4 +1,8 @@
 def call(String project_name, String tag) {
+    script {
+        imageId = readFile(file: 'build/.image-id').trim()
+        imageName = readFile(file: 'build/.facts/nectar_name').trim()
+    }
     sh """
     set +x
     echo "\033[33m========== Promote to RCTest ==========\033[0m"
