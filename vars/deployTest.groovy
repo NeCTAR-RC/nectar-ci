@@ -14,13 +14,12 @@ def call(String project_name) {
             export OS_USER_DOMAIN_NAME=Default
             export OS_IDENTITY_API_VERSION=3
             export OS_PROJECT_NAME=$project_name
-            IMAGE_ID="''' + "${imageId}" + '''"
-            IMAGE_NAME="''' + "${imageName}" + '''"
-            [ -z "$imageName" ] && exit 1
-            echo "Creating image $imageName..."
-            echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 'NeCTAR $imageName'"
-            openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR $imageName" > image_id.txt
-            echo "Image \$imageId created!"
+            IMAGE_NAME=\"'$imageName'\"
+            [ -z "\$IMAGE_NAME" ] && exit 1
+            echo "Creating image \$IMAGE_NAME..."
+            echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 'NeCTAR \$IMAGE_NAME'"
+            openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR \$IMAGE_NAME" > image_id.txt
+            echo "Image $imageId created!"
             echo "Applying properties..."
             for FACT in .facts/*; do 
                PROP=\${FACT#*/}

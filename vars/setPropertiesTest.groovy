@@ -13,9 +13,10 @@ def call(String project_name) {
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=$project_name
-       [ -z "$imageName" ] && exit 1
-       echo "Setting nectar_name='$imageName'"
-       openstack image set --property nectar_name="$imageName" $imageId
+       IMAGE_NAME=\"'$imageName'\"
+       [ -z "\$IMAGE_NAME" ] && exit 1
+       echo "Setting nectar_name=\$IMAGE_NAME"
+       openstack image set --property nectar_name="\$IMAGE_NAME" $imageId
        echo "Setting nectar_build=\$BUILD_NUMBER"
        openstack image set --property nectar_build=\$BUILD_NUMBER $imageId
        """

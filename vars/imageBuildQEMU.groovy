@@ -7,24 +7,16 @@ def call(String imageName) {
         OUTPUT_DIR=\$WORKSPACE/output-\$BUILD_TAG
         rm -fr \$OUTPUT_DIR
         rm -fr build
-        #jq ".builders[0].name = \\"\$BUILD_TAG\\" | .builders[0].vm_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
-        #echo "Starting packer build..."
-        #packer build -color=true \$BUILD_TAG.json
-        #echo "Shrinking image..."
-        #echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 \$BUILD_TAG \$BUILD_TAG.qcow2"
-        #qemu-img convert -c -o compat=0.10 -O qcow2 \$OUTPUT_DIR/\$BUILD_TAG \$OUTPUT_DIR/image.qcow2
-        #rm -rf \$OUTPUT_DIR/\$BUILD_TAG
-        #mv \$OUTPUT_DIR build
-        mkdir -p build
+        jq ".builders[0].name = \\"\$BUILD_TAG\\" | .builders[0].vm_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
+        echo "Starting packer build..."
+        packer build -color=true \$BUILD_TAG.json
+        echo "Shrinking image..."
+        echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 \$BUILD_TAG \$BUILD_TAG.qcow2"
+        qemu-img convert -c -o compat=0.10 -O qcow2 \$OUTPUT_DIR/\$BUILD_TAG \$OUTPUT_DIR/image.qcow2
+        rm -rf \$OUTPUT_DIR/\$BUILD_TAG
+        mv \$OUTPUT_DIR build
         echo `uuidgen` > build/.image-id
         
-    """
-    script {
-        imageId = readFile(file: 'build/.image-id').trim()
-    }
-    sh """#!/bin/bash
-    IMAGE_ID=\"'$imageId (sam)'\"
-    echo "The image ID is \"\$IMAGE_ID\""
     """
     stash includes: 'build/**', name: 'build'
 }
