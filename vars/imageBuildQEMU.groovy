@@ -18,8 +18,9 @@ def call(Map pipelineParams) {
         rm -rf $OUTPUT_DIR/$BUILD_TAG
         mkdir -p build/.facts
         echo "build-name-sam1" > build/.facts/nectar_name
+        echo "aaaaddd" > build/.facts/special
         echo `uuidgen` > build/.image-id
-        
+
         #mv $OUTPUT_DIR build
     '''
     
