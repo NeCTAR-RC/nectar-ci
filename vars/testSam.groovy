@@ -13,5 +13,5 @@ def call(String project_name, String cloud_env) {
     echo "cloud env=$cloud_env"
     echo "creds=$os_cred_id"
     echo "$keystone=os_auth_url"
-    }
+    """
 }
