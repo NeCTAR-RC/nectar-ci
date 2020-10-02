@@ -23,7 +23,7 @@ def call(String imageName) {
         imageId = readFile(file: 'build/.image-id').trim()
     }
     sh """#!/bin/bash
-    IMAGE_ID=\"'"${imageId}"'\"
+    IMAGE_ID=\"'$imageId'\"
     echo "The image ID is \"\$IMAGE_ID\""
     """
     stash includes: 'build/**', name: 'build'
