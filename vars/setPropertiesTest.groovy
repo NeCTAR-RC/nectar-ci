@@ -15,9 +15,9 @@ def call(String project_name) {
        export OS_PROJECT_NAME=$project_name
        [ -z "$imageName" ] && exit 1
        echo "Setting nectar_name='$imageName'"
-       #openstack image set --property nectar_name="$imageName" $imageId
+       openstack image set --property nectar_name="$imageName" $imageId
        echo "Setting nectar_build=\$BUILD_NUMBER"
-       #openstack image set --property nectar_build=\$BUILD_NUMBER $imageId
+       openstack image set --property nectar_build=\$BUILD_NUMBER $imageId
        """
     }
 }

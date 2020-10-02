@@ -17,7 +17,7 @@ def call(String project_name) {
             [ -z "$imageName" ] && exit 1
             echo "Creating image $imageName..."
             echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 \"NeCTAR $imageName\""
-            #openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR $imageName" > image_id.txt
+            openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR $imageName" > image_id.txt
             echo "Image \$imageId created!"
             echo "Applying properties..."
             for FACT in .facts/*; do 
@@ -25,10 +25,10 @@ def call(String project_name) {
                if ! echo "\$PROP" | grep -q '^nectar_'; then
                    VAL=`cat \$FACT`
                    echo " -> \$PROP: '\$VAL'..."
-                   #openstack image set --property \$PROP="\$VAL" $imageId
+                   openstack image set --property \$PROP="\$VAL" $imageId
                fi
             done
-            #openstack image show --max-width=120 $imageId
+            openstack image show --max-width=120 $imageId
             """
         }
     }

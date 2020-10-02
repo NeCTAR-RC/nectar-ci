@@ -14,7 +14,7 @@ def call(String project_name, String tag) {
        export OS_PROJECT_NAME=$project_name
        echo "Setting tag..."
        echo "==> openstack image set --tag $tag $imageId"
-       #openstack image set --tag $tag $imageId
+       openstack image set --tag $tag $imageId
        """
     }
 }
