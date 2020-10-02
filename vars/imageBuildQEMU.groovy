@@ -5,7 +5,7 @@ def call(String imageName) {
         echo "\033[34m========== Building ==========\033[0m"
         NAME=$imageName
         OUTPUT_DIR=\$WORKSPACE/output-\$BUILD_TAG
-        rm -fr $OUTPUT_DIR
+        rm -fr \$OUTPUT_DIR
         rm -fr build
         jq ".builders[0].name = \\"\$BUILD_TAG\\" | .builders[0].vm_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
         echo "Starting packer build..."
