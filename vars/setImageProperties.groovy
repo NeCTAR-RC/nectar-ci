@@ -2,12 +2,12 @@ def call(String project_name, String cloud_env) {
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
-        if ($cloud_env == 'production') {
-            def os_cred_id = '6c8091b5-0e7d-4be5-8458-4e5a999acdd6'
-            def os_auth_url = 'https://keystone.rc.nectar.org.au:5000/v3'
+        if (cloud_env == 'production') {
+            os_cred_id = '6c8091b5-0e7d-4be5-8458-4e5a999acdd6'
+            os_auth_url = 'https://keystone.rc.nectar.org.au:5000/v3'
         } else {
-            def os_cred_id = 'cc826c4e-07fe-4a0c-b334-fb8100b23c7b'
-            def os_auth_url = 'https://keystone.test.rc.nectar.org.au:5000/v3'
+            os_cred_id = 'cc826c4e-07fe-4a0c-b334-fb8100b23c7b'
+            os_auth_url = 'https://keystone.test.rc.nectar.org.au:5000/v3'
         }
     }
 
