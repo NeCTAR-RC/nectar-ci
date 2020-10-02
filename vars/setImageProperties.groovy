@@ -11,7 +11,7 @@ def call(String project_name, String cloud_env) {
         }
     }
 
-    withCredentials([usernamePassword(credentialsId: $os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """
        set +x
        echo "\033[33m========== Set properties for $cloud_env ==========\033[0m"

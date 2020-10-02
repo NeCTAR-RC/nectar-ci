@@ -12,7 +12,7 @@ def call(String project_name, String cloud_env) {
         }
     }
     dir('build') {
-        withCredentials([usernamePassword(credentialsId: $os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
+        withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
             sh """#!/bin/bash
             set +x
             echo "\033[33m========== Deploying to $cloud_env ==========\033[0m"
