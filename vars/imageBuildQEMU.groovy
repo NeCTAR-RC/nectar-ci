@@ -1,6 +1,6 @@
 def call(String imageName) {
     git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git'
-    sh """
+    sh """#!/bin/bash
         set +x
         echo "\033[34m========== Building ==========\033[0m"
         NAME=$imageName
@@ -22,9 +22,8 @@ def call(String imageName) {
     script {
         imageId = readFile(file: 'build/.image-id').trim()
     }
-    sh """
+    sh """#!/bin/bash
     IMAGE_ID="''' + "${imageId}" + '''"
-    sh """
     echo "The image ID is \"$IMAGE_ID\""
     """
     stash includes: 'build/**', name: 'build'
