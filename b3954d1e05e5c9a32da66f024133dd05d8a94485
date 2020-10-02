@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "825f0f81_66a55dc6",
+        "filename": "vars/deployImage.groovy",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2020-10-02T04:30:57Z",
+      "side": 1,
+      "message": "should that not be ## ?",
+      "revId": "b3954d1e05e5c9a32da66f024133dd05d8a94485",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
