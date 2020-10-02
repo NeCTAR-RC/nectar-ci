@@ -10,7 +10,7 @@ def call(String project_name, String tag, String cloud_env) {
             os_auth_url = 'https://keystone.test.rc.nectar.org.au:5000/v3'
         }
     }
-    withCredentials([usernamePassword(credentialsId: os_auth_url, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """
        set +x
        echo "\033[33m========== Promote to image in $cloud_env ==========\033[0m"
