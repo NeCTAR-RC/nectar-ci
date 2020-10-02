@@ -24,7 +24,8 @@ def call(String imageName) {
     }
     sh """
     IMAGE_ID="''' + "${imageId}" + '''"
+    sh """
     echo "The image ID is \"$IMAGE_ID\""
-    
+    """
     stash includes: 'build/**', name: 'build'
 }
