@@ -16,6 +16,7 @@ def call(String project_name) {
             export OS_PROJECT_NAME=$project_name
             [ -z "$imageName" ] && exit 1
             echo "Creating image $imageName..."
+            echo "SAMM"
             echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 'NeCTAR $imageName'"
             openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file image.qcow2 "NeCTAR $imageName" > image_id.txt
             echo "Image \$imageId created!"
