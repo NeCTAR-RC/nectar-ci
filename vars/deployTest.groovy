@@ -26,8 +26,8 @@ def call(String project_name) {
             for FACT in .facts/*; do 
                PROP=\${FACT#*/}
                if ! echo "\$PROP" | grep -q '^nectar_'; then
-                   VAL=$(cat \$FACT)
-                   echo " -> \$PROP: '$VAL'..."
+                   VAL=`cat \$FACT`
+                   echo " -> \$PROP: '\$VAL'..."
                    #openstack image set --property \$PROP="\$VAL" \$IMAGE_ID
                fi
             done
