@@ -3,6 +3,7 @@ def call(String project_name) {
     git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: 'ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git'
     sh '''#!/bin/bash
     set +x
+    echo "SAMMMMM"
     echo "\033[33m========== Testing RCTest ==========\033[0m"
     . /opt/tempest/bin/activate
     tmpdir=$(mktemp -d --suffix=_tempest)
@@ -14,5 +15,5 @@ def call(String project_name) {
     rm -rf $tmpdir
     exit $RET
     '''
-    }
+
 }
