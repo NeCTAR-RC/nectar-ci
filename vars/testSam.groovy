@@ -8,7 +8,8 @@ def call(String project_name, String cloud_env) {
             def os_auth_url = 'https://keystone.test.rc.nectar.org.au:5000/v3'
         }
     }
-    sh """
+    sh """#!/bin/bash -x
+
     echo "cloud env=$cloud_env"
     echo "creds=$os_cred_id"
     echo "$keystone=os_auth_url"
