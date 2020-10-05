@@ -59,27 +59,22 @@
       - 'image-build-{name}'
 
 - project:
-    name: mysql-5.7-ubuntu-16.04-x86_64
+    name: mysql-5.7
     jobs:
       - 'image-build-trove-{name}'
 
 - project:
-    name: mysql-5.7-ubuntu-18.04-x86_64
+    name: mysql-8.0
     jobs:
       - 'image-build-trove-{name}'
 
 - project:
-    name: mysql-8.0-ubuntu-18.04-x86_64
+    name: postgresql-9.6
     jobs:
       - 'image-build-trove-{name}'
 
 - project:
-    name: postgresql-9.6-ubuntu-16.04-x86_64
-    jobs:
-      - 'image-build-trove-{name}'
-
-- project:
-    name: postgresql-11.3-ubuntu-18.04-x86_64
+    name: postgresql-11.3
     jobs:
       - 'image-build-trove-{name}'
 
@@ -209,6 +204,75 @@
         - file:
            credential-id: 10270abc-f1f9-47c7-ae66-114ae8246a71
            variable: SSH_TESTING_KEY
+
+
+- job-template:
+    name: 'image-build-trove-{name}'
+    defaults: global
+    properties:
+      - authorization:
+          nobody:
+            - job-read
+            - job-discover
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {{
+            agent none
+            options {{
+                preserveStashes(buildCount: 1)
+                ansiColor('xterm')
+            }}
+            stages {{
+                stage('Build Image') {{
+                    agent {{ label 'bionic' }}
+                    steps {{
+                        imageBuildQEMU 'trove-{name}'
+                    }}
+                }}
+                stage('Deploy to Test Cloud') {{
+                    agent {{{{ label 'bionic' }}}}
+                    steps {{
+                        deployImage 'trove', 'testing'
+                        setImageProperties 'trove', 'testing'
+                    }}
+                }}
+                stage('Update trove datastore') {{
+                    agent {{{{ label 'internal' }}}}
+                    steps {{
+                        updateTroveDatastore 'testing'
+                    }}
+                }}
+                stage('Test Image in Test Cloud') {{
+                    agent {{ label 'tempest' }}
+                    steps {{
+                        testTroveImage 'testing', 'coreservices'
+                    }}
+                }}
+                stage('Deploy to Production Cloud') {{
+                    agent {{ label 'bionic' }}
+                    steps {{
+                        deployImage 'trove', 'production'
+                        setImageProperties 'trove', 'production'
+                    }}
+                }}
+            }}
+            post {{
+                failure {{
+                    node('bionic') {{
+                        deleteImage 'trove', 'testing'
+                        deleteImage 'trove', 'production'
+                        }}
+                    }}
+                cleanup {{
+                    node('bionic') {{
+                        deleteDir() /* clean up our workspace */
+                    }}
+                }}
+            }}
+        }}
 
 
 - job-template:
