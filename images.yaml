@@ -273,62 +273,62 @@
     dsl: |
         def imageId
         def imageName
-        pipeline {{
+        pipeline {
             agent none
-            options {{
+            options {
                 preserveStashes(buildCount: 1)
                 ansiColor('xterm')
-            }}
-            stages {{
-                stage('Build Image') {{
-                    agent {{ label 'bionic' }}
-                    steps {{
+            }
+            stages {
+                stage('Build Image') {
+                    agent { label 'bionic' }
+                    steps {
                         imageBuildQEMU 'octavia-haproxy-ubuntu-18.04-x86_64'
-                    }}
-                }}
-                stage('Deploy to Test Cloud') {{
-                    agent {{ label 'bionic' }}
-                    steps {{
+                    }
+                }
+                stage('Deploy to Test Cloud') {
+                    agent { label 'bionic' }
+                    steps {
                         deployImage 'octavia', 'testing'
                         setImageProperties 'octavia', 'testing'
                         setImageTag 'octavia', 'octavia', 'testing'
-                    }}
-                }}
-                stage('Test Image in Test Cloud') {{
-                    agent {{ label 'tempest' }}
-                    steps {{
+                    }
+                }
+                stage('Test Image in Test Cloud') {
+                    agent { label 'tempest' }
+                    steps {
                         testOctaviaImage 'testing', 'coreservices'
-                    }}
-                }}
-                stage('Deploy to Production Cloud') {{
-                    agent {{ label 'bionic' }}
-                    steps {{
+                    }
+                }
+                stage('Deploy to Production Cloud') {
+                    agent { label 'bionic' }
+                    steps {
                         deployImage 'octavia', 'production'
                         setImageProperties 'octavia', 'production'
                         setImageTag 'octavia', 'octavia', 'production'
-                    }}
-                }}
-                stage('Test Image in Prod Cloud') {{
-                    agent {{ label 'tempest' }}
-                    steps {{
+                    }
+                }
+                stage('Test Image in Prod Cloud') {
+                    agent { label 'tempest' }
+                    steps {
                         testOctaviaImage 'production', 'melbourne-qh2'
-                    }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('bionic') {{
+                    }
+                }
+            }
+            post {
+                failure {
+                    node('bionic') {
                         deleteImage 'octavia', 'testing'
                         deleteImage 'octavia', 'production'
-                        }}
-                    }}
-                cleanup {{
-                    node('bionic') {{
+                        }
+                    }
+                cleanup {
+                    node('bionic') {
                         deleteDir() /* clean up our workspace */
-                    }}
-                }}
-            }}
-        }}
+                    }
+                }
+            }
+        }
 
 
 - job-template:
