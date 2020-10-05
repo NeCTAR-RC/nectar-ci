@@ -260,7 +260,7 @@
            password: IMAGE_PROMOTE_PASSWORD
 
 
-- project:
+- job:
     name: image-build-octavia-amphora
     defaults: global
     properties:
