@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1110c7a_619e6ce6",
+        "filename": "vars/deployImage.groovy",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2020-10-05T00:17:06Z",
+      "side": 1,
+      "message": "maybe just go with $imageName instead. I think checking for image name to be set might not really be an issue",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "78637080064b353ce18ca87a3f683cac51183609",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "205e076e_4194d943",
+        "filename": "vars/imageBuildQEMU.groovy",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2020-10-05T00:17:06Z",
+      "side": 1,
+      "message": "WS",
+      "range": {
+        "startLine": 18,
+        "startChar": 40,
+        "endLine": 18,
+        "endChar": 48
+      },
+      "revId": "78637080064b353ce18ca87a3f683cac51183609",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b4fb388_a580cdef",
+        "filename": "vars/setImageProperties.groovy",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2020-10-05T00:17:06Z",
+      "side": 1,
+      "message": "could do away with $IMAGE_NAME and use the groovy var instead?",
+      "range": {
+        "startLine": 23,
+        "startChar": 7,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "78637080064b353ce18ca87a3f683cac51183609",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
