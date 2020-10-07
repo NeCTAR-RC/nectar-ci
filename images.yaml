@@ -346,6 +346,66 @@
             }
         }
 
+- job:
+    name: image-build-dev-cloud
+    defaults: global
+    properties:
+      - authorization:
+          nobody:
+            - job-read
+            - job-discover
+    parameters:
+      - string:
+          name: IMAGE
+          description: "The image in nectar-images eg. undercloud-ubuntu-16.04-x86_64"
+      - string:
+          name: PROJECT
+          default: service
+          description: "The project image is created under (note ensure jenkins-image-builder user is in this project)"
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {
+            agent none
+            options {
+                preserveStashes(buildCount: 1)
+                ansiColor('xterm')
+            }
+            //parameters {
+            //   string(name: 'IMAGE', description: 'The image in nectar-images eg. undercloud-ubuntu-16.04-x86_64')
+            //   string(name: 'PROJECT', defaultValue: 'service', description: 'The project image is created under (note ensure jenkins-image-builder user is in this project)')
+            //}
+            stages {
+                stage('Build Image') {
+                    agent { label 'bionic' }
+                    steps {
+                        imageBuildQEMU '\$IMAGE'
+                    }
+                }
+                stage('Deploy to Dev Cloud') {
+                    agent { label 'bionic' }
+                    steps {
+                        deployImage '\$PROJECT', 'developement'
+                        setImageProperties '\$PROJECT', 'development'
+                    }
+                }
+            }
+            post {
+                failure {
+                    node('bionic') {
+                        deleteImage '\$PROJECT', 'development'
+                        }
+                    }
+                cleanup {
+                    node('bionic') {
+                        deleteDir() /* clean up our workspace */
+                    }
+                }
+            }
+        }
+
 
 - job-template:
     name: 'image-build-extra-{name}'
