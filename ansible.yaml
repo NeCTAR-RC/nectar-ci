@@ -5,6 +5,9 @@
          environment: linters
       - 'nectar-ansible-{environment}-{playbook}':
          environment: check
+         playbook: f5-base
+      - 'nectar-ansible-{environment}-{playbook}':
+         environment: check
          playbook: f5-certificates
       - 'nectar-ansible-{environment}-{playbook}':
          environment: check
