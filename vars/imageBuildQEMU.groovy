@@ -15,7 +15,9 @@ def call(String imageName) {
         qemu-img convert -c -o compat=0.10 -O qcow2 \$OUTPUT_DIR/\$BUILD_TAG \$OUTPUT_DIR/image.qcow2
         rm -rf \$OUTPUT_DIR/\$BUILD_TAG
         mv \$OUTPUT_DIR build
-        echo `uuidgen` > build/.image-id
+        mkdir raw_image
+        mv build/image.qcow2 raw_image
     """
     stash includes: 'build/**', name: 'build'
+    stash includes: 'raw_image/**', name: 'raw_image'
 }
