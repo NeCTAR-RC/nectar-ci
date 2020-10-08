@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a1ad376_0ef2d04d",
+        "filename": "python.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-08T23:48:16Z",
+      "side": 1,
+      "message": "just wondering why this changed? if it is ussuri it should build focal by default now",
+      "range": {
+        "startLine": 630,
+        "startChar": 16,
+        "endLine": 630,
+        "endChar": 21
+      },
+      "revId": "ae2eb7214d922f4e0ff25c2566ae68fd5096aa09",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
