@@ -1,4 +1,5 @@
 def call(String project_name, String cloud_env) {
+    unstash 'build'
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         switch(cloud_env) {

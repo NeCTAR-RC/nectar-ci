@@ -1,6 +1,5 @@
-def call(String cloud_env, String availability_zone) {
+def call(String project_name, String cloud_env, String availability_zone) {
     unstash 'build'
-    unstash 'raw_image'
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
@@ -27,7 +26,7 @@ def call(String cloud_env, String availability_zone) {
         export OS_PROJECT_DOMAIN_NAME=Default
         export OS_USER_DOMAIN_NAME=Default
         export OS_IDENTITY_API_VERSION=3
-        export OS_PROJECT_NAME=NeCTAR-Images
+        export OS_PROJECT_NAME=$project_name
         echo "Creating instance..."
         echo "==> openstack server create --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone test_$imageName"
         INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone test_$imageName")
