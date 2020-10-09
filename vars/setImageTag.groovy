@@ -18,8 +18,7 @@ def call(String project_name, String tag, String cloud_env) {
         }
     }
     withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
-       sh """
-       set +x
+       sh """#!/bin/bash
        echo "\033[33m========== Promote to image in $cloud_env ==========\033[0m"
        export OS_AUTH_URL=$os_auth_url
        export OS_PROJECT_DOMAIN_NAME=Default

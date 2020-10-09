@@ -1,7 +1,6 @@
 def call(String imageName) {
     git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git'
-    sh """#!/bin/bash
-        set +x
+    sh """#!/bin/bash -eu
         echo "\033[34m========== Building ==========\033[0m"
         NAME=$imageName
         OUTPUT_DIR=\$WORKSPACE/output-\$BUILD_TAG
@@ -15,8 +14,8 @@ def call(String imageName) {
         qemu-img convert -c -o compat=0.10 -O qcow2 \$OUTPUT_DIR/\$BUILD_TAG \$OUTPUT_DIR/image.qcow2
         rm -rf \$OUTPUT_DIR/\$BUILD_TAG
         mv \$OUTPUT_DIR build
-        mkdir raw_image
-        mv build/image.qcow2 raw_image
+        mkdir -p raw_image
+        mv build/image.qcow2 raw_image/
     """
     stash includes: 'build/**', name: 'build'
     stash includes: 'raw_image/**', name: 'raw_image'
