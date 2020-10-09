@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f63790d2_795e3b08",
+        "filename": "images.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2020-10-09T02:23:31Z",
+      "side": 1,
+      "message": "In this case, you could probably set `agent { label \u0027bionic\u0027 }` here and drop it from each of the steps if you\u0027re using the same label for everything",
+      "range": {
+        "startLine": 371,
+        "startChar": 12,
+        "endLine": 371,
+        "endChar": 22
+      },
+      "revId": "374c2b3db254dff8fbdfc853ea3b7902a4937bec",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
