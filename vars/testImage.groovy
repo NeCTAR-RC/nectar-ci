@@ -3,6 +3,7 @@ def call(String project_name, String cloud_env, String availability_zone) {
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
+        userAccount = readFile(file: 'build/.facts/default_user').trim()
         switch(cloud_env) {
           case "production":
             os_cred_id = '7a2e4b77-a292-47a1-b852-c0cfd9c1c383'
@@ -18,9 +19,9 @@ def call(String project_name, String cloud_env, String availability_zone) {
             break
         }
     }
-    withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD'),
+                     file(credentialsId: '10270abc-f1f9-47c7-ae66-114ae8246a71', variable: 'SSH_TESTING_KEY')]) {
         sh """#!/bin/bash
-        set +x
         echo "\033[33m========== Deploying to $cloud_env ==========\033[0m"
         export OS_AUTH_URL=$os_auth_url
         export OS_PROJECT_DOMAIN_NAME=Default
@@ -28,8 +29,8 @@ def call(String project_name, String cloud_env, String availability_zone) {
         export OS_IDENTITY_API_VERSION=3
         export OS_PROJECT_NAME=$project_name
         echo "Creating instance..."
-        echo "==> openstack server create --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone test_$imageName"
-        INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone test_$imageName")
+        echo "==> openstack server create --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone 'test_$BUILD_TAG'"
+        INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
         echo "Found instance ID: \$INSTANCE_ID"
         RETRIES=10
         i=1
@@ -39,14 +40,14 @@ def call(String project_name, String cloud_env, String availability_zone) {
             [ "\$STATUS" = "ACTIVE" ] && break
             if [ \$i -ge \$RETRIES ]; then
                 echo "ERROR: Limit reached, cleaning up..."
-                openstack image delete $imageId
-                openstack server delete \$INSTANCE_ID
+                openstack image delete $imageId || true
+                openstack server delete \$INSTANCE_ID || true
                 exit 1
             fi
             if [ "\$STATUS" = "ERROR" ]; then
                 echo "Recreating instance due to error: \$(openstack server show -f value -c fault \$INSTANCE_ID)"
                 openstack server delete \$INSTANCE_ID
-                INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$imageName")
+                INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
                 echo "Found instance ID: \$INSTANCE_ID"
             fi
             i=\$((i+1))
@@ -55,31 +56,37 @@ def call(String project_name, String cloud_env, String availability_zone) {
         openstack server show --max-width=120 \$INSTANCE_ID
         IP_ADDRESS=\$(openstack server show -f value -c accessIPv4 \$INSTANCE_ID)
         chmod 600 \$SSH_TESTING_KEY
-        sleep 120 # time to settle for SSH key/fail2ban
+        #echo "Sleeping for 60 seconds..."
+        sleep 30 # time to settle for SSH key/fail2ban
         RETRIES=5
         j=1
         while [ \$j -le \$RETRIES ]; do
             echo "Checking for SSH to \$IP_ADDRESS (\$j/\$RETRIES)..."
-            ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i \$SSH_TESTING_KEY \$USER_ACCOUNT@\$IP_ADDRESS exit && break
+            ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i \$SSH_TESTING_KEY ${userAccount}@\$IP_ADDRESS exit && break
             if [ \$j -ge \$RETRIES ]; then
                 echo "ERROR: Limit reached. Showing console log..."
-                openstack console log show \$INSTANCE_ID
+                #openstack console log show \$INSTANCE_ID
+                nova console-log \$INSTANCE_ID
                 echo "ERROR: Cleaning up instance and image..."
-                openstack image delete $imageId
-                openstack server delete \$INSTANCE_ID
+                openstack image delete $imageId || true
+                openstack server delete \$INSTANCE_ID || true
                 exit 1
             fi
             j=\$((j+1))
+            echo "Sleeping for 60 seconds..."
             sleep 60
         done
         echo "Running tests..."
-        echo "==> ssh \$USER_ACCOUNT@\$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'"
-        sleep 120 # time for cloud-init to complete
+        echo "==> ssh ${userAccount}@\$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'"
+        echo "Sleeping 2 min for cloud-init to complete..."
+        sleep 120
         set +e
-        ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i \$SSH_TESTING_KEY \$USER_ACCOUNT@\$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
+        ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i \$SSH_TESTING_KEY ${userAccount}@\$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
         TEST_RESULT=\$?
+        echo "Cleaning up test instance..."
+        echo "==> openstack server delete \$INSTANCE_ID"
         openstack server delete \$INSTANCE_ID
-        exit $TEST_RESULT
+        exit \$TEST_RESULT
         """
     }
 }

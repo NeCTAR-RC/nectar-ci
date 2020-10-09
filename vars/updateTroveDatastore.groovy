@@ -24,8 +24,7 @@ def call(String cloud_env) {
         }
     }
     withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
-       sh """
-       set +x
+       sh """#!/bin/bash
        export OS_AUTH_URL=$os_auth_url
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default
@@ -42,7 +41,6 @@ def call(String cloud_env) {
     stash includes: 'previous-version/**', name: 'previous-version'
 
     sh """#!/bin/bash
-    set +x
     echo "\033[33m========== Updating Trove datastore in $cloud_env ==========\033[0m"
     echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 1"
     trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 1
