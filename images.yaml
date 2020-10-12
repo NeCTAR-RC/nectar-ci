@@ -174,7 +174,7 @@
                 }}
                 stage('Test image in RCTest') {{
                     steps {{
-                        testImage 'NeCTAR-Images', 'testing', 'coreservices'
+                        testOfficialImage 'NeCTAR-Images', 'testing', 'coreservices'
                     }}
                 }}
                 stage('Promote image to RCTest') {{
