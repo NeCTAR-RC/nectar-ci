@@ -6,7 +6,7 @@
          target: 'au.org.nectar.RStudio'
          category: 'Big Data'
          image: 'NeCTAR R-Studio (Ubuntu 18.04 LTS Bionic)'
-         trigger: 'image-build-extra-rstudio-ubuntu-18.04-x86_64'
+         trigger: 'image-build-extra-rstudio-ubuntu-18.04'
          git_url: 'https://github.com/NeCTAR-RC/murano-rstudio.git'
 
 - project:
@@ -17,7 +17,7 @@
          target: 'au.org.nectar.JupyterNotebook'
          category: 'Big Data'
          image: 'NeCTAR Jupyter Notebook (Ubuntu 18.04 LTS Bionic)'
-         trigger: 'image-build-extra-jupyternotebook-ubuntu-18.04-x86_64'
+         trigger: 'image-build-extra-jupyternotebook-ubuntu-18.04'
          git_url: 'https://github.com/NeCTAR-RC/murano-jupyternotebook.git'
 
 
