@@ -26,7 +26,8 @@ def call(String imageName, String sourceImage, String gitRepo) {
         mv \$OUTPUT_DIR build
         mkdir -p raw_image
         mv build/image.qcow2 raw_image/
-    """
+        """
+    }
     stash includes: 'build/**', name: 'build'
     stash includes: 'raw_image/**', name: 'raw_image'
 }
