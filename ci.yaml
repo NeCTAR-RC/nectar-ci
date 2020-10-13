@@ -64,6 +64,8 @@
           '{access}':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 10
 
     triggers:
       - gerrit:
@@ -122,6 +124,8 @@
           '{access}':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 10
 
     triggers:
       - gerrit:
