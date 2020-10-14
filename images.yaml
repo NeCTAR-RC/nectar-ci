@@ -308,48 +308,48 @@
             stages {{
                 stage('Build Image') {{
                     steps {{
-                        imageBuildExtra '{name}', '{source_image}', '{git_repo}'
+                        imageBuildExtra '{name}', '{source_image}', '{git_repo}', 'murano'
                     }}
                 }}
                 stage('Deploy image to RCTest') {{
                     steps {{
                         setImageID()
-                        deployImage 'NeCTAR-Images', 'testing'
-                        setImageProperties 'NeCTAR-Images', 'testing'
+                        deployImage 'murano', 'testing'
+                        setImageProperties 'murano', 'testing'
                     }}
                 }}
                 stage('Test image in RCTest') {{
                     steps {{
-                        testOfficialImage 'NeCTAR-Images', 'testing', 'coreservices'
+                        testOfficialImage 'murano', 'testing', 'coreservices'
                     }}
                 }}
                 stage('Promote image to RCTest') {{
                     steps {{
-                        promoteOfficialImage 'NeCTAR-Images', 'testing'
+                        promoteOfficialImage 'murano', 'testing'
                     }}
                 }}
                 stage('Deploy image to Production') {{
                     steps {{
-                        deployImage 'NeCTAR-Images', 'production'
-                        setImageProperties 'NeCTAR-Images', 'production'
+                        deployImage 'murano', 'production'
+                        setImageProperties 'murano', 'production'
                     }}
                 }}
                 stage('Test image in Production') {{
                     steps {{
-                        testOfficialImage 'NeCTAR-Images', 'production', 'melbourne-qh2'
+                        testOfficialImage 'murano', 'production', 'melbourne-qh2'
                     }}
                 }}
                 stage('Promote image to Production') {{
                     steps {{
-                        promoteOfficialImage 'NeCTAR-Images', 'production'
+                        promoteOfficialImage 'murano', 'production'
                     }}
                 }}
             }}
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'NeCTAR-Images', 'testing'
-                        deleteImage 'NeCTAR-Images', 'production'
+                        deleteImage 'murano', 'testing'
+                        deleteImage 'murano', 'production'
                     }}
                 }}
                 cleanup {{
