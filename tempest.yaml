@@ -1401,7 +1401,7 @@
             - tasmania-s
     builders:
       - shell: |
-          #!/bin/bash -e
+          #!/bin/bash -eu
           export OS_USERNAME=$OS_USERNAME
           export OS_PASSWORD=$OS_PASSWORD
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
@@ -1409,7 +1409,7 @@
           export OS_USER_DOMAIN_NAME=Default
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Images
-          IMAGES=$(openstack image list --public --property owner=28eadf5ad64b42a4929b2fb7df99275c -c ID -f value)
+          IMAGES=$(openstack image list --long --public | grep 28eadf5ad64b42a4929b2fb7df99275c | grep NeCTAR | awk '{print $2}')
           for IMAGE in $IMAGES; do
             echo "==> Triggering tempest-image-check job for $IMAGE..."
             curl -s -X POST https://jenkins.rc.nectar.org.au/job/tempest-image-check/build \
@@ -1460,7 +1460,7 @@
             - tasmania-s
     builders:
       - shell: |
-          #!/bin/bash -e
+          #!/bin/bash -eu
           export OS_USERNAME=$OS_USERNAME
           export OS_PASSWORD=$OS_PASSWORD
           export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
@@ -1469,7 +1469,7 @@
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Images
           openstack image show --max-width=120 $IMAGE
-          eval $(openstack image show -f value -c properties $IMAGE | sed 's/, /\n/g' | grep default_user)
+          default_user=$(openstack image show -f value -c properties $IMAGE | sed 's/, /\n/g' | grep default_user | sed "s/'//g" | awk '{print $NF}')
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
