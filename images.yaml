@@ -249,7 +249,7 @@
                         setImageProperties 'trove', 'testing'
                     }}
                 }}
-                stage('Update trove datastore') {{
+                stage('Update test trove datastore') {{
                     agent {{ label 'internal' }}
                     steps {{
                         updateTroveDatastore 'testing'
@@ -266,6 +266,12 @@
                     steps {{
                         deployImage 'trove', 'production'
                         setImageProperties 'trove', 'production'
+                    }}
+                }}
+                stage('Update production trove datastore') {{
+                    agent {{ label 'internal' }}
+                    steps {{
+                        updateTroveDatastore 'production', '0'
                     }}
                 }}
             }}
