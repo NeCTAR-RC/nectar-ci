@@ -32,7 +32,11 @@ def call(String cloud_env, String active = '1') {
        export OS_PROJECT_NAME=trove
        echo "Finding previous datastore version"
        PREVIOUS_BUILD=`openstack datastore version list $datastoreType -c Name -f value | grep "${datastoreVersion}-" | awk -F '-' '{print \$2}' | sort -n | tail -n 1`
-       PREVIOUS_VERSION=${datastoreVersion}-\$PREVIOUS_BUILD
+       if [ -n "\$PREVIOUS_BUILD" ]; then
+           PREVIOUS_VERSION=${datastoreVersion}-\$PREVIOUS_BUILD
+       else
+           PREVIOUS_VERSION=
+       fi
        mkdir -p previous-version
        echo \$PREVIOUS_VERSION > previous-version/${cloud_env}
        echo "Previous version is: \$PREVIOUS_VERSION"
