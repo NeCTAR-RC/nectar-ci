@@ -20,6 +20,5 @@ def call(String cloud_env, String availability_zone) {
     cd \$tmpdir
     echo "==> stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-trove.yaml --serial"
     stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-trove.yaml --serial
-    stestr run trove_tempest_plugin.tests.scenario.database.test_upgrade.UpgradeInstanceScenarioTest.test_upgrade_instance
     """
 }
