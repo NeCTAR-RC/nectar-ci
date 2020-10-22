@@ -412,10 +412,23 @@
                         imageBuildQEMU 'octavia-haproxy-ubuntu-18.04-x86_64'
                     }
                 }
-                stage('Deploy to Test Cloud') {
+                stage('Set Image ID') {
                     agent { label 'bionic' }
                     steps {
                         setImageID()
+                    }
+                }
+                stage('Deploy to Dev Cloud') {
+                    agent { label 'bionic' }
+                    steps {
+                        deployImage 'octavia', 'development'
+                        setImageProperties 'octavia', 'development'
+                        setImageTag 'octavia', 'octavia', 'development'
+                    }
+                }
+                stage('Deploy to Test Cloud') {
+                    agent { label 'bionic' }
+                    steps {
                         deployImage 'octavia', 'testing'
                         setImageProperties 'octavia', 'testing'
                         setImageTag 'octavia', 'octavia', 'testing'
@@ -445,8 +458,9 @@
             post {
                 failure {
                     node('bionic') {
-                        deleteImage 'octavia', 'testing'
                         deleteImage 'octavia', 'production'
+                        deleteImage 'octavia', 'testing'
+                        deleteImage 'octavia', 'development'
                         }
                     }
                 cleanup {
