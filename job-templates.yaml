@@ -1218,6 +1218,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
