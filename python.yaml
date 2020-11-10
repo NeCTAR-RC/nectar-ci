@@ -241,6 +241,26 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: aardvark
+    jobs:
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py36'
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+
+- project:
     name: manuka
     jobs:
       - '{name}-os-tox-{environment}':
