@@ -4,6 +4,10 @@
     project-type: pipeline
     sandbox: true
 
+    properties:
+      - copyartifact:
+          projects: '*'
+
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -109,6 +113,11 @@
                   build(job: 'magnum-containers')
                 }
               }
+              stage('Aardvark') {
+                steps {
+                  build(job: 'aardvark-containers')
+                }
+              }
             }
           }
         }
@@ -141,6 +150,8 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'nectar/train'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/master'
           silent: false
           escape-quotes: true
           skip-vote:

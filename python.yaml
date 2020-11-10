@@ -259,6 +259,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
+      - '{name}-containers':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: manuka
