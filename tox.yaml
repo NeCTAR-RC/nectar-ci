@@ -19,6 +19,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'focal'
             os_release: 'ussuri'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'focal'
+            os_release: 'victoria'
 
 
 - job-template:
