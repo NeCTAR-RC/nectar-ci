@@ -53,6 +53,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -130,6 +131,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -205,6 +207,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -260,6 +263,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -316,6 +320,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -378,6 +383,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -433,6 +439,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -494,6 +501,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -550,6 +558,7 @@
             - tasmania-s
             - coreservices
             - qh2-test
+            - monash-test
             - lani
             - luna
           description: 'Availability zone.'
@@ -629,6 +638,7 @@
          site:
            - coreservices
            - qh2-test
+           - monash-test
 
 - project:
     name: manila-scenario
