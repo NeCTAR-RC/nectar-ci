@@ -436,6 +436,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-podman
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-postfix
     jobs:
       - '{name}-puppet-unit':
