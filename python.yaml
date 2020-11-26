@@ -259,9 +259,11 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
-      - '{name}-containers':
+      - '{name}-container-{ubuntu_release}-{os_release}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+         ubuntu_release: 'focal'
+         os_release: 'victoria'
 
 - project:
     name: manuka
@@ -404,9 +406,11 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-containers':
+      - '{name}-container-{ubuntu_release}-{os_release}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+         ubuntu_release: 'bionic'
+         os_release: 'train'
 
 
 - project:
@@ -500,9 +504,11 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-containers':
+      - '{name}-container-{ubuntu_release}-{os_release}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+         ubuntu_release: 'bionic'
+         os_release: 'train'
 
 - project:
     name: octavia
@@ -579,9 +585,11 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-containers':
+      - '{name}-container-{ubuntu_release}-{os_release}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+         ubuntu_release: 'bionic'
+         os_release: 'train'
 
 - project:
     name: python-magnumclient
@@ -702,9 +710,11 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-      - '{name}-containers':
+      - '{name}-container-{ubuntu_release}-{os_release}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+         ubuntu_release: 'bionic'
+         os_release: 'train'
 
 - project:
     name: neutron-lbaas

@@ -1,5 +1,5 @@
-- job:
-    name: 'requirements-container'
+- job-template:
+    name: 'requirements-container-{ubuntu_release}-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
@@ -40,14 +40,14 @@
             notbuilt: true
 
     dsl: |
-      pipeline {
-        agent { label 'docker' }
-        options {
+      pipeline {{
+        agent {{ label 'docker' }}
+        options {{
             copyArtifactPermission('*')
-        }
-        stages {
-          stage('Clone') {
-            steps {
+        }}
+        stages {{
+          stage('Clone') {{
+            steps {{
                 checkout(
                   poll: false,
                   scm: [
@@ -67,23 +67,23 @@
                     ]]
                   ]
                 )
-                dir('src') {
+                dir('src') {{
                   git(
                     url: 'https://github.com/openstack/requirements.git',
-                    branch: 'stable/train'
+                    branch: 'stable/{os_release}'
                   )
-                }
+                }}
                 sh '''
                 git submodule init
                 git submodule update
                 '''
-            }
-          }
-          stage('Build requirements image') {
-            environment {
+            }}
+          }}
+          stage('Build requirements image') {{
+            environment {{
               REGISTRY = credentials('registry')
-            }
-            steps {
+            }}
+            steps {{
                 sh '''
                 export BUILDAH_FORMAT=docker
 
@@ -91,7 +91,7 @@
                 export REGISTRY_AUTH_FILE=auth.json
                 echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
 
-                make BUILDER=podman DOCKER_REPO="$REGISTRY/loci" REPO=src requirements
+                make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src requirements
 
                 rm auth.json
 
@@ -100,48 +100,13 @@
                 git rev-parse --verify --short HEAD > artifacts/LOCI_VERSION
                 '''
                 archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
-            }
-          }
-          stage('Start downstream jobs') {
-            parallel {
-              stage('Nova') {
-                steps {
-                  build(job: 'nova-containers')
-                }
-              }
-              stage('Ceilometer') {
-                steps {
-                  build(job: 'ceilometer-containers')
-                }
-              }
-              stage('Neutron') {
-                steps {
-                  build(job: 'neutron-containers')
-                }
-              }
-              stage('Magnum') {
-                steps {
-                  build(job: 'magnum-containers')
-                }
-              }
-              stage('Aardvark') {
-                steps {
-                  build(
-                    job: 'aardvark-containers',
-                    parameters: [
-                      string(name: 'GERRIT_REFSPEC', value: 'refs/heads/nectar/master'),
-                      string(name: 'GERRIT_BRANCH', value: 'nectar/master'),
-                    ]
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
+            }}
+          }}
+        }}
+      }}
 
 - job-template:
-    name: '{name}-containers'
+    name: '{name}-container-{ubuntu_release}-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
@@ -149,11 +114,11 @@
     parameters:
       - string:
           name: GERRIT_REFSPEC
-          default: refs/heads/nectar/train
+          default: "refs/heads/nectar/{os_release}"
           description: "The default ref to test."
       - string:
           name: GERRIT_BRANCH
-          default: nectar/train
+          default: "nectar/{os_release}"
           description: "The default branch to test."
 
     triggers:
@@ -166,9 +131,7 @@
               project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/train'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/master'
+                  branch-pattern: 'nectar/{os_release}'
           silent: false
           escape-quotes: true
           skip-vote:
@@ -176,6 +139,10 @@
             failed: true
             unstable: true
             notbuilt: true
+
+      - reverse:
+          jobs:
+            - 'requirements-container-{ubuntu_release}-{os_release}'
 
     dsl: |
       def copyArtifactSelector = upstream()
@@ -188,7 +155,7 @@
               script {{
                 if (currentBuild.upstreamBuilds.size() == 0) {{
                   build = selectRun(
-                    job: 'requirements-container',
+                    job: 'requirements-container-{ubuntu_release}-{os_release}',
                     selector: status('SUCCESSFUL'),
                     filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/master")]),
                     verbose: true
@@ -196,7 +163,7 @@
                   copyArtifactSelector = specific(build.getId())
                 }}
                 copyArtifacts(
-                  projectName: 'requirements-container',
+                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
                   selector: copyArtifactSelector,
                   fingerprintArtifacts: true,
                 )
@@ -255,7 +222,7 @@
             }}
             steps {{
                 copyArtifacts(
-                  projectName: 'requirements-container',
+                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
                   selector: copyArtifactSelector,
                   fingerprintArtifacts: true,
                 )
@@ -268,7 +235,7 @@
                 export REGISTRY_AUTH_FILE=auth.json
                 echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
 
-                make BUILDER=podman DOCKER_REPO="$REGISTRY/loci" REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
+                make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
 
                 rm auth.json
                 '''
