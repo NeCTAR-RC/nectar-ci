@@ -475,3 +475,10 @@
       - 'requirements-container':
          access: 'nobody'
          organisation: 'internal'
+
+- project:
+    name: loci
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
