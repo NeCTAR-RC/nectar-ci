@@ -13,9 +13,10 @@
           echo
           echo "================================================================="
           echo
-          echo "                   CLOUD: $CLOUD"
-          echo "                   AZ:    $AVAILABILITY_ZONE"
-          echo "                   HOST:  $HOST"
+          echo "                   CLOUD:   $CLOUD"
+          echo "                   AZ:      $AVAILABILITY_ZONE"
+          echo "                   HOST:    $HOST"
+          echo "                   STARTED: $(date)"
           echo
           echo "================================================================="
           echo
@@ -93,6 +94,7 @@
           echo "                   HOST:  $HOST"
           echo "                   TARGET_HOST: $TARGET_HOST"
           echo "                   BLOCK_MIGRATION: $BLOCK_MIGRATION"
+          echo "                   STARTED: $(date)"
           echo
           echo "================================================================="
           echo
@@ -764,8 +766,9 @@
           echo
           echo "================================================================="
           echo
-          echo "                   CLOUD: testing"
-          echo "                   AZ:    coreservices"
+          echo "                   CLOUD:   testing"
+          echo "                   AZ:      coreservices"
+          echo "                   STARTED: $(date)"
           echo
           echo "================================================================="
           echo
@@ -804,8 +807,9 @@
           echo
           echo "================================================================="
           echo
-          echo "                   CLOUD: testing"
-          echo "                   AZ:    coreservices"
+          echo "                   CLOUD:   testing"
+          echo "                   AZ:      coreservices"
+          echo "                   STARTED: $(date)"
           echo
           echo "================================================================="
           echo
