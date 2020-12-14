@@ -290,6 +290,11 @@
       - '{name}-pypi-upload':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-container-{ubuntu_release}-{os_release}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         ubuntu_release: 'focal'
+         os_release: 'victoria'
 
 - project:
     name: python-manukaclient
