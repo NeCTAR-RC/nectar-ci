@@ -323,7 +323,7 @@
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
             export R10K_HOST={r10k_host}
-            r10k-deploy.sh $GERRIT_PATCHSET_REVISION
+            r10k-deploy.sh -e $GERRIT_PATCHSET_REVISION
 
 - builder:
     name: r10k-cleanup
@@ -344,7 +344,7 @@
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
             export R10K_HOST={r10k_host}
-            r10k-cleanup.sh $GERRIT_PATCHSET_REVISION
+            r10k-deploy.sh -e master
 
 - builder:
     name: r10k-diff-catalog-control-repo
