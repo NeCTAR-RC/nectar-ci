@@ -1016,7 +1016,7 @@
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+              - ref-updated-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
