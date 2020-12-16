@@ -98,6 +98,8 @@
                 mkdir -p artifacts
                 git -C src rev-parse --verify --short HEAD > artifacts/REQUIREMENTS_VERSION
                 git rev-parse --verify --short HEAD > artifacts/LOCI_VERSION
+                cp IMAGE IMAGE_TAG artifacts/
+                echo "$GERRIT_EVENT_TYPE" > artifacts/GERRIT_EVENT_TYPE
                 '''
                 archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
             }}
@@ -110,6 +112,12 @@
     defaults: global
     project-type: pipeline
     sandbox: true
+
+    deploy_to_test: 'false'
+
+    properties:
+      - copyartifact:
+          projects: '*'
 
     parameters:
       - string:
@@ -170,6 +178,7 @@
               }}
             }}
           }}
+
           stage('Clone') {{
             environment {{
               LOCI_SHA = readFile('artifacts/LOCI_VERSION')
@@ -216,6 +225,7 @@
                 '''
             }}
           }}
+
           stage('Build') {{
             environment {{
               REGISTRY = credentials('registry')
@@ -238,7 +248,92 @@
                 make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
 
                 rm auth.json
+
+                cp IMAGE IMAGE_TAG artifacts/
                 '''
+                archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
+            }}
+          }}
+
+          stage('Deploy to rctest') {{
+            when {{
+                expression {{
+                  return {deploy_to_test} && readFile('artifacts/GERRIT_EVENT_TYPE') != 'patchset-created' && env.GERRIT_EVENT_TYPE != 'patchset-created'
+                }}
+            }}
+            steps {{
+                build(job: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest')
+            }}
+          }}
+        }}
+      }}
+
+
+- job-template:
+    name: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    git_credential: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c'
+
+    dsl: |
+      def copyArtifactSelector = upstream()
+
+      pipeline {{
+        agent any
+        stages {{
+          stage("Get artifacts") {{
+            steps {{
+              script {{
+                if (currentBuild.upstreamBuilds.size() == 0) {{
+                  build = selectRun(
+                    job: '{name}-container-{ubuntu_release}-{os_release}',
+                    selector: status('SUCCESSFUL'),
+                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/nectar/{os_release}")]),
+                    verbose: true
+                  )
+                  copyArtifactSelector = specific(build.getId())
+                }}
+                copyArtifacts(
+                  projectName: '{name}-container-{ubuntu_release}-{os_release}',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+              }}
+            }}
+          }}
+          stage("Update tag") {{
+            environment {{
+              IMAGE_TAG = readFile('artifacts/IMAGE_TAG').trim()
+            }}
+            steps {{
+              git(
+                changelog: false,
+                credentialsId: '{git_credential}',
+                poll: false,
+                url: 'https://jenkins@review.rc.nectar.org.au/a/internal/puppet-site-rctest'
+              )
+              sh('''
+                sed -i \"s/^profile::core::{name}::version: .*/profile::core::{name}::version: $IMAGE_TAG/g\" data/base.yaml
+                git checkout -B master
+                git config user.name 'Jenkins'
+                git config user.email 'jenkins@rc.nectar.org.au'
+                git add data/base.yaml && git commit -am "[Jenkins CI] {name}::version: $IMAGE_TAG"
+              ''')
+            }}
+          }}
+          stage("Push") {{
+            environment {{
+              GIT_AUTH = credentials('{git_credential}')
+            }}
+            steps {{
+              sh('''
+                  git show -q
+                  git config --local credential.helper "!f() {{ echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }}; f"
+                  git push origin HEAD:refs/heads/master
+                  git config --local --unset credential.helper
+              ''')
             }}
           }}
         }}
