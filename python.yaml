@@ -145,7 +145,7 @@
          organisation: 'internal'
       - '{name}-focal-deb-package':
          access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         organisation: 'internal'
 
 - project:
     name: openstacksdk
