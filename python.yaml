@@ -264,6 +264,12 @@
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
+         deploy_to_test: 'true'
+      - '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         ubuntu_release: 'focal'
+         os_release: 'victoria'
 
 - project:
     name: manuka
