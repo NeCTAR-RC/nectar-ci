@@ -143,6 +143,9 @@
       - '{name}-bionic-deb-package':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-focal-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: openstacksdk
