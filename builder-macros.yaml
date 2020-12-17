@@ -344,7 +344,9 @@
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
             export R10K_HOST={r10k_host}
-            r10k-deploy.sh -e master
+            # deploy a dummy env (master), which also deletes all environments
+            # belonging to deleted branches this returns 1 so || true
+            r10k deploy environment --puppetfile master || true
 
 - builder:
     name: r10k-diff-catalog-control-repo
