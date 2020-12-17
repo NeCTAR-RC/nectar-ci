@@ -303,6 +303,22 @@
           command: /usr/local/sbin/deploy-control-repo.sh $GERRIT_PROJECT
 
 - builder:
+    name: r10k-deploy-control-repo
+    builders:
+      - ssh-builder:
+          ssh-user-ip: puppet@{r10k_host}:22
+          command: |
+            set -u
+            set -e
+            set -x
+            export R10K_HOST={r10k_host}
+            # strips 'internal/puppet-site-nectar' to 'puppet-site-nectar'
+            REPO=`echo $GERRIT_PROJECT | cut -f2 -d'/'`
+            # strips 'puppet-site-nectar' to 'nectar'
+            export ENVIRONMENT=`echo $REPO | cut -f3 -d'-'`
+            r10k -c /etc/puppetlabs/r10k/r10k-$ENVIRONMENT.yaml deploy environment --puppetfile master
+
+- builder:
     name: r10k-deploy
     builders:
       - shell: |

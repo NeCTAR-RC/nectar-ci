@@ -615,6 +615,10 @@
          access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-cloud'
