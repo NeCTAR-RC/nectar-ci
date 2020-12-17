@@ -303,6 +303,33 @@
           command: /usr/local/sbin/deploy-control-repo.sh $GERRIT_PROJECT
 
 - builder:
+    name: r10k-deploy-control-repo
+    builders:
+      - shell: |
+          # strips 'internal/puppet-site-nectar' to 'puppet-site-nectar'
+          REPO=`echo $GERRIT_PROJECT | cut -f2 -d'/'`
+          # Creates repo to hold r10k branches if it doesn't exist
+          respcode=`curl -H "Authorization: token $TOKEN" "https://git.rc.nectar.org.au/api/v1/repos/r10k/${{REPO}}" -w "%{{http_code}}" -o /dev/null -s`
+          if [ $respcode = '404' ]; then
+            curl -H "Authorization: token $TOKEN" https://git.rc.nectar.org.au/api/v1/org/r10k/repos -X POST -d name=$REPO
+          fi
+          # Adds r10k remote
+          git remote | grep 'r10k' > /dev/null && retval=0 || retval=1
+          if [ $retval -eq 1 ]; then
+            git remote add r10k git@git.rc.nectar.org.au:r10k/$REPO
+          fi
+          git push r10k HEAD:refs/heads/$GERRIT_PATCHSET_REVISION
+      - ssh-builder:
+          ssh-user-ip: puppet@{r10k_host}:22
+          command: |
+            export R10K_HOST={r10k_host}
+            # strips 'internal/puppet-site-nectar' to 'puppet-site-nectar'
+            REPO=`echo $GERRIT_PROJECT | cut -f2 -d'/'`
+            # strips 'puppet-site-nectar' to 'nectar'
+            export ENVIRONMENT=`echo $REPO | cut -f3 -d'-'`
+            r10k -c /etc/puppetlabs/r10k/r10k-$ENVIRONMENT.yaml deploy environment --puppetfile master
+
+- builder:
     name: r10k-deploy
     builders:
       - shell: |
