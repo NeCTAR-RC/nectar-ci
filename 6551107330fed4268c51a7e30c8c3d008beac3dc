@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc7ccdd2_f287af33",
+        "filename": "python.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-01-04T00:36:38Z",
+      "side": 1,
+      "message": "You just need to create another block like this for ussuri",
+      "range": {
+        "startLine": 417,
+        "startChar": 1,
+        "endLine": 421,
+        "endChar": 28
+      },
+      "revId": "6551107330fed4268c51a7e30c8c3d008beac3dc",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
