@@ -618,7 +618,7 @@
       - '{name}-r10k-deploy-control-repo':
          access: 'nobody'
          organisation: 'resplat-cloud'
-         r10k_host: 'puppet.test.rc.nectar.org.au'
+         puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-cloud'
@@ -1164,7 +1164,7 @@
 
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
           command: /usr/local/sbin/update-test-modules.sh $GERRIT_PROJECT
 
     publishers:

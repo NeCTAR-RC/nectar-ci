@@ -1168,7 +1168,7 @@
 
     builders:
       - r10k-deploy-control-repo:
-          r10k_host: '{r10k_host}'
+          puppet_host: '{puppet_host}'
 
     wrappers:
       - ssh-agent-credentials:

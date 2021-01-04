@@ -39,6 +39,9 @@
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh
+      - ssh-builder:
+          ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
+          command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh
 
 
 - builder:
@@ -306,7 +309,7 @@
     name: r10k-deploy-control-repo
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@{puppet_host}:22
           command: |
             set -u
             set -e
