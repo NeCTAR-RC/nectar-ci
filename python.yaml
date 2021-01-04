@@ -402,7 +402,7 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
+         environment: 'py38'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -419,6 +419,11 @@
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'bionic'
          os_release: 'train'
+      - '{name}-container-{ubuntu_release}-{os_release}':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         ubuntu_release: 'focal'
+         os_release: 'ussuri'
 
 
 - project:
