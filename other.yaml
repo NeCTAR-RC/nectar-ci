@@ -391,6 +391,9 @@
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /usr/local/sbin/global-hieradata-deploy.sh
+      - ssh-builder:
+          ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
+          command: /usr/local/sbin/global-hieradata-deploy.sh
 
     publishers:
       !include: publisher.yaml.inc
