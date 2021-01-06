@@ -634,9 +634,6 @@
          access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'resplat-cloud'
 
 - project:
     name: puppet-site-monashtest
@@ -663,9 +660,6 @@
          access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'nectar-monash'
 
 - project:
     name: puppet-site-monashunder
@@ -842,9 +836,6 @@
          access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'resplat-hpc'
 
 - project:
     name: puppet-site-swinburne
@@ -896,9 +887,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-undertest
@@ -925,9 +913,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-auckland
