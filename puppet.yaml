@@ -644,6 +644,10 @@
          access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+         puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'nectar-monash'
@@ -869,6 +873,10 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'internal'
+         puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
