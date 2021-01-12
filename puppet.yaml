@@ -983,7 +983,7 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
