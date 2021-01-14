@@ -596,15 +596,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'resplat-cloud'
@@ -673,15 +673,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'nectar-monash'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'nectar-monash'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
@@ -698,15 +698,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'nectar-monash'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'nectar-monash'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'nectar-monash'
@@ -723,15 +723,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
@@ -748,15 +748,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'resplat-hpc'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-hpc'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'resplat-hpc'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'resplat-hpc'
@@ -773,15 +773,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'tas-gerrit'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'tas-gerrit'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'tas-gerrit'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'tas-gerrit'
@@ -798,15 +798,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'tas-gerrit'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'tas-gerrit'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'tas-gerrit'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'tas-gerrit'
@@ -849,15 +849,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
@@ -926,15 +926,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
@@ -951,15 +951,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
@@ -980,11 +980,11 @@
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'internal'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'internal'
@@ -1001,15 +1001,15 @@
       - '{name}-r10k-deploy':
          access: 'nobody'
          organisation: 'QRIScloud'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'QRIScloud'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          access: 'nobody'
          organisation: 'QRIScloud'
-         r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+         r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-site-deploy':
          access: 'nobody'
          organisation: 'QRIScloud'
