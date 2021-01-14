@@ -597,6 +597,10 @@
          access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-cloud'
@@ -674,6 +678,10 @@
          access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'nectar-monash'
@@ -699,6 +707,10 @@
          access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'nectar-monash'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'nectar-monash'
@@ -724,6 +736,10 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'internal'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
@@ -749,6 +765,10 @@
          access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'resplat-hpc'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'resplat-hpc'
@@ -774,6 +794,10 @@
          access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'tas-gerrit'
@@ -799,6 +823,10 @@
          access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'tas-gerrit'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'tas-gerrit'
@@ -850,6 +878,10 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'internal'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
@@ -927,6 +959,10 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'internal'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
@@ -952,6 +988,10 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'internal'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
@@ -977,6 +1017,10 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'internal'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'internal'
