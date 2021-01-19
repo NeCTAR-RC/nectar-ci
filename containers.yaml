@@ -1,3 +1,10 @@
+- project:
+    name: containers
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'internal'
+
 - job-template:
     name: 'requirements-container-{ubuntu_release}-{os_release}'
     defaults: global
