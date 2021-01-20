@@ -263,6 +263,17 @@
           curl -s --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Test at: $SWIFTURL'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
 
 - builder:
+    name: jekyll-html-check
+    builders:
+      - shell: |
+          bundle install --path vendor/bundle
+          bundle exec jekyll build
+          bundle exec htmlproofer --allow-hash-href \
+              --assume_extension --url-ignore '/localhost/' \
+              --typhoeus_config '{ \"ssl_verifyhost\": 0, \"ssl_verifypeer\": false }' \
+              ./_site"
+
+- builder:
     name: jekyll-test-build-cleanup
     builders:
       - shell: |
