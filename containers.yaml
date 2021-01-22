@@ -6,6 +6,94 @@
          organisation: 'internal'
 
 - job-template:
+    name: '{name}-container'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The ref to use."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The branch to use."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+              - patchset-created-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        environment {{
+          TAG = "${{env.GERRIT_EVENT_TYPE == "patchset-created" ? "review-" + env.GERRIT_CHANGE_NUMBER : "" }}"
+        }}
+        stages {{
+          stage('Clone') {{
+            steps {{
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: 'origin/$GERRIT_BRANCH']],
+                    extensions: [
+                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
+                      [$class: 'CleanCheckout'],
+                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
+                    ],
+                    userRemoteConfigs: [[
+                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      name: 'origin',
+                      refspec: '$GERRIT_REFSPEC',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
+                    ]]
+                  ]
+                )
+            }}
+          }}
+
+          stage('Build') {{
+            steps {{
+                sh '''
+                make build BUILDER=podman TAG=$TAG
+                '''
+            }}
+          }}
+          stage('Push') {{
+            environment {{
+              REGISTRY = credentials('registry-nectar')
+            }}
+            steps {{
+                sh '''
+                export REGISTRY="registry.rc.nectar.org.au"
+                export REGISTRY_AUTH_FILE=auth.json
+                echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+
+                make push BUILDER=podman TAG=$TAG
+
+                rm auth.json
+                '''
+            }}
+          }}
+        }}
+      }}
+
+- job-template:
     name: 'requirements-container-{ubuntu_release}-{os_release}'
     defaults: global
     project-type: pipeline
