@@ -270,8 +270,8 @@
           bundle exec jekyll build
           bundle exec htmlproofer --allow-hash-href \
               --assume_extension --url-ignore '/localhost/' \
-              --typhoeus_config '{ \"ssl_verifyhost\": 0, \"ssl_verifypeer\": false }' \
-              ./_site"
+              --typhoeus_config '{ "ssl_verifyhost": 0, "ssl_verifypeer": false }' \
+              ./_site
 
 - builder:
     name: jekyll-test-build-cleanup
