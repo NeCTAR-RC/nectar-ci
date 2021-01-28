@@ -327,7 +327,7 @@
             set -x
             # strips 'internal/puppet-site-nectar' to 'nectar'
             ENVIRONMENT=`echo $GERRIT_PROJECT | cut -f2 -d'/' | cut -f3 -d'-'`
-            r10k -c /etc/puppetlabs/r10k/r10k-$ENVIRONMENT.yaml deploy environment --puppetfile master --verbose
+            r10k -c /etc/puppetlabs/r10k/r10k-$ENVIRONMENT.yaml deploy environment --puppetfile master --verbose --generate-types
 
 - builder:
     name: r10k-deploy
