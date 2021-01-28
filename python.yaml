@@ -1003,6 +1003,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - '{name}-container':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: python-orcid
