@@ -1123,7 +1123,6 @@
       - gerrit:
           trigger-on:
             - patchset-created-event:
-                exclude-no-code-change: true
             - change-restored-event
           projects:
             - project-compare-type: 'PLAIN'
