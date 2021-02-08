@@ -1046,6 +1046,10 @@
          access: 'nobody'
          organisation: 'QRIScloud'
          r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'QRIScloud'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          access: 'nobody'
          organisation: 'QRIScloud'
