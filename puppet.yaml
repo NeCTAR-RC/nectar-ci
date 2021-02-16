@@ -609,9 +609,6 @@
          access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'resplat-cloud'
 
 - project:
     name: puppet-site-melbournetest
@@ -690,9 +687,6 @@
          access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'nectar-monash'
 
 - project:
     name: puppet-site-monash
@@ -719,9 +713,6 @@
          access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'nectar-monash'
 
 - project:
     name: puppet-site-nectar
@@ -748,9 +739,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-spartan
@@ -777,9 +765,6 @@
          access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'resplat-hpc'
 
 - project:
     name: puppet-site-tas
@@ -806,9 +791,6 @@
          access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'tas-gerrit'
 
 - project:
     name: puppet-site-tasunder
@@ -835,9 +817,6 @@
          access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'tas-gerrit'
 
 - project:
     name: puppet-site-thespian
@@ -890,9 +869,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-rctest
@@ -971,9 +947,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-aucklandunder
@@ -1000,9 +973,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-intersect
@@ -1029,9 +999,6 @@
          access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'internal'
 
 - project:
     name: puppet-site-qld_ctrl
@@ -1058,9 +1025,6 @@
          access: 'nobody'
          organisation: 'QRIScloud'
          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-site-deploy':
-         access: 'nobody'
-         organisation: 'QRIScloud'
 
 - project:
     name: puppet-snmp
