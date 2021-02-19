@@ -372,7 +372,7 @@
 
     publishers:
       - trigger:
-          project: puppet-site-rctest-site-deploy
+          project: puppet-site-rctest-r10k-deploy-control-repo
           threshold: SUCCESS
 
     git_credential: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c'
