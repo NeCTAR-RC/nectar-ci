@@ -443,7 +443,7 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: puppet-podman
+    name: camptocamp-podman
     jobs:
       - '{name}-puppet-unit':
          access: 'anonymous'
