@@ -51,6 +51,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -130,6 +131,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -206,6 +208,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -262,6 +265,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -319,6 +323,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -382,6 +387,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -438,6 +444,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -500,6 +507,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -557,6 +565,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
             - coreservices
             - qh2-test
@@ -1132,6 +1141,7 @@
         - qld
         - swinburne-01
         - tasmania
+        - tasmania-02
         - tasmania-s
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
@@ -1412,6 +1422,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
     builders:
       - shell: |
@@ -1470,6 +1481,7 @@
             - qld
             - swinburne-01
             - tasmania
+            - tasmania-02
             - tasmania-s
     builders:
       - shell: |
