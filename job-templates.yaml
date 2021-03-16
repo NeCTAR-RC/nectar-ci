@@ -1170,6 +1170,7 @@
     name: '{name}-r10k-deploy-control-repo'
     defaults: global
     node: internal
+    quiet-period: 10
 
     parameters:
       - string:
