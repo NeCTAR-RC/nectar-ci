@@ -798,11 +798,11 @@
 - project:
     name: keystone
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-bionic-ussuri-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
          environment: 'py36'
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-bionic-ussuri-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
          environment: 'pep8'
