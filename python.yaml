@@ -809,6 +809,9 @@
       - '{name}-os-deb-package':
          access: 'nobody'
          organisation: 'internal'
+      - '{name}-container':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: ospurge
