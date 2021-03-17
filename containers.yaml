@@ -30,7 +30,7 @@
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
               branches:
-                - branch-compare-type: 'PLAIN'
+                - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
