@@ -657,8 +657,8 @@
 
     builders:
       - os-pbuilder-checkout
-      - os-pbuilder-create-xenial
-      - os-pbuilder-buildpackage-xenial
+      - os-pbuilder-create-bionic
+      - os-pbuilder-buildpackage-bionic
 
     publishers:
       !include: publisher.yaml.inc
