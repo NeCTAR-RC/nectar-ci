@@ -52,7 +52,7 @@
                     $class: 'GitSCM',
                     branches: [[name: 'origin/$GERRIT_BRANCH']],
                     extensions: [
-                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
+                      [$class: 'CloneOption', honorRefspec: true],
                       [$class: 'CleanCheckout'],
                       [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
                     ],
