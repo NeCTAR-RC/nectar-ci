@@ -1057,7 +1057,7 @@
          environment: 'flake8'
 
 - project:
-    name: manuka
+    name: warre
     jobs:
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
