@@ -42,7 +42,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -122,7 +121,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -199,7 +197,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -256,7 +253,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -314,7 +310,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -378,7 +373,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -435,7 +429,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -498,7 +491,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -556,7 +548,6 @@
           choices:
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -1132,7 +1123,6 @@
     site:
         - auckland
         - intersect-01
-        - intersect-qld
         - melbourne-qh2
         - melbourne-qh2-uom
         - monash-01
@@ -1413,7 +1403,6 @@
             - Any zone
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
@@ -1472,7 +1461,6 @@
             - Any zone
             - auckland
             - intersect-01
-            - intersect-qld
             - melbourne-qh2
             - melbourne-qh2-uom
             - monash-01
