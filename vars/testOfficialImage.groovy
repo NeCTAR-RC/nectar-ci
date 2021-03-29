@@ -31,7 +31,13 @@ def call(String project_name, String cloud_env, String availability_zone) {
         echo "Creating instance..."
         echo "==> openstack server create --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone 'test_$BUILD_TAG'"
         INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
-        echo "Found instance ID: \$INSTANCE_ID"
+        if [ -z "\$INSTANCE_ID" ]; then
+            echo "Instance ID not found! Cleaning up image..."
+            openstack image delete $imageId || true
+            exit 1
+        else
+            echo "Found instance ID: \$INSTANCE_ID"
+        fi
         RETRIES=10
         i=1
         while [ \$i -le \$RETRIES ]; do

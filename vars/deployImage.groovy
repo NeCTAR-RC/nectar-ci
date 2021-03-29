@@ -33,6 +33,20 @@ def call(String project_name, String cloud_env) {
         echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 'NeCTAR $imageName'"
         openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "NeCTAR $imageName" > image_id.txt
         echo "Image $imageId created!"
+        RETRIES=10
+        i=1
+        while [ \$i -le \$RETRIES ]; do
+            STATUS=\$(openstack image show -f value -c status $imageId)
+            echo "Image is \$STATUS (\$i/\$RETRIES)..."
+            [ "\$STATUS" = "active" ] && break
+            if [ \$i -ge \$RETRIES ]; then
+                echo "ERROR: Limit reached, cleaning up image..."
+                openstack image delete $imageId || true
+                exit 1
+            fi
+            i=\$((i+1))
+            sleep 30
+        done
         echo "Applying properties..."
         for FACT in build/.facts/*; do
            PROP=\${FACT##*/}
