@@ -1239,6 +1239,12 @@
     node: internal
     quiet-period: 10
 
+    properties:
+      - build-blocker:
+          blocking-jobs:
+            - "{name}-r10k-cleanup"
+          block-level: 'GLOBAL'
+
     parameters:
       - string:
           name: GERRIT_REFSPEC
