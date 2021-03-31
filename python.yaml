@@ -657,6 +657,9 @@
       - '{name}-os-deb-package':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+      - '{name}-container':
+         access: 'nobody'
+         organisation: 'internal'
 
 - project:
     name: manila-ui
