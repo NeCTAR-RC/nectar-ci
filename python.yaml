@@ -1072,3 +1072,22 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+
+- project:
+    name: python-warreclient
+    jobs:
+      - '{name}-bionic-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py27'
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-pypi-upload':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
