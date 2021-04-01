@@ -407,6 +407,16 @@
     builders:
       - shell: |
           #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD:   $CLOUD"
+          echo "                   AZ:      $AVAILABILITY_ZONE"
+          echo "                   HOST:    $HOST"
+          echo "                   STARTED: $(date)"
+          echo
+          echo "================================================================="
+          echo
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
