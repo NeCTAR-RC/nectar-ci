@@ -1077,6 +1077,10 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
+      - '{name}-os-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
 
 - project:
     name: python-warreclient
