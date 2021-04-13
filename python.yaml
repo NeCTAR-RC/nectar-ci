@@ -1076,6 +1076,9 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
+      - '{name}-container':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: python-warreclient
