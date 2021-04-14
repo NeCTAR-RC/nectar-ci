@@ -131,11 +131,11 @@
       - '{name}-bionic-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
-         environment: 'py27'
-      - '{name}-bionic-tox-{environment}':
+         environment: 'py36'
+      - '{name}-focal-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
-         environment: 'py36'
+         environment: 'py38'
       - '{name}-bionic-tox-{environment}':
          access: 'nobody'
          organisation: 'internal'
