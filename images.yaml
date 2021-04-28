@@ -24,12 +24,12 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: fedora-32
+    name: fedora-33
     jobs:
       - 'image-build-official-{name}'
 
 - project:
-    name: fedora-33
+    name: fedora-34
     jobs:
       - 'image-build-official-{name}'
 
