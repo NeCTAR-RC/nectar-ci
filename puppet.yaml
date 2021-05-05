@@ -871,6 +871,32 @@
          r10k_host: 'r10k.rc.nectar.org.au'
 
 - project:
+    name: puppet-site-uommediafluxtest
+    jobs:
+      - '{name}-yaml':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+      - '{name}-puppet-unit':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+      - '{name}-r10k-deploy':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+         puppet_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-cleanup':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-diff-catalog':
+         access: 'nobody'
+         organisation: 'resplat-cloud'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
+
+- project:
     name: puppet-site-rctest
     jobs:
       - '{name}-yaml':
