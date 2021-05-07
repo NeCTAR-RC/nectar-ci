@@ -1,7 +1,7 @@
 - project:
     name: containers
     jobs:
-      - '{name}-yaml':
+      - '{name}-dummy':
          access: 'nobody'
          organisation: 'internal'
 
