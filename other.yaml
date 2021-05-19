@@ -497,3 +497,13 @@
       - '{name}-dummy':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-keycloak
+    jobs:
+      - '{name}-dummy':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+      - '{name}-container':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
