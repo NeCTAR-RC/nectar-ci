@@ -681,6 +681,16 @@
            - coreservices
 
 - project:
+    name: manila-nfs-production
+    jobs:
+      - 'tempest-{name}-check-{site}':
+         job: 'manila-nfs'
+         whitelist: 'manila-nfs'
+         cloud: 'production'
+         site:
+           - auckland
+
+- project:
     name: telemetry
     jobs:
       - 'tempest-{name}-check':

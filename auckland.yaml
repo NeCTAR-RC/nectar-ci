@@ -1,0 +1,16 @@
+
+- job:
+    name: auckland-test-trigger
+    description: |
+        Parent job to trigger all tempest jobs for auckland
+    defaults: global
+    node: internal
+    concurrent: false
+    builders:
+      - shell: '/bin/true'
+    triggers:
+      - timed: "H * * * *"
+    publishers:
+      - trigger:
+          project: tempest-manila-nfs-production-check-auckland
+          threshold: SUCCESS
