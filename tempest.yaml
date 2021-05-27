@@ -681,6 +681,15 @@
            - coreservices
 
 - project:
+    name: tempest-nagios-services-manila-nfs
+    site:
+        - auckland
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}-noinstance':
+          test:
+            - 'manila_nfs'
+
+- project:
     name: telemetry
     jobs:
       - 'tempest-{name}-check':
@@ -1249,6 +1258,46 @@
           fixed-delay: 30
       - trigger:
           project: 'tempest-cleanup'
+          threshold: 'FAILURE'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - build-discarder:
+          days-to-keep: 7
+
+- job-template:
+    name: 'tempest-nagios-services-{site}-{test}-noinstance'
+    defaults: global
+    node: tempest
+    concurrent: false
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production --without-instance
+
+    triggers:
+      - timed: 'H H(4-6) * * *'
+
+    publishers:
+      - naginator:
+          max-failed-builds: 2
+          fixed-delay: 30
+      - trigger:
+          project: 'tempest-cleanup-site-{site}'
           threshold: 'FAILURE'
 
     properties:
