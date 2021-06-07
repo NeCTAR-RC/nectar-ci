@@ -89,10 +89,10 @@
       - 'image-build-trove-{name}'
 
 - project:
-    name: rstudio-ubuntu-18.04
+    name: rstudio-ubuntu-20.04
     jobs:
       - 'image-build-extra-{name}':
-         source_image: 'NeCTAR Ubuntu 18.04 LTS (Bionic) amd64'
+         source_image: 'NeCTAR Ubuntu 20.04 LTS (Focal) amd64'
          git_repo: 'https://github.com/NeCTAR-RC/packer-rstudio.git'
 
 - project:
