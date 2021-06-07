@@ -29,8 +29,8 @@ def call(String project_name, String cloud_env, String availability_zone) {
         export OS_IDENTITY_API_VERSION=3
         export OS_PROJECT_NAME=$project_name
         echo "Creating instance..."
-        echo "==> openstack server create --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone 'test_$BUILD_TAG'"
-        INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
+        echo "==> openstack server create --image $imageId --flavor m3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone 'test_$BUILD_TAG'"
+        INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor m3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
         if [ -z "\$INSTANCE_ID" ]; then
             echo "Instance ID not found! Cleaning up image..."
             openstack image delete $imageId || true
@@ -53,7 +53,7 @@ def call(String project_name, String cloud_env, String availability_zone) {
             if [ "\$STATUS" = "ERROR" ]; then
                 echo "Recreating instance due to error: \$(openstack server show -f value -c fault \$INSTANCE_ID)"
                 openstack server delete \$INSTANCE_ID
-                INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
+                INSTANCE_ID=\$(openstack server create -f value -c id --image $imageId --flavor m3.xsmall --security-group image-build --key-name jenkins-image-testing --availability-zone $availability_zone "test_$BUILD_TAG")
                 echo "Found instance ID: \$INSTANCE_ID"
             fi
             i=\$((i+1))
