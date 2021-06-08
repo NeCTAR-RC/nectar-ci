@@ -3,8 +3,8 @@
     jobs:
       - 'murano-package-{name}':
          category: 'Big Data'
-         image: 'NeCTAR R-Studio (Ubuntu 18.04 LTS Bionic)'
-         trigger: 'image-build-extra-rstudio-ubuntu-18.04'
+         image: 'NeCTAR R-Studio (Ubuntu 20.04 LTS Focal)'
+         trigger: 'image-build-extra-rstudio-ubuntu-20.04'
          git_repo: 'https://github.com/NeCTAR-RC/murano-rstudio.git'
 
 - project:
