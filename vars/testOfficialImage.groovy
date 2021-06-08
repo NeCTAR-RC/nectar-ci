@@ -38,7 +38,7 @@ def call(String project_name, String cloud_env, String availability_zone) {
         else
             echo "Found instance ID: \$INSTANCE_ID"
         fi
-        RETRIES=10
+        RETRIES=20
         i=1
         while [ \$i -le \$RETRIES ]; do
             STATUS=\$(openstack server show -f value -c status \$INSTANCE_ID)
@@ -57,7 +57,7 @@ def call(String project_name, String cloud_env, String availability_zone) {
                 echo "Found instance ID: \$INSTANCE_ID"
             fi
             i=\$((i+1))
-            sleep 30
+            sleep 60
         done
         openstack server show --max-width=120 \$INSTANCE_ID
         IP_ADDRESS=\$(openstack server show -f value -c accessIPv4 \$INSTANCE_ID)
