@@ -49,7 +49,6 @@
       - lockable-resources:
           resources: nectar-ansible
 
-
     triggers:
       - gerrit:
           trigger-on:
@@ -101,12 +100,6 @@
     defaults: global
     node: internal
 
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default branch to test."
-
     properties:
       - authorization:
           'anonymous':
@@ -115,7 +108,13 @@
       - lockable-resources:
           resources: nectar-ansible
 
-    triggers:
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+   triggers:
       - gerrit:
           trigger-on:
               - patchset-created-event
@@ -144,14 +143,62 @@
            after: true
          choosing-strategy: gerrit
 
+    wrappers:
+      - ansicolor
+      - ssh-agent-credentials:
+          users:
+              - 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
+           username: F5_USERNAME
+           password: F5_PASSWORD
+        - text:
+           credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
+           variable: ANSIBLE_VAULT_PASSWORD
+
     builders:
       - shell: |
           export http_proxy=http://wwwproxy.unimelb.edu.au:8000
           export https_proxy=http://wwwproxy.unimelb.edu.au:8000
           export no_proxy=localhost,127.0.0.1,localaddress,169.254.169.254,172.16.0.0/12,115.146.80/20,.melbourne.rc.nectar.org.au,.melbourne.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au,.its.unimelb.edu.au,.unimelb.net.au,.test.rc.nectar.org.au,.dev.rc.nectar.org.au,.rc.nectar.org.au
-          export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
           tox -e {task}-{environment} playbook-{playbook}.yaml
+
+
+- job:
+    name: 'nectar-ansible-deploy'
+    concurrent: false
+    defaults: global
+    node: internal
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - lockable-resources:
+          resources: nectar-ansible
+
+    parameters:
+      - choice:
+          name: 'ENVIRONMENT'
+          choices:
+            - production
+            - rctest
+          description: "Environment to deploy to"
+      - choice:
+          name: 'PLAYBOOK'
+          choices:
+            - f5-base
+            - f5-certificates
+            - f5-services
+          description: "Playbook to deploy"
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
 
     wrappers:
       - ansicolor
@@ -166,3 +213,11 @@
         - text:
            credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
            variable: ANSIBLE_VAULT_PASSWORD
+
+    builders:
+      - shell: |
+          export http_proxy=http://wwwproxy.unimelb.edu.au:8000
+          export https_proxy=http://wwwproxy.unimelb.edu.au:8000
+          export no_proxy=localhost,127.0.0.1,localaddress,169.254.169.254,172.16.0.0/12,115.146.80/20,.melbourne.rc.nectar.org.au,.melbourne.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au,.its.unimelb.edu.au,.unimelb.net.au,.test.rc.nectar.org.au,.dev.rc.nectar.org.au,.rc.nectar.org.au
+          export ANSIBLE_FORCE_COLOR=true
+          tox -e deploy-${ENVIRONMENT} playbook-${PLAYBOOK}.yaml
