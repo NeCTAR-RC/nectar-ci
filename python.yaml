@@ -525,14 +525,14 @@
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-deb-package':
-         access: 'anonymous'
-         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
       - '{name}-os-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
-         environment: 'py35'
+         environment: 'py38'
+      - '{name}-os-deb-package':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: ceilometer
@@ -1101,6 +1101,12 @@
       - '{name}-container':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+         deploy_to_test: 'true'
+      - '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest':
+         access: 'nobody'
+         organisation: 'NeCTAR-RC'
+         ubuntu_release: 'focal'
+         os_release: 'victoria'
 
 - project:
     name: python-warreclient
