@@ -578,6 +578,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppetlabs-docker
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppetlabs-rsync
     jobs:
       - '{name}-puppet-unit':
