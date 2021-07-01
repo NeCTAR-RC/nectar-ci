@@ -165,6 +165,10 @@
 - project:
     name: python-nectarallocationclient
     jobs:
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
       - '{name}-bionic-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
@@ -173,7 +177,11 @@
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
