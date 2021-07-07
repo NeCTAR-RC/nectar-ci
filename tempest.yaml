@@ -689,6 +689,67 @@
           test:
             - 'share_nfs'
           skip_capacity_check: true
+          environment: 'production'
+
+- project:
+    name: tempest-nagios-services
+    site:
+      - auckland
+      - intersect-01
+      - melbourne-qh2
+      - melbourne-qh2-uom
+      - monash-01
+      - monash-02
+      - monash-03
+      - qld
+      - swinburne-01
+      - tasmania
+      - tasmania-02
+      - tasmania-s
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}':
+          test:
+            - 'volume'
+            - 'volume_backup'
+          skip_capacity_check: false
+          environment: 'production'
+
+- project:
+    name: tempest-nagios-services-rctest
+    site:
+      - coreservices
+      - qh2-test
+      - monash-test
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}':
+          test:
+            - 'volume'
+            - 'volume_backup'
+          skip_capacity_check: false
+          environment: 'testing'
+
+
+- project:
+    name: tempest-nagios-services-site-agnostic
+    environment: 'production'
+    jobs:
+      - 'tempest-nagios-services-{test}-{environment}':
+          test:
+            - 'image'
+            - 'object'
+            - 'ec2api'
+          skip_capacity_check: true
+
+- project:
+    name: tempest-nagios-services-site-agnostic-rctest
+    environment: 'testing'
+    jobs:
+      - 'tempest-nagios-services-{test}-{environment}':
+          test:
+            - 'image'
+            - 'object'
+            - 'ec2api'
+          skip_capacity_check: true
 
 - project:
     name: telemetry
@@ -1289,7 +1350,7 @@
       - shell: |
           . /opt/tempest/bin/activate
           [ {skip_capacity_check} == True ] && skip_capacity_check="--skip_capacity_check"
-          $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production $skip_capacity_check
+          $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e {environment} $skip_capacity_check
 
     triggers:
       - timed: 'H H(4-6) * * *'
@@ -1309,6 +1370,48 @@
             - job-discover
       - build-discarder:
           days-to-keep: 7
+
+- job-template:
+    name: 'tempest-nagios-services-{test}-{environment}'
+    defaults: global
+    node: tempest
+    concurrent: false
+
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+
+    wrappers:
+      - timeout:
+          timeout: 45
+          fail: true
+
+    builders:
+      - shell: |
+          . /opt/tempest/bin/activate
+          [ {skip_capacity_check} == True ] && skip_capacity_check="--skip_capacity_check"
+          $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -t {test} -e {environment} $skip_capacity_check
+
+    triggers:
+      - timed: 'H H(4-6) * * *'
+
+    publishers:
+      - naginator:
+          max-failed-builds: 2
+          fixed-delay: 30
+      - trigger:
+          project: 'tempest-cleanup'
+          threshold: 'FAILURE'
+
+    properties:
+      - authorization:
+          'anonymous':
+            - job-read
+            - job-discover
+      - build-discarder:
+          days-to-keep: 7
+
 
 - job-template:
     name: 'tempest-cleanup-site-{site}'
