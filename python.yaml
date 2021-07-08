@@ -846,6 +846,14 @@
          organisation: 'internal'
 
 - project:
+    name: elasticluster
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+
+- project:
     name: ospurge
     jobs:
       - '{name}-bionic-tox-{environment}':
