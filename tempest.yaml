@@ -1224,6 +1224,7 @@
     name: tempest-nagios-site-network
     site:
         - auckland
+        - intersect-01
         - melbourne-qh2
         - monash-01
         - monash-02
