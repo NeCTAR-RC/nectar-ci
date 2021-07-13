@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1a9a72_e0496f32",
+        "filename": "tempest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-13T22:11:32Z",
+      "side": 1,
+      "message": "should dns be here too?",
+      "revId": "1db7f4e8fe86f1a6e81a084939dbff39a43c5f75",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
