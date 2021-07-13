@@ -692,6 +692,28 @@
           environment: 'production'
 
 - project:
+    name: tempest-nagios-services-manila-cephfs
+    site:
+        - monash-02-cephfs
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}':
+          test:
+            - 'share_cephfs'
+          skip_capacity_check: true
+          environment: 'production'
+
+- project:
+    name: tempest-nagios-services-manila-cephfs-rctest
+    site:
+        - auckland
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}':
+          test:
+            - 'share_cephfs'
+          skip_capacity_check: true
+          environment: 'testing'
+
+- project:
     name: tempest-nagios-services
     site:
       - auckland
@@ -710,6 +732,9 @@
       - 'tempest-nagios-services-{site}-{test}':
           test:
             - 'volume'
+            - 'orchestration'
+            - 'database'
+            - 'application'
           skip_capacity_check: false
           environment: 'production'
 
@@ -735,6 +760,24 @@
           environment: 'production'
 
 - project:
+    name: tempest-nagios-services-advanced-network
+    site:
+      - auckland
+      - intersect-01
+      - melbourne-qh2
+      - monash-01
+      - monash-02
+      - qld
+      - tasmania
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}':
+          test:
+            - 'loadbalancer'
+            - 'coe'
+          skip_capacity_check: false
+          environment: 'production'
+
+- project:
     name: tempest-nagios-services-rctest
     site:
       - coreservices
@@ -745,6 +788,11 @@
           test:
             - 'volume'
             - 'volume_backup'
+            - 'orchestration'
+            - 'loadbalancer'
+            - 'database'
+            - 'coe'
+            - 'application'
           skip_capacity_check: false
           environment: 'testing'
 
@@ -758,6 +806,7 @@
             - 'image'
             - 'object'
             - 'ec2api'
+            - 'dns'
           skip_capacity_check: true
 
 - project:
@@ -769,6 +818,7 @@
             - 'image'
             - 'object'
             - 'ec2api'
+            - 'dns'
           skip_capacity_check: true
 
 - project:
