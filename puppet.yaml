@@ -1176,7 +1176,7 @@
     name: 'puppet-module-deploy-testing'
     defaults: global
     node: internal
-    quiet-period: 20
+    quiet-period: 40
 
     parameters:
       - string:
@@ -1232,7 +1232,7 @@
     name: 'puppet-module-deploy-production'
     defaults: global
     node: internal
-    quiet-period: 20
+    quiet-period: 40
 
     parameters:
       - string:
