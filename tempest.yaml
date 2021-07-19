@@ -1472,7 +1472,7 @@
           max-failed-builds: 2
           fixed-delay: 30
       - trigger:
-          project: 'tempest-cleanup'
+          project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
 
     properties:
