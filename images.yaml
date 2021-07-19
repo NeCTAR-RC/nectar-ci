@@ -414,7 +414,7 @@
                 stage('Build Image') {
                     agent { label 'bionic' }
                     steps {
-                        imageBuildQEMU 'octavia-haproxy-ubuntu-18.04-x86_64'
+                        imageBuildQEMU 'octavia-haproxy-ubuntu-x86_64'
                     }
                 }
                 stage('Set Image ID') {
