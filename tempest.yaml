@@ -683,7 +683,7 @@
 - project:
     name: tempest-nagios-services-manila-nfs
     site:
-        - auckland
+      - auckland
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
@@ -694,7 +694,7 @@
 - project:
     name: tempest-nagios-services-manila-cephfs
     site:
-        - monash-02-cephfs
+      - monash-02
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
@@ -705,7 +705,7 @@
 - project:
     name: tempest-nagios-services-manila-cephfs-rctest
     site:
-        - auckland
+      - coreservice
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
