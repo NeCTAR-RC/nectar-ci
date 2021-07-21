@@ -1428,7 +1428,7 @@
 
     publishers:
       - naginator:
-          max-failed-builds: 2
+          max-failed-builds: 1
           fixed-delay: 30
       - trigger:
           project: 'tempest-cleanup-site-{site}'
@@ -1465,11 +1465,11 @@
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -t {test} -e {environment} $skip_capacity_check
 
     triggers:
-      - timed: 'H H(4-6) * * *'
+      - timed: 'H H(3-4) * * *'
 
     publishers:
       - naginator:
-          max-failed-builds: 2
+          max-failed-builds: 1
           fixed-delay: 30
       - trigger:
           project: 'tempest-cleanup'
