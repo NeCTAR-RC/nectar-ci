@@ -722,7 +722,6 @@
       - melbourne-qh2-uom
       - monash-01
       - monash-02
-      - monash-03
       - qld
       - swinburne-01
       - tasmania
@@ -735,6 +734,17 @@
             - 'orchestration'
             - 'database'
             - 'application'
+          skip_capacity_check: false
+          environment: 'production'
+
+- project:
+    name: tempest-nagios-services-volume
+    site:
+      - monash-03
+    jobs:
+      - 'tempest-nagios-services-{site}-{test}':
+          test:
+            - 'volume'
           skip_capacity_check: false
           environment: 'production'
 
@@ -773,7 +783,6 @@
       - 'tempest-nagios-services-{site}-{test}':
           test:
             - 'loadbalancer'
-            - 'coe'
           skip_capacity_check: false
           environment: 'production'
 
