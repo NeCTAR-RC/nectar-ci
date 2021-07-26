@@ -1206,6 +1206,11 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/camptocamp-podman'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
           silent: false
           escape-quotes: true
 
