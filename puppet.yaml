@@ -62,6 +62,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-cloudkitty
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-dashboard
     jobs:
       - '{name}-puppet-unit':
