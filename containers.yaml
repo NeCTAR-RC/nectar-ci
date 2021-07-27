@@ -370,11 +370,6 @@
     project-type: pipeline
     sandbox: true
 
-    publishers:
-      - trigger:
-          project: puppet-site-rctest-r10k-deploy-control-repo
-          threshold: SUCCESS
-
     git_credential: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c'
 
     dsl: |
@@ -388,11 +383,7 @@
               script {{
                 if (currentBuild.upstreamBuilds.size() == 0) {{
                   build = selectRun(
-                    job: '{name}-container-{ubuntu_release}-{os_release}',
-                    selector: status('SUCCESSFUL'),
-                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/nectar/{os_release}")]),
-                    verbose: true
-                  )
+                         )
                   copyArtifactSelector = specific(build.getId())
                 }}
                 copyArtifacts(
@@ -435,6 +426,14 @@
                   git config --local --unset credential.helper
               ''')
             }}
+          }}
+        }}
+        post {{
+          success {{
+            build (
+              job: 'puppet-site-rctest-r10k-deploy-control-repo',
+              parameters: [string(name: 'GERRIT_PROJECT', value: 'internal/puppet-site-rctest')]
+            )
           }}
         }}
       }}
