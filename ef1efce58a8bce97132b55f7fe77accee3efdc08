@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc12c561_f1cce30e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-27T03:05:51Z",
+      "side": 1,
+      "message": "Sucks needing to hardcode this but can\u0027t think of a better way",
+      "revId": "ef1efce58a8bce97132b55f7fe77accee3efdc08",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
