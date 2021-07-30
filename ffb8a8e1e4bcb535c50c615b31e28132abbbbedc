@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abb12762_b6fcad38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000264
+      },
+      "writtenOn": "2021-07-30T03:18:07Z",
+      "side": 1,
+      "message": "Duplicated the job, and removed the triggers, it is full manual now.",
+      "revId": "ffb8a8e1e4bcb535c50c615b31e28132abbbbedc",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
