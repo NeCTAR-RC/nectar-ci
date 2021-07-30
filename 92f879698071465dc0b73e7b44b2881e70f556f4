@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1cd1c6_66490735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-07-30T01:56:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the way to do this, this job prob shouldn\u0027t change as it for gerrit triggered projects. If its an upstream project we should have a stand alone job that we can trigger manually when we need a new version. Can discuss more in terms of tactics here",
+      "revId": "92f879698071465dc0b73e7b44b2881e70f556f4",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
