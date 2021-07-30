@@ -363,6 +363,137 @@
         }}
       }}
 
+- job-template:
+    name: '{name}-container-{ubuntu_release}-{os_release}-upstream'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    deploy_to_test: 'false'
+
+    properties:
+      - copyartifact:
+          projects: '*'
+
+    triggers:
+      - reverse:
+          jobs:
+            - 'requirements-container-{ubuntu_release}-{os_release}'
+      
+    dsl: |
+      def copyArtifactSelector = upstream()
+
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Get artifacts') {{
+            steps {{
+              script {{
+                if (currentBuild.upstreamBuilds.size() == 0) {{
+                  build = selectRun(
+                    job: 'requirements-container-{ubuntu_release}-{os_release}',
+                    selector: status('SUCCESSFUL'),
+                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/master")]),
+                    verbose: true
+                  )
+                  copyArtifactSelector = specific(build.getId())
+                }}
+                copyArtifacts(
+                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+              }}
+            }}
+          }}
+
+          stage('Clone') {{
+            environment {{
+              LOCI_SHA = readFile('artifacts/LOCI_VERSION')
+            }}
+            steps {{
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: env.LOCI_SHA]],
+                    extensions: [
+                      [$class: 'CleanCheckout'],
+                    ],
+                    userRemoteConfigs: [[
+                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      name: 'origin',
+                      refspec: '+refs/heads/*:refs/remotes/origin/* +refs/changes/*:refs/remotes/origin/*',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
+                    ]]
+                  ]
+                )
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: 'origin/stable/{os_release}']],
+                    extensions: [
+                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
+                      [$class: 'RelativeTargetDirectory', relativeTargetDir: 'src'],
+                      [$class: 'CleanCheckout'],
+                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
+                    ],
+                    userRemoteConfigs: [[
+                      name: 'origin',
+                      refspec: "refs/heads/stable/{os_release}",
+                      url: 'https://github.com/openstack/{name}.git'
+                    ]]
+                  ]
+                )
+                sh '''
+                git submodule init
+                git submodule update
+                '''
+            }}
+          }}
+
+          stage('Build') {{
+            environment {{
+              REGISTRY = credentials('registry')
+            }}
+            steps {{
+                copyArtifacts(
+                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+                sh '''
+                echo "Building stable/{os_release} (refs/heads/stable/{os_release})"
+                export BUILDAH_FORMAT=docker
+                export REQUIREMENTS_SHA=`cat artifacts/REQUIREMENTS_VERSION`
+
+                export REGISTRY="registry.rc.nectar.org.au"
+                export REGISTRY_AUTH_FILE=auth.json
+                echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+
+                make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
+
+                rm auth.json
+
+                cp IMAGE IMAGE_TAG artifacts/
+                '''
+                archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
+            }}
+          }}
+
+          stage('Deploy to rctest') {{
+            when {{
+                expression {{
+                  return {deploy_to_test} && readFile('artifacts/GERRIT_EVENT_TYPE') != 'patchset-created' && env.GERRIT_EVENT_TYPE != 'patchset-created'
+                }}
+            }}
+            steps {{
+                build(job: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest')
+            }}
+          }}
+        }}
+      }}
 
 - job-template:
     name: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest'
