@@ -295,7 +295,16 @@
                     ]]
                   ]
                 )
-                checkout(
+                script {{
+                  switch('{organisation}') {{
+                    case 'NeCTAR-RC': 
+                    url_git = 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
+                    credentialsId_git = '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+                    case 'openstack': 
+                    url_git = 'https://github.com/{organisation}/{name}.git'
+                    credentialsId_git = ''
+                  }}
+                  checkout(
                   poll: false,
                   scm: [
                     $class: 'GitSCM',
@@ -307,13 +316,14 @@
                       [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: credentialsId_git,
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
+                      url: url_git
                     ]]
                   ]
                 )
+                }}
                 sh '''
                 git submodule init
                 git submodule update
