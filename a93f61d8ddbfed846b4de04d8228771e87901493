@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "181c3455_84344961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-01T22:48:20Z",
+      "side": 1,
+      "message": "I think some of this can be ripped out too",
+      "revId": "a93f61d8ddbfed846b4de04d8228771e87901493",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "390f30d8_9e73c7a8",
+        "filename": "containers.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-01T22:48:20Z",
+      "side": 1,
+      "message": "or this",
+      "range": {
+        "startLine": 388,
+        "startChar": 1,
+        "endLine": 396,
+        "endChar": 26
+      },
+      "revId": "a93f61d8ddbfed846b4de04d8228771e87901493",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05dedb5e_2a0a6b08",
+        "filename": "containers.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-01T22:48:20Z",
+      "side": 1,
+      "message": "or this",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 68
+      },
+      "revId": "a93f61d8ddbfed846b4de04d8228771e87901493",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
