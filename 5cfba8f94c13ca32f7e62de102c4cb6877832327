@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749fa03b_ce23b211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-08-01T22:39:12Z",
+      "side": 1,
+      "message": "organisation: \u0027NeCTAR-RC\u0027 is required and shouldn\u0027t be removed",
+      "revId": "5cfba8f94c13ca32f7e62de102c4cb6877832327",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
