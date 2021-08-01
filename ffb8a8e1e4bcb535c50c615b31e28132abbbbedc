@@ -39,6 +39,30 @@
       },
       "revId": "ffb8a8e1e4bcb535c50c615b31e28132abbbbedc",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "825dee14_be032935",
+        "filename": "containers.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000264
+      },
+      "writtenOn": "2021-08-01T23:26:39Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "518d5f6d_d74278e7",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 52
+      },
+      "revId": "ffb8a8e1e4bcb535c50c615b31e28132abbbbedc",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
     }
   ]
 }

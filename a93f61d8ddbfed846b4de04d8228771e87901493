@@ -41,6 +41,30 @@
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce0c08e_2b9eef22",
+        "filename": "containers.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000264
+      },
+      "writtenOn": "2021-08-01T23:26:39Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "390f30d8_9e73c7a8",
+      "range": {
+        "startLine": 388,
+        "startChar": 1,
+        "endLine": 396,
+        "endChar": 26
+      },
+      "revId": "a93f61d8ddbfed846b4de04d8228771e87901493",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05dedb5e_2a0a6b08",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-08-01T22:48:20Z",
       "side": 1,
       "message": "or this",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 68
+      },
+      "revId": "a93f61d8ddbfed846b4de04d8228771e87901493",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1477d0_1ac6d6fb",
+        "filename": "containers.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000264
+      },
+      "writtenOn": "2021-08-01T23:26:39Z",
+      "side": 1,
+      "message": "By removing this we will not create a new service container if the requirements base image change, so I think we should keep this",
+      "parentUuid": "05dedb5e_2a0a6b08",
       "range": {
         "startLine": 398,
         "startChar": 0,

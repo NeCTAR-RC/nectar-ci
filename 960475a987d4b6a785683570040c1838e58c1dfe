@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bad7d1_ea77dc02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000264
+      },
+      "writtenOn": "2021-08-01T23:26:39Z",
+      "side": 1,
+      "message": "I left the reverse trigger for the requirements, I think we still need this.",
+      "revId": "960475a987d4b6a785683570040c1838e58c1dfe",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
