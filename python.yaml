@@ -1155,3 +1155,11 @@
       - '{name}-pypi-upload':
          access: 'anonymous'
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: aodh
+    jobs:
+      - '{name}-container-{ubuntu_release}-{os_release}-upstream':
+         access: 'nobody'
+         ubuntu_release: 'focal'
+         os_release: 'victoria'
