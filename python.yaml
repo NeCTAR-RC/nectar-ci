@@ -785,8 +785,8 @@
       - '{name}-container-{ubuntu_release}-{os_release}':
          access: 'nobody'
          organisation: 'NeCTAR-RC'
-         ubuntu_release: 'bionic'
-         os_release: 'train'
+         ubuntu_release: 'focal'
+         os_release: 'victoria'
 
 - project:
     name: neutron-lbaas
