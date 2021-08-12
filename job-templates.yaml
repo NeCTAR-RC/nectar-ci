@@ -1256,6 +1256,8 @@
           description: "The default branch to test."
       - string:
           name: GERRIT_PROJECT
+          default: '{organisation}/{name}'
+          description: "The fully qualified project name."
 
     triggers:
       - gerrit:
@@ -1317,6 +1319,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
+      - string:
+          name: GERRIT_PROJECT
+          default: '{organisation}/{name}'
+          description: "The fully qualified project name."
 
     triggers:
       - gerrit:
