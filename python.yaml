@@ -539,7 +539,7 @@
          access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
-         os_release: 'ussuri'
+         os_release: 'victoria'
 
 - project:
     name: designate
