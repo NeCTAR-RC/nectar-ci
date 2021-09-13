@@ -899,7 +899,7 @@
 - job-template:
     name: '{name}-jekyll-test-build'
     defaults: global
-    node: bionic
+    node: focal
 
     parameters:
       - string:
