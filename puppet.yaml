@@ -471,6 +471,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-prometheus
+    jobs:
+      - '{name}-puppet-unit':
+         access: 'anonymous'
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-puppet
     jobs:
       - '{name}-puppet-unit':
