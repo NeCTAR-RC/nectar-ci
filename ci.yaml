@@ -9,12 +9,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -60,10 +54,6 @@
           description: "The default branch to test."
 
     properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
       - build-discarder:
           num-to-keep: 10
 
@@ -120,10 +110,6 @@
           description: "The default branch to test."
 
     properties:
-      - authorization:
-          '{access}':
-            - job-read
-            - job-discover
       - build-discarder:
           num-to-keep: 10
 
@@ -174,8 +160,5 @@
     name: nectar-ci
     jobs:
       - '{name}-ruby-lint':
-          access: 'anonymous'
       - '{name}-jenkins-jobs-test':
-          access: 'anonymous'
       - '{name}-jenkins-jobs-update':
-          access: 'anonymous'

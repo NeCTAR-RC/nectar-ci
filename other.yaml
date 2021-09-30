@@ -2,21 +2,18 @@
     name: lab-kubernetes
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-images
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: gitea-theme-ardc
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - job:
@@ -289,7 +286,6 @@
     name: octocatalog-diff
     jobs:
       - 'octocatalog-diff-test':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - job:
@@ -407,10 +403,8 @@
     name: nectar-testing
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-bionic-tox-{environment}':
-         access: 'nobody'
          environment: 'pep8'
          organisation: 'internal'
 
@@ -419,7 +413,6 @@
     name: nectar-reports
     jobs:
       - '{name}-xenial-tox-{environment}':
-         access: 'nobody'
          environment: 'pep8'
          organisation: 'internal'
 
@@ -428,15 +421,12 @@
     name: murano-docker-apps
     jobs:
       - '{name}-xenial-tox-{environment}':
-         access: 'nobody'
          environment: 'yamllint'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-tox-{environment}':
-         access: 'nobody'
          environment: 'shellcheck'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-tox-{environment}':
-         access: 'nobody'
          environment: 'murano-pkg-check'
          organisation: 'NeCTAR-RC'
 
@@ -445,53 +435,44 @@
     name: spartan-resplat
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'resplat-hpc'
 
 - project:
     name: spartan-slurmconf
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'resplat-hpc'
 
 - project:
     name: midonet
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: dashboard-dev
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-loci
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'internal'
       - 'requirements-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'internal'
          ubuntu_release: 'bionic'
          os_release: 'train'
       - 'requirements-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'internal'
          ubuntu_release: 'focal'
          os_release: 'ussuri'
       - 'requirements-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'internal'
          ubuntu_release: 'focal'
          os_release: 'victoria'
       - 'requirements-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'internal'
          ubuntu_release: 'focal'
          os_release: 'wallaby'
@@ -500,15 +481,12 @@
     name: loci
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-keycloak
     jobs:
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'

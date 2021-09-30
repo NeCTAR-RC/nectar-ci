@@ -2,10 +2,8 @@
     name: freshdesk-pip
     jobs:
       - '{name}-nodejs-test':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 
@@ -13,9 +11,7 @@
     name: freshdesk-openstack
     jobs:
       - '{name}-nodejs-test':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 

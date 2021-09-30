@@ -2,632 +2,537 @@
     name: puppet-anu
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-aodh
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-apache
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-barbican
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-bind
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-blazar
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ceilometer
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ceph
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-cinder
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-cloudkitty
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-dashboard
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-denyhosts
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-designate
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ec2api
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-elasticsearch
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-elk
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ersa
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-etckeeper
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-gnocchi
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ironic
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-manuka
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-memcached
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-midonet
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-mlocate
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-mongo
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-murano
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-facts
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-fail2ban
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ganglia
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-gitea
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-glance
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-graphite
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-haproxy
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-heat
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-intersect
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-iptables_templates
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-ivec
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-jenkins
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-karaage
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-kexec
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-keystone
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-logrotate
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-logstash
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-magnum
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-manila
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-mariadb
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-melbourne
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-cloud'
 
 - project:
     name: puppet-mongodb
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-mysql
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nag
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-nagios
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nectar
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-prod-review':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-neutron
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nginx
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-nova
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ntp
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-octavia
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-openstack
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-openstacklib
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-openvpn
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-oslo
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ovn
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-patchman
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-physical
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: camptocamp-podman
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-postfix
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-pound
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-prometheus
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-puppet
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-puppetboard
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-profile
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-prod-review':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-python
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-qld
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-rabbitmq
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-rcshibboleth
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-role
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-prod-review':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-rsyslog
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-screen
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-shibboleth
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-spartan
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-puppet-prod-review':
-         access: 'nobody'
          organisation: 'resplat-hpc'
 
 - project:
     name: puppet-sut
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-sysctl
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-tempest
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppetlabs-docker
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppetlabs-rsync
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-site-melbourne
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'resplat-cloud'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-cloud'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -635,25 +540,19 @@
     name: puppet-site-melbournetest
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'resplat-cloud'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-cloud'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
 
@@ -661,25 +560,19 @@
     name: puppet-site-monashtest
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'nectar-monash'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'puppet.test.rc.nectar.org.au'
 
@@ -687,25 +580,19 @@
     name: puppet-site-monashunder
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'nectar-monash'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -713,25 +600,19 @@
     name: puppet-site-monash
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'nectar-monash'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'nectar-monash'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'nectar-monash'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -739,25 +620,19 @@
     name: puppet-site-nectar
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -765,25 +640,19 @@
     name: puppet-site-spartan
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -791,25 +660,19 @@
     name: puppet-site-tas
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'tas-gerrit'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'tas-gerrit'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -817,25 +680,19 @@
     name: puppet-site-tasunder
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'tas-gerrit'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'tas-gerrit'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'tas-gerrit'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -843,25 +700,19 @@
     name: puppet-site-thespian
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-hpc'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'resplat-hpc'
          r10k_host: 'puppet.test.rc.nectar.org.au'
 
@@ -869,25 +720,19 @@
     name: puppet-site-swinburne
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -895,25 +740,19 @@
     name: puppet-site-uommediafluxtest
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'resplat-cloud'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'resplat-cloud'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'resplat-cloud'
          r10k_host: 'puppet.test.rc.nectar.org.au'
 
@@ -921,25 +760,19 @@
     name: puppet-site-rctest
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
 
@@ -947,25 +780,19 @@
     name: puppet-site-undertest
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'puppet.test.rc.nectar.org.au'
 
@@ -973,25 +800,19 @@
     name: puppet-site-auckland
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -999,25 +820,19 @@
     name: puppet-site-aucklandunder
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -1025,25 +840,19 @@
     name: puppet-site-intersect
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'internal'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'internal'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -1051,25 +860,19 @@
     name: puppet-site-qld_ctrl
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'QRIScloud'
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'QRIScloud'
       - '{name}-r10k-deploy':
-         access: 'nobody'
          organisation: 'QRIScloud'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-         access: 'nobody'
          organisation: 'QRIScloud'
          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-         access: 'nobody'
          organisation: 'QRIScloud'
          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-         access: 'nobody'
          organisation: 'QRIScloud'
          r10k_host: 'r10k.rc.nectar.org.au'
 
@@ -1077,112 +880,96 @@
     name: puppet-snmp
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-ssh
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-swift
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-tas
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-trove
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-ubuntu
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-vim
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-virtual
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-netapp
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-freshdesk
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: puppet-grafana
     jobs:
       - '{name}-puppet-unit':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: hiera-melbourne
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: hiera-sut
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: hieradata
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: puppet-monash
     jobs:
       - '{name}-puppet-unit':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: hiera-test
     jobs:
       - '{name}-yaml':
-         access: 'nobody'
          organisation: 'nectar-monash'
 
 

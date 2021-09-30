@@ -2,212 +2,164 @@
     name: hivemind
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: hivemind_contrib
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-xenial-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: langstroth
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'jshint'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-osc
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-tools
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'functional'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-stein-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-metrics
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-dummy-debian':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-openstack
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'nobody'
          organisation: 'internal'
          environment: 'py36'
       - '{name}-focal-tox-{environment}':
-         access: 'nobody'
          organisation: 'internal'
          environment: 'py38'
       - '{name}-bionic-tox-{environment}':
-         access: 'nobody'
          organisation: 'internal'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'internal'
 
 - project:
     name: openstacksdk
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: python-nectarallocationclient
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: vendordata
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
 
@@ -215,24 +167,19 @@
     name: python-placementclient
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: cookiecutter-pypackage
     jobs:
       - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
 
@@ -240,44 +187,35 @@
     name: nectar-reporting
     jobs:
       - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-trusty-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: aardvark
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
          deploy_to_test: 'true'
       - '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
@@ -286,15 +224,12 @@
     name: cloudkitty
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'wallaby'
@@ -303,15 +238,12 @@
     name: cyborg
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
@@ -320,29 +252,22 @@
     name: manuka
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'functional'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
@@ -351,47 +276,36 @@
     name: python-manukaclient
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: blazar
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'wallaby'
@@ -400,37 +314,30 @@
     name: blazar-nova
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: ec2-api
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: ec2api-tempest-plugin
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -438,45 +345,35 @@
     name: external_naginator
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nova
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'functional'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-os-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'bionic'
          os_release: 'train'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'ussuri'
@@ -486,62 +383,50 @@
     name: cinder
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'fast8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: horizon
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'bionic'
          os_release: 'train'
          environment: 'py36-dj1'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: heat
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
@@ -550,18 +435,14 @@
     name: designate
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}-upstream':
-         access: 'nobody'
          ubuntu_release: 'focal'
          os_release: 'victoria'
 
@@ -569,18 +450,14 @@
     name: ceilometer
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'bionic'
          os_release: 'train'
@@ -589,60 +466,48 @@
     name: octavia
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: octavia-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'eslint'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'karma'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: octavia-lib
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: octavia-tempest-plugin
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -650,15 +515,12 @@
     name: magnum
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'ussuri'
@@ -667,48 +529,38 @@
     name: python-magnumclient
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: magnum-ui
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: manila
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'ussuri'
@@ -717,78 +569,62 @@
     name: manila-ui
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: murano
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-focal-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: murano-agent
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: murano-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: neutron
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-container-{ubuntu_release}-{os_release}':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
@@ -797,85 +633,68 @@
     name: neutron-lbaas
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: networking-midonet
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: networking-ovn
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: neutron-lbaas-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: keystone
     jobs:
       - '{name}-os-bionic-ussuri-tox-{environment}':
-         access: 'nobody'
          organisation: 'internal'
          environment: 'py36'
       - '{name}-os-bionic-ussuri-tox-{environment}':
-         access: 'nobody'
          organisation: 'internal'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'nobody'
          organisation: 'internal'
       - '{name}-container':
-         access: 'nobody'
          organisation: 'internal'
 
 - project:
     name: elasticluster
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
 
@@ -883,7 +702,6 @@
     name: ospurge
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
 
@@ -891,11 +709,9 @@
     name: tempest
     jobs:
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -903,105 +719,84 @@
     name: python-troveclient
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: trove
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: trove-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: glance
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: glance_store
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: gnocchi
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36-mysql-file'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36-mysql-influxdb'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: rc-servicecheck
     jobs:
       - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-trusty-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
 
@@ -1009,7 +804,6 @@
     name: magnum-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1017,7 +811,6 @@
     name: murano-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1025,7 +818,6 @@
     name: trove-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1033,7 +825,6 @@
     name: designate-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1041,7 +832,6 @@
     name: heat-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1049,7 +839,6 @@
     name: telemetry-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1057,7 +846,6 @@
     name: manila-tempest-plugin
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -1065,57 +853,46 @@
     name: uom-cloud-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'resplat-cloud'
          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'resplat-cloud'
          environment: 'flake8'
       - '{name}-os-deb-package':
-         access: 'anonymous'
          organisation: 'resplat-cloud'
 
 - project:
     name: nectar-freshdesk
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py36'
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-container':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: python-orcid
     jobs:
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: django-select2-forms
     jobs:
       - '{name}-bionic-deb-package':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-dummy':
-         access: 'nobody'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: pfup
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
 
@@ -1123,48 +900,38 @@
     name: warre
     jobs:
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-os-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-container':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: python-warreclient
     jobs:
       - '{name}-bionic-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-focal-tox-{environment}':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-pypi-upload':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: aodh
     jobs:
       - '{name}-container-{ubuntu_release}-{os_release}-upstream':
-         access: 'nobody'
          ubuntu_release: 'focal'
          os_release: 'victoria'

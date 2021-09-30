@@ -2,25 +2,20 @@
     name: nectarcloud-tier0doco
     jobs:
       - '{name}-markdown':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-specs
     jobs:
       - '{name}-dummy':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
 
 - project:
     name: tutorials
     jobs:
       - '{name}-jekyll-test-build':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-jekyll-html-check':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
       - '{name}-jekyll-test-build-cleanup':
-         access: 'anonymous'
          organisation: 'NeCTAR-RC'
