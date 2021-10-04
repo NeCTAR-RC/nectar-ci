@@ -5,6 +5,74 @@
          organisation: 'internal'
 
 - job-template:
+    name: '{name}-kolla-container'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/nectar/wallaby
+          description: "The ref to use."
+      - string:
+          name: GERRIT_BRANCH
+          default: nectar/wallaby
+          description: "The branch to use."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Clone') {{
+            steps {{
+            git poll: false,
+                url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
+                credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+                branch: '$GERRIT_BRANCH'
+            }}
+          }}
+          stage('Build') {{
+            environment {{
+              REGISTRY = credentials('registry-nectar')
+            }}
+            steps {{
+              sh '''
+                export REGISTRY="registry.rc.nectar.org.au"
+                export REGISTRY_AUTH_FILE=auth.json
+                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+                OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{{ print $2 }}'`
+                virtualenv kolla
+                source kolla/bin/activate
+                pip install -r requirements.txt
+
+                docker image prune --all -f
+                docker image ls
+
+                docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
+                docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
+
+                kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
+              '''
+            }}
+          }}
+        }}
+      }}
+
+- job-template:
     name: '{name}-container'
     defaults: global
     project-type: pipeline
