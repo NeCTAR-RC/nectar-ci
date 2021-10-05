@@ -456,6 +456,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: nectar-kolla
+    jobs:
+      - '{name}-dummy':
+         organisation: 'internal'
+
+- project:
     name: nectar-loci
     jobs:
       - '{name}-dummy':
