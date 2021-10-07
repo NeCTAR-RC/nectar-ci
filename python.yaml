@@ -419,6 +419,8 @@
          environment: 'flake8'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
+      - 'dashboard-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: heat
