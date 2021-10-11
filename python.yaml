@@ -894,7 +894,7 @@
 - project:
     name: pfup
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
 
