@@ -952,4 +952,4 @@
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'pep8'
