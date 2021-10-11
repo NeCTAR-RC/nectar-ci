@@ -943,3 +943,13 @@
     jobs:
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: bumblebee
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
