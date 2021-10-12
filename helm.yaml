@@ -3,10 +3,14 @@
     jobs:
       - '{name}-helm-lint':
          organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-dashboard-helm
     jobs:
       - '{name}-helm-lint':
+         organisation: 'internal'
+      - '{name}-helm-package':
          organisation: 'internal'
 

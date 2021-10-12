@@ -102,6 +102,53 @@
 
 
 - job-template:
+    name: '{name}-helm-package'
+    defaults: global
+    node: internal
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'production'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+          trigger-for-unreviewed-patches: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - helm-package
+      - helm-push
+
+
+- job-template:
     name: '{name}-trusty-deb-package'
     defaults: global
     node: trusty-liberty

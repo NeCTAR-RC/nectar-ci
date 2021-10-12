@@ -235,6 +235,19 @@
          helm lint
 
 - builder:
+    name: helm-package
+    builders:
+      - shell: |
+         rm -rf *.tgz
+         helm package .
+
+- builder:
+    name: helm-push
+    builders:
+      - shell: |
+         helm push *.tgz oci://registry.rc.nectar.org.au/nectar-helm
+
+- builder:
     name: markdown-lint
     builders:
       - shell: |
