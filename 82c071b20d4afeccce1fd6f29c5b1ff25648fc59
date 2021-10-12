@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b012e7_d285353b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2021-10-12T02:54:32Z",
+      "side": 1,
+      "message": "nice, didn\u0027t realise there was a \"helm lint\"",
+      "revId": "82c071b20d4afeccce1fd6f29c5b1ff25648fc59",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5"
+    }
+  ]
+}
