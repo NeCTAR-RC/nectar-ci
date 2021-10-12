@@ -1,0 +1,12 @@
+- project:
+    name: aardvark-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-dashboard-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'internal'
+

@@ -229,6 +229,12 @@
       - shell: 'exit 0'
 
 - builder:
+    name: helm-lint
+    builders:
+      - shell: |
+         helm lint
+
+- builder:
     name: markdown-lint
     builders:
       - shell: |
