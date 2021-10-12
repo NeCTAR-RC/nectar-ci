@@ -143,6 +143,13 @@
            after: true
          choosing-strategy: gerrit
 
+    wrappers:
+      - credentials-binding:
+        - username-password-separated:
+           credential-id: registry-nectar
+           username: REGISTRY_USR
+           password: REGISTRY_PSW
+
     builders:
       - helm-package
       - helm-push

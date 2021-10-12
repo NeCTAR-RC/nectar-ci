@@ -245,6 +245,9 @@
     name: helm-push
     builders:
       - shell: |
+         export HELM_EXPERIMENTAL_OCI=1
+         export REGISTRY="registry.rc.nectar.org.au"
+         echo "$REGISTRY_PSW" | helm registry login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
          helm push *.tgz oci://registry.rc.nectar.org.au/nectar-helm
 
 - builder:
