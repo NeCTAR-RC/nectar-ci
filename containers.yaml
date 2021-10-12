@@ -31,6 +31,11 @@
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
             - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/nectar-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/trove-dashboard'
               branches:
                 - branch-compare-type: 'REG_EXP'
