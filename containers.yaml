@@ -190,7 +190,7 @@
               REGISTRY = credentials('registry-nectar')
             }}
             steps {{
-              sh '''#!bin/bash
+              sh '''
                 cd {name}
                 export VERSION_TAG=`git describe`
                 cd ..
@@ -210,8 +210,8 @@
 
                 for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
-                    docker tag ${{REGISTRY}}/kolla/${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/${{image}}:${{VERSION_TAG}}
-                    docker push ${{REGISTRY}}/kolla/${{image}}:${{VERSION_TAG}}
+                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                    docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                 done
 
               '''
