@@ -941,8 +941,7 @@
 - project:
     name: barbican
     jobs:
-      - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container-upstream'
 
 - project:
     name: bumblebee

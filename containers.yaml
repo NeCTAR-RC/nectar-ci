@@ -149,6 +149,71 @@
                 docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
 
                 kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
+
+              '''
+            }}
+          }}
+        }}
+      }}
+
+- job-template:
+    name: '{name}-kolla-container-upstream'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: OPENSTACK_RELEASE
+          default: wallaby
+          description: "Openstack version to use."
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Clone') {{
+            steps {{
+              git poll: false,
+                url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
+                credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                branch: 'nectar/${{OPENSTACK_RELEASE}}'
+              dir ('{name}') {{
+                git poll: false,
+                    url: 'https://github.com/openstack/{name}',
+                    branch: 'stable/${{OPENSTACK_RELEASE}}'
+              }}
+            }}
+          }}
+          stage('Build') {{
+            environment {{
+              REGISTRY = credentials('registry-nectar')
+            }}
+            steps {{
+              sh '''#!bin/bash
+                cd {name}
+                export VERSION_TAG=`git describe`
+                cd ..
+                export REGISTRY="registry.rc.nectar.org.au"
+                export REGISTRY_AUTH_FILE=auth.json
+                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+                virtualenv kolla
+                . kolla/bin/activate
+                pip install -r requirements.txt
+
+                docker image prune --all -f
+
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:${{OPENSTACK_RELEASE}}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:${{OPENSTACK_RELEASE}}
+
+                kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
+
+                for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{print $3}' | egrep -v '^(base|openstack-base)$'`
+                do
+                    docker tag ${{REGISTRY}}/kolla/${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/${{image}}:${{VERSION_TAG}}
+                    docker push ${{REGISTRY}}/kolla/${{image}}:${{VERSION_TAG}}
+                done
+
               '''
             }}
           }}
