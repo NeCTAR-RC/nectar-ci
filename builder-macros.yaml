@@ -235,6 +235,12 @@
          helm lint
 
 - builder:
+    name: helm-template
+    builders:
+      - shell: |
+         helm template .
+
+- builder:
     name: helm-package
     builders:
       - shell: |
