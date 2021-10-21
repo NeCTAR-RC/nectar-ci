@@ -1,4 +1,4 @@
-def call(String projectName, String cloudEnv, String imageName, String gitRepo) {
+def call(String projectName, String cloudEnv) {
     script {
         switch(cloudEnv) {
           case "production":
@@ -15,7 +15,6 @@ def call(String projectName, String cloudEnv, String imageName, String gitRepo) 
             break
         }
     }
-    git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: gitRepo
     withCredentials([usernamePassword(credentialsId: osCredId, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -eu
        echo "\033[33m========== Building for $cloudEnv ==========\033[0m"
@@ -24,15 +23,7 @@ def call(String projectName, String cloudEnv, String imageName, String gitRepo) 
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=$projectName
-       echo "Searching for image $imageName..."
-       IMAGE_ID=\$(openstack image list -f value -c ID --public --name "$imageName" | head -n1)
-       echo "Found image ID: \$IMAGE_ID"
-       # Find the directory containing the manifest
-       TARGET=\$(find * -name manifest.yaml -printf '%h\n')
-       sed -i "s/image:.*/image: \$IMAGE_ID/g" \$TARGET/UI/ui.yaml
-       echo "Zipping package..."
-       cd \$TARGET
-       zip ../package.zip -r *
+       make
        """
     }
     stash includes: 'package.zip', name: 'build'

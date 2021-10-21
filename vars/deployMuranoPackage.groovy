@@ -1,4 +1,4 @@
-def call(String projectName, String cloudEnv, String category) {
+def call(String projectName, String cloudEnv) {
     unstash 'build'
     script {
         switch(cloudEnv) {
@@ -24,7 +24,7 @@ def call(String projectName, String cloudEnv, String category) {
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=$projectName
-       murano package-import -c "$category" --is-public --exists-action u package.zip
+       murano package-import --is-public --exists-action u package.zip
        """
     }
 }
