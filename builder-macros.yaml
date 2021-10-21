@@ -224,6 +224,12 @@
           find . -type f -iname "*.yml" -o -iname "*.yaml" -o -iname "*.eyaml" | xargs -d '\n' /tmp/yamls/bin/yaml-lint
 
 - builder:
+    name: yamllint
+    builders:
+      - shell: |
+          yamllint -d relaxed .
+
+- builder:
     name: 'dummy'
     builders:
       - shell: 'exit 0'

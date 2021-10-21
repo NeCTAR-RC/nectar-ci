@@ -496,3 +496,9 @@
          organisation: 'NeCTAR-RC'
       - '{name}-container':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: heat-templates
+    jobs:
+      - '{name}-yamllint':
+         organisation: 'NeCTAR-RC'
