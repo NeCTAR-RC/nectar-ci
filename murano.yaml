@@ -111,7 +111,6 @@
                 stage('Deploy package in RCTest') {{
                     steps {{
                         deployMuranoPackage 'murano', 'testing'
-                        deleteDir()
                     }}
                 }}
                 stage('Build package in Production') {{
@@ -122,7 +121,6 @@
                 stage('Deploy package in Production') {{
                     steps {{
                         deployMuranoPackage 'murano', 'production'
-                        deleteDir()
                     }}
                 }}
             }}
