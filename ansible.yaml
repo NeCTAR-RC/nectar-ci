@@ -3,30 +3,10 @@
     jobs:
       - 'nectar-ansible-{task}':
          task: linters
-      - 'nectar-ansible-{environment}-{task}-{playbook}':
+      - 'nectar-ansible-check-{environment}':
          environment: rctest
-         task: check
-         playbook: f5-base
-      - 'nectar-ansible-{environment}-{task}-{playbook}':
-         environment: rctest
-         task: check
-         playbook: f5-certificates
-      - 'nectar-ansible-{environment}-{task}-{playbook}':
-         environment: rctest
-         task: check
-         playbook: f5-services
-      - 'nectar-ansible-{environment}-{task}-{playbook}':
+      - 'nectar-ansible-check-{environment}':
          environment: production
-         task: check
-         playbook: f5-base
-      - 'nectar-ansible-{environment}-{task}-{playbook}':
-         environment: production
-         task: check
-         playbook: f5-certificates
-      - 'nectar-ansible-{environment}-{task}-{playbook}':
-         environment: production
-         task: check
-         playbook: f5-services
 
 
 - job-template:
@@ -94,7 +74,7 @@
 
 
 - job-template:
-    name: 'nectar-ansible-{environment}-{task}-{playbook}'
+    name: 'nectar-ansible-check-{environment}'
     concurrent: false
     defaults: global
     node: internal
@@ -148,7 +128,7 @@
           export no_proxy=localhost,127.0.0.1,localaddress,169.254.169.254,172.16.0.0/12,115.146.80/20,.melbourne.rc.nectar.org.au,.melbourne.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au,.its.unimelb.edu.au,.unimelb.net.au,.test.rc.nectar.org.au,.dev.rc.nectar.org.au,.rc.nectar.org.au
           export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
-          tox -e {task}-{environment} playbook-{playbook}.yaml
+          tox -e check-{environment}
 
     wrappers:
       - ansicolor
