@@ -14,6 +14,11 @@
       - 'image-build-official-{name}'
 
 - project:
+    name: rocky-8
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
     name: debian-9
     jobs:
       - 'image-build-official-{name}'
