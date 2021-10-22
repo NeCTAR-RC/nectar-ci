@@ -29,7 +29,6 @@
                   branch-pattern: 'oldnova'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -82,7 +81,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -129,7 +127,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -798,7 +795,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -843,7 +839,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -889,7 +884,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -934,7 +928,6 @@
                   branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -979,7 +972,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -1026,7 +1018,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -1070,7 +1061,6 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -1124,7 +1114,6 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:

@@ -63,7 +63,6 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -128,7 +127,6 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:

@@ -40,7 +40,6 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:

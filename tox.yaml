@@ -65,7 +65,6 @@
                   branch-pattern: 'uom/{os_release}'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -120,7 +119,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -176,7 +174,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -233,7 +230,6 @@
                   branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
@@ -290,7 +286,6 @@
                   branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
-          trigger-for-unreviewed-patches: true
 
     scm:
       - git:
