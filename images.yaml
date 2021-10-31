@@ -154,6 +154,20 @@
          image_name: '{name}'
          default_user: 'root'
 
+- project:
+    name: bumblebee-ubuntu-20.04
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'ubuntu-20.04'
+         default_user: 'ubuntu'
+
+- project:
+    name: bumblebee-centos-7
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'centos-7'
+         default_user: 'ec2-user'
+
 
 - job-template:
     name: 'image-build-official-{name}'
@@ -816,3 +830,76 @@
           echo "  NeCTAR UnderCloud {image_name} v$BUILD_NUMBER build successful!"
           echo ""
           echo "================================================================================"
+
+
+- job-template:
+    name: 'image-build-bumblebee-{name}'
+    defaults: global
+    properties:
+      - authorization:
+          nobody:
+            - job-read
+            - job-discover
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {{
+            agent {{ label 'bionic' }}
+            options {{
+                preserveStashes(buildCount: 1)
+                ansiColor('xterm')
+            }}
+            stages {{
+                stage('Clone') {{
+                    steps {{
+                        git poll: false,
+                        url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-images.git',
+                        credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                        branch: '$GERRIT_BRANCH'
+                    }}
+                }}
+                stage('Build Image') {{
+                    steps {{
+                        imageBuildExtra '{image_name}', 'bumblebee'
+                    }}
+                }}
+                stage('Deploy image to RCTest') {{
+                    steps {{
+                        setImageID()
+                        deployImage 'bumblebee', 'testing'
+                        setImageProperties 'bumblebee', 'testing'
+                    }}
+                }}
+                stage('Test image in RCTest') {{
+                    steps {{
+                        testOfficialImage 'bumblebee', 'testing', 'coreservices'
+                    }}
+                }}
+                stage('Deploy image to Production') {{
+                    steps {{
+                        deployImage 'bumblebee', 'production'
+                        setImageProperties 'bumblebee', 'production'
+                    }}
+                }}
+                stage('Test image in Production') {{
+                    steps {{
+                        testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
+                    }}
+                }}
+            }}
+            post {{
+                failure {{
+                    node('internal') {{
+                        deleteImage 'bumblebee', 'testing'
+                        deleteImage 'bumblebee', 'production'
+                    }}
+                }}
+                cleanup {{
+                    node('bionic') {{
+                        deleteDir() /* clean up our workspace */
+                    }}
+                }}
+            }}
+        }}
