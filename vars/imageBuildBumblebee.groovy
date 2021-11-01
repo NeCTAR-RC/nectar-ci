@@ -13,8 +13,9 @@ def call(String imageName, String projectName) {
         rm -fr raw_image; mkdir raw_image
         NAME=$imageName
         SOURCE_NAME=\$(jq -r '.builders[0].source_image' \$NAME.json)
-        SOURCE_ID=\$(openstack image list -c ID -f value --public --name "\$SOURCE_ID")
-        echo "Found base image \$SOURCE_NAME (\$SOURCE_ID)..."
+        echo "Finding image ID for \$SOURCE_NAME..."
+        SOURCE_ID=\$(openstack image list -c ID -f value --public --name "\$SOURCE_NAME")
+        echo "Found base image \$SOURCE_NAME (\$SOURCE_ID)"
         jq ".builders[0].source_image = \\"\$SOURCE_ID\\" | .builders[0].image_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
         echo "Starting packer build..."
         packer build -color=true \$BUILD_TAG.json

@@ -857,12 +857,12 @@
                         git poll: false,
                         url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-images.git',
                         credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
-                        branch: '$GERRIT_BRANCH'
+                        branch: 'master'
                     }}
                 }}
                 stage('Build Image') {{
                     steps {{
-                        imageBuildExtra '{image_name}', 'bumblebee'
+                        imageBuildBumblebee '{image_name}', 'bumblebee'
                     }}
                 }}
                 stage('Deploy image to RCTest') {{
@@ -877,23 +877,11 @@
                         testOfficialImage 'bumblebee', 'testing', 'coreservices'
                     }}
                 }}
-                stage('Deploy image to Production') {{
-                    steps {{
-                        deployImage 'bumblebee', 'production'
-                        setImageProperties 'bumblebee', 'production'
-                    }}
-                }}
-                stage('Test image in Production') {{
-                    steps {{
-                        testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
-                    }}
-                }}
             }}
             post {{
                 failure {{
                     node('internal') {{
                         deleteImage 'bumblebee', 'testing'
-                        deleteImage 'bumblebee', 'production'
                     }}
                 }}
                 cleanup {{
