@@ -21,14 +21,6 @@
           default: refs/heads/master
           description: "The default branch to test."
 
-    properties:
-      - authorization:
-          'anonymous':
-            - job-read
-            - job-discover
-      - lockable-resources:
-          resources: nectar-ansible
-
     triggers:
       - gerrit:
           trigger-on:
@@ -84,14 +76,6 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
-    properties:
-      - authorization:
-          'anonymous':
-            - job-read
-            - job-discover
-      - lockable-resources:
-          resources: nectar-ansible
 
     triggers:
       - gerrit:
@@ -150,14 +134,6 @@
     concurrent: false
     defaults: global
     node: internal
-
-    properties:
-      - authorization:
-          'anonymous':
-            - job-read
-            - job-discover
-      - lockable-resources:
-          resources: nectar-ansible
 
     parameters:
       - choice:
