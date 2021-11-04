@@ -244,8 +244,13 @@
     name: helm-template
     builders:
       - shell: |
-         helm dependency build
          helm template .
+
+- builder:
+    name: helm-dependency-build
+    builders:
+      - shell: |
+         helm dependency build
 
 - builder:
     name: helm-package

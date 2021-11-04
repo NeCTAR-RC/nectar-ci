@@ -96,6 +96,7 @@
          choosing-strategy: gerrit
 
     builders:
+      - helm-dependency-build
       - helm-template
       - helm-lint
 
@@ -149,6 +150,7 @@
            password: REGISTRY_PSW
 
     builders:
+      - helm-dependency-build
       - helm-package
       - helm-push
 
