@@ -1,0 +1,242 @@
+- job:
+    name: 'dashboard-devenv-create'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/nectar/wallaby
+          description: "The ref to use."
+      - string:
+          name: GERRIT_BRANCH
+          default: nectar/wallaby
+          description: "The branch to use."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - patchset-created-event
+              - change-restored-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/horizon'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/nectar-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/trove-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/murano-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        environment {{
+          TAG = "${{"review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER}}"
+          REGISTRY = credentials('registry-nectar')
+          KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
+          GERRIT_API = credentials('2f00f9a5-00c3-42fe-82bf-cc787af1df8c')
+        }}
+        stages {{
+          stage('Clone') {{
+            steps {{
+              deleteDir()
+              git poll: false,
+                  url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
+                  credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                  branch: '$GERRIT_BRANCH'
+              dir ('src/${env.GERRIT_PROJECT}') {{
+                checkout(
+                  poll: false,
+                  scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: 'origin/$GERRIT_BRANCH']],
+                    extensions: [
+                      [$class: 'CloneOption', honorRefspec: true],
+                      [$class: 'CleanCheckout'],
+                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
+                    ],
+                    userRemoteConfigs: [[
+                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      name: 'origin',
+                      refspec: '$GERRIT_REFSPEC',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/$GERRIT_PROJECT.git'
+                    ]]
+                  ]
+                )
+              }}
+            }}
+          }}
+          stage('Build') {{
+            steps {{
+              sh '''
+              export REGISTRY="registry.rc.nectar.org.au"
+              export REGISTRY_AUTH_FILE=auth.json
+              echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+              OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{{ print $2 }}'`
+              virtualenv kolla
+              . kolla/bin/activate
+              pip install -r requirements.txt
+
+              docker image prune --all -f
+              docker image ls
+
+              docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
+              docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
+
+              kolla-build --config-file dev/$GERRIT_PROJECT/kolla-build.conf --profile dashboard --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY
+              for image in `kolla-build --list-images --profile dashboard --config-file dev/$GERRIT_PROJECT/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
+              do
+                docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{TAG}}
+                docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{TAG}}
+              done
+              '''
+            }}
+          }}
+          stage('Deploy') {{
+            agent {{ label 'internal' }}
+            steps{{
+              sh '''
+              export OS_USERNAME=$KEYSTONE_USR
+              export OS_PASSWORD=$KEYSTONE_PSW
+              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_PROJECT_DOMAIN_NAME=Default
+              export OS_USER_DOMAIN_NAME=Default
+              export OS_IDENTITY_API_VERSION=3
+              export OS_PROJECT_NAME=NeCTAR-Devs
+              openstack recordset create dev.rc.nectar.org.au. ${{TAG}}.dev.rc.nectar.org.au. --type CNAME --record k8s-worker-1.dev.rc.nectar.org.au.
+              '''
+              dir ('containers') {{
+                git poll: false,
+                    url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/containers.git',
+                    credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                    branch: 'master'
+
+                withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
+                                serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
+                ]) {{
+                  sh '''
+                  kubectl get namespaces
+                  echo "$REGISTRY_PSW" | helm repo add nectar-internal https://registry.rc.nectar.org.au/chartrepo/nectar-internal \
+                    --username "$REGISTRY_USR" --password-stdin
+                  helm install -n ${{TAG}} --create-namespace dashboard nectar-internal/dashboard \
+                    -f dev/dashboard/values.yaml --set image.tag=${{TAG}} \
+                    --set conf.token_url=http://${{TAG}}.dev.rc.nectar.org.au:31974/auth/websso/ \
+                    --set ingress.host=${{TAG}}.dev.rc.nectar.org.au
+                  '''
+                }}
+                sh '''
+                curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' \
+                  -d "{{'message': 'Test at: http://${{TAG}}.dev.rc.nectar.org.au:31974'}}" \
+                  https://$GERRIT_HOST/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
+                '''
+              }}
+            }}
+          }}
+        }}
+      }}
+
+- job:
+    name: 'dashboard-devenv-cleanup'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/nectar/wallaby
+          description: "The ref to use."
+      - string:
+          name: GERRIT_BRANCH
+          default: nectar/wallaby
+          description: "The branch to use."
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - change-abandoned-event
+              - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/horizon'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/nectar-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/trove-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/murano-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'internal' }}
+        environment {{
+          KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
+          REGISTRY = credentials('registry-nectar')
+        }}
+        stages {{
+          stage('Cleanup') {{
+            steps {{
+              sh '''
+              export OS_USERNAME=$KEYSTONE_USR
+              export OS_PASSWORD=$KEYSTONE_PSW
+              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_PROJECT_DOMAIN_NAME=Default
+              export OS_USER_DOMAIN_NAME=Default
+              export OS_IDENTITY_API_VERSION=3
+              export OS_PROJECT_NAME=NeCTAR-Devs
+
+              TAG_BASE=review-$GERRIT_CHANGE_NUMBER
+
+              recordsets=`openstack recordset list dev.rc.nectar.org.au. | grep ${{TAG_BASE}} | awk '{{print $2}}'`
+              for i in $recordsets
+              do
+                  openstack recordset delete dev.rc.nectar.org.au. $i
+              done
+              '''
+
+              withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
+                    serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
+              ]) {{
+                sh '''
+                  TAG_BASE=review-$GERRIT_CHANGE_NUMBER
+                  namespaces=`kubectl get namespaces | grep ${{TAG_BASE}} | awk '{{print $1}}'`
+                  for namespace in $namespaces
+                  do
+                      kubectl delete namespace $namespace
+                  done
+                  '''
+              }}
+            }}
+          }}
+        }}
+      }}
