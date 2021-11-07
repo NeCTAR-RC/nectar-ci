@@ -53,9 +53,23 @@
           GERRIT_API = credentials('2f00f9a5-00c3-42fe-82bf-cc787af1df8c')
         }
         stages {
+          stage('DNS') {
+            agent { label 'internal' }
+            steps{
+              sh '''
+              export OS_USERNAME=$KEYSTONE_USR
+              export OS_PASSWORD=$KEYSTONE_PSW
+              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_PROJECT_DOMAIN_NAME=Default
+              export OS_USER_DOMAIN_NAME=Default
+              export OS_IDENTITY_API_VERSION=3
+              export OS_PROJECT_NAME=NeCTAR-Devs
+              openstack recordset create dev.rc.nectar.org.au. ${TAG}.dev.rc.nectar.org.au. --type CNAME --record k8s-worker-1.dev.rc.nectar.org.au.
+              '''
+            }
+          }
           stage('Clone') {
             steps {
-              deleteDir()
               git poll: false,
                   url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                   credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
@@ -111,16 +125,6 @@
           stage('Deploy') {
             agent { label 'internal' }
             steps{
-              sh '''
-              export OS_USERNAME=$KEYSTONE_USR
-              export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
-              export OS_PROJECT_DOMAIN_NAME=Default
-              export OS_USER_DOMAIN_NAME=Default
-              export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
-              openstack recordset create dev.rc.nectar.org.au. ${TAG}.dev.rc.nectar.org.au. --type CNAME --record k8s-worker-1.dev.rc.nectar.org.au.
-              '''
               dir ('containers') {
                 git poll: false,
                     url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/containers.git',
@@ -146,6 +150,31 @@
                   https://$GERRIT_HOST/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
                 '''
               }
+            }
+          }
+        }
+        post {
+          failure {
+            node('internal') {
+              sh '''
+              export OS_USERNAME=$KEYSTONE_USR
+              export OS_PASSWORD=$KEYSTONE_PSW
+              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_PROJECT_DOMAIN_NAME=Default
+              export OS_USER_DOMAIN_NAME=Default
+              export OS_IDENTITY_API_VERSION=3
+              export OS_PROJECT_NAME=NeCTAR-Devs
+              recordsets=`openstack recordset list dev.rc.nectar.org.au. | grep ${TAG} | awk '{print $2}'`
+              for i in $recordsets
+              do
+                  openstack recordset delete dev.rc.nectar.org.au. $i
+              done
+              '''
+            }
+          }
+          cleanup {
+            node('docker') {
+              deleteDir() /* clean up our workspace */
             }
           }
         }
