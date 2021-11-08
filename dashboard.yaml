@@ -220,7 +220,6 @@
         agent { label 'internal' }
         environment {
           KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
-          REGISTRY = credentials('registry-nectar')
         }
         stages {
           stage('Cleanup') {
