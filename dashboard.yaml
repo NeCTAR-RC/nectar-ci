@@ -99,7 +99,7 @@
           }
           stage('Build') {
             steps {
-              kollaBuild profile: dashboard,
+              kollaBuild profile: 'dashboard',
                          config_file: "dev/${env.GERRIT_PROJECT}/kolla-build.conf"
 
               sh '''
