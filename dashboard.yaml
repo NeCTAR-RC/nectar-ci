@@ -99,8 +99,7 @@
           }
           stage('Build') {
             steps {
-              kollaBuild profile: 'dashboard',
-                         config_file: "dev/${env.GERRIT_PROJECT}/kolla-build.conf"
+              kollaBuild 'dashboard', "dev/${env.GERRIT_PROJECT}/kolla-build.conf"
 
               sh '''
               OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{ print $2 }'`
