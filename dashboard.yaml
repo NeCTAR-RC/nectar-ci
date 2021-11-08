@@ -49,6 +49,7 @@
         environment {
           TAG = "${"review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER}"
           REGISTRY = credentials('registry-nectar')
+          REGISTRY_HOST="registry.rc.nectar.org.au"
           KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
           GERRIT_API = credentials('2f00f9a5-00c3-42fe-82bf-cc787af1df8c')
         }
@@ -98,26 +99,15 @@
           }
           stage('Build') {
             steps {
+              kollaBuild profile: dashboard,
+                         config_file: "dev/${env.GERRIT_PROJECT}/kolla-build.conf"
+
               sh '''
-              export REGISTRY="registry.rc.nectar.org.au"
-              export REGISTRY_AUTH_FILE=auth.json
-              echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
               OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{ print $2 }'`
-              virtualenv kolla
-              . kolla/bin/activate
-              pip install -r requirements.txt
-
-              docker image prune --all -f
-              docker image ls
-
-              docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
-              docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
-
-              kolla-build --config-file dev/$GERRIT_PROJECT/kolla-build.conf --profile dashboard --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY
               for image in `kolla-build --list-images --profile dashboard --config-file dev/$GERRIT_PROJECT/kolla-build.conf | awk '{print $3}' | egrep -v '^(base|openstack-base)$'`
               do
-                docker tag ${REGISTRY}/kolla/ubuntu-source-${image}:${OPENSTACK_RELEASE} ${REGISTRY}/kolla/ubuntu-source-${image}:${TAG}
-                docker push ${REGISTRY}/kolla/ubuntu-source-${image}:${TAG}
+                docker tag ${REGISTRY_HOST}/kolla/ubuntu-source-${image}:${OPENSTACK_RELEASE} ${REGISTRY_HOST}/kolla/ubuntu-source-${image}:${TAG}
+                docker push ${REGISTRY_HOST}/kolla/ubuntu-source-${image}:${TAG}
               done
               '''
             }
