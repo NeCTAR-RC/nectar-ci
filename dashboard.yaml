@@ -118,6 +118,7 @@
                   kubectl get namespaces
                   echo "$REGISTRY_PSW" | helm repo add nectar-internal https://registry.rc.nectar.org.au/chartrepo/nectar-internal \
                     --username "$REGISTRY_USR" --password-stdin
+                  helm repo update
                   helm install -n ${TAG} --create-namespace dashboard nectar-internal/dashboard \
                     -f dev/dashboard/values.yaml --set image.tag=${TAG} \
                     --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
