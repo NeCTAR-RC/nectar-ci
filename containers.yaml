@@ -63,25 +63,15 @@
           stage('Build') {{
             environment {{
               REGISTRY = credentials('registry-nectar')
+              REGISTRY_HOST = "registry.rc.nectar.org.au"
             }}
             steps {{
-              sh '''
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-                OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{{ print $2 }}'`
-                virtualenv kolla
-                . kolla/bin/activate
-                pip install -r requirements.txt
-
-                docker image prune --all -f
-                docker image ls
-
-                docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
-                docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
-
-                kolla-build --config-file etc/kolla-build.conf --profile dashboard --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
-              '''
+              script {{
+                env.OPENSTACK_RELEASE = sh(script: "echo ${{env.GERRIT_BRANCH}} | awk -F '/' '{{ print \$2 }}'", 
+                                           returnStdout: true).trim()
+                env.TAG = "${{env.OPENSTACK_RELEASE}}-${{env.BUILD_NUMBER}}"
+              }}
+              kollaBuild 'dashboard', "${{env.TAG}}"
             }}
           }}
         }}
