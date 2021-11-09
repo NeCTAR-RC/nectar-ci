@@ -99,7 +99,7 @@
           }
           stage('Build') {
             steps {
-              kollaBuild 'dashboard', "${env.TAG}" "dev/${env.GERRIT_PROJECT}/kolla-build.conf"
+              kollaBuild 'dashboard', "${env.TAG}", "dev/${env.GERRIT_PROJECT}/kolla-build.conf"
             }
           }
           stage('Deploy') {
