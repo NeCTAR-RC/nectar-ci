@@ -404,8 +404,6 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-dashboard
@@ -413,16 +411,9 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py36'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         ubuntu_release: 'bionic'
-         os_release: 'train'
-         environment: 'py36-dj1'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
       - 'dashboard-kolla-container':
          organisation: 'NeCTAR-RC'
 
@@ -616,8 +607,6 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: neutron
@@ -754,8 +743,6 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: glance
