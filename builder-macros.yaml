@@ -250,6 +250,8 @@
     name: helm-dependency-build
     builders:
       - shell: |
+         # Add bintami repo as we trust it, see https://github.com/helm/helm/issues/8036 for reasons why this is needed
+         helm repo add bitnami https://charts.bitnami.com/bitnami
          helm dependency build
 
 - builder:
