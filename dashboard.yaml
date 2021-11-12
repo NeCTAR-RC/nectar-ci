@@ -122,7 +122,7 @@
                   helm install -n ${TAG} --create-namespace dashboard nectar-internal/dashboard \
                     -f dev/dashboard/values.yaml --set image.tag=${TAG} \
                     --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
-                    --set ingress.hosts.0.host=${TAG}.dev.rc.nectar.org.au
+                    --set ingress.hosts.0.host=${TAG}.dev.rc.nectar.org.au \
                     --set ingress.hosts.0.paths.0.path=/
                   '''
                 }
