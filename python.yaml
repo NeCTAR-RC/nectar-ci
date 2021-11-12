@@ -60,16 +60,16 @@
 - project:
     name: nectar-tools
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'functional'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-stein-deb-package':
