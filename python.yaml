@@ -675,14 +675,12 @@
 - project:
     name: keystone
     jobs:
-      - '{name}-os-bionic-ussuri-tox-{environment}':
+      - '{name}-os-tox-{environment}':
          organisation: 'internal'
-         environment: 'py36'
-      - '{name}-os-bionic-ussuri-tox-{environment}':
+         environment: 'py38'
+      - '{name}-os-tox-{environment}':
          organisation: 'internal'
          environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'internal'
       - '{name}-container':
          organisation: 'internal'
 
