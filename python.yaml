@@ -753,6 +753,7 @@
          environment: 'pep8'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container-upstream'
 
 - project:
     name: glance_store
