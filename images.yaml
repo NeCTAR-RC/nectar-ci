@@ -865,9 +865,13 @@
                         imageBuildBumblebee '{image_name}', 'bumblebee'
                     }}
                 }}
-                stage('Deploy image to RCTest') {{
+                stage('Set Image ID') {{
                     steps {{
                         setImageID()
+                    }}
+                }}
+                stage('Deploy image to RCTest') {{
+                    steps {{
                         deployImage 'bumblebee', 'testing'
                         setImageProperties 'bumblebee', 'testing'
                     }}
@@ -877,11 +881,24 @@
                         testOfficialImage 'bumblebee', 'testing', 'coreservices'
                     }}
                 }}
+                stage('Deploy image to Production') {{
+                    steps {{
+                        deployImage 'bumblebee', 'production'
+                        setImageProperties 'bumblebee', 'production'
+                    }}
+                }}
+                stage('Test image in Production') {{
+                    steps {{
+                        testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
+                    }}
+                }}
+
             }}
             post {{
                 failure {{
                     node('internal') {{
                         deleteImage 'bumblebee', 'testing'
+                        deleteImage 'bumblebee', 'production'
                     }}
                 }}
                 cleanup {{
