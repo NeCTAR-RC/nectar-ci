@@ -881,6 +881,11 @@
                         testOfficialImage 'bumblebee', 'testing', 'coreservices'
                     }}
                 }}
+                stage('Deploy volumes to RCTest') {{
+                    steps {{
+                        deployVolumeBumblebee 'bumblebee', 'testing', 'coreservices'
+                    }}
+                }}
                 stage('Deploy image to Production') {{
                     steps {{
                         deployImage 'bumblebee', 'production'
@@ -892,7 +897,11 @@
                         testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
                     }}
                 }}
-
+                stage('Deploy volumes to Production') {{
+                    steps {{
+                        deployVolumeBumblebee 'bumblebee', 'production', 'melbourne-qh2,QRIScloud'
+                    }}
+                }}
             }}
             post {{
                 failure {{
