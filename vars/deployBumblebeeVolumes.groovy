@@ -20,13 +20,13 @@ def call(String project_name, String cloud_env, String zones) {
 
     withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -ex
-       echo "\033[33m========== Promote image for $cloud_env ==========\033[0m"
+       echo "\033[33m========== Deploy Bumblebee volumes for $cloud_env ==========\033[0m"
        export OS_AUTH_URL=$os_auth_url
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=$project_name
-       python scripts/bumblebee_deploy_volume.py -y -z melbourne-qh2 -z QRIScloud $imageId
+       python scripts/bumblebee_deploy_volume.py -w -y -z $zones $imageId
        """
     }
 }
