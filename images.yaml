@@ -872,7 +872,7 @@
                 }}
                 stage('Deploy image to RCTest') {{
                     steps {{
-                        deployImage 'bumblebee', 'testing'
+                        deployImageBumblebee 'bumblebee', 'testing'
                         setImageProperties 'bumblebee', 'testing'
                     }}
                 }}
@@ -888,7 +888,7 @@
                 }}
                 stage('Deploy image to Production') {{
                     steps {{
-                        deployImage 'bumblebee', 'production'
+                        deployImageBumblebee 'bumblebee', 'production'
                         setImageProperties 'bumblebee', 'production'
                     }}
                 }}
