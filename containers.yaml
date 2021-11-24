@@ -74,6 +74,11 @@
               kollaBuild 'dashboard', "${{env.TAG}}"
             }}
           }}
+          stage('Helm package') {{
+            steps {{
+              build job: 'nectar-dashboard-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.TAG}}")]
+            }}
+          }}
         }}
       }}
 
