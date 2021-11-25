@@ -216,6 +216,75 @@
       }}
 
 - job-template:
+    name: '{name}-helm-update-version'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    parameters:
+      - string:
+          name: IMAGE_TAG
+          description: "New image tag for version"
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'internal' }}
+        stages {{
+          stage('Clone') {{
+            steps {{
+              git poll: false,
+                  url: 'https://jenkins@review.rc.nectar.org.au/a/{organisation}/{name}',
+                  credentialsId: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c',
+                  branch: 'master'
+            }}
+          }}
+          stage('Build') {{
+            steps {{
+              script {{
+                def chart = readYaml file: 'Chart.yaml'
+                def split = chart.version.split('\\.')
+                split[2] = Integer.parseInt(split[2]) + 1
+                chart.version = split.join('.')
+                chart.appVersion = "\$IMAGE_TAG"
+                def new_chart = writeYaml file: 'Chart.yaml',  data: chart, overwrite:true
+              }}
+              sh '''
+              cat Chart.yaml
+              git config user.name 'Jenkins'
+              git config user.email 'jenkins@rc.nectar.org.au'
+              git add Chart.yaml && git commit -am "[Jenkins CI] New appVersion: \$IMAGE_TAG"
+              '''
+            }}
+          }}
+          stage("Push") {{
+            environment {{
+              GIT_AUTH = credentials('2f00f9a5-00c3-42fe-82bf-cc787af1df8c')
+            }}
+            steps {{
+              sh('''
+                 git show -q
+                 git config --local credential.helper "!f() {{ echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }}; f"
+                 git push origin HEAD:refs/heads/master
+                 git config --local --unset credential.helper
+              ''')
+            }}
+          }}
+          stage("Package") {{
+              steps {{
+                build(job: '{name}-helm-package')
+              }}
+          }}
+        }}
+        post {{
+          cleanup {{
+            node('internal') {{
+              deleteDir() /* clean up our workspace */
+            }}
+          }}
+        }}
+      }}
+
+- job-template:
     name: '{name}-container'
     defaults: global
     project-type: pipeline

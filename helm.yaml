@@ -13,4 +13,6 @@
          organisation: 'internal'
       - '{name}-helm-package':
          organisation: 'internal'
+      - '{name}-helm-update-version':
+         organisation: 'internal'
 
