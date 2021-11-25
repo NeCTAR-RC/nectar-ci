@@ -20,8 +20,8 @@
     name: bumblebee-helm
     jobs:
       - '{name}-helm-lint':
-         organisation: 'internal'
+         organisation: 'NeCTAR-RC'
       - '{name}-helm-package':
-         organisation: 'internal'
+         organisation: 'NeCTAR-RC'
       - '{name}-helm-update-version':
-         organisation: 'internal'
+         organisation: 'NeCTAR-RC'
