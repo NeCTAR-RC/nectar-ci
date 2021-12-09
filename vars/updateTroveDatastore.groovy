@@ -22,13 +22,13 @@ def call(String cloud_env, String active = '1') {
     }
     withCredentials([usernamePassword(credentialsId: os_cred_id, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash
-       export OS_AUTH_URL=$os_auth_url
+       export OS_AUTH_URL=${os_auth_url}
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=trove
        echo "Finding previous datastore version"
-       PREVIOUS_BUILD=`openstack datastore version list $datastoreType -c Name -f value | grep "${datastoreVersion}-" | awk -F '-' '{print \$2}' | sort -n | tail -n 1`
+       PREVIOUS_BUILD=`openstack datastore version list ${datastoreType} -c Name -f value | grep "${datastoreVersion}-" | awk -F '-' '{print \$2}' | sort -n | tail -n 1`
        if [ -n "\$PREVIOUS_BUILD" ]; then
            PREVIOUS_VERSION=${datastoreVersion}-\$PREVIOUS_BUILD
        else
@@ -37,15 +37,15 @@ def call(String cloud_env, String active = '1') {
        mkdir -p previous-version
        echo \$PREVIOUS_VERSION > previous-version/${cloud_env}
        echo "Previous version is: \$PREVIOUS_VERSION"
-       echo "\033[33m========== Updating Trove datastore in $cloud_env ==========\033[0m"
-       echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' $active"
-       trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' $active
-       echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf db_load_datastore_config_parameters $datastoreName ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json"
-       trove-manage --config-file /etc/trove/${cloud_env}.conf db_load_datastore_config_parameters $datastoreName ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json
-       for flavor_id in `openstack flavor list --long --all | grep "flavor_class:name='trove'" | awk '{print $2}'`
+       echo "\033[33m========== Updating Trove datastore in ${cloud_env} ==========\033[0m"
+       echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${datastoreType} ${imageId} '' ${active}"
+       trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${datastoreType} ${imageId} '' ${active}
+       echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf db_load_datastore_config_parameters ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json"
+       trove-manage --config-file /etc/trove/${cloud_env}.conf db_load_datastore_config_parameters ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json
+       for flavor_id in `openstack flavor list --long --all | grep "flavor_class:name='trove'" | awk '{print \$2}'`
        do
-         echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_flavor_add $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $flavor_id"
-         trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_flavor_add $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $flavor_id
+         echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_flavor_add ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${flavor_id}"
+         trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_flavor_add ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${flavor_id}
        done
        """
     }
