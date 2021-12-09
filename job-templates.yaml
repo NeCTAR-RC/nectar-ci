@@ -1,5 +1,7 @@
 - job-template:
-    name: '{name}-puppet-unit'
+    id: '{name}-puppet-unit'
+    name: '{name}-puppet-unit{name-suffix}'
+    name-suffix:
     defaults: global
     node: puppet
 
