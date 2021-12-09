@@ -245,7 +245,7 @@
                 def split = chart.version.split('\\.')
                 split[2] = Integer.parseInt(split[2]) + 1
                 chart.version = split.join('.')
-                chart.appVersion = "\$IMAGE_TAG"
+                chart.appVersion = "$IMAGE_TAG"
                 def new_chart = writeYaml file: 'Chart.yaml',  data: chart, overwrite:true
               }}
               sh '''
