@@ -792,9 +792,10 @@
           echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
           echo ""
           echo "  To use this new image in Jenkins, go to:"
-          echo "      https://jenkins.rc.nectar.org.au/configure"
+          echo "      https://jenkins.rc.nectar.org.au/configureClouds/"
           echo ""
-          echo "  and set the 'Cloud Instance Templates Image ID' value to:"
+          echo "  find the node group that you want to update the image for
+          echo "  and click 'provisioning details' and update the boot source image to:"
           echo "      {image_name}-v$BUILD_NUMBER"
           echo ""
           echo "================================================================================"
