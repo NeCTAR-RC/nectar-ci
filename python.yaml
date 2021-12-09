@@ -323,6 +323,13 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: blazar-tempest-plugin
+    jobs:
+      - '{name}-bionic-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: ec2-api
     jobs:
       - '{name}-os-tox-{environment}':
