@@ -1,5 +1,5 @@
 - job-template:
-    id: '{name}-puppet-unit'
+    id: '{name}-puppet-unit-job'
     name: '{name}-puppet-unit{name-suffix}'
     name-suffix: ''
     defaults: global
