@@ -900,7 +900,7 @@
                 }}
                 stage('Deploy volumes to Production') {{
                     steps {{
-                        deployBumblebeeVolumes 'bumblebee', 'production', 'melbourne-qh2,QRIScloud'
+                        deployBumblebeeVolumes 'bumblebee', 'production', 'melbourne-qh2,QRIScloud,monash-02'
                     }}
                 }}
             }}
