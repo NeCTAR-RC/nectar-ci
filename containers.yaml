@@ -289,6 +289,7 @@
     defaults: global
     project-type: pipeline
     sandbox: true
+    helm_name: false
 
     parameters:
       - string:
@@ -367,6 +368,19 @@
 
                 rm auth.json
                 '''
+            }}
+          }}
+          stage('Helm package update') {{
+            when {{
+                expression {{
+                  return {helm_name} && env.GERRIT_EVENT_TYPE != 'patchset-created'
+                }}
+            }}
+            steps {{
+                script {{
+                  env.IMAGE_TAG = sh(script: "git describe --tags --always", returnStdout: true).trim()
+                }}
+                build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}")]
             }}
           }}
         }}
