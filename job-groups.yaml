@@ -1,7 +1,7 @@
 - job-group:
     name: '{name}-puppet-unit'
     jobs:
-        - '{name}-puppet-unit-job':
+        - '{name}-puppet-unit-job'
         - '{name}-puppet-unit-job':
             name-suffix: -next
             node: focal
