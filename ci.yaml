@@ -86,6 +86,7 @@
 
     builders:
       - jenkins-jobs-test
+      - jenkins-jobs-test-diff
 
     wrappers:
       - ssh-agent-credentials:

@@ -378,6 +378,18 @@
           jenkins-jobs update .
 
 - builder:
+    name: jenkins-jobs-test-diff
+    builders:
+      - shell: |
+          echo "Setting up diff:"
+          git checkout $GERRIT_NEWREV
+          NEW_CONF=$(jenkins-jobs test . 2>&1)
+          git reset --hard origin/master
+          OLD_CONF=$(jenkins-jobs test . 2>&1)
+          echo "diff:"
+          diff -U0 --color=always  <(echo "$OLD_CONF") <(echo "$NEW_CONF")
+
+- builder:
     name: site-deploy
     builders:
       - ssh-builder:
