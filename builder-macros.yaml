@@ -389,6 +389,7 @@
           OLD_CONF=$(jenkins-jobs test . 2>&1)
           echo "diff:"
           diff -U0 --color=always  <(echo "$OLD_CONF") <(echo "$NEW_CONF")
+          exit 0
 
 - builder:
     name: site-deploy
