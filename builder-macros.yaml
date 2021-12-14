@@ -381,6 +381,7 @@
     name: jenkins-jobs-test-diff
     builders:
       - shell: |
+          #!/bin/bash
           echo "Setting up diff:"
           git checkout $GERRIT_NEWREV
           NEW_CONF=$(jenkins-jobs test . 2>&1)
