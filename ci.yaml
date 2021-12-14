@@ -92,6 +92,7 @@
       - ssh-agent-credentials:
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+      - ansicolor
 
 - job-template:
     name: '{name}-jenkins-jobs-update'
