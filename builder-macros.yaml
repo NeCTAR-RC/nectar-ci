@@ -385,6 +385,7 @@
           echo "Setting up diff:"
           git checkout $GERRIT_NEWREV
           NEW_CONF=$(jenkins-jobs test . 2>&1)
+          git fetch
           git reset --hard origin/master
           OLD_CONF=$(jenkins-jobs test . 2>&1)
           echo "diff:"
