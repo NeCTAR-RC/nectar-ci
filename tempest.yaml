@@ -1456,6 +1456,10 @@
             - job-discover
       - build-discarder:
           days-to-keep: 7
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-nagios-site-{site}.*"
+          block-level: 'GLOBAL'
 
 - job-template:
     name: 'tempest-nagios-services-{test}-{environment}'
