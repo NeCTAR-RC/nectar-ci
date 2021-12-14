@@ -586,6 +586,74 @@
             - job-read
             - job-discover
 
+
+- job:
+    name: tempest-blazar-check
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+    builders:
+      - shell: |
+          #!/bin/bash
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD --blazar-resource-properties $BLAZAR_RESOURCE_PROPERTIES -j check-blazar $tmpdir
+          cd $tmpdir
+          stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-blazar.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - auckland
+            - intersect-01
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - qld
+            - swinburne-01
+            - tasmania
+            - tasmania-02
+            - tasmania-s
+            - coreservices
+            - qh2-test
+            - monash-test
+            - lani
+            - luna
+          description: 'Availability zone.'
+      - string:
+          name: 'BLAZAR_RESOURCE_PROPERTIES'
+          description: |
+                Optional. Specify Blazar resource_properties. <br>
+                - e.g. To test creating a lease for a P40 GPU in Auckland zone, specify <br>
+                - '["and", ["=", "$availability_zone", "auckland"], ["=", "$gpu", "P40"]]'
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
+
+
 - project:
     name: trove-mysql
     jobs:
