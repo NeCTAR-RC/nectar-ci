@@ -602,7 +602,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD --blazar-resource-properties $BLAZAR_RESOURCE_PROPERTIES -j check-blazar $tmpdir
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD --blazar-resource-properties "$BLAZAR_RESOURCE_PROPERTIES" --blazar-extra-specs "$BLAZAR_EXTRA_SPECS" -j check-blazar $tmpdir
           cd $tmpdir
           stestr run --serial --whitelist-file $WORKSPACE/tempest/whitelists/check-blazar.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -641,8 +641,14 @@
           name: 'BLAZAR_RESOURCE_PROPERTIES'
           description: |
                 Optional. Specify Blazar resource_properties. <br>
-                - e.g. To test creating a lease for a P40 GPU in Auckland zone, specify <br>
-                - '["and", ["=", "$availability_zone", "auckland"], ["=", "$gpu", "P40"]]'
+                - e.g. To test creating a lease on a host in Auckland zone with a custom capability, specify <br>
+                - '["and", ["=", "\$availability_zone", "auckland"], ["=", "\$custom_key", "custom_value"]]'
+      - string:
+          name: 'BLAZAR_EXTRA_SPECS'
+          description: |
+                Optional. Specify Blazar extra_specs. <br>
+                - e.g. To test creating a lease for a P40 GPU, specify <br>
+                - '{"pci_passthrough:alias":"P40:1"}'
     properties:
       - authorization:
           'nobody':
