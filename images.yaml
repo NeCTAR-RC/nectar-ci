@@ -168,6 +168,13 @@
          image_name: 'centos-7'
          default_user: 'ec2-user'
 
+- project:
+    name: bumblebee-neurodesk
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'neurodesk'
+         default_user: 'ubuntu'
+
 
 - job-template:
     name: 'image-build-official-{name}'
