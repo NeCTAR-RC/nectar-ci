@@ -642,7 +642,7 @@
           description: |
                 Optional. Specify Blazar resource_properties. <br>
                 - e.g. To test creating a lease on a host in Auckland zone with a custom capability, specify <br>
-                - '["and", ["=", "\$availability_zone", "auckland"], ["=", "\$custom_key", "custom_value"]]'
+                - '["and", ["=", "\$$availability_zone", "auckland"], ["=", "\$$custom_key", "custom_value"]]'
       - string:
           name: 'BLAZAR_EXTRA_SPECS'
           description: |
