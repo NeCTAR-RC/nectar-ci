@@ -110,22 +110,23 @@
                     url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/containers.git',
                     credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
                     branch: 'master'
-
-                withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
-                                serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
-                ]) {
-                  sh '''
-                  kubectl get namespaces
-                  export HELM_EXPERIMENTAL_OCI=1
-                  echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
-                    --username "$REGISTRY_USR" --password-stdin
-                  helm pull oci://registry.rc.nectar.org.au/nectar-helm/dashboard --version latest
-                  helm install -n ${TAG} --create-namespace dashboard dashboard-latest.tgz \
-                    -f dev/dashboard/values.yaml --set image.tag=${TAG} \
-                    --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
-                    --set ingress.hosts.0.host=${TAG}.dev.rc.nectar.org.au \
-                    --set ingress.hosts.0.paths.0.path=/
-                  '''
+                retry(3) {
+                  withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
+                                  serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
+                  ]) {
+                    sh '''
+                    kubectl get namespaces
+                    export HELM_EXPERIMENTAL_OCI=1
+                    echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
+                      --username "$REGISTRY_USR" --password-stdin
+                    helm pull oci://registry.rc.nectar.org.au/nectar-helm/dashboard --version latest
+                    helm install -n ${TAG} --create-namespace dashboard dashboard-latest.tgz \
+                      -f dev/dashboard/values.yaml --set image.tag=${TAG} \
+                      --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
+                      --set ingress.hosts.0.host=${TAG}.dev.rc.nectar.org.au \
+                      --set ingress.hosts.0.paths.0.path=/
+                    '''
+                  }
                 }
                 sh '''
                 curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' \
