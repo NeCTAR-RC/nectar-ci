@@ -693,6 +693,7 @@
          environment: 'pep8'
       - '{name}-container':
          organisation: 'internal'
+      - '{name}-kolla-container-upstream'
 
 - project:
     name: elasticluster
