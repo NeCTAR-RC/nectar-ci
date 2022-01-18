@@ -35,3 +35,21 @@
          organisation: 'NeCTAR-RC'
       - '{name}-helm-update-version':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: keycloak-deploy
+    jobs:
+      - '{name}-kustomize-validate':
+         organisation: 'internal'
+
+- project:
+    name: freshdesk-deploy
+    jobs:
+      - '{name}-kustomize-validate':
+         organisation: 'internal'
+
+- project:
+    name: argocd-deploy
+    jobs:
+      - '{name}-kustomize-validate':
+         organisation: 'internal'
