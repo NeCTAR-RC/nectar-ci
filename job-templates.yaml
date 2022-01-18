@@ -165,7 +165,7 @@
 - job-template:
     name: '{name}-kustomize-validate'
     defaults: global
-    node: openstack
+    node: internal
 
     parameters:
       - string:
