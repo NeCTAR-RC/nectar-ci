@@ -429,7 +429,7 @@
           fi
           git push r10k origin/master:refs/heads/master
           git push r10k origin/master:refs/heads/r10k_diff_catalog_${{PUPPET_ENV}}
-          git ls-remote | grep "refs/changes/.*/${{GERRIT_CHANGE_NUMBER}}/[0-9]" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT
+          git ls-remote | grep "refs/changes/.*/${{GERRIT_CHANGE_NUMBER}}/[0-9]" | cut -f1 | xargs -n1 -ICOMMIT git push r10k :COMMIT || true
       - ssh-builder:
           ssh-user-ip: puppet@{puppet_host}:22
           command: |
