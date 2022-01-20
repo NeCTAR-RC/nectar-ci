@@ -220,6 +220,7 @@
     defaults: global
     project-type: pipeline
     sandbox: true
+    concurrent: false
 
     parameters:
       - string:
