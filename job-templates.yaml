@@ -112,6 +112,7 @@
     name: '{name}-helm-package'
     defaults: global
     node: internal
+    concurrent: false
 
     parameters:
       - string:
