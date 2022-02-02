@@ -1,7 +1,7 @@
 - project:
     name: containers
     jobs:
-      - '{name}-dummy':
+      - '{name}-yaml':
          organisation: 'internal'
 
 - job-template:
