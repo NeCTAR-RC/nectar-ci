@@ -236,6 +236,8 @@
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'wallaby'
+      - '{name}-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: cyborg
