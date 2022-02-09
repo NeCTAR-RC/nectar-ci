@@ -45,6 +45,11 @@
               branches:
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'NeCTAR-RC/cloudkitty-dashboard'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
 

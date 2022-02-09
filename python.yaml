@@ -240,6 +240,16 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: cloudkitty-dashboard
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: cyborg
     jobs:
       - '{name}-focal-tox-{environment}':
