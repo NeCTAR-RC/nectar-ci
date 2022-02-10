@@ -161,8 +161,7 @@
                     export HELM_EXPERIMENTAL_OCI=1
                     echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
                       --username "$REGISTRY_USR" --password-stdin
-                    helm pull oci://registry.rc.nectar.org.au/nectar-helm/dashboard --version latest
-                    helm install -n ${TAG} --create-namespace dashboard dashboard-latest.tgz \
+                    helm install -n ${TAG} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
                       -f dev/dashboard/values.yaml --set image.tag=${TAG} \
                       --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
                       --set ingress.hosts.0.host=${TAG}.dev.rc.nectar.org.au \
