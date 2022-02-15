@@ -26,7 +26,7 @@ def call(String project_name, String cloud_env, String zones) {
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=$project_name
-       python scripts/bumblebee_deploy_volume.py -w -y -z $zones $imageId
+       python3 scripts/bumblebee_deploy_volume.py -w -y -z $zones $imageId
        """
     }
 }
