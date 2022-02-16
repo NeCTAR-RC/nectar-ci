@@ -483,8 +483,6 @@
     jobs:
       - '{name}-puppet-unit':
          organisation: 'resplat-hpc'
-      - '{name}-puppet-prod-review':
-         organisation: 'resplat-hpc'
 
 - project:
     name: puppet-sut
@@ -1134,11 +1132,6 @@
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'resplat-hpc/puppet-spartan'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'production'
           silent: false
           escape-quotes: true
 
