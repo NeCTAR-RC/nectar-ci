@@ -16,6 +16,12 @@
       - '{name}-dummy':
          organisation: 'NeCTAR-RC'
 
+- project:
+    name: jupyterhub-on-nectar-k8s
+    jobs:
+      - '{name}-dummy':
+         organisation: 'NeCTAR-RC'
+
 - job:
     name: 'librarian-verify'
     concurrent: false
