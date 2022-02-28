@@ -81,7 +81,7 @@
           }}
           stage('Helm package') {{
             steps {{
-              build job: 'nectar-dashboard-helm-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.TAG}}")]
+              build job: 'nectar-dashboard-helm-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
             }}
           }}
         }}
@@ -279,6 +279,12 @@
       - string:
           name: IMAGE_TAG
           description: "New image tag for version"
+      - string:
+          name: CHANGE_MESSAGE
+          description: "Commit change message"
+      - string:
+          name: CHANGE_PROJECT
+          description: "Project which initiated the this version update"
 
     dsl: |
       pipeline {{
@@ -306,7 +312,7 @@
               cat Chart.yaml
               git config user.name 'Jenkins'
               git config user.email 'jenkins@rc.nectar.org.au'
-              git add Chart.yaml && git commit -am "[Jenkins CI] New appVersion: \$IMAGE_TAG"
+              git add Chart.yaml && git commit -a -m "[Jenkins CI] New appVersion: \$IMAGE_TAG" -m "Project: \$CHANGE_PROJECT" -m "\$CHANGE_MESSAGE"
               '''
             }}
           }}
@@ -434,7 +440,7 @@
                 script {{
                   env.IMAGE_TAG = sh(script: "git describe --tags --always", returnStdout: true).trim()
                 }}
-                build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}")]
+                build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
             }}
           }}
         }}
