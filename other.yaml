@@ -212,7 +212,7 @@
 
     builders:
       - r10k-diff-catalog-puppet-library:
-          r10k_host: 'puppet.test.rc.nectar.org.au'
+          r10k_host: 'r10k.test.rc.nectar.org.au'
           r10k_build_env: 'testing'
 
     wrappers:
