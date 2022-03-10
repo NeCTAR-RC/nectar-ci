@@ -543,16 +543,16 @@
          organisation: 'resplat-cloud'
       - '{name}-r10k-deploy':
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
          organisation: 'resplat-cloud'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
 
 - project:
     name: puppet-site-monashtest
@@ -723,16 +723,16 @@
          organisation: 'resplat-hpc'
       - '{name}-r10k-deploy':
          organisation: 'resplat-hpc'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
          organisation: 'resplat-hpc'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          organisation: 'resplat-hpc'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          organisation: 'resplat-hpc'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
 
 - project:
     name: puppet-site-swinburne
@@ -763,16 +763,16 @@
          organisation: 'resplat-cloud'
       - '{name}-r10k-deploy':
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
          organisation: 'resplat-cloud'
          puppet_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
          organisation: 'resplat-cloud'
-         r10k_host: 'r10k.test.rc.nectar.org.au'
+         r10k_host: 'puppet.test.rc.nectar.org.au'
 
 - project:
     name: puppet-site-rctest
