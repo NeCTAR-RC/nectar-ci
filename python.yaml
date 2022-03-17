@@ -98,17 +98,12 @@
 - project:
     name: nectar-openstack
     jobs:
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'internal'
-         environment: 'py36'
       - '{name}-focal-tox-{environment}':
          organisation: 'internal'
          environment: 'py38'
       - '{name}-focal-tox-{environment}':
          organisation: 'internal'
          environment: 'flake8'
-      - '{name}-bionic-deb-package':
-         organisation: 'internal'
       - '{name}-focal-deb-package':
          organisation: 'internal'
 
