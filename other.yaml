@@ -296,7 +296,7 @@
     defaults: global
     # NOTE(jake): currently rake only can run on Xenial, this is due to
     # changes in OpenSSL libraries that fails on Bionic
-    node: xenial
+    node: focal
 
     parameters:
       - string:
