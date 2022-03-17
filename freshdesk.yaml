@@ -3,15 +3,9 @@
     jobs:
       - '{name}-nodejs-test':
          organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
-         organisation: 'NeCTAR-RC'
-
 
 - project:
     name: freshdesk-openstack
     jobs:
       - '{name}-nodejs-test':
          organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
-         organisation: 'NeCTAR-RC'
-

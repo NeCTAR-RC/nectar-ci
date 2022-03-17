@@ -9,8 +9,6 @@
          environment: 'flake8'
       - '{name}-bionic-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: hivemind_contrib
@@ -22,8 +20,6 @@
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-xenial-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
