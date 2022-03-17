@@ -104,7 +104,7 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'internal'
          environment: 'py38'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'internal'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
