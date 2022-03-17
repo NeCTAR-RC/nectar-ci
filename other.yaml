@@ -414,7 +414,7 @@
 - project:
     name: nectar-reports
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          environment: 'pep8'
          organisation: 'internal'
 
@@ -422,13 +422,13 @@
 - project:
     name: murano-docker-apps
     jobs:
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          environment: 'yamllint'
          organisation: 'NeCTAR-RC'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          environment: 'shellcheck'
          organisation: 'NeCTAR-RC'
-      - '{name}-xenial-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          environment: 'murano-pkg-check'
          organisation: 'NeCTAR-RC'
 
