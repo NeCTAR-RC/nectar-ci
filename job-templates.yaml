@@ -59,6 +59,9 @@
           console-log-parsers:
             - Puppet-Lint
 
+    wrappers:
+      - ansicolor
+
 - job-template:
     name: '{name}-helm-lint'
     defaults: global
