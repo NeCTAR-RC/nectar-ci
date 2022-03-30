@@ -664,7 +664,7 @@
     jobs:
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
+         environment: 'py38'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
