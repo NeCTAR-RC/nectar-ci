@@ -508,6 +508,92 @@
         }
 
 
+- job:
+    name: image-build-manila-share-server
+    defaults: global
+    properties:
+      - authorization:
+          nobody:
+            - job-read
+            - job-discover
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {
+            agent none
+            options {
+                preserveStashes(buildCount: 1)
+                ansiColor('xterm')
+            }
+            stages {
+                stage('Build Image') {
+                    agent { label 'focal' }
+                    steps {
+                        imageBuildQEMU 'manila-ubuntu-x86_64'
+                    }
+                }
+                stage('Set Image ID') {
+                    agent { label 'focal' }
+                    steps {
+                        setImageID()
+                    }
+                }
+                stage('Deploy to Dev Cloud') {
+                    agent { label 'focal' }
+                    steps {
+                        deployImage 'manila', 'development'
+                        setImageProperties 'manila', 'development'
+                        setImageTag 'manila', 'manila', 'development'
+                    }
+                }
+                stage('Deploy to Test Cloud') {
+                    agent { label 'focal' }
+                    steps {
+                        deployImage 'manila', 'testing'
+                        setImageProperties 'manila', 'testing'
+                        setImageTag 'manila', 'manila', 'testing'
+                    }
+                }
+                stage('Test Image in Test Cloud') {
+                    agent { label 'tempest' }
+                    steps {
+                        testManilaImage 'testing', 'coreservices'
+                    }
+                }
+                stage('Deploy to Production Cloud') {
+                    agent { label 'focal' }
+                    steps {
+                        deployImage 'manila', 'production'
+                        setImageProperties 'manila', 'production'
+                        setImageTag 'manila', 'manila', 'production'
+                    }
+                }
+                stage('Test Image in Prod Cloud') {
+                    agent { label 'tempest' }
+                    steps {
+                        testManilaImage 'production', 'melbourne-qh2'
+                    }
+                }
+            }
+            post {
+                failure {
+                    node('focal') {
+                        deleteImage 'manila', 'production'
+                        deleteImage 'manila', 'testing'
+                        deleteImage 'manila', 'development'
+                        }
+                    }
+                cleanup {
+                    node('focal') {
+                        deleteDir() /* clean up our workspace */
+                    }
+                }
+            }
+        }
+
+
 - job-template:
     name: 'image-build-rctest-{name}'
     defaults: global
