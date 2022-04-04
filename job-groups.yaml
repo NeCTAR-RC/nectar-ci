@@ -7,5 +7,5 @@
         - '{name}-puppet-unit-job':
             name-suffix: -next
             node: focal
-            skip-vote: true
+            skip-vote: false
 
