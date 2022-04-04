@@ -404,6 +404,8 @@
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
+      - '{name}-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 
 - project:
