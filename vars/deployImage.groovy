@@ -32,6 +32,7 @@ def call(String project_name, String cloud_env) {
         echo "Creating image \$IMAGE_NAME..."
         echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 'NeCTAR $imageName'"
         openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "NeCTAR $imageName" > image_id.txt
+        [ -s image_id.txt ] || exit 1
         echo "Image $imageId created!"
         RETRIES=10
         i=1
