@@ -160,6 +160,12 @@
          image_name: 'neurodesk'
          default_user: 'ubuntu'
 
+- project:
+    name: bumblebee-fedora-scientific
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'fedora-scientific'
+         default_user: 'fedora'
 
 - job-template:
     name: 'image-build-official-{name}'
