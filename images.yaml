@@ -175,7 +175,7 @@
         def imageId
         def imageName
         pipeline {{
-            agent {{ label 'focal' }}
+            agent {{ label 'bionic' }}
             options {{
                 preserveStashes(buildCount: 1)
                 ansiColor('xterm')
@@ -346,7 +346,7 @@
         def imageId
         def imageName
         pipeline {{
-            agent {{ label 'focal' }}
+            agent {{ label 'bionic' }}
             options {{
                 preserveStashes(buildCount: 1)
                 ansiColor('xterm')
