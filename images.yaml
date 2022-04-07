@@ -19,11 +19,6 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: debian-9
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
     name: debian-10
     jobs:
       - 'image-build-official-{name}'
@@ -34,12 +29,12 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: fedora-33
+    name: fedora-34
     jobs:
       - 'image-build-official-{name}'
 
 - project:
-    name: fedora-34
+    name: fedora-35
     jobs:
       - 'image-build-official-{name}'
 
@@ -60,16 +55,6 @@
 
 - project:
     name: ubuntu-20.04
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: ubuntu-20.10
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: ubuntu-21.04
     jobs:
       - 'image-build-official-{name}'
 
