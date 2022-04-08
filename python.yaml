@@ -538,14 +538,14 @@
     jobs:
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
+         environment: 'py38'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-container-{ubuntu_release}-{os_release}':
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
-         os_release: 'wallaby'
+         os_release: 'xena'
 
 - project:
     name: python-magnumclient
