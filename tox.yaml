@@ -22,6 +22,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'focal'
             os_release: 'xena'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'focal'
+            os_release: 'yoga'
 
 # Transition group for Ussuri projects that need to use bionic.
 - job-group:
