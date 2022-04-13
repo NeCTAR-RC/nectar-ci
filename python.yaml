@@ -887,7 +887,7 @@
          environment: 'py38'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'pep8'
       #- 'dashboard-kolla-container':
       #   organisation: 'NeCTAR-RC'
 
