@@ -178,7 +178,7 @@
                 git poll: false,
                     url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
                     credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
-                    branch: 'nectar/${{OPENSTACK_RELEASE}}'
+                    branch: '$GERRIT_BRANCH'
               }}
             }}
           }}
