@@ -30,23 +30,8 @@
               branches:
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/nectar-dashboard'
-              branches:
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/trove-dashboard'
-              branches:
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/murano-dashboard'
-              branches:
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'NeCTAR-RC/cloudkitty-dashboard'
+            - project-compare-type: 'REG_EXP'
+              project-pattern: 'NeCTAR-RC/.*-dashboard'
               branches:
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
