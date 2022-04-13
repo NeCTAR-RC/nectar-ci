@@ -431,18 +431,6 @@
          environment: 'pep8'
 
 - project:
-    name: nectar-dashboard
-    jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - 'dashboard-kolla-container':
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: heat
     jobs:
       - '{name}-os-tox-{environment}':
@@ -890,6 +878,18 @@
          environment: 'cover'
       - '{name}-container':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: warre-dashboard
+    jobs:
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      #- 'dashboard-kolla-container':
+      #   organisation: 'NeCTAR-RC'
 
 - project:
     name: python-warreclient
