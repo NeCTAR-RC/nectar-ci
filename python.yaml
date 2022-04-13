@@ -650,18 +650,6 @@
          os_release: 'victoria'
 
 - project:
-    name: neutron-lbaas
-    jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: networking-midonet
     jobs:
       - '{name}-os-tox-{environment}':
@@ -670,30 +658,6 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-
-- project:
-    name: networking-ovn
-    jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: neutron-lbaas-dashboard
-    jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: keystone
