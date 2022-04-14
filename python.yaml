@@ -636,6 +636,8 @@
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
          os_release: 'victoria'
+      - 'neutron-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: networking-midonet
