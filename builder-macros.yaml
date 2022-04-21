@@ -99,6 +99,16 @@
           grep -l -R ${WORKSPACE} * | while read fname; do sed -i "s@${WORKSPACE}/@/@g" $fname; done;
 
 - builder:
+    name: puppet-openstack-spec
+    builders:
+      - shell: |
+          export STRICT_VARIABLES=no
+          export RSPEC_PUPPET_VERSION='= 2.9.0'
+          export PUPPET_GEM_VERSION='~> 7.10.0'
+          bundle install --path vendor/bundle
+          bundle exec rake spec
+
+- builder:
     name: 'python-tox'
     builders:
       - shell: 'export OS_TEST_TIMEOUT=300; tox -e {environment}'
