@@ -317,6 +317,9 @@
     jobs:
       - '{name}-puppet-unit':
          organisation: 'NeCTAR-RC'
+      - '{name}-puppet-openstack-spec':
+         organisation: 'NeCTAR-RC'
+         skip-vote: true
 
 - project:
     name: puppet-nginx
