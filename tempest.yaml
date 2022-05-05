@@ -1718,6 +1718,7 @@
           blocking-jobs:
             - "^.*tempest-compute-host-check"
             - "^.*tempest-compute-host-check-advanced"
+            - "tempest-magnum-check"
           block-level: 'GLOBAL'
 
 
