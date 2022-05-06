@@ -365,7 +365,7 @@
           git branch change
           git checkout production
           git cherry-pick change
-          git review production
+          git review production -t '$GERRIT_TOPIC'
 
 - builder:
     name: jenkins-jobs-test
