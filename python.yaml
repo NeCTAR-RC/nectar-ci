@@ -869,6 +869,7 @@
          environment: 'cover'
       - '{name}-container':
          organisation: 'NeCTAR-RC'
+         helm_name: '{name}-helm'
 
 - project:
     name: warre-dashboard
