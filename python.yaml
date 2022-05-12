@@ -748,6 +748,8 @@
          environment: 'pep8'
       - '{name}-bionic-deb-package':
          organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: rc-servicecheck
