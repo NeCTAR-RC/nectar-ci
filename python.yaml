@@ -906,9 +906,7 @@
 - project:
     name: aodh
     jobs:
-      - '{name}-container-{ubuntu_release}-{os_release}-upstream':
-         ubuntu_release: 'focal'
-         os_release: 'wallaby'
+      - '{name}-kolla-container-upstream'
 
 - project:
     name: barbican
