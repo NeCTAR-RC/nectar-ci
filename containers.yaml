@@ -207,7 +207,10 @@
       - string:
           name: GERRIT_BRANCH
           default: nectar/wallaby
-          description: "The branch to use."
+          description: "The kolla branch to use."
+      - string:
+          name: PROJECT_BRANCH_OVERRIDE
+          description: "If project branch is not the same as gerrit branch you can override this here. Leave blank if project follows standard nectar/<openstack_version> pattern."
 
     triggers:
       - gerrit:
@@ -227,6 +230,9 @@
         agent {{ label 'docker' }}
         stages {{
           stage('Clone') {{
+            environment {{
+              PROJECT_BRANCH = "${{$PROJECT_BRANCH_OVERRIDE == "" ? $GERRIT_BRANCH : $PROJECT_BRANCH_OVERRIDE }}"
+            }}
             steps {{
               git poll: false,
                   url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
@@ -236,7 +242,7 @@
                 git poll: false,
                     url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
                     credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
-                    branch: '$GERRIT_BRANCH'
+                    branch: '$PROJECT_BRANCH'
               }}
             }}
           }}
