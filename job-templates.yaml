@@ -677,7 +677,7 @@
 - job-template:
     name: '{name}-yaml'
     defaults: global
-    node: bionic
+    node: openstack
 
     parameters:
       - string:
