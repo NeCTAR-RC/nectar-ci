@@ -35,6 +35,11 @@
               branches:
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
+            - project-compare-type: 'REG_EXP'
+              project-pattern: 'NeCTAR-RC/.*-ui'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
 
