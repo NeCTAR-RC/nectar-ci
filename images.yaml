@@ -145,6 +145,13 @@
          default_user: 'root'
 
 - project:
+    name: undercloud-ubuntu-22.04-x86_64
+    jobs:
+      - 'image-build-undercloud-{name}':
+         image_name: '{name}'
+         default_user: 'root'
+
+- project:
     name: bumblebee-ubuntu-20.04
     jobs:
       - 'image-build-bumblebee-{name}':
