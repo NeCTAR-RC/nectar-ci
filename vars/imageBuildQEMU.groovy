@@ -8,6 +8,7 @@ def call(String imageName) {
         rm -fr build
         jq ".builders[0].name = \\"\$BUILD_TAG\\" | .builders[0].vm_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
         echo "Starting packer build..."
+        chmod 600 packer-ssh-key
         packer build -color=true \$BUILD_TAG.json
         echo "Shrinking image..."
         echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 \$BUILD_TAG \$BUILD_TAG.qcow2"

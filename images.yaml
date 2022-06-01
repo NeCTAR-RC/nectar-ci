@@ -709,6 +709,7 @@
           rm -fr $FACT_DIR $TAG_DIR
           jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" $NAME.json > $BUILD_TAG.json
           echo "Starting packer build..."
+          chmod 600 packer-ssh-key
           packer build -color=false $BUILD_TAG.json
           IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
           USER_ACCOUNT=$(cat $FACT_DIR/default_user)
@@ -824,6 +825,7 @@
           echo "Found base image {source_image} ($SOURCE_ID)..."
           jq ".builders[0].source_image = \"$SOURCE_ID\" | .builders[0].image_name = \"$BUILD_TAG\"" packer.json > $BUILD_TAG.json
           echo "Starting packer build..."
+          chmod 600 packer-ssh-key
           packer build -color=false $BUILD_TAG.json
           IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
           USER_ACCOUNT=$(cat $FACT_DIR/default_user)
@@ -875,6 +877,7 @@
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=nectar-ci
           jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
+          chmod 600 packer-ssh-key
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
           cd output-${{BUILD_NAME}}
@@ -914,6 +917,7 @@
           export OS_PROJECT_NAME=NeCTAR-Devs
 
           jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
+          chmod 600 packer-ssh-key
           packer build -color=false ${{BUILD_NAME}}.json
           rm ${{BUILD_NAME}}.json
           cd output-${{BUILD_NAME}}

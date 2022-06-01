@@ -18,6 +18,7 @@ def call(String imageName, String projectName) {
         echo "Found base image \$SOURCE_NAME (\$SOURCE_ID)"
         jq ".builders[0].source_image = \\"\$SOURCE_ID\\" | .builders[0].image_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
         echo "Starting packer build..."
+        chmod 600 packer-ssh-key
         packer build -color=true \$BUILD_TAG.json
         echo "Downloading built image..."
         echo "==> openstack image save --file raw_image/image-large.qcow2 \$BUILD_TAG"
