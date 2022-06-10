@@ -173,6 +173,13 @@
          default_user: 'ubuntu'
 
 - project:
+    name: bumblebee-geodesktop
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'geodesktop'
+         default_user: 'ubuntu'
+
+- project:
     name: bumblebee-fedora-scientific
     jobs:
       - 'image-build-bumblebee-{name}':
