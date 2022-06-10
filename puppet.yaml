@@ -999,7 +999,9 @@
     name: hieradata
     jobs:
       - '{name}-yaml':
-         organisation: 'internal'
+          organisation: 'internal'
+      - 'hieradata-duplicate-check':
+          organisation: 'internal'
 
 - project:
     name: puppet-monash

@@ -401,6 +401,58 @@
           users:
               - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
 
+- job:
+    name: 'hieradata-duplicate-check'
+    concurrent: false
+    defaults: global
+
+    node: internal
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+    triggers:
+      - gerrit:
+          trigger-on:
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: 'internal/hieradata'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+
+    scm:
+      - git:
+          url: |
+            ssh://jenkins@review.rc.nectar.org.au:29418/internal/hieradata.git
+          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
+
+    builders:
+      - shell: |
+          ./tests/dup-check.sh
+
 - project:
     name: nectar-testing
     jobs:
