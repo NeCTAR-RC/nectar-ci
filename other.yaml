@@ -406,7 +406,9 @@
     concurrent: false
     defaults: global
 
-    node: internal
+    # TR: The check uses 'git log --output-indicator-new' which
+    #     seems to be missing from old versions of Git (eg bionic).
+    node: jammy
 
     parameters:
       - string:
