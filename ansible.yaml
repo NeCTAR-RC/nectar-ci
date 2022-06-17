@@ -39,7 +39,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -62,7 +62,7 @@
       - ansicolor
       - ssh-agent-credentials:
           users:
-              - 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+              - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
 
 - job-template:
@@ -95,7 +95,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -118,7 +118,7 @@
       - ansicolor
       - ssh-agent-credentials:
           users:
-              - 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+              - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
       - credentials-binding:
         - username-password-separated:
            credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
@@ -153,13 +153,13 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - ansicolor
       - ssh-agent-credentials:
           users:
-              - 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+              - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
       - credentials-binding:
         - username-password-separated:
            credential-id: 753d4c5e-f072-4916-b40f-a633157f8333

@@ -6,7 +6,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -82,7 +82,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -171,7 +171,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -227,7 +227,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -283,7 +283,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -347,7 +347,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -409,7 +409,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -481,7 +481,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -538,7 +538,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -595,7 +595,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -964,7 +964,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1000,7 +1000,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1041,7 +1041,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1078,7 +1078,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1110,7 +1110,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1142,7 +1142,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1175,7 +1175,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1207,7 +1207,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1239,7 +1239,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1271,7 +1271,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1303,7 +1303,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1335,7 +1335,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1420,7 +1420,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1461,7 +1461,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1501,7 +1501,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1546,7 +1546,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1588,7 +1588,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1622,7 +1622,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1659,7 +1659,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1694,7 +1694,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 
     wrappers:
       - timeout:
@@ -1780,7 +1780,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     parameters:
       - string:
           name: 'IMAGE'

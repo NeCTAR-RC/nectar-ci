@@ -105,7 +105,7 @@
             steps {
               git poll: false,
                   url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                  credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                  credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                   branch: '$GERRIT_BRANCH'
               dir ("src/${env.GERRIT_PROJECT}") {
                 checkout(
@@ -119,7 +119,7 @@
                       [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
                       url: 'ssh://jenkins@review.rc.nectar.org.au:29418/$GERRIT_PROJECT.git'
@@ -140,7 +140,7 @@
               dir ('containers') {
                 git poll: false,
                     url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/containers.git',
-                    credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                    credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                     branch: 'master'
                 retry(3) {
                   withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',

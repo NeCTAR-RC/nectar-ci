@@ -51,7 +51,7 @@
             steps {{
             git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                 branch: '$GERRIT_BRANCH'
             }}
           }}
@@ -123,7 +123,7 @@
             steps {{
             git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                 branch: '$GERRIT_BRANCH'
             }}
           }}
@@ -165,7 +165,7 @@
             steps {
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                 branch: 'nectar/${OPENSTACK_RELEASE}'
             }
           }
@@ -236,12 +236,12 @@
             steps {{
               git poll: false,
                   url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                  credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                  credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                   branch: '$GERRIT_BRANCH'
               dir ('{name}') {{
                 git poll: false,
                     url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
-                    credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                    credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                     branch: "${{env.PROJECT_BRANCH}}"
               }}
             }}
@@ -305,7 +305,7 @@
             steps {{
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                 branch: 'nectar/${{OPENSTACK_RELEASE}}'
               dir ('{name}') {{
                 git poll: false,
@@ -481,7 +481,7 @@
                       [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
                       url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
@@ -592,7 +592,7 @@
                       [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']],
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
                       url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
@@ -725,7 +725,7 @@
                       [$class: 'CleanCheckout'],
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '+refs/heads/*:refs/remotes/origin/* +refs/changes/*:refs/remotes/origin/*',
                       url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
@@ -744,7 +744,7 @@
                       [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
                       url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
@@ -858,7 +858,7 @@
                       [$class: 'CleanCheckout'],
                     ],
                     userRemoteConfigs: [[
-                      credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '+refs/heads/*:refs/remotes/origin/* +refs/changes/*:refs/remotes/origin/*',
                       url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
