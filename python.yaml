@@ -412,6 +412,8 @@
          environment: 'fast8'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: horizon
@@ -509,6 +511,11 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
+
+- project:
+    name: placement
+    jobs:
+      - '{name}-kolla-container-upstream'
 
 - project:
     name: magnum
