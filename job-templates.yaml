@@ -40,7 +40,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -96,7 +96,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -144,7 +144,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -192,7 +192,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -248,7 +248,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -305,7 +305,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -328,7 +328,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job-template:
     name: '{name}-focal-deb-package'
@@ -375,7 +375,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -398,7 +398,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job-template:
     name: '{name}-bionic-deb-package'
@@ -445,7 +445,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -468,7 +468,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job-template:
     name: '{name}-stein-deb-package'
@@ -515,7 +515,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -538,7 +538,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 
 - job-template:
@@ -584,7 +584,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -605,7 +605,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 # Temp to support bionic-ussuri
 - job-template:
@@ -651,7 +651,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -672,7 +672,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job-template:
     name: '{name}-yaml'
@@ -705,7 +705,7 @@
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
           refspec: $GERRIT_REFSPEC
           branches:
             - origin/$GERRIT_BRANCH
@@ -749,7 +749,7 @@
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
           refspec: $GERRIT_REFSPEC
           branches:
             - origin/$GERRIT_BRANCH
@@ -794,7 +794,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -838,7 +838,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -882,7 +882,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -926,7 +926,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -979,7 +979,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1028,7 +1028,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1086,7 +1086,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1105,7 +1105,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job-template:
     name: '{name}-site-deploy'
@@ -1149,7 +1149,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1168,7 +1168,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job-template:
     name: '{name}-r10k-deploy'
@@ -1208,7 +1208,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1225,7 +1225,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
         - text:
            credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
@@ -1280,7 +1280,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1297,7 +1297,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
         - text:
            credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
@@ -1346,7 +1346,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1366,7 +1366,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 
 - job-template:
@@ -1377,7 +1377,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist:
           check: '{name}'
@@ -1426,7 +1426,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist-noparam:
           check: '{job}'
@@ -1491,7 +1491,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1508,7 +1508,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
 
 
@@ -1520,7 +1520,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist-site-agnostic:
           check: '{name}'
@@ -1547,7 +1547,7 @@
     scm:
       - git:
          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist-site-agnostic-noparam:
           check: '{job}'
@@ -1599,7 +1599,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -1618,7 +1618,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
         - file:
            credential-id: dot-pypirc

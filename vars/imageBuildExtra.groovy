@@ -1,5 +1,5 @@
 def call(String imageName, String sourceImage, String gitRepo, String projectName) {
-    git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: gitRepo
+    git credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498', url: gitRepo
     withCredentials([usernamePassword(credentialsId: '7a2e4b77-a292-47a1-b852-c0cfd9c1c383', usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
         sh """#!/bin/bash -eu
         echo "\033[33m========== Building ==========\033[0m"

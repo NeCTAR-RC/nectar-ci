@@ -1095,7 +1095,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job:
     name: 'puppet-module-deploy-production'
@@ -1178,4 +1178,4 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'

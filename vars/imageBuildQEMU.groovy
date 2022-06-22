@@ -1,5 +1,5 @@
 def call(String imageName) {
-    git credentialsId: '4946c3a5-9f5e-4eac-9ec4-90e1e348db14', url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git'
+    git credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498', url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git'
     sh """#!/bin/bash -eu
         echo "\033[34m========== Building ==========\033[0m"
         NAME=$imageName

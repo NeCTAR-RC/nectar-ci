@@ -59,7 +59,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -81,7 +81,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job:
     name: 'librarian-diff-library'
@@ -131,7 +131,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -149,7 +149,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
 
 - job:
@@ -200,7 +200,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -218,7 +218,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
 
 
@@ -264,7 +264,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -283,7 +283,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - project:
     name: octocatalog-diff
@@ -324,7 +324,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/octocatalog-diff.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -375,7 +375,7 @@
     scm:
       - git:
          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/hieradata.git
-         credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
          refspec: $GERRIT_REFSPEC
          branches:
           - origin/$GERRIT_BRANCH
@@ -399,7 +399,7 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - '4946c3a5-9f5e-4eac-9ec4-90e1e348db14'
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 
 - job:
     name: 'hieradata-duplicate-check'
@@ -441,7 +441,7 @@
       - git:
           url: |
             ssh://jenkins@review.rc.nectar.org.au:29418/internal/hieradata.git
-          credentials-id: 4946c3a5-9f5e-4eac-9ec4-90e1e348db14
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
           refspec: $GERRIT_REFSPEC
           branches:
             - origin/$GERRIT_BRANCH
