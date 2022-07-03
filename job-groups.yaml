@@ -6,6 +6,5 @@
             skip-vote: false
         - '{name}-puppet-unit-job':
             name-suffix: -next
-            node: focal
-            skip-vote: false
-
+            node: jammy
+            skip-vote: true
