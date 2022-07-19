@@ -145,19 +145,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: vendordata
-    jobs:
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-
-- project:
     name: python-placementclient
     jobs:
       - '{name}-bionic-tox-{environment}':
@@ -827,10 +814,10 @@
 - project:
     name: nova-pollinate
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
-      - '{name}-os-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-container':
