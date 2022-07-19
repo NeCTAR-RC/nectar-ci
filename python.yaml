@@ -825,6 +825,19 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: nova-pollinate
+    jobs:
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-container':
+         organisation: 'NeCTAR-RC'
+         helm_name: '{name}-helm'
+
+- project:
     name: python-orcid
     jobs:
       - '{name}-bionic-deb-package':
