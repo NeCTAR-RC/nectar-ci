@@ -888,6 +888,8 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
          organisation: 'NeCTAR-RC'
 
