@@ -71,8 +71,6 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
-      - '{name}-stein-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
 
