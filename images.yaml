@@ -69,6 +69,11 @@
       - 'image-build-official-{name}'
 
 - project:
+    name: ubuntu-20.04-nvidia-vgpu
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
     name: ubuntu-22.04
     jobs:
       - 'image-build-official-{name}'
