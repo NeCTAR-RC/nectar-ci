@@ -48,15 +48,6 @@ def call(String project_name, String cloud_env) {
             i=\$((i+1))
             sleep 30
         done
-        echo "Applying properties..."
-        for FACT in build/.facts/*; do
-           PROP=\${FACT##*/}
-           if ! echo "\$PROP" | grep -q '^nectar_'; then
-               VAL=`cat \$FACT`
-               echo " -> \$PROP: '\$VAL'..."
-               openstack image set --property \$PROP="\$VAL" $imageId
-           fi
-        done
         openstack image show --max-width=120 $imageId
         """
     }
