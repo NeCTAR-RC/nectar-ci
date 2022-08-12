@@ -469,7 +469,7 @@
     name: nectar-reports
     jobs:
       - '{name}-focal-tox-{environment}':
-         environment: 'pep8'
+         environment: 'flake8'
          organisation: 'internal'
 
 
