@@ -566,6 +566,5 @@
 - project:
     name: openstack-bash-creds-helper
     jobs:
-      - '{name}-focal-tox-{environment}':
-         environment: 'shellcheck'
+      - '{name}-run-tests':
          organisation: 'NeCTAR-RC'

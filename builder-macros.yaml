@@ -604,3 +604,8 @@
           else
               echo "Already a tag on this commit"
           fi
+
+- builder:
+    name: run-tests
+    builders:
+      - shell: ./run-tests.sh
