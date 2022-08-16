@@ -562,3 +562,10 @@
     jobs:
       - '{name}-yamllint':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: openstack-bash-creds-helper
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         environment: 'shellcheck'
+         organisation: 'NeCTAR-RC'
