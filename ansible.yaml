@@ -1,4 +1,11 @@
 - project:
+    name: nectar-ops
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'internal'
+         environment: 'linters'
+
+- project:
     name: nectar-ansible
     jobs:
       - 'nectar-ansible-{task}':
