@@ -907,6 +907,11 @@
       - '{name}-kolla-container-upstream'
 
 - project:
+    name: prometheus
+    jobs:
+      - '{name}-kolla-container-upstream'
+
+- project:
     name: bumblebee
     jobs:
       - '{name}-focal-tox-{environment}':
