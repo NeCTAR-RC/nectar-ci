@@ -888,6 +888,8 @@
          environment: 'cover'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
+      - '{name}-bionic-deb-package':
+         organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
          organisation: 'NeCTAR-RC'
 
