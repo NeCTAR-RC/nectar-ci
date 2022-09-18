@@ -9,6 +9,7 @@
     defaults: global
     project-type: pipeline
     sandbox: true
+    concurrent: false
 
     parameters:
       - string:
@@ -443,6 +444,7 @@
     project-type: pipeline
     sandbox: true
     helm_name: false
+    concurrent: false
 
     parameters:
       - string:
