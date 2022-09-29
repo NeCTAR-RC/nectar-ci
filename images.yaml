@@ -487,7 +487,7 @@
                     }
                 }
                 stage('Deploy to Dev Cloud') {
-                    agent { label 'focal' }
+                    agent { label 'jammy' }
                     steps {
                         deployImage 'octavia', 'development'
                         setImageProperties 'octavia', 'development'
@@ -495,7 +495,7 @@
                     }
                 }
                 stage('Deploy to Test Cloud') {
-                    agent { label 'focal' }
+                    agent { label 'jammy' }
                     steps {
                         deployImage 'octavia', 'testing'
                         setImageProperties 'octavia', 'testing'
@@ -509,7 +509,7 @@
                     }
                 }
                 stage('Deploy to Production Cloud') {
-                    agent { label 'focal' }
+                    agent { label 'jammy' }
                     steps {
                         deployImage 'octavia', 'production'
                         setImageProperties 'octavia', 'production'
