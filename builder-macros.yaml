@@ -362,6 +362,7 @@
     builders:
       - shell: |
           git config gitreview.username jenkins
+          git config core.hooksPath /tmp/jenkins-git-hooks
           git branch change
           git checkout production
           git cherry-pick change
