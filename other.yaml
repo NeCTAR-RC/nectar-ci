@@ -568,3 +568,11 @@
     jobs:
       - '{name}-run-tests':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectar-jupyterhub
+    jobs:
+      - '{name}-dummy':
+         organisation: internal
+      - '{name}-container':
+         organisation: internal
