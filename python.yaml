@@ -315,7 +315,7 @@
 - project:
     name: blazar-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -334,7 +334,7 @@
 - project:
     name: ec2api-tempest-plugin
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -475,7 +475,7 @@
 - project:
     name: octavia-tempest-plugin
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -732,49 +732,49 @@
 - project:
     name: magnum-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: murano-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: trove-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: designate-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: heat-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: telemetry-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: manila-tempest-plugin
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
