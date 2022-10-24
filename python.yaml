@@ -793,10 +793,10 @@
 - project:
     name: nectar-freshdesk
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-container':
