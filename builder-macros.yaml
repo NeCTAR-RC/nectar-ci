@@ -48,6 +48,24 @@
 
 
 - builder:
+    name: puppet-git-secrets
+    builders:
+      - shell: |
+          #!/bin/bash
+          set -eux -o pipefail
+          mkdir -p $HOME/bin
+          export PATH=$HOME/bin:${PATH}
+          curl -s https://raw.githubusercontent.com/NeCTAR-RC/git-secrets/master/git-secrets -o $HOME/bin/git-secrets
+          chmod +x $HOME/bin/git-secrets
+          curl -s https://raw.githubusercontent.com/NeCTAR-RC/git-secrets-puppet-openstack/main/all -o .secrets.pattern
+          git config --unset-all secrets.providers || true
+          git config --unset-all secrets.allowed || true
+          git config --add secrets.allowed '^.*ENC\[GPG.*$'
+          git secrets --add-provider -- cat .secrets.pattern
+          git secrets --scan -r data/
+
+
+- builder:
     name: puppet-lint
     builders:
       - shell: |
