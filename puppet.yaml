@@ -782,6 +782,8 @@
     jobs:
       - '{name}-yaml':
          organisation: 'internal'
+      - '{name}-puppet-git-secrets':
+         organisation: 'internal'
       - '{name}-puppet-unit':
          organisation: 'internal'
       - '{name}-r10k-deploy':
