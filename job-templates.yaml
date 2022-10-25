@@ -854,6 +854,8 @@
               project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'main'
+                - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
