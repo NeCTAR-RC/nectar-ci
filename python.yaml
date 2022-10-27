@@ -921,3 +921,19 @@
       - '{name}-container':
          organisation: 'NeCTAR-RC'
          helm_name: '{name}-helm'
+
+- project:
+    name: taynac
+    jobs:
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-container':
+         organisation: 'NeCTAR-RC'
+         helm_name: '{name}-helm'
