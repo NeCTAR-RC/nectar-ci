@@ -17,6 +17,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: git-secrets-puppet-internal
+    jobs:
+      - '{name}-dummy':
+         organisation: 'internal'
+
+- project:
     name: git-secrets-puppet-openstack
     jobs:
       - '{name}-dummy':
