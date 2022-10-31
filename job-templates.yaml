@@ -105,6 +105,11 @@
     builders:
       - puppet-git-secrets
 
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+
 
 - job-template:
     name: '{name}-puppet-openstack-spec'
