@@ -519,8 +519,6 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: manila
