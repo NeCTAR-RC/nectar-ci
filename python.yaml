@@ -620,6 +620,16 @@
       - '{name}-kolla-container-upstream'
 
 - project:
+    name: kolla
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: elasticluster
     jobs:
       - '{name}-focal-tox-{environment}':
