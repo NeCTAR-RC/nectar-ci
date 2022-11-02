@@ -206,6 +206,8 @@
     project-type: pipeline
     sandbox: true
 
+    kolla_profile_name: 'false'
+
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -279,12 +281,14 @@
                 docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
                 docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
 
-                kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
+                # in rare cases, kolla profile name is not equal to project name, so we can override the profile name.
+                PROFILE_NAME=[[ {kolla_profile_name} == 'false' ]] && echo {name} || echo {kolla_profile_name}
+                kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
                 BASE_IMAGE=`docker image ls --filter reference=$REGISTRY/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE --quiet`
                 VERSION_TAG=b$BASE_IMAGE-$VERSION_TAG
 
-                for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
+                for image in `kolla-build --list-images --profile $PROFILE_NAME --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
                     docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                     docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}

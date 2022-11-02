@@ -332,6 +332,7 @@
          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
+         kolla_profile_name: ec2api
 
 - project:
     name: ec2api-tempest-plugin
