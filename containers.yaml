@@ -282,7 +282,7 @@
                 docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
 
                 # in rare cases, kolla profile name is not equal to project name, so we can override the profile name.
-                PROFILE_NAME=[[ {kolla_profile_name} == 'false' ]] && echo {name} || echo {kolla_profile_name}
+                [[ $kolla_profile_name == 'false' ]] && PROFILE_NAME=$name || PROFILE_NAME=$kolla_profile_name
                 kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
                 BASE_IMAGE=`docker image ls --filter reference=$REGISTRY/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE --quiet`
