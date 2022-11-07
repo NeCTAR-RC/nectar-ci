@@ -19,13 +19,13 @@
 - project:
     name: git-secrets-puppet-internal
     jobs:
-      - '{name}-dummy':
+      - '{name}-git-secrets-sorted':
          organisation: 'internal'
 
 - project:
     name: git-secrets-puppet-openstack
     jobs:
-      - '{name}-dummy':
+      - '{name}-git-secrets-sorted':
          organisation: 'NeCTAR-RC'
 
 - project:
