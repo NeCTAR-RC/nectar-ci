@@ -264,6 +264,8 @@
             }}
             steps {{
               sh '''
+                #!/bin/bash
+                set -eux -o pipefail
                 cd {name}
                 export VERSION_TAG=`git describe`
                 cd ..
