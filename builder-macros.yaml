@@ -66,9 +66,14 @@
           git config --unset-all secrets.allowed || true
           git config --add secrets.allowed '^.*ENC\[GPG.*$'
           git config --add secrets.allowed '%{lookup'
-          git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-internal/all
-          git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-openstack/all
+          git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-internal/all.pattern
+          git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-openstack/all.pattern
           git secrets --scan -r data/
+
+- builder:
+    name: git-secrets-sorted
+    builders:
+      - shell: find . -name '*.pattern' -exec sort -c {} +
 
 
 - builder:
