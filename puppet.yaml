@@ -926,6 +926,8 @@
     jobs:
       - '{name}-yaml':
          organisation: 'QRIScloud'
+      - '{name}-puppet-git-secrets':
+         organisation: 'internal'
       - '{name}-puppet-unit':
          organisation: 'QRIScloud'
       - '{name}-r10k-deploy':
