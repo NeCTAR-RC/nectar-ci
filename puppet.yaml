@@ -927,7 +927,7 @@
       - '{name}-yaml':
          organisation: 'QRIScloud'
       - '{name}-puppet-git-secrets':
-         organisation: 'internal'
+         organisation: 'QRIScloud'
       - '{name}-puppet-unit':
          organisation: 'QRIScloud'
       - '{name}-r10k-deploy':
