@@ -68,6 +68,7 @@
           git config --add secrets.allowed '%{lookup'
           git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-internal/all.pattern
           git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-openstack/all.pattern
+          git secrets --add-provider -- cat .gitprohibited
           git secrets --scan -r data/
 
 - builder:
