@@ -1511,7 +1511,7 @@
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          [ {skip_capacity_check} == True ] && skip_capacity_check="--skip_capacity_check"
+          [ {skip_capacity_check} == True ] && skip_capacity_check="--skip-capacity-check"
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e {environment} $skip_capacity_check
 
     triggers:
@@ -1556,7 +1556,7 @@
     builders:
       - shell: |
           . /opt/tempest/bin/activate
-          [ {skip_capacity_check} == True ] && skip_capacity_check="--skip_capacity_check"
+          [ {skip_capacity_check} == True ] && skip_capacity_check="--skip-capacity-check"
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -t {test} -e {environment} $skip_capacity_check
 
     triggers:
