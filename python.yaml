@@ -855,7 +855,7 @@
     jobs:
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
+         environment: 'py310'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
