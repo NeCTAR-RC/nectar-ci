@@ -16,7 +16,6 @@ def call(String imageName, String sourceImage, String gitRepo, String projectNam
         echo "Found base image $sourceImage (\$SOURCE_ID)..."
         jq ".builders[0].source_image = \\"\$SOURCE_ID\\" | .builders[0].image_name = \\"\$BUILD_TAG\\"" packer.json > \$BUILD_TAG.json
         echo "Starting packer build..."
-        chmod 600 packer-ssh-key
         packer build -color=true \$BUILD_TAG.json
         echo "Downloading built image..."
         echo "==> openstack image save --file raw_image/image-large.qcow2 \$BUILD_TAG"
