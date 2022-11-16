@@ -111,10 +111,10 @@
          git_repo: 'https://github.com/NeCTAR-RC/packer-rstudio.git'
 
 - project:
-    name: jupyternotebook-ubuntu-18.04
+    name: jupyterlab
     jobs:
       - 'image-build-extra-{name}':
-         source_image: 'NeCTAR Ubuntu 18.04 LTS (Bionic) amd64'
+         source_image: 'NeCTAR Ubuntu 22.04 LTS (Jammy) amd64'
          git_repo: 'https://github.com/NeCTAR-RC/packer-jupyternotebook.git'
 
 - project:
