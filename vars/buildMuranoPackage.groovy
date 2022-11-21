@@ -5,7 +5,7 @@ def call(String projectName, String cloudEnv) {
             osCredId = '6c8091b5-0e7d-4be5-8458-4e5a999acdd6'
             osAuthUrl = 'https://keystone.rc.nectar.org.au:5000/v3'
             break
-          case "testing":
+          case "rctest":
             osCredId = 'cc826c4e-07fe-4a0c-b334-fb8100b23c7b'
             osAuthUrl = 'https://keystone.test.rc.nectar.org.au:5000/v3'
             break

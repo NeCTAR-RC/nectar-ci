@@ -222,7 +222,12 @@
         def imageId
         def imageName
         pipeline {{
-            agent {{ label 'bionic' }}
+            agent {{
+                node {{
+                    label 'focal'
+                    reuseNode true
+                }}
+            }}
             options {{
                 preserveStashes(buildCount: 1)
                 ansiColor('xterm')
@@ -236,18 +241,18 @@
                 stage('Deploy image to RCTest') {{
                     steps {{
                         setImageID()
-                        deployImage 'NeCTAR-Images', 'testing'
-                        setImageProperties 'NeCTAR-Images', 'testing'
+                        deployImage 'NeCTAR-Images', 'rctest'
+                        setImageProperties 'NeCTAR-Images', 'rctest'
                     }}
                 }}
                 stage('Test image in RCTest') {{
                     steps {{
-                        testOfficialImage 'NeCTAR-Images', 'testing', 'coreservices'
+                        testOfficialImage 'NeCTAR-Images', 'rctest', 'coreservices'
                     }}
                 }}
                 stage('Promote image to RCTest') {{
                     steps {{
-                        promoteOfficialImage 'NeCTAR-Images', 'testing'
+                        promoteOfficialImage 'NeCTAR-Images', 'rctest'
                     }}
                 }}
                 stage('Deploy image to Production') {{
@@ -270,7 +275,7 @@
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'NeCTAR-Images', 'testing'
+                        deleteImage 'NeCTAR-Images', 'rctest'
                         deleteImage 'NeCTAR-Images', 'production'
                     }}
                 }}
@@ -332,20 +337,20 @@
                     agent {{ label 'focal' }}
                     steps {{
                         setImageID()
-                        deployImage 'trove', 'testing'
-                        setImageProperties 'trove', 'testing'
+                        deployImage 'trove', 'rctest'
+                        setImageProperties 'trove', 'rctest'
                     }}
                 }}
                 stage('Update test trove datastore') {{
                     agent {{ label 'internal' }}
                     steps {{
-                        updateTroveDatastore 'testing'
+                        updateTroveDatastore 'rctest'
                     }}
                 }}
                 stage('Test Image in Test Cloud') {{
                     agent {{ label 'tempest' }}
                     steps {{
-                        testTroveImage 'testing', 'coreservices'
+                        testTroveImage 'rctest', 'coreservices'
                     }}
                 }}
                 stage('Deploy to Production Cloud') {{
@@ -365,9 +370,9 @@
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'trove', 'testing'
+                        deleteImage 'trove', 'rctest'
                         deleteImage 'trove', 'production'
-                        troveRevertDatastore 'testing'
+                        troveRevertDatastore 'rctest'
                         }}
                     }}
                 cleanup {{
@@ -393,7 +398,12 @@
         def imageId
         def imageName
         pipeline {{
-            agent {{ label 'bionic' }}
+            agent {{
+                node {{
+                    label 'focal'
+                    reuseNode true
+                }}
+            }}
             options {{
                 preserveStashes(buildCount: 1)
                 ansiColor('xterm')
@@ -407,18 +417,18 @@
                 stage('Deploy image to RCTest') {{
                     steps {{
                         setImageID()
-                        deployImage 'murano', 'testing'
-                        setImageProperties 'murano', 'testing'
+                        deployImage 'murano', 'rctest'
+                        setImageProperties 'murano', 'rctest'
                     }}
                 }}
                 stage('Test image in RCTest') {{
                     steps {{
-                        testOfficialImage 'murano', 'testing', 'coreservices'
+                        testOfficialImage 'murano', 'rctest', 'coreservices'
                     }}
                 }}
                 stage('Promote image to RCTest') {{
                     steps {{
-                        promoteOfficialImage 'murano', 'testing'
+                        promoteOfficialImage 'murano', 'rctest'
                     }}
                 }}
                 stage('Deploy image to Production') {{
@@ -441,7 +451,7 @@
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'murano', 'testing'
+                        deleteImage 'murano', 'rctest'
                         deleteImage 'murano', 'production'
                     }}
                 }}
@@ -497,15 +507,15 @@
                 stage('Deploy to Test Cloud') {
                     agent { label 'jammy' }
                     steps {
-                        deployImage 'octavia', 'testing'
-                        setImageProperties 'octavia', 'testing'
-                        setImageTag 'octavia', 'octavia', 'testing'
+                        deployImage 'octavia', 'rctest'
+                        setImageProperties 'octavia', 'rctest'
+                        setImageTag 'octavia', 'octavia', 'rctest'
                     }
                 }
                 stage('Test Image in Test Cloud') {
                     agent { label 'tempest' }
                     steps {
-                        testOctaviaImage 'testing', 'coreservices'
+                        testOctaviaImage 'rctest', 'coreservices'
                     }
                 }
                 stage('Deploy to Production Cloud') {
@@ -527,7 +537,7 @@
                 failure {
                     node('focal') {
                         deleteImage 'octavia', 'production'
-                        deleteImage 'octavia', 'testing'
+                        deleteImage 'octavia', 'rctest'
                         deleteImage 'octavia', 'development'
                         }
                     }
@@ -583,15 +593,15 @@
                 stage('Deploy to Test Cloud') {
                     agent { label 'focal' }
                     steps {
-                        deployImage 'manila', 'testing'
-                        setImageProperties 'manila', 'testing'
-                        setImageTag 'manila', 'manila', 'testing'
+                        deployImage 'manila', 'rctest'
+                        setImageProperties 'manila', 'rctest'
+                        setImageTag 'manila', 'manila', 'rctest'
                     }
                 }
                 stage('Test Image in Test Cloud') {
                     agent { label 'tempest' }
                     steps {
-                        testManilaImage 'testing', 'coreservices'
+                        testManilaImage 'rctest', 'coreservices'
                     }
                 }
                 stage('Deploy to Production Cloud') {
@@ -613,7 +623,7 @@
                 failure {
                     node('focal') {
                         deleteImage 'manila', 'production'
-                        deleteImage 'manila', 'testing'
+                        deleteImage 'manila', 'rctest'
                         deleteImage 'manila', 'development'
                         }
                     }
@@ -1002,18 +1012,18 @@
                 }}
                 stage('Deploy image to RCTest') {{
                     steps {{
-                        deployImageBumblebee 'bumblebee', 'testing'
-                        setImageProperties 'bumblebee', 'testing'
+                        deployImageBumblebee 'bumblebee', 'rctest'
+                        setImageProperties 'bumblebee', 'rctest'
                     }}
                 }}
                 stage('Test image in RCTest') {{
                     steps {{
-                        testOfficialImage 'bumblebee', 'testing', 'coreservices'
+                        testOfficialImage 'bumblebee', 'rctest', 'coreservices'
                     }}
                 }}
                 stage('Deploy volumes to RCTest') {{
                     steps {{
-                        deployBumblebeeVolumes 'bumblebee', 'testing', 'coreservices'
+                        deployBumblebeeVolumes 'bumblebee', 'rctest', 'coreservices'
                     }}
                 }}
                 stage('Deploy image to Production') {{
@@ -1036,7 +1046,7 @@
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'bumblebee', 'testing'
+                        deleteImage 'bumblebee', 'rctest'
                         deleteImage 'bumblebee', 'production'
                     }}
                 }}

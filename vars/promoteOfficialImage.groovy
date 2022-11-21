@@ -7,7 +7,7 @@ def call(String project_name, String cloud_env) {
             os_cred_id = '6c8091b5-0e7d-4be5-8458-4e5a999acdd6'
             os_auth_url = 'https://keystone.rc.nectar.org.au:5000/v3'
             break
-          case "testing":
+          case "rctest":
             os_cred_id = 'cc826c4e-07fe-4a0c-b334-fb8100b23c7b'
             os_auth_url = 'https://keystone.test.rc.nectar.org.au:5000/v3'
             break
@@ -32,8 +32,8 @@ def call(String project_name, String cloud_env) {
        echo "================================================================================"
        openstack image show --max-width=120 $imageId
        echo "Promoting image to public..."
-       echo "==> hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $imageId"
-       hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $imageId
+       echo "==> scripts/mage_workflow.py -e $cloud_env -i $imageId promote"
+       $WORKSPACE/scripts/image_workflow.py -e $cloud_env -i $imageId promote
        """
     }
 }
