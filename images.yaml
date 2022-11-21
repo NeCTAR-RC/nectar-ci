@@ -225,7 +225,6 @@
             agent {{
                 node {{
                     label 'focal'
-                    reuseNode true
                 }}
             }}
             options {{
