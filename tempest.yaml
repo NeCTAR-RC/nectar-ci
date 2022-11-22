@@ -1327,38 +1327,6 @@
           option: category
 
 
-- job:
-    name: tempest-rctest-lbaas-check
-    defaults: global
-    node: tempest
-    concurrent: true
-    scm:
-      - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-    builders:
-      - shell: |
-          #!/bin/bash
-          . /opt/tempest/bin/activate
-          tmpdir=`mktemp -d --suffix=_tempest`
-          cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
-          cd $tmpdir
-          stestr run -n neutron_lbaas.tests.tempest.v2.scenario.test_load_balancer_basic.TestLoadBalancerBasic.test_load_balancer_basic 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${PIPESTATUS[0]}
-          rm -rf $tmpdir
-          exit $RET
-    properties:
-      - authorization:
-          'nobody':
-            - job-read
-            - job-discover
-      - throttle:
-          categories:
-            - tempest-rctest
-          option: category
-
-
 - project:
     name: tempest-nagios-site-compute
     site:
