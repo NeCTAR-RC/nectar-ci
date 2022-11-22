@@ -702,18 +702,6 @@
       - '{name}-kolla-container-upstream'
 
 - project:
-    name: glance_store
-    jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: gnocchi
     jobs:
       - '{name}-bionic-tox-{environment}':
