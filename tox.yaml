@@ -3,9 +3,6 @@
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'bionic'
-            os_release: 'queens'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'bionic'
             os_release: 'rocky'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'bionic'
