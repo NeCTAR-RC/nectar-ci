@@ -419,6 +419,11 @@
 - project:
     name: ceilometer
     jobs:
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+         ubuntu_release: 'bionic'
+         os_release: 'rocky'
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py36'
