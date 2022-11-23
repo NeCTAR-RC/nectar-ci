@@ -32,8 +32,8 @@ def call(String project_name, String cloud_env) {
        echo "================================================================================"
        openstack image show --max-width=120 $imageId
        echo "Promoting image to public..."
-       echo "==> scripts/mage_workflow.py -e $cloud_env -i $imageId promote"
-       $WORKSPACE/scripts/image_workflow.py -e $cloud_env -i $imageId promote
+       echo "==> scripts/aggrandise.py -e $cloud_env -i $imageId promote"
+       $WORKSPACE/scripts/aggrandise.py -e $cloud_env -i $imageId promote
        """
     }
 }
