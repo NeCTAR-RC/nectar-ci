@@ -169,20 +169,19 @@
 - project:
     name: aardvark
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-focal-tox-{environment}':
+         environment: 'py310'
+      - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-focal-tox-{environment}':
+      - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-container-{ubuntu_release}-{os_release}':
          organisation: 'NeCTAR-RC'
-         ubuntu_release: 'focal'
-         os_release: 'victoria'
-         deploy_to_test: 'true'
+         ubuntu_release: 'jammy'
+         os_release: 'zed'
 
 - project:
     name: cloudkitty
