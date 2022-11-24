@@ -235,7 +235,7 @@
     jobs:
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
+         environment: 'py310'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -245,14 +245,8 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'functional'
-      - '{name}-os-deb-package':
+      - '{name}-container':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
-         organisation: 'NeCTAR-RC'
-      - '{name}-container-{ubuntu_release}-{os_release}':
-         organisation: 'NeCTAR-RC'
-         ubuntu_release: 'focal'
-         os_release: 'victoria'
 
 - project:
     name: python-manukaclient
