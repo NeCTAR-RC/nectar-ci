@@ -19,6 +19,7 @@ def call(String imageName, String projectName) {
         chmod 600 packer-ssh-key
         packer build -color=true \$BUILD_TAG.json
         echo "Downloading built image..."
+        mkdir -p raw_image
         echo "==> openstack image save --file raw_image/image-large.qcow2 \$BUILD_TAG"
         openstack image save --file raw_image/image-large.qcow2 \$BUILD_TAG
         openstack image delete \$BUILD_TAG
