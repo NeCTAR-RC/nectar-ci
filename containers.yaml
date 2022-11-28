@@ -252,7 +252,7 @@
                   branch: '$GERRIT_BRANCH'
               dir ('{name}') {{
                 git poll: false,
-                    url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
+                    url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git',
                     credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                     branch: "${{env.PROJECT_BRANCH}}"
               }}
@@ -263,39 +263,41 @@
               REGISTRY = credentials('registry-nectar')
             }}
             steps {{
-              sh '''
-                #!/bin/bash
-                set -eux -o pipefail
-                cd {name}
-                export VERSION_TAG=`git describe`
-                cd ..
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-                OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{{ print $2 }}'`
-                virtualenv kolla
-                . kolla/bin/activate
-                pip install -r requirements.txt
+              sshagent (credentials: ['cd8b8dd3-b897-4ecb-985d-180d5b6f8498']) {{
+                sh '''
+                  #!/bin/bash
+                  set -eux -o pipefail
+                  cd {name}
+                  export VERSION_TAG=`git describe`
+                  cd ..
+                  export REGISTRY="registry.rc.nectar.org.au"
+                  export REGISTRY_AUTH_FILE=auth.json
+                  echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+                  OPENSTACK_RELEASE=`echo $GERRIT_BRANCH | awk -F '/' '{{ print $2 }}'`
+                  virtualenv kolla
+                  . kolla/bin/activate
+                  pip install -r requirements.txt
 
-                docker image prune --all -f
-                docker image ls
+                  docker image prune --all -f
+                  docker image ls
 
-                docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
-                docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
+                  docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-base:$OPENSTACK_RELEASE
+                  docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
 
-                # in rare cases, kolla profile name is not equal to project name, so we can override the profile name.
-                [[ {kolla_profile_name} == 'false' ]] && PROFILE_NAME={name} || PROFILE_NAME={kolla_profile_name}
-                kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
+                  # in rare cases, kolla profile name is not equal to project name, so we can override the profile name.
+                  [[ {kolla_profile_name} == 'false' ]] && PROFILE_NAME={name} || PROFILE_NAME={kolla_profile_name}
+                  kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
-                BASE_IMAGE=`docker image ls --filter reference=$REGISTRY/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE --quiet`
-                VERSION_TAG=b$BASE_IMAGE-$VERSION_TAG
+                  BASE_IMAGE=`docker image ls --filter reference=$REGISTRY/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE --quiet`
+                  VERSION_TAG=b$BASE_IMAGE-$VERSION_TAG
 
-                for image in `kolla-build --list-images --profile $PROFILE_NAME --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
-                do
-                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
-                    docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
-                done
-              '''
+                  for image in `kolla-build --list-images --profile $PROFILE_NAME --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
+                  do
+                      docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                      docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                  done
+                '''
+              }}
             }}
           }}
         }}
