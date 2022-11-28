@@ -603,9 +603,8 @@
       - '{name}-os-tox-{environment}':
          organisation: 'internal'
          environment: 'pep8'
-      - '{name}-container':
+      - '{name}-kolla-container':
          organisation: 'internal'
-      - '{name}-kolla-container-upstream'
 
 - project:
     name: kolla
