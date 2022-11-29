@@ -484,7 +484,7 @@
       pipeline {{
         agent {{ label 'docker' }}
         environment {{
-          TAG = "${{env.GERRIT_EVENT_TYPE == "patchset-created" ? "review-" + env.GERRIT_CHANGE_NUMBER : "" }}"
+          TAG = "${{env.GERRIT_EVENT_TYPE == "patchset-created" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
         }}
         stages {{
           stage('Clone') {{
