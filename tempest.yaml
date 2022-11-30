@@ -895,6 +895,7 @@
             - 'database'
             - 'coe'
             - 'application'
+            - 'ec2api'
           skip_capacity_check: false
           environment: 'testing'
 
@@ -919,7 +920,6 @@
           test:
             - 'image'
             - 'object'
-            - 'ec2api'
             - 'dns'
           skip_capacity_check: true
 
