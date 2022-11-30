@@ -825,6 +825,7 @@
             - 'orchestration'
             - 'database'
             - 'application'
+            - 'ec2api'
           skip_capacity_check: false
           environment: 'production'
 
@@ -908,7 +909,6 @@
           test:
             - 'image'
             - 'object'
-            - 'ec2api'
             - 'dns'
           skip_capacity_check: true
 
