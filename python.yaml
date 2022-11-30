@@ -244,7 +244,7 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'functional'
-      - '{name}-container':
+      - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
