@@ -509,7 +509,7 @@
                 stage('Test Image in Test Cloud') {
                     agent { label 'tempest' }
                     steps {
-                        testOctaviaImage 'rctest', 'coreservices'
+                        testOctaviaImage 'testing', 'coreservices'
                     }
                 }
                 stage('Deploy to Production Cloud') {
