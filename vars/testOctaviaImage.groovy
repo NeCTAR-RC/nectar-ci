@@ -8,6 +8,6 @@ def call(String cloud_env, String availability_zone) {
     cd \$WORKSPACE/tempest
     ./setup_tempest.py -s $availability_zone -e $cloud_env -j check-octavia-smoke \$tmpdir
     cd \$tmpdir
-    stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-octavia.yaml --serial
+    stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-octavia-upgrade.yaml --serial
     """
 }
