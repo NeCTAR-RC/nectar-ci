@@ -9,7 +9,7 @@ def call(String project_name, String cloud_env) {
             os_cred_id = '7a2e4b77-a292-47a1-b852-c0cfd9c1c383'
             os_auth_url = 'https://keystone.rc.nectar.org.au:5000/v3'
             break
-          case "rctest":
+          case "testing":
             os_cred_id = '5c8f1b5c-2739-465e-ab10-e674b3fb884a'
             os_auth_url = 'https://keystone.test.rc.nectar.org.au:5000/v3'
             break
