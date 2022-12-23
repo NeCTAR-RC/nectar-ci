@@ -400,12 +400,8 @@
 - project:
     name: octavia
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
