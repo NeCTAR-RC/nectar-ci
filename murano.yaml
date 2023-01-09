@@ -103,12 +103,12 @@
                 }}
                 stage('Build package in RCTest') {{
                     steps {{
-                        buildMuranoPackage 'murano', 'rctest'
+                        buildMuranoPackage 'murano', 'testing'
                     }}
                 }}
                 stage('Deploy package in RCTest') {{
                     steps {{
-                        deployMuranoPackage 'murano', 'rctest'
+                        deployMuranoPackage 'murano', 'testing'
                     }}
                 }}
                 stage('Build package in Production') {{
