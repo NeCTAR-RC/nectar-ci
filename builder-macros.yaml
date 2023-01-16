@@ -245,7 +245,7 @@
       - shell: |
           mkdir -p /tmp/yamls
           export GEM_HOME=/tmp/yamls
-          gem install --no-document yaml-lint -v 0.0.10
+          gem install --no-document yaml-lint
           find . -type f -iname "*.yml" -o -iname "*.yaml" -o -iname "*.eyaml" | xargs -d '\n' /tmp/yamls/bin/yaml-lint
 
 - builder:
