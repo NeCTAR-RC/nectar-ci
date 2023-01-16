@@ -585,6 +585,6 @@
     name: nectar-jupyterhub
     jobs:
       - '{name}-dummy':
-         organisation: internal
+         organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: internal
+         organisation: 'NeCTAR-RC'
