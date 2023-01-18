@@ -39,6 +39,16 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: gnocchi-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: langstroth-helm
     jobs:
       - '{name}-helm-lint':
