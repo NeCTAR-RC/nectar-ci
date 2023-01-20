@@ -31,6 +31,16 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: ceilometer-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: cloudkitty-helm
     jobs:
       - '{name}-helm-lint':
