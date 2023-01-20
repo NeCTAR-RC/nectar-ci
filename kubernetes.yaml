@@ -97,6 +97,16 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: nova-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: nova-pollinate-helm
     jobs:
       - '{name}-helm-lint':
