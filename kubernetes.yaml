@@ -31,11 +31,31 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: ceilometer-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: cloudkitty-helm
     jobs:
       - '{name}-helm-lint':
          organisation: 'NeCTAR-RC'
       - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: gnocchi-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -68,6 +88,16 @@
 
 - project:
     name: nectar-freshdesk-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: nova-helm
     jobs:
       - '{name}-helm-lint':
          organisation: 'NeCTAR-RC'
