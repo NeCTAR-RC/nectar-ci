@@ -176,6 +176,12 @@
          image_name: 'ubuntu-20.04'
          default_user: 'ubuntu'
 
+    name: bumblebee-ubuntu-22.04
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'ubuntu-22.04'
+         default_user: 'ubuntu'
+
 - project:
     name: bumblebee-centos-7
     jobs:
