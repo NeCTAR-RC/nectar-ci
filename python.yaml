@@ -467,24 +467,16 @@
 - project:
     name: magnum
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: python-magnumclient
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
 
