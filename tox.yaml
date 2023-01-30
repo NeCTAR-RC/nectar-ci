@@ -1,4 +1,28 @@
 - job-group:
+    name: '{name}-os-tox-python3'
+    jobs:
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            os_release: 'yoga'
+            environment: 'pep8'
+            ubuntu_release: 'focal'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            os_release: 'yoga'
+            environment: 'py38'
+            ubuntu_release: 'focal'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            os_release: 'zed'
+            environment: 'pep8'
+            ubuntu_release: 'focal'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            os_release: 'zed'
+            environment: 'py38'
+            ubuntu_release: 'focal'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            os_release: 'zed'
+            environment: 'py310'
+            ubuntu_release: 'jammy'
+
+- job-group:
     name: '{name}-os-tox-{environment}'
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
