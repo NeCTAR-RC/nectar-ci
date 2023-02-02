@@ -833,6 +833,7 @@
     name: tempest-nagios-services-volume
     site:
       - monash-03
+      - restricted-qld
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
@@ -1369,6 +1370,7 @@
         - monash-01
         - monash-02
         - qld
+        - restricted-qld
         - swinburne-01
         - tasmania
     jobs:
