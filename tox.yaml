@@ -10,13 +10,13 @@
             environment: 'py38'
             ubuntu_release: 'focal'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            os_release: 'zed'
-            environment: 'pep8'
-            ubuntu_release: 'focal'
+            os_release: 'yoga'
+            environment: 'py310'
+            ubuntu_release: 'jammy'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             os_release: 'zed'
-            environment: 'py38'
-            ubuntu_release: 'focal'
+            environment: 'pep8'
+            ubuntu_release: 'jammy'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             os_release: 'zed'
             environment: 'py310'
