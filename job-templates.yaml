@@ -420,7 +420,7 @@
 - job-template:
     name: '{name}-focal-deb-package'
     defaults: global
-    node: bionic-train
+    node: jammy-zed
 
     parameters:
       - string:
@@ -489,7 +489,7 @@
 - job-template:
     name: '{name}-jammy-deb-package'
     defaults: global
-    node: bionic-train
+    node: jammy-zed
 
     parameters:
       - string:
@@ -630,7 +630,7 @@
 - job-template:
     name: '{name}-os-deb-package'
     defaults: global
-    node: bionic-queens
+    node: jammy-zed
 
     parameters:
       - string:
