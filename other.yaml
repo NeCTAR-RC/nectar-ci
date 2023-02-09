@@ -34,6 +34,12 @@
       - '{name}-dummy':
          organisation: 'NeCTAR-RC'
 
+- project:
+    name: meliponini
+    jobs:
+      - '{name}-dummy':
+         organisation: 'internal'
+
 - job:
     name: 'librarian-verify'
     concurrent: false
