@@ -47,8 +47,6 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
@@ -348,12 +346,6 @@
          environment: 'functional'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-os-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-container-{ubuntu_release}-{os_release}':
-         organisation: 'NeCTAR-RC'
-         ubuntu_release: 'bionic'
-         os_release: 'train'
       - '{name}-container-{ubuntu_release}-{os_release}':
          organisation: 'NeCTAR-RC'
          ubuntu_release: 'focal'
@@ -672,17 +664,12 @@
 - project:
     name: gnocchi
     jobs:
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36-mysql-file'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py36-mysql-influxdb'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
@@ -794,8 +781,6 @@
 - project:
     name: django-select2-forms
     jobs:
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-dummy':
          organisation: 'NeCTAR-RC'
 
