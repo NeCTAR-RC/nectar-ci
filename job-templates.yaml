@@ -559,7 +559,7 @@
 - job-template:
     name: '{name}-bionic-deb-package'
     defaults: global
-    node: bionic-queens
+    node: jammy-zed
 
     parameters:
       - string:
