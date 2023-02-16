@@ -157,3 +157,9 @@
     jobs:
       - '{name}-kustomize-validate':
          organisation: 'internal'
+
+- project:
+    name: fluentd-deploy
+    jobs:
+      - '{name}-kustomize-validate':
+         organisation: 'internal'
