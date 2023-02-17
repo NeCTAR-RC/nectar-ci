@@ -655,16 +655,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: rc-servicecheck
-    jobs:
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-
-- project:
     name: magnum-tempest-plugin
     jobs:
       - '{name}-focal-tox-{environment}':
