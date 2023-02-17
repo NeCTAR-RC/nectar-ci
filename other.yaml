@@ -476,7 +476,7 @@
     jobs:
       - '{name}-yaml':
          organisation: 'internal'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          environment: 'pep8'
          organisation: 'internal'
 
