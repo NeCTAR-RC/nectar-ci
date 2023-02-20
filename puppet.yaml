@@ -838,6 +838,10 @@
       - '{name}-r10k-diff-catalog':
          organisation: 'internal'
          r10k_host: 'r10k.test.rc.nectar.org.au'
+      - '{name}-diff-{backend}':
+         backend: 'catalog-diff'
+         organisation: 'internal'
+         r10k_host: 'r10k.test.rc.nectar.org.au'
 
 - project:
     name: puppet-site-undertest

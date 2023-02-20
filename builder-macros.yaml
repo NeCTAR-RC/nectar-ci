@@ -472,7 +472,7 @@
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
             export R10K_HOST={r10k_host}
-            r10k-diff-catalog.py test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
+            r10k-diff-catalog.py --backend {backend} test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
 
 - builder:
     name: r10k-diff-catalog-puppet-library
