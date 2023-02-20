@@ -146,25 +146,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: cookiecutter-pypackage
-    jobs:
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-
-- project:
-    name: nectar-reporting
-    jobs:
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - '{name}-trusty-deb-package':
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: aardvark
     jobs:
       - '{name}-os-tox-{environment}':
@@ -672,16 +653,6 @@
          environment: 'pep8'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
-
-- project:
-    name: rc-servicecheck
-    jobs:
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - '{name}-trusty-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
 
 - project:
     name: magnum-tempest-plugin
