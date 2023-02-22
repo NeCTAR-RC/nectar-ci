@@ -1,7 +1,7 @@
 - project:
     name: nectar-ops
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'internal'
          environment: 'linters'
 
