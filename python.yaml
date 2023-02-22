@@ -73,13 +73,16 @@
 - project:
     name: nectar-metrics
     jobs:
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-focal-deb-package':
@@ -113,15 +116,15 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-bionic-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
@@ -135,7 +138,7 @@
 - project:
     name: python-placementclient
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
       - '{name}-bionic-deb-package':
@@ -203,10 +206,6 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
-      - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-kolla-container-upstream'
 
 - project:
     name: manuka
@@ -229,16 +228,19 @@
 - project:
     name: python-manukaclient
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py27'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-bionic-tox-{environment}':
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-bionic-deb-package':
@@ -581,7 +583,7 @@
 - project:
     name: ospurge
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py27'
 
@@ -793,12 +795,15 @@
 - project:
     name: python-warreclient
     jobs:
-      - '{name}-bionic-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py27'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
