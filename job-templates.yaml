@@ -1,7 +1,7 @@
 - job-template:
     name: '{name}-git-secrets-sorted'
     defaults: global
-    node: openstack
+    node: generic
 
     triggers:
       - gerrit:
@@ -105,7 +105,7 @@
 - job-template:
     name: '{name}-puppet-git-secrets'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:
@@ -694,7 +694,7 @@
 - job-template:
     name: '{name}-yaml'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:
@@ -783,7 +783,7 @@
 - job-template:
     name: '{name}-dummy'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:
@@ -829,7 +829,7 @@
 - job-template:
     name: '{name}-dummy-debian'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:
@@ -873,7 +873,7 @@
 - job-template:
     name: '{name}-markdown'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:
@@ -1015,7 +1015,7 @@
 - job-template:
     name: '{name}-jekyll-test-build-cleanup'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:
@@ -1071,7 +1071,7 @@
 - job-template:
     name: '{name}-puppet-prod-review'
     defaults: global
-    node: openstack
+    node: generic
 
     parameters:
       - string:

@@ -69,7 +69,7 @@
 - job-template:
     name: 'murano-package-deploy-{name}'
     defaults: global
-    node: openstack
+    node: generic
     project-type: pipeline
     sandbox: true
 
