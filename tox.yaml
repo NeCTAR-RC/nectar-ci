@@ -47,20 +47,6 @@
             ubuntu_release: 'jammy'
             os_release: 'zed'
 
-# Transition group for Ussuri projects that need to use bionic.
-- job-group:
-    name: '{name}-os-bionic-ussuri-tox-{environment}'
-    jobs:
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-         ubuntu_release: 'bionic'
-         os_release: 'train'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-         ubuntu_release: 'bionic'
-         os_release: 'ussuri'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-         ubuntu_release: 'focal'
-         os_release: 'victoria'
-
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
     defaults: global
