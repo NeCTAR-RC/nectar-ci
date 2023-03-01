@@ -221,24 +221,6 @@
           hivemind packaging.buildpackage
           cp ../../build-area/*/*.deb .
 
-# Temp to support bionic-ussuri
-- builder:
-    name: 'os-pbuilder-create-bionic'
-    builders:
-      - shell: 'hivemind pbuilder.create --ubuntu-release bionic || hivemind pbuilder.update --ubuntu-release bionic'
-
-# Temp to support bionic-ussuri
-- builder:
-    name: 'os-pbuilder-buildpackage-bionic'
-    builders:
-      - shell: |
-          export DEBFULLNAME="$GIT_AUTHOR_NAME"
-          export DEBEMAIL="$GIT_AUTHOR_EMAIL"
-          rm -f *.deb
-          hivemind packaging.buildpackage --ubuntu-release bionic
-          cp ../../build-area/*/*.deb .
-
-
 - builder:
     name: yaml-lint
     builders:
