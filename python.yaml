@@ -704,7 +704,7 @@
     jobs:
       - '{name}-os-tox-{environment}':
          organisation: 'resplat-cloud'
-         environment: 'py36'
+         environment: 'py38'
       - '{name}-os-tox-{environment}':
          organisation: 'resplat-cloud'
          environment: 'flake8'
