@@ -79,6 +79,11 @@
       - 'image-build-official-{name}'
 
 - project:
+    name: ubuntu-22.04-docker
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
     name: mysql-5.7
     jobs:
       - 'image-build-trove-{name}'
