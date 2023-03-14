@@ -23,7 +23,7 @@ def call(String cloud_env, String availability_zone) {
     echo "==> ./setup_tempest.py -s $availability_zone -e $cloud_env -j check-trove --trove-datastore $datastoreName --trove-datastore-version ${datastoreVersion}-\$BUILD_NUMBER \$TROVE_PREVIOUS_VERSION \$tmpdir"
     ./setup_tempest.py -s $availability_zone -e $cloud_env -j check-trove --trove-datastore $datastoreName --trove-datastore-version ${datastoreVersion}-\$BUILD_NUMBER \$TROVE_PREVIOUS_VERSION \$tmpdir
     cd \$tmpdir
-    echo "==> stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-trove.yaml --serial"
-    stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-trove.yaml --serial
+    echo "==> stestr run --include-list \$WORKSPACE/tempest/whitelists/check-trove.yaml --serial"
+    stestr run --include-list \$WORKSPACE/tempest/whitelists/check-trove.yaml --serial
     """
 }

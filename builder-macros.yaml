@@ -504,7 +504,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-{check} $tmpdir
           cd $tmpdir
-          stestr run --whitelist-file $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --include-list $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
@@ -519,7 +519,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s {site} -e {cloud} -j check-{check} $tmpdir
           cd $tmpdir
-          stestr run --whitelist-file $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --include-list $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
@@ -534,7 +534,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e $CLOUD -j check-{check} $tmpdir
           cd $tmpdir
-          stestr run --whitelist-file $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --include-list $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
@@ -549,7 +549,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -e {cloud} -j check-{check} $tmpdir
           cd $tmpdir
-          stestr run --whitelist-file $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run --include-list $WORKSPACE/tempest/whitelists/check-{whitelist}.yaml --serial 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET

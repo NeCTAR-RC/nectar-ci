@@ -8,6 +8,6 @@ def call(String cloud_env, String availability_zone) {
     cd \$WORKSPACE/tempest
     ./setup_tempest.py -s $availability_zone -e $cloud_env -j check-manila-smoke \$tmpdir
     cd \$tmpdir
-    stestr run --whitelist-file \$WORKSPACE/tempest/whitelists/check-manila-nfs.yaml --serial
+    stestr run --include-list \$WORKSPACE/tempest/whitelists/check-manila-nfs.yaml --serial
     """
 }
