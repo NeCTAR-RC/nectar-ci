@@ -408,6 +408,79 @@
          whitelist: 'upgrade-neutron'
 
 - job:
+    name: tempest-scenario-check-midonet
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+    builders:
+      - shell: |
+          #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD:   $CLOUD"
+          echo "                   AZ:      $AVAILABILITY_ZONE"
+          echo "                   HOST:    $HOST"
+          echo "                   STARTED: $(date)"
+          echo
+          echo "================================================================="
+          echo
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest/
+          ./setup_tempest.py --host $HOST -s ${AVAILABILITY_ZONE}-midonet -e $CLOUD -j check-scenario-midonet $tmpdir
+          cd $tmpdir
+          stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - auckland
+            - intersect-01
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - monash-03
+            - qld
+            - swinburne-01
+            - tasmania
+            - tasmania-02
+            - tasmania-s
+            - coreservices
+            - qh2-test
+            - monash-test
+            - aucklandtest
+            - lani
+            - luna
+          description: 'Availability zone.'
+      - string:
+          name: 'HOST'
+          description: |
+                Nova host to test. <br>
+                - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+                - Leave blank to let scheduler choose a host.
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+
+- job:
     name: tempest-scenario-check
     defaults: global
     node: tempest
