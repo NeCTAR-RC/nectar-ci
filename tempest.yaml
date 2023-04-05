@@ -40,6 +40,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -120,6 +121,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -197,6 +199,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -254,6 +257,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -312,6 +316,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -376,6 +381,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -449,6 +455,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -522,6 +529,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -585,6 +593,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -643,6 +652,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -701,6 +711,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -880,6 +891,7 @@
 - project:
     name: tempest-nagios-services
     site:
+      - ardc-mel-1
       - auckland
       - intersect-01
       - melbourne-qh2
@@ -917,6 +929,7 @@
 - project:
     name: tempest-nagios-services-volume-backup
     site:
+      - ardc-mel-1
       - auckland
       - melbourne-qh2
       - melbourne-qh2-uom
@@ -938,6 +951,7 @@
 - project:
     name: tempest-nagios-services-advanced-network
     site:
+      - ardc-mel-1
       - auckland
       - intersect-01
       - melbourne-qh2
@@ -1416,6 +1430,7 @@
 - project:
     name: tempest-nagios-site-compute
     site:
+        - ardc-mel-1
         - auckland
         - intersect-01
         - melbourne-qh2
@@ -1437,6 +1452,7 @@
 - project:
     name: tempest-nagios-site-network
     site:
+        - ardc-mel-1
         - auckland
         - intersect-01
         - melbourne-qh2
@@ -1789,6 +1805,7 @@
           description: 'Availability zone. Use "Any zone" to allow the scheduler to choose.'
           choices:
             - Any zone
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -1847,6 +1864,7 @@
           description: 'Availability zone. Use "Any zone" to allow the scheduler to choose.'
           choices:
             - Any zone
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
