@@ -30,11 +30,11 @@ def call(String project_name, String cloud_env) {
         export OS_USER_DOMAIN_NAME=Default
         export OS_IDENTITY_API_VERSION=3
         export OS_PROJECT_NAME=$project_name
-        IMAGE_NAME=\"$imageName [\$BUILD_NUMBER]\"
+        IMAGE_NAME=\"NeCTAR $imageName [\$BUILD_NUMBER]\"
         [ -z "\$IMAGE_NAME" ] && exit 1
         echo "Creating image \$IMAGE_NAME..."
-        echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 'NeCTAR $imageName'"
-        openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "NeCTAR $imageName" > image_id.txt
+        echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 \"\$IMAGE_NAME\""
+        openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "\$IMAGE_NAME" > image_id.txt
         [ -s image_id.txt ] || exit 1
         echo "Image $imageId created!"
         RETRIES=10
