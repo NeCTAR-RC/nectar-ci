@@ -334,7 +334,7 @@
                 stage('Deploy to Dev Cloud') {{
                     agent {{ label 'focal' }}
                     steps {{
-                        deployImage 'trove', 'development'
+                        deployImageWithBuildNumber 'trove', 'development'
                         setImageProperties 'trove', 'development'
                     }}
                 }}
@@ -348,7 +348,7 @@
                     agent {{ label 'focal' }}
                     steps {{
                         setImageID()
-                        deployImage 'trove', 'testing'
+                        deployImageWithBuildNumber 'trove', 'testing'
                         setImageProperties 'trove', 'testing'
                     }}
                 }}
@@ -367,7 +367,7 @@
                 stage('Deploy to Production Cloud') {{
                     agent {{ label 'focal' }}
                     steps {{
-                        deployImage 'trove', 'production'
+                        deployImageWithBuildNumber 'trove', 'production'
                         setImageProperties 'trove', 'production'
                     }}
                 }}
