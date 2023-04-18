@@ -1453,15 +1453,24 @@
     name: tempest-nagios-site-network
     site:
         - ardc-mel-1
+        - ardc-mel-1-midonet
         - auckland
+        - auckland-midonet
         - intersect-01
+        - intersect-01-midonet
         - melbourne-qh2
+        - melbourne-qh2-midonet
         - monash-01
+        - monash-01-midonet
         - monash-02
+        - monash-02-midonet
         - qld
+        - qld-midonet
         - restricted-qld
         - swinburne-01
+        - swinburne-01-midonet
         - tasmania
+        - tasmania-midonet
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
           test:
