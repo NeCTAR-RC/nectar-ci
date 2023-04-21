@@ -878,3 +878,8 @@
       - '{name}-container':
          organisation: 'NeCTAR-RC'
          helm_name: '{name}-helm'
+
+- project:
+    name: iscsi
+    jobs:
+      - '{name}-kolla-container-upstream'
