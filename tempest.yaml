@@ -955,6 +955,7 @@
       - auckland
       - intersect-01
       - melbourne-qh2
+      - melbourne-qh2-uom
       - monash-01
       - monash-02
       - qld
@@ -1456,6 +1457,7 @@
         - auckland
         - intersect-01
         - melbourne-qh2
+        - melbourne-qh2-uom
         - monash-01
         - monash-02
         - qld
@@ -1474,6 +1476,7 @@
         - auckland-midonet
         - intersect-01-midonet
         - melbourne-qh2-midonet
+        - melbourne-qh2-uom-midonet
         - monash-01-midonet
         - monash-02-midonet
         - qld-midonet
