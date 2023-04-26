@@ -880,6 +880,6 @@
          helm_name: '{name}-helm'
 
 - project:
-    name: iscsi
+    name: iscsid
     jobs:
-      - '{name}-kolla-container-upstream'
+      - 'iscsid-kolla-container-upstream'
