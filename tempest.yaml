@@ -964,6 +964,7 @@
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
+            - 'coe'
             - 'loadbalancer'
           skip_capacity_check: false
           environment: 'production'
