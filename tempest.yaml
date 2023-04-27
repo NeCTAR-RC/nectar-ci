@@ -1800,6 +1800,7 @@
       - shell: |
           . /opt/tempest/bin/activate
           $WORKSPACE/nagios/tempest_purge.py -e production -j operator --no-dry-run
+          $WORKSPACE/nagios/tempest_purge.py -e production -j operator -s auckland --no-dry-run
 
     triggers:
       - timed: '30 2 * * *'
