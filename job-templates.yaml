@@ -1370,6 +1370,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+         blocking-jobs:
+           - "tempest-cleanup-operator"
+         block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 
 - job-template:
@@ -1492,6 +1500,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+         blocking-jobs:
+           - "tempest-cleanup-operator"
+         block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job-template:
     name: tempest-{name}-check-site-agnostic-{cloud}
@@ -1512,6 +1528,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+         blocking-jobs:
+           - "tempest-cleanup-operator"
+         block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 
 - job-template:

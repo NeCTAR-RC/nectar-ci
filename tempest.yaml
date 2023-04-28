@@ -71,6 +71,10 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
     publishers:
       - trigger:
           project: 'tempest-cleanup-operator'
@@ -162,6 +166,10 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
     publishers:
       - trigger:
           project: 'tempest-cleanup-operator'
@@ -224,6 +232,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job:
     name: tempest-magnum-check
@@ -282,6 +298,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job:
     name: tempest-ec2api-check
@@ -341,6 +365,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 
 - project:
@@ -406,6 +438,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - project:
     name: neutron-upgrade
@@ -486,6 +526,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job:
     name: tempest-scenario-check
@@ -560,6 +608,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job:
     name: tempest-murano-check
@@ -618,7 +674,14 @@
           'nobody':
             - job-read
             - job-discover
-
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job:
     name: tempest-trove-check
@@ -677,6 +740,14 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 
 - job:
@@ -748,6 +819,10 @@
           'nobody':
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
     publishers:
       - trigger:
           project: 'tempest-cleanup-operator'
@@ -1092,7 +1167,14 @@
           'nobody':
             - job-read
             - job-discover
-
+      - build-blocker:
+         blocking-jobs:
+           - "tempest-cleanup-operator"
+         block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
 
 - job:
     name: tempest-rctest-compute-host-check
@@ -1372,8 +1454,8 @@
     concurrent: true
     scm:
       - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - shell: |
           #!/bin/bash
@@ -1900,7 +1982,7 @@
           blocking-jobs:
             - "^.*tempest-compute-host-check"
             - "^.*tempest-compute-host-check-advanced"
-            - "tempest-magnum-check"
+            - "^tempest-(?!.*rctest).*check.*"
           block-level: 'GLOBAL'
 
 
