@@ -546,9 +546,9 @@
             post {
                 failure {
                     node('focal') {
-                        deleteImage 'octavia', 'production'
-                        deleteImage 'octavia', 'testing'
-                        deleteImage 'octavia', 'development'
+                        unsetImageTag 'octavia', 'octavia', 'production'
+                        unsetImageTag 'octavia', 'octavia', 'testing'
+                        unsetImageTag 'octavia', 'octavia', 'development'
                         }
                     }
                 cleanup {
