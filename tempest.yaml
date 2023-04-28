@@ -1484,7 +1484,7 @@
         - swinburne-01
         - tasmania
     jobs:
-      - 'tempest-nagios-site-{site}-{test}-midonet':
+      - 'tempest-nagios-site-{site}-midonet-{test}':
           test:
             - 'network'
       - 'tempest-cleanup-site-{site}-midonet'
@@ -1551,7 +1551,7 @@
 
 
 - job-template:
-    name: 'tempest-nagios-site-{site}-{test}-midonet'
+    name: 'tempest-nagios-site-{site}-midonet-{test}'
     defaults: global
     node: tempest
     concurrent: false
