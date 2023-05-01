@@ -376,7 +376,7 @@
 
 
 - project:
-    name: tempest-s3-check
+    name: s3
     jobs:
       - 'tempest-{name}-check-site-agnostic':
          whitelist: 's3'
