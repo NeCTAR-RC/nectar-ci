@@ -10,6 +10,7 @@ def call(String profile, String tag, String config_file = "etc/kolla-build.conf"
 
     docker pull \${REGISTRY_HOST}/kolla/ubuntu-source-base:\${OPENSTACK_RELEASE}
     docker pull \${REGISTRY_HOST}/kolla/ubuntu-source-openstack-base:\${OPENSTACK_RELEASE}
+    echo "Running: kolla-build --config-file $config_file --profile $profile --skip-existing --tag \$OPENSTACK_RELEASE --registry \$REGISTRY_HOST"
     kolla-build --config-file $config_file --profile $profile --skip-existing --tag \$OPENSTACK_RELEASE --registry \$REGISTRY_HOST
 
     for image in `kolla-build --list-images --profile $profile --config-file $config_file | awk '{print \$3}' | egrep -v '^(base|openstack-base)\$'`
