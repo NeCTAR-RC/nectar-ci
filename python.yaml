@@ -548,6 +548,16 @@
          environment: 'pep8'
 
 - project:
+    name: os-brick
+    jobs:
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: keystone
     jobs:
       - '{name}-os-tox-{environment}':
