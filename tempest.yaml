@@ -981,23 +981,10 @@
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
-            - 'volume'
             - 'orchestration'
             - 'database'
             - 'application'
             - 'ec2api'
-          skip_capacity_check: false
-          environment: 'production'
-
-- project:
-    name: tempest-nagios-services-volume
-    site:
-      - monash-03
-      - restricted-qld
-    jobs:
-      - 'tempest-nagios-services-{site}-{test}':
-          test:
-            - 'volume'
           skip_capacity_check: false
           environment: 'production'
 
@@ -1570,6 +1557,28 @@
           test:
             - 'network'
       - 'tempest-cleanup-site-{site}-midonet'
+
+- project:
+    name: tempest-nagios-site-volume
+    site:
+      - ardc-mel-1
+      - auckland
+      - intersect-01
+      - melbourne-qh2
+      - melbourne-qh2-uom
+      - monash-01
+      - monash-02
+      - monash-03
+      - qld
+      - restricted-qld
+      - swinburne-01
+      - tasmania
+      - tasmania-02
+      - tasmania-s
+    jobs:
+      - 'tempest-nagios-site-{site}-{test}':
+          test:
+            - 'volume'
 
 - project:
     name: tempest-nagios-flavor
