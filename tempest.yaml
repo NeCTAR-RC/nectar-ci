@@ -1608,7 +1608,7 @@
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e production
 
     triggers:
-      - timed: 'H/30 * * * *'
+      - timed: 'H(1-59)/30 * * * *'
 
     publishers:
       - naginator:
@@ -1654,7 +1654,7 @@
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site}-midonet -t {test} -e production
 
     triggers:
-      - timed: 'H/30 * * * *'
+      - timed: 'H(1-59)/30 * * * *'
 
     publishers:
       - naginator:
@@ -1699,7 +1699,7 @@
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -f {flavor} -t {test} -e production
 
     triggers:
-      - timed: 'H * * * *'
+      - timed: 'H(1-59) * * * *'
 
     publishers:
       - naginator:
@@ -1740,7 +1740,7 @@
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e {environment} $skip_capacity_check
 
     triggers:
-      - timed: 'H H(4-6) * * *'
+      - timed: 'H(1-59) H(4-6) * * *'
 
     publishers:
       - naginator:
@@ -1787,7 +1787,7 @@
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -t {test} -e {environment} $skip_capacity_check
 
     triggers:
-      - timed: 'H H(3-4) * * *'
+      - timed: 'H(1-59) H(3-4) * * *'
 
     publishers:
       - naginator:
