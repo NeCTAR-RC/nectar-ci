@@ -225,6 +225,13 @@
          image_name: 'fedora-scientific'
          default_user: 'fedora'
 
+- project:
+    name: bumblebee-rocky-9
+    jobs:
+      - 'image-build-bumblebee-{name}':
+         image_name: 'rocky-9'
+         default_user: 'rocky'
+
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
