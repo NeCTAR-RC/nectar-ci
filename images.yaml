@@ -252,7 +252,6 @@
                 }}
             }}
             options {{
-                preserveStashes(buildCount: 1)
                 ansiColor('xterm')
             }}
             stages {{
@@ -327,7 +326,6 @@
         pipeline {{
             agent none
             options {{
-                preserveStashes(buildCount: 1)
                 ansiColor('xterm')
             }}
             stages {{
@@ -427,7 +425,6 @@
                 }}
             }}
             options {{
-                preserveStashes(buildCount: 1)
                 ansiColor('xterm')
             }}
             stages {{
@@ -502,7 +499,6 @@
         pipeline {
             agent none
             options {
-                preserveStashes(buildCount: 1)
                 ansiColor('xterm')
             }
             stages {
@@ -588,7 +584,6 @@
         pipeline {
             agent none
             options {
-                preserveStashes(buildCount: 1)
                 ansiColor('xterm')
             }
             stages {
@@ -1010,7 +1005,6 @@
         pipeline {{
             agent {{ label 'focal' }}
             options {{
-                preserveStashes(buildCount: 1)
                 ansiColor('xterm')
             }}
             stages {{
