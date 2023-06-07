@@ -563,7 +563,7 @@
     name: keystone
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+         organisation: 'internal'
       - '{name}-kolla-container':
          organisation: 'internal'
 
