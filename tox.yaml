@@ -16,7 +16,7 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             os_release: 'zed'
             environment: 'pep8'
-            ubuntu_release: 'jammy'
+            ubuntu_release: 'focal'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             os_release: 'zed'
             environment: 'py310'
