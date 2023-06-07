@@ -562,12 +562,8 @@
 - project:
     name: keystone
     jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'internal'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'internal'
-         environment: 'pep8'
+      - '{name}-os-tox-python3':
+         organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
          organisation: 'internal'
 
