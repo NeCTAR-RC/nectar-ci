@@ -39,6 +39,11 @@
       - 'image-build-official-{name}'
 
 - project:
+    name: debian-12
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
     name: fedora-36
     jobs:
       - 'image-build-official-{name}'
