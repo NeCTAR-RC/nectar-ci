@@ -39,6 +39,24 @@
          helm_name: '{name}-helm'
 
 - project:
+    name: python-langstrothclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: nectar-osc
     jobs:
       - '{name}-focal-tox-{environment}':
