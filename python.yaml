@@ -858,6 +858,13 @@
       - '{name}-kolla-container-upstream'
 
 - project:
+    name: barbican-tempest-plugin
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+- project:
     name: barbican
     jobs:
       - '{name}-kolla-container-upstream'
