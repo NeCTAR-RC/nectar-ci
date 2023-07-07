@@ -374,6 +374,11 @@
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
 
+- project:
+    name: key-manager
+    jobs:
+      - 'tempest-{name}-check-site-agnostic':
+         whitelist: 'barbican'
 
 - project:
     name: s3
