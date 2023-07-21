@@ -960,7 +960,7 @@
 - project:
     name: tempest-nagios-services-manila-cephfs-rctest
     site:
-      - coreservice
+      - coreservices
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
