@@ -500,6 +500,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-systemrootwrap
+    jobs:
+      - '{name}-puppet-unit':
+         organisation: 'internal'
+
+- project:
     name: puppet-tempest
     jobs:
       - '{name}-puppet-unit':
