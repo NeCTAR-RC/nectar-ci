@@ -594,6 +594,14 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: nectar-binderhub
+    jobs:
+      - '{name}-dummy':
+         organisation: 'NeCTAR-RC'
+      - '{name}-container':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: nectar-jupyterhub-binderhub
     jobs:
       - '{name}-dummy':
