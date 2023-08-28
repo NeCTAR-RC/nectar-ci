@@ -119,6 +119,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-kmod
+    jobs:
+      - '{name}-dummy':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-manuka
     jobs:
       - '{name}-puppet-unit':
