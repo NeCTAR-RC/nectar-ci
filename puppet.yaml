@@ -1,10 +1,4 @@
 - project:
-    name: puppet-anu
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'internal'
-
-- project:
     name: puppet-aodh
     jobs:
       - '{name}-puppet-unit':
@@ -93,12 +87,6 @@
     jobs:
       - '{name}-puppet-unit':
          organisation: 'NeCTAR-RC'
-
-- project:
-    name: puppet-ersa
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'internal'
 
 - project:
     name: puppet-etckeeper
@@ -216,12 +204,6 @@
 
 - project:
     name: puppet-iptables_templates
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'internal'
-
-- project:
-    name: puppet-ivec
     jobs:
       - '{name}-puppet-unit':
          organisation: 'internal'
@@ -401,12 +383,6 @@
 
 - project:
     name: puppet-postfix
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: puppet-pound
     jobs:
       - '{name}-puppet-unit':
          organisation: 'NeCTAR-RC'
