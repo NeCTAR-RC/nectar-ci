@@ -1032,34 +1032,10 @@
          organisation: 'internal'
 
 - project:
-    name: puppet-netapp
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: puppet-freshdesk
     jobs:
       - '{name}-puppet-unit':
          organisation: 'NeCTAR-RC'
-
-- project:
-    name: puppet-grafana
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'NeCTAR-RC'
-
-- project:
-    name: hiera-melbourne
-    jobs:
-      - '{name}-yaml':
-         organisation: 'internal'
-
-- project:
-    name: hiera-sut
-    jobs:
-      - '{name}-yaml':
-         organisation: 'internal'
 
 - project:
     name: hieradata
@@ -1074,13 +1050,6 @@
     jobs:
       - '{name}-puppet-unit':
          organisation: 'internal'
-
-- project:
-    name: hiera-test
-    jobs:
-      - '{name}-yaml':
-         organisation: 'nectar-monash'
-
 
 - job:
     name: 'puppet-module-deploy-testing'
