@@ -506,6 +506,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppetlabs-puppetdb
+    jobs:
+      - '{name}-dummy':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-site-ardc
     jobs:
       - '{name}-yaml':
