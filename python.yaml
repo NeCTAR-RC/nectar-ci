@@ -781,6 +781,17 @@
          environment: 'flake8'
 
 - project:
+    name: nectar-dashboard
+    jobs:
+      - '{name}-os-tox-python3':
+         organisation: 'NeCTAR-RC'
+      - '{name}-os-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - 'dashboard-kolla-container':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: warre
     jobs:
       - '{name}-os-tox-{environment}':
