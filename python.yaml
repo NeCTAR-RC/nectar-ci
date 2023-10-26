@@ -376,12 +376,8 @@
 - project:
     name: horizon
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
 
 - project:
     name: heat
@@ -785,9 +781,6 @@
     jobs:
       - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
       - 'dashboard-kolla-container':
          organisation: 'NeCTAR-RC'
 
