@@ -616,3 +616,9 @@
          organisation: 'NeCTAR-RC'
       - '{name}-container':
          organisation: 'NeCTAR-RC'
+
+- project:
+    name: DigitalResearch-Toolbox
+    jobs:
+      - '{name}-dummy':
+         organisation: 'tas-projects'
