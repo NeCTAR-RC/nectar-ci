@@ -154,6 +154,8 @@
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
          organisation: 'NeCTAR-RC'
 
@@ -268,6 +270,8 @@
       - '{name}-bionic-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-pypi-upload':
          organisation: 'NeCTAR-RC'
@@ -832,6 +836,8 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-bionic-deb-package':
