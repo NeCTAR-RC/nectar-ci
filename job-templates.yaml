@@ -258,6 +258,10 @@
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
 
     triggers:
       - gerrit:

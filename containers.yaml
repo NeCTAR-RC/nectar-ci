@@ -486,7 +486,7 @@
           }}
           stage("Package") {{
               steps {{
-                build(job: '{name}-helm-package')
+                build job: '{name}-helm-package', parameters: [string(name: 'GERRIT_REFSPEC', value: "refs/heads/${{env.BRANCH}}"),string(name: 'GERRIT_BRANCH', value: "${{env.BRANCH}}")]
               }}
           }}
         }}
