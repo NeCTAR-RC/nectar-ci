@@ -3,6 +3,7 @@ def call(String profile, String tag, String config_file = "etc/kolla-build.conf"
     export REGISTRY_AUTH_FILE=auth.json
     echo "\$REGISTRY_PSW" | docker login -u "\$REGISTRY_USR" --password-stdin "\$REGISTRY_HOST"
     OPENSTACK_RELEASE=`echo \$GERRIT_BRANCH | awk -F '/' '{ print \$2 }'`
+    rm -rf kolla
     virtualenv kolla
     . kolla/bin/activate
     pip install -r requirements.txt
