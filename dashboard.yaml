@@ -160,9 +160,12 @@
                   }
                 }
                 sh '''
+                PROJECT=`printf %s $GERRIT_PROJECT | jq -sRr @uri`
+                BRANCH=`printf %s $GERRIT_BRANCH | jq -sRr @uri`
+                CHANGE_ID=${PROJECT}~${BRANCH}~${GERRIT_CHANGE_ID}
                 curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' \
                   -d "{'message': 'Test at: http://${TAG}.dev.rc.nectar.org.au:31974'}" \
-                  https://$GERRIT_HOST/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
+                  https://$GERRIT_HOST/a/changes/$CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
                 '''
               }
             }
