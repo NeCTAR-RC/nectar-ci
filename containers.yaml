@@ -75,7 +75,7 @@
           }}
           stage('Helm package') {{
             steps {{
-              build job: 'nectar-dashboard-helm-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
+              build job: 'nectar-dashboard-helm-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}"),string(name: 'BRANCH', value: "${{env.GERRIT_BRANCH}}")]
             }}
           }}
         }}
@@ -436,6 +436,10 @@
       - string:
           name: CHANGE_PROJECT
           description: "Project which initiated the this version update"
+      - string:
+          name: BRANCH
+          default: master
+          description: "Branch of helm chart repo"
 
     dsl: |
       pipeline {{
@@ -446,7 +450,7 @@
               git poll: false,
                   url: 'https://jenkins@review.rc.nectar.org.au/a/{organisation}/{name}',
                   credentialsId: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c',
-                  branch: 'master'
+                  branch: '$BRANCH'
             }}
           }}
           stage('Build') {{
