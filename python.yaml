@@ -73,7 +73,7 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: nc-lib
+    name: nectarclient-lib
     jobs:
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
