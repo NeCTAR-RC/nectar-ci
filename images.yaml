@@ -29,6 +29,16 @@
       - 'image-build-official-{name}'
 
 - project:
+    name: almalinux-8
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
+    name: almalinux-9
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
     name: debian-10
     jobs:
       - 'image-build-official-{name}'
