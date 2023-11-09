@@ -562,12 +562,8 @@
 - project:
     name: murano-dashboard
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
 
 - project:
     name: neutron
@@ -668,12 +664,8 @@
 - project:
     name: trove-dashboard
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
 
 - project:
     name: glance
