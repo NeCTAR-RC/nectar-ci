@@ -14,6 +14,11 @@
           default: nectar/wallaby
           description: "The branch to use."
 
+    properties:
+      - throttle:
+          max-total: 5
+          option: project
+
     triggers:
       - gerrit:
           trigger-on:
