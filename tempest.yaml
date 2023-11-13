@@ -1548,7 +1548,6 @@
     name: tempest-nagios-site-network-midonet
     site:
         - ardc-mel-1
-        - auckland
         - intersect-01
         - melbourne-qh2
         - melbourne-qh2-uom
