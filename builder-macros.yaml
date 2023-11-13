@@ -175,13 +175,11 @@
             fi
           fi
           git fetch --tags alt-origin
-          if [ ! -d debian ]; then
-            for rb in `git branch -r --list | grep alt-origin | grep debian`
-            do
-              branch=`echo $rb | sed "s,alt-origin/,,g"`;
-              git branch $branch alt-origin/$branch;
-            done
-          fi
+          for rb in `git branch -r --list | grep alt-origin | grep debian`
+          do
+            branch=`echo $rb | sed "s,alt-origin/,,g"`;
+            git branch $branch alt-origin/$branch;
+          done
 
           git branch -d $GERRIT_BRANCH || true
           git checkout -b $GERRIT_BRANCH origin/$GERRIT_BRANCH
