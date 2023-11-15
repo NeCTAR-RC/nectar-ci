@@ -909,7 +909,7 @@
 - job-template:
     name: '{name}-jekyll-html-check'
     defaults: global
-    node: bionic
+    node: jammy
 
     parameters:
       - string:
