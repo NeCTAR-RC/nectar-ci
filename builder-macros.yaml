@@ -345,11 +345,7 @@
       - shell: |
           bundle install --path vendor/bundle
           bundle exec jekyll build
-          bundle exec htmlproofer \
-              --allow-hash-href --assume_extension \
-              --url-ignore '/localhost/' \
-              --typhoeus_config '{ "ssl_verifyhost": 0, "ssl_verifypeer": false }' \
-              --log-level debug ./_site
+          bundle exec htmlproofer --allow-hash-href --assume-extension --ignore-urls '/localhost/' --log-level debug ./_site
 
 - builder:
     name: jekyll-test-build-cleanup
