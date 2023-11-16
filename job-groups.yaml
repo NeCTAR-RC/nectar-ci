@@ -7,4 +7,4 @@
         - '{name}-puppet-unit-job':
             name-suffix: -next
             node: jammy
-            skip-vote: true
+            skip-vote: false
