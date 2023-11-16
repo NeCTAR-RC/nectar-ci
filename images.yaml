@@ -54,17 +54,17 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: fedora-36
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
     name: fedora-37
     jobs:
       - 'image-build-official-{name}'
 
 - project:
     name: fedora-38
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
+    name: fedora-39
     jobs:
       - 'image-build-official-{name}'
 
