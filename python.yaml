@@ -34,6 +34,10 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'jshint'
+      - '{name}-devenv-create':
+         organisation: 'NeCTAR-RC'
+      - '{name}-devenv-cleanup':
+         organisation: 'NeCTAR-RC'
       - '{name}-container':
          organisation: 'NeCTAR-RC'
          helm_name: '{name}-helm'
