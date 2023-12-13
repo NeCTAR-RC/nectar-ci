@@ -1533,24 +1533,6 @@
             - 'network'
 
 - project:
-    name: tempest-nagios-site-network-midonet
-    site:
-        - ardc-mel-1
-        - intersect-01
-        - melbourne-qh2
-        - melbourne-qh2-uom
-        - monash-01
-        - monash-02
-        - qld
-        - swinburne-01
-        - tasmania
-    jobs:
-      - 'tempest-nagios-site-{site}-midonet-{test}':
-          test:
-            - 'network'
-      - 'tempest-cleanup-site-{site}-midonet'
-
-- project:
     name: tempest-nagios-site-volume
     site:
       - ardc-mel-1
