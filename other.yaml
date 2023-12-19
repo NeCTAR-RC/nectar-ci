@@ -191,7 +191,7 @@
             - job-read
             - job-discover
       - lockable-resources:
-          resources: 'diff-catalog-puppet.test.rc.nectar.org.au'
+          resources: 'diff-catalog-r10k.test.rc.nectar.org.au'
 
     triggers:
       - gerrit:
