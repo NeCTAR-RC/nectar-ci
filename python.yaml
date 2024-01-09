@@ -119,9 +119,6 @@
 - project:
     name: nectar-metrics
     jobs:
-      - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
@@ -134,10 +131,6 @@
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-dummy-debian':
          organisation: 'NeCTAR-RC'
 
 - project:
