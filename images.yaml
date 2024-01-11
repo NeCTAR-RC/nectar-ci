@@ -585,10 +585,22 @@
             post {
                 failure {
                     node('focal') {
-                        unsetImageTag 'octavia', 'octavia', 'production'
-                        unsetImageTag 'octavia', 'octavia', 'testing'
-                        unsetImageTag 'octavia', 'octavia', 'development'
+                        try {
+                          unsetImageTag 'octavia', 'octavia', 'development'
+                        } catch (err) {
+                          echo "Failed: ${err}"
                         }
+                        try {
+                          unsetImageTag 'octavia', 'octavia', 'testing'
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                        try {
+                          unsetImageTag 'octavia', 'octavia', 'production'
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                      }
                     }
                 cleanup {
                     node('focal') {
