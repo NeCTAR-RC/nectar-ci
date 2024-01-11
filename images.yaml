@@ -588,20 +588,22 @@
             post {
                 failure {
                     node('focal') {
-                        try {
-                          unsetImageTag 'octavia', 'octavia', 'development'
-                        } catch (err) {
-                          echo "Failed: ${err}"
-                        }
-                        try {
-                          unsetImageTag 'octavia', 'octavia', 'testing'
-                        } catch (err) {
-                          echo "Failed: ${err}"
-                        }
-                        try {
-                          unsetImageTag 'octavia', 'octavia', 'production'
-                        } catch (err) {
-                          echo "Failed: ${err}"
+                        script {
+                          try {
+                            unsetImageTag 'octavia', 'octavia', 'development'
+                          } catch (err) {
+                            echo "Failed: ${err}"
+                          }
+                          try {
+                            unsetImageTag 'octavia', 'octavia', 'testing'
+                          } catch (err) {
+                            echo "Failed: ${err}"
+                          }
+                          try {
+                            unsetImageTag 'octavia', 'octavia', 'production'
+                          } catch (err) {
+                            echo "Failed: ${err}"
+                          }
                         }
                       }
                     }
