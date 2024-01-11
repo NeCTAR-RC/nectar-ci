@@ -551,6 +551,7 @@
                         deployImage 'octavia', 'development'
                         setImageProperties 'octavia', 'development'
                         setImageTag 'octavia', 'octavia', 'development'
+                        setImageTag 'octavia', 'octavia_next', 'development'
                     }
                 }
                 stage('Deploy to Test Cloud') {
@@ -559,6 +560,7 @@
                         deployImage 'octavia', 'testing'
                         setImageProperties 'octavia', 'testing'
                         setImageTag 'octavia', 'octavia', 'testing'
+                        setImageTag 'octavia', 'octavia_next', 'testing'
                     }
                 }
                 stage('Test Image in Test Cloud') {
@@ -573,6 +575,7 @@
                         deployImage 'octavia', 'production'
                         setImageProperties 'octavia', 'production'
                         setImageTag 'octavia', 'octavia', 'production'
+                        setImageTag 'octavia', 'octavia_next', 'production'
                     }
                 }
                 stage('Test Image in Prod Cloud') {
