@@ -534,6 +534,28 @@
          r10k_host: 'r10k.rc.nectar.org.au'
 
 - project:
+    name: puppet-site-ardctest
+    jobs:
+      - '{name}-yaml':
+         organisation: 'internal'
+      - '{name}-puppet-git-secrets':
+         organisation: 'internal'
+      - '{name}-puppet-unit':
+         organisation: 'internal'
+      - '{name}-r10k-deploy':
+         organisation: 'internal'
+         r10k_host: 'r10k.test.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         organisation: 'internal'
+         puppet_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-cleanup':
+         organisation: 'internal'
+         r10k_host: 'r10k.test.rc.nectar.org.au'
+      - '{name}-r10k-diff-catalog':
+         organisation: 'internal'
+         r10k_host: 'r10k.test.rc.nectar.org.au'
+
+- project:
     name: puppet-site-melbourne
     jobs:
       - '{name}-yaml':
