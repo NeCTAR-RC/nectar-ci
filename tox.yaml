@@ -118,10 +118,10 @@
       - python-tox:
           environment: '{environment}'
 
-    publishers:
-      - cobertura:
-          report-file: "cover/coverage.xml"
-          targets: {}
+    #publishers:
+    #  - cobertura:
+    #      report-file: "cover/coverage.xml"
+    #      targets: {}
 
 - job-template:
     name: '{name}-focal-tox-{environment}'
@@ -174,10 +174,10 @@
       - python-tox:
           environment: '{environment}'
 
-    publishers:
-      - cobertura:
-          report-file: "cover/coverage.xml"
-          targets: {}
+    #publishers:
+    #  - cobertura:
+    #      report-file: "cover/coverage.xml"
+    #      targets: {}
 
 - job-template:
     name: '{name}-jammy-tox-{environment}'
@@ -230,7 +230,7 @@
       - python-tox:
           environment: '{environment}'
 
-    publishers:
-      - cobertura:
-          report-file: "cover/coverage.xml"
-          targets: {}
+#    publishers:
+#      - cobertura:
+#          report-file: "cover/coverage.xml"
+#          targets: {}
