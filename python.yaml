@@ -371,7 +371,7 @@
          environment: 'functional'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-focal-deb-package':
+      - '{name}-focal-os-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
