@@ -531,8 +531,6 @@
          environment: 'pep8'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-kolla-container-upstream':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: murano-agent
