@@ -529,7 +529,7 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-focal-deb-package':
+      - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container-upstream':
          organisation: 'NeCTAR-RC'
