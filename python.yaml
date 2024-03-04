@@ -157,9 +157,6 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
-      - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
@@ -169,8 +166,6 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
