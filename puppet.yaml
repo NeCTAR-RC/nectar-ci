@@ -101,6 +101,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-influxdb
+    jobs:
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-ironic
     jobs:
       - '{name}-puppet-unit':
