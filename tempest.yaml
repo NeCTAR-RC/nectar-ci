@@ -847,19 +847,7 @@
          whitelist: 'trove'
 
 - project:
-    name: trove-mysql-5.7
-    jobs:
-      - 'tempest-{name}-check':
-         whitelist: 'trove'
-
-- project:
     name: trove-mysql-8.0
-    jobs:
-      - 'tempest-{name}-check':
-         whitelist: 'trove'
-
-- project:
-    name: trove-postgresql-9.6
     jobs:
       - 'tempest-{name}-check':
          whitelist: 'trove'

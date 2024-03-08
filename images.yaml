@@ -109,17 +109,7 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: mysql-5.7
-    jobs:
-      - 'image-build-trove-{name}'
-
-- project:
     name: mysql-8.0
-    jobs:
-      - 'image-build-trove-{name}'
-
-- project:
-    name: postgresql-9.6
     jobs:
       - 'image-build-trove-{name}'
 
