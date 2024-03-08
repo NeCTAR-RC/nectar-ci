@@ -42,7 +42,7 @@ def call(String cloud_env, String active = '1') {
        trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${datastoreType} ${imageId} '' ${active}
        echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf db_load_datastore_config_parameters ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json"
        trove-manage --config-file /etc/trove/${cloud_env}.conf db_load_datastore_config_parameters ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json
-       for flavor_id in `openstack flavor list --long --all | grep "flavor_class:name='trove'" | awk '{print \$2}'`
+       for flavor_id in `openstack flavor list --long --all | grep "flavor_class:name='trove'" | grep db3 | awk '{print \$2}'`
        do
          echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_flavor_add ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER \$flavor_id"
          trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_flavor_add ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER \$flavor_id
