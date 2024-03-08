@@ -404,7 +404,6 @@
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'trove', 'testing'
                         deleteImage 'trove', 'production'
                         troveRevertDatastore 'testing'
                         }}
