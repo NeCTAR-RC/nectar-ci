@@ -119,7 +119,7 @@
       - 'image-build-trove-{name}'
 
 - project:
-    name: postgresql-13
+    name: postgresql-16
     jobs:
       - 'image-build-trove-{name}'
 
