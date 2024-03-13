@@ -897,6 +897,17 @@
          helm_name: '{name}-helm'
 
 - project:
+    name: bumblebee-stormbee
+    jobs:
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      # Add pypi upload and deb packaging later ...
+
+- project:
     name: taynac
     jobs:
       - '{name}-os-tox-{environment}':
