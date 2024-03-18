@@ -264,6 +264,9 @@
          environment: 'functional'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
+      - '{name}-container':
+         organisation: 'NeCTAR-RC'
+
 
 - project:
     name: python-manukaclient
