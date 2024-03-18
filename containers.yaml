@@ -4,6 +4,14 @@
       - '{name}-yaml':
          organisation: 'internal'
 
+- project:
+    name: docker-shibd
+    jobs:
+      - '{name}-container':
+         organisation: 'internal'
+
+
+
 - job-template:
     name: 'dashboard-kolla-container'
     defaults: global
