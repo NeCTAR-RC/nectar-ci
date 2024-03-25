@@ -49,6 +49,14 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: etcd-operations-helm
+    jobs:
+      - '{name}-helm-lint':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: gnocchi-helm
     jobs:
       - '{name}-helm-lint':
@@ -127,7 +135,7 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: warre-helm
+    name: shibd-helm
     jobs:
       - '{name}-helm-lint':
          organisation: 'NeCTAR-RC'
@@ -135,7 +143,6 @@
          organisation: 'NeCTAR-RC'
       - '{name}-helm-update-version':
          organisation: 'NeCTAR-RC'
-
 
 - project:
     name: taynac-helm
@@ -149,11 +156,13 @@
 
 
 - project:
-    name: etcd-operations-helm
+    name: warre-helm
     jobs:
       - '{name}-helm-lint':
          organisation: 'NeCTAR-RC'
       - '{name}-helm-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-helm-update-version':
          organisation: 'NeCTAR-RC'
 
 
