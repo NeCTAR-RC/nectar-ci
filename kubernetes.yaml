@@ -137,7 +137,7 @@
 - project:
     name: shibd-helm
     jobs:
-      - '{name}-helm-lint':
+      - '{name}-helm-library-lint':
          organisation: 'NeCTAR-RC'
       - '{name}-helm-package':
          organisation: 'NeCTAR-RC'
