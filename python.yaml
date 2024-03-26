@@ -262,7 +262,9 @@
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'functional'
-      - '{name}-os-deb-package':
+      - '{name}-devenv-create':
+         organisation: 'NeCTAR-RC'
+      - '{name}-devenv-cleanup':
          organisation: 'NeCTAR-RC'
       - '{name}-container':
          organisation: 'NeCTAR-RC'
