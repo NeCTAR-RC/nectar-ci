@@ -274,9 +274,6 @@
 - project:
     name: python-manukaclient
     jobs:
-      - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py38'
@@ -289,8 +286,6 @@
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
