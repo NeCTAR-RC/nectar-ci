@@ -1722,6 +1722,7 @@
     name: '{name}-pypi-upload'
     defaults: global
     node: generic
+    concurrent: false
 
     parameters:
       - string:
