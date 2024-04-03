@@ -282,7 +282,7 @@
          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'pep8'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
