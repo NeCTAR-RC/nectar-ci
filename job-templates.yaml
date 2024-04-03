@@ -1721,7 +1721,7 @@
 - job-template:
     name: '{name}-pypi-upload'
     defaults: global
-    node: bionic
+    node: generic
 
     parameters:
       - string:
