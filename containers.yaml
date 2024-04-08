@@ -10,6 +10,17 @@
       - '{name}-container':
          organisation: 'internal'
 
+- project:
+    name: argocd-apps-test
+    jobs:
+      - '{name}-yaml':
+         organisation: 'internal'
+
+- project:
+    name: argocd-apps-prod
+    jobs:
+      - '{name}-yaml':
+         organisation: 'internal'
 
 
 - job-template:
