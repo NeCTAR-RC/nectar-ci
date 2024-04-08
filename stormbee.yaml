@@ -1,0 +1,64 @@
+- job:
+    name: stormbee-lifecycle-check
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run stormbee on (Production, Testing, etc)."
+      - choice:
+          name: 'DESKTOP'
+          choices:
+            - ubuntu
+            - jammy
+            - centos
+            - neurodesktop
+            - geodesktop
+            - rocky9
+            - fedorascientific
+          description: "Desktop type to launch. Some not available in Test."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - melbourne-qh2
+            - monash-02
+            - qld
+            - coreservices
+            - default
+          description: 'VDS availability zone.'
+    dsl: |
+      pipeline {{
+        agent {{ label 'jammy' }}
+        stages {{
+          stage('Prepare') {{
+            steps {{
+              git poll: false,
+                  url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-stormbee.git',
+                  credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
+                  branch: 'master'
+              sh '''
+                echo Installing stormbee into a virtual env
+                rm -rf ./venv-stormbee
+                virtualenv -p python3 ./venv-stormbee
+                . ./venv-stormbee/bin/activate
+                pip install -e .
+              '''
+            }}
+          }}
+          stage('Run') {{
+            steps {{
+              withCredentials([file(credentialsId: 'jenkins-stormbee-ini', variable: 'CONFIG')]) {{
+                  sh '''
+                  . ./venv-stormbee/bin/activate
+                  xvfb-run stormbee -c $CONFIG -p --site $SITE scenario lifecycle --zone $ZONE --desktop $DESKTOP
+                  '''
+              }}
+            }}
+          }}
+        }}
+      }}
