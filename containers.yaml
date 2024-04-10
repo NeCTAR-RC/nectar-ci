@@ -172,6 +172,52 @@
 
 
 - job:
+    name: 'periodic-kolla-containers'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    # trigger tue @2am
+    triggers:
+      - timed: '0 2 * * 2'
+
+    dsl: |
+      def openstack_releases = ['xena', 'yoga', 'zed', '2023.1', '2023.2']
+      def openstack_services = ['heat', 'nova', 'blazar', 'cinder', 'magnum', 'murano', 'ec2-api', 'gnocchi',
+                                'neutron', 'octavia', 'keystone', 'dashboard', 'ceilometer', 'cloudkitty']
+      pipeline {
+        agent any
+        stages {
+          stage('build all requirements') {
+            steps {
+              script {
+                openstack_releases.each { rel->
+                  build job: 'requirements-kolla-container', parameters: [stringParam(name: 'OPENSTACK_RELEASE', value: rel)]
+                }
+              }
+            }
+          }
+          stage('build openstack containers') {
+            steps {
+              script {
+                openstack_releases.each { rel->
+                  openstack_services.each { svc ->
+                    try {
+                      build job: svc + '-kolla-container', parameters: [stringParam(name: 'GERRIT_REFSPEC', value: 'refs/heads/nectar/' + rel), stringParam(name: 'GERRIT_BRANCH', value: 'nectar/' + rel)]
+                    } catch (e) {
+                      sh "echo FAIL REASON: No $rel branch available to build $svc containers"
+                      currentBuild.result = 'SUCCESS'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+- job:
     name: 'requirements-kolla-container'
     defaults: global
     project-type: pipeline
