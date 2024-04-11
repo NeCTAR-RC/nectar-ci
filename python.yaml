@@ -927,3 +927,13 @@
     name: iscsid
     jobs:
       - 'iscsid-kolla-container-upstream'
+
+- project:
+    name: nectar-tc-report
+    jobs:
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'internal'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'internal'
+         environment: 'flake8'
