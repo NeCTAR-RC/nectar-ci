@@ -304,6 +304,7 @@
          environment: 'pep8'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
+         helm_name: '{name}-helm'
 
 - project:
     name: blazar-nova
