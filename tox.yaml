@@ -76,6 +76,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
             ubuntu_release: 'jammy'
             os_release: '2023.2'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+            ubuntu_release: 'jammy'
+            os_release: '2024.1'
 
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
