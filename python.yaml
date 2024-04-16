@@ -250,12 +250,8 @@
 - project:
     name: manuka
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py310'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
