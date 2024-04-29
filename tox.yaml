@@ -83,7 +83,7 @@
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
     defaults: global
-    node: '{ubuntu_release}-{os_release}'
+    node: '{ubuntu_release}'
 
     parameters:
       - string:
@@ -137,7 +137,7 @@
 - job-template:
     name: '{name}-focal-tox-{environment}'
     defaults: global
-    node: 'focal-ussuri'
+    node: 'focal'
 
     parameters:
       - string:
@@ -193,7 +193,7 @@
 - job-template:
     name: '{name}-jammy-tox-{environment}'
     defaults: global
-    node: 'jammy-yoga'
+    node: 'jammy'
 
     parameters:
       - string:
