@@ -7,8 +7,6 @@
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: hivemind_contrib
@@ -19,8 +17,6 @@
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: langstroth
@@ -179,8 +175,6 @@
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
@@ -761,8 +755,6 @@
 - project:
     name: python-orcid
     jobs:
-      - '{name}-bionic-deb-package':
-         organisation: 'NeCTAR-RC'
       - '{name}-dummy':
          organisation: 'NeCTAR-RC'
 

@@ -310,8 +310,6 @@
 - job:
     name: 'octocatalog-diff-test'
     defaults: global
-    # NOTE(jake): currently rake only can run on Xenial, this is due to
-    # changes in OpenSSL libraries that fails on Bionic
     node: focal
 
     parameters:
@@ -422,8 +420,6 @@
     concurrent: false
     defaults: global
 
-    # TR: The check uses 'git log --output-indicator-new' which
-    #     seems to be missing from old versions of Git (eg bionic).
     node: jammy
 
     parameters:
@@ -538,10 +534,6 @@
     jobs:
       - '{name}-dummy':
          organisation: 'internal'
-      - 'requirements-container-{ubuntu_release}-{os_release}':
-         organisation: 'internal'
-         ubuntu_release: 'bionic'
-         os_release: 'train'
       - 'requirements-container-{ubuntu_release}-{os_release}':
          organisation: 'internal'
          ubuntu_release: 'focal'
