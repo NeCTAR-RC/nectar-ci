@@ -5,12 +5,12 @@
     sandbox: true
     parameters:
       - choice:
-          name: 'CLOUD'
+          name: 'ENVIRONMENT'
           choices:
             - production
             - testing
             - development
-          description: "Cloud to run stormbee on (Production, Testing, etc)."
+          description: "Bumblebee installation to test (Production, Testing, etc)."
       - choice:
           name: 'DESKTOP'
           choices:
@@ -21,16 +21,16 @@
             - geodesktop
             - rocky9
             - fedorascientific
-          description: "Desktop type to launch. Some not available in Test."
+          description: "Desktop type to launch: depends on ENVIRONMENT"
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - default
             - melbourne-qh2
             - monash-02
             - qld
             - coreservices
-            - default
-          description: 'VDS availability zone.'
+          description: "Desktop availability zone: depends on ENVIRONMENT"
     dsl: |
       pipeline {
         agent { label 'jammy' }
@@ -55,7 +55,7 @@
               withCredentials([file(credentialsId: 'jenkins-stormbee-ini', variable: 'CONFIG')]) {
                   sh '''
                   . ./venv-stormbee/bin/activate
-                  xvfb-run stormbee -c $CONFIG -p --site $SITE scenario lifecycle --zone $ZONE --desktop $DESKTOP
+                  xvfb-run stormbee -c $CONFIG -p --site $ENVIRONMENT scenario lifecycle --zone $ZONE --desktop $DESKTOP
                   '''
               }
             }
