@@ -1,51 +1,46 @@
 # Helm
 
+- job-group:
+    name: '{name}-helm-default-jobs'
+    jobs:
+      - '{name}-helm-lint'
+      - '{name}-helm-package'
+      - '{name}-helm-update-version'
+
 - project:
     name: aardvark-helm
     jobs:
-      - '{name}-helm-lint':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+
+- project:
+    name: aodh-helm
+    jobs:
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: blazar-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: bumblebee-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: ceilometer-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: cloudkitty-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -59,41 +54,25 @@
 - project:
     name: gnocchi-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: langstroth-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: manuka-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nectar-dashboard-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'internal'
-      - '{name}-helm-package':
-         organisation: 'internal'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'internal'
 
 - project:
@@ -107,31 +86,19 @@
 - project:
     name: nectar-freshdesk-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nova-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: nova-pollinate-helm
     jobs:
-      - '{name}-helm-lint':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -147,24 +114,14 @@
 - project:
     name: taynac-helm
     jobs:
-      - '{name}-helm-lint':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
-         organisation: 'NeCTAR-RC'
-
 
 - project:
     name: warre-helm
     jobs:
-      - '{name}-helm-lint':
+      - '{name}-helm-default-jobs':
          organisation: 'NeCTAR-RC'
-      - '{name}-helm-package':
-         organisation: 'NeCTAR-RC'
-      - '{name}-helm-update-version':
-         organisation: 'NeCTAR-RC'
-
 
 # Kustomize
 
