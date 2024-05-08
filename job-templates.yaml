@@ -341,6 +341,9 @@
          choosing-strategy: gerrit
 
     wrappers:
+      - ssh-agent-credentials:
+          users:
+              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
         - username-password-separated:
            credential-id: registry-nectar
