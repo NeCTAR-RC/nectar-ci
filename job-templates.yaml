@@ -246,6 +246,9 @@
       - helm-template
       - helm-lint
 
+    publishers:
+      - workspace-cleanup
+
 
 - job-template:
     name: '{name}-helm-library-lint'
@@ -292,6 +295,9 @@
 
     builders:
       - helm-lint
+
+    publishers:
+      - workspace-cleanup
 
 
 - job-template:
@@ -355,6 +361,9 @@
       - helm-package
       - helm-push
 
+    publishers:
+      - workspace-cleanup
+
 
 - job-template:
     name: '{name}-kustomize-validate'
@@ -401,6 +410,10 @@
 
     builders:
       - kustomize-validate
+
+    publishers:
+      - workspace-cleanup
+
 
 - job-template:
     name: '{name}-focal-deb-package'
