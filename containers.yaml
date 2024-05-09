@@ -1165,6 +1165,7 @@
           docker {
             image 'registry.rc.nectar.org.au/docker.io/renovate/renovate'
             reuseNode true
+            args '--group-add root'
           }
         }
         stages {
@@ -1197,6 +1198,7 @@
           docker {
             image 'registry.rc.nectar.org.au/docker.io/renovate/renovate'
             reuseNode true
+            args '--group-add root'
           }
         }
         stages {
