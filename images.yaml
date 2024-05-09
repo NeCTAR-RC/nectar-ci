@@ -69,6 +69,11 @@
       - 'image-build-official-{name}'
 
 - project:
+    name: fedora-40
+    jobs:
+      - 'image-build-official-{name}'
+
+- project:
     name: ubuntu-16.04
     jobs:
       - 'image-build-official-{name}'
