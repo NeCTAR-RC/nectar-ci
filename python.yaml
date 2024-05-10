@@ -465,6 +465,17 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: magnum-capi-helm
+    jobs:
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+
+
+- project:
     name: python-magnumclient
     jobs:
       - '{name}-os-tox-python3':
