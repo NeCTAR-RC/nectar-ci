@@ -545,7 +545,7 @@
          organisation: 'NeCTAR-RC'
       - '{name}-focal-os-deb-package':
          organisation: 'NeCTAR-RC'
-      - 'neutron-kolla-container':
+      - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
 - project:
