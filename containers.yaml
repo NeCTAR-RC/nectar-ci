@@ -137,13 +137,13 @@
 
     properties:
       - copyartifact:
-          projects: 'kolla-container-*'
+          projects: '*-kolla-container-*'
 
     dsl: |
       pipeline {{
         agent {{ label 'docker' }}
         options {{
-            copyArtifactPermission('kolla-container-*')
+            copyArtifactPermission('*-kolla-container-*')
         }}
         stages {{
           stage('Clone') {{
@@ -353,11 +353,11 @@
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                branch: 'nectar/${{OPENSTACK_RELEASE}}'
+                branch: 'nectar/{os_release}'
               dir ('{name}') {{
                 git poll: false,
                     url: 'https://github.com/openstack/{name}',
-                    branch: 'stable/${{OPENSTACK_RELEASE}}'
+                    branch: 'stable/{os_release}'
               }}
             }}
           }}
@@ -385,16 +385,16 @@
 
                 docker image prune --all -f
 
-                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:${{OPENSTACK_RELEASE}}
-                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:${{OPENSTACK_RELEASE}}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{os_release}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{os_release}
 
-                kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
+                kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag {os_release} --registry $REGISTRY --push
 
                 VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER
 
                 for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
-                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{os_release} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                     docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                 done
 
