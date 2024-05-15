@@ -171,6 +171,7 @@
                 docker image prune --all -f
 
                 kolla-build --config-file etc/kolla-build.conf --profile requirements --pull --tag {os_release} --registry $REGISTRY --push
+                mkdir -p artifacts
                 echo "$BUILD_NUMBER" > artifacts/BUILD_NUMBER
               '''
               archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
