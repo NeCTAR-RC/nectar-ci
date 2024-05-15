@@ -207,10 +207,6 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-container-{ubuntu_release}-{os_release}':
-         organisation: 'NeCTAR-RC'
-         ubuntu_release: 'focal'
-         os_release: 'wallaby'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
@@ -493,10 +489,6 @@
          environment: 'pep8'
       - '{name}-os-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-container-{ubuntu_release}-{os_release}':
-         organisation: 'NeCTAR-RC'
-         ubuntu_release: 'focal'
-         os_release: 'ussuri'
 
 - project:
     name: manila-ui
@@ -645,12 +637,6 @@
 - project:
     name: glance
     jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-kolla-container-upstream'
 
 - project:
@@ -864,8 +850,14 @@
 
 - project:
     name: requirements
+    os_release:
+      - 'xena'
+      - 'yoga'
+      - 'zed'
+      - '2023.1'
+      - '2023.2'
     jobs:
-      - '{name}-kolla-container-upstream'
+      - 'requirements-kolla-container-{os_release}'
 
 - project:
     name: prometheus
@@ -915,7 +907,8 @@
 - project:
     name: iscsid
     jobs:
-      - 'iscsid-kolla-container-upstream'
+      - '{name}-kolla-container-upstream'
+
 
 - project:
     name: nectar-tc-report

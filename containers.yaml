@@ -22,7 +22,35 @@
       - '{name}-yaml':
          organisation: 'internal'
 
+- job-group:
+    name: '{name}-kolla-container'
+    jobs:
+      - '{name}-kolla-container-{os_release}':
+         os_release: 'xena'
+      - '{name}-kolla-container-{os_release}':
+         os_release: 'yoga'
+      - '{name}-kolla-container-{os_release}':
+         os_release: 'zed'
+      - '{name}-kolla-container-{os_release}':
+         os_release: '2023.1'
+      - '{name}-kolla-container-{os_release}':
+         os_release: '2023.2'
 
+- job-group:
+    name: '{name}-kolla-container-upstream'
+    jobs:
+      - '{name}-kolla-container-upstream-{os_release}':
+         os_release: 'xena'
+      - '{name}-kolla-container-upstream-{os_release}':
+         os_release: 'yoga'
+      - '{name}-kolla-container-upstream-{os_release}':
+         os_release: 'zed'
+      - '{name}-kolla-container-upstream-{os_release}':
+         os_release: '2023.1'
+      - '{name}-kolla-container-upstream-{os_release}':
+         os_release: '2023.2'
+
+         
 - job-template:
     name: 'dashboard-kolla-container'
     defaults: global
@@ -101,81 +129,36 @@
       }}
 
 
-- job:
-    name: 'periodic-kolla-containers'
+- job-template:
+    name: 'requirements-kolla-container-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
 
-    # trigger tue @2am
-    triggers:
-      - timed: '0 2 * * 2'
+    properties:
+      - copyartifact:
+          projects: 'kolla-container-*'
 
     dsl: |
-      def openstack_releases = ['xena', 'yoga', 'zed', '2023.1', '2023.2']
-      def openstack_services = ['heat', 'nova', 'blazar', 'cinder', 'magnum', 'murano', 'ec2-api', 'gnocchi',
-                                'neutron', 'octavia', 'keystone', 'dashboard', 'ceilometer', 'cloudkitty']
-      pipeline {
-        agent any
-        stages {
-          stage('build all requirements') {
-            steps {
-              script {
-                openstack_releases.each { rel->
-                  build job: 'requirements-kolla-container', parameters: [stringParam(name: 'OPENSTACK_RELEASE', value: rel)]
-                }
-              }
-            }
-          }
-          stage('build openstack containers') {
-            steps {
-              script {
-                openstack_releases.each { rel->
-                  openstack_services.each { svc ->
-                    try {
-                      build job: svc + '-kolla-container', parameters: [stringParam(name: 'GERRIT_REFSPEC', value: 'refs/heads/nectar/' + rel), stringParam(name: 'GERRIT_BRANCH', value: 'nectar/' + rel)]
-                    } catch (e) {
-                      sh "echo FAIL REASON: No $rel branch available to build $svc containers"
-                      currentBuild.result = 'SUCCESS'
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-
-- job:
-    name: 'requirements-kolla-container'
-    defaults: global
-    project-type: pipeline
-    sandbox: true
-
-    parameters:
-      - string:
-          name: OPENSTACK_RELEASE
-          default: wallaby
-          description: "Openstack version to use."
-
-    dsl: |
-      pipeline {
-        agent { label 'docker' }
-        stages {
-          stage('Clone') {
-            steps {
+      pipeline {{
+        agent {{ label 'docker' }}
+        options {{
+            copyArtifactPermission('kolla-container-*')
+        }}
+        stages {{
+          stage('Clone') {{
+            steps {{
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                branch: 'nectar/${OPENSTACK_RELEASE}'
-            }
-          }
-          stage('Build') {
-            environment {
+                branch: 'nectar/{os_release}'
+            }}
+          }}
+          stage('Build') {{
+            environment {{
               REGISTRY = credentials('registry-nectar')
-            }
-            steps {
+            }}
+            steps {{
               sh '''
                 export REGISTRY="registry.rc.nectar.org.au"
                 export REGISTRY_AUTH_FILE=auth.json
@@ -187,17 +170,18 @@
 
                 docker image prune --all -f
 
-                kolla-build --config-file etc/kolla-build.conf --profile requirements --pull --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
-
+                kolla-build --config-file etc/kolla-build.conf --profile requirements --pull --tag {os_release} --registry $REGISTRY --push
+                echo "$BUILD_NUMBER" > artifacts/BUILD_NUMBER
               '''
-            }
-          }
-        }
-      }
+              archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
+            }}
+          }}
+        }}
+      }}
 
 
 - job-template:
-    name: '{name}-kolla-container'
+    name: '{name}-kolla-container-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
@@ -207,11 +191,11 @@
     parameters:
       - string:
           name: GERRIT_REFSPEC
-          default: refs/heads/nectar/wallaby
+          default: refs/heads/nectar/{os_release}
           description: "The ref to use."
       - string:
           name: GERRIT_BRANCH
-          default: nectar/wallaby
+          default: nectar/{os_release}
           description: "The kolla branch to use."
       - string:
           name: PROJECT_BRANCH_OVERRIDE
@@ -226,17 +210,40 @@
               project-pattern: '{organisation}/{name}'
               branches:
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
+                  branch-pattern: 'nectar/{os_release}'
           silent: false
           escape-quotes: true
+      - reverse:
+          jobs:
+            - 'requirements-kolla-container-{os_release}'
 
     publishers:
       !include: publisher.yaml.inc
 
     dsl: |
+      def copyArtifactSelector = upstream()
       pipeline {{
         agent {{ label 'docker' }}
         stages {{
+          stage('Get artifacts') {{
+            steps {{
+              script {{
+                if (currentBuild.upstreamBuilds.size() == 0) {{
+                  build = selectRun(
+                    job: 'requirements-kolla-container-{os_release}',
+                    selector: status('SUCCESSFUL'),
+                    verbose: true
+                  )
+                  copyArtifactSelector = specific(build.getId())
+                }}
+                copyArtifacts(
+                  projectName: 'requirements-kolla-container-{os_release}',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+              }}
+            }}
+          }}
           stage('Clone') {{
             environment {{
               PROJECT_BRANCH = "${{sh(script:'[ -z $PROJECT_BRANCH_OVERRIDE ] && echo $GERRIT_BRANCH || echo $PROJECT_BRANCH_OVERRIDE', returnStdout: true).trim()}}"
@@ -259,12 +266,18 @@
               REGISTRY = credentials('registry-nectar')
             }}
             steps {{
+              copyArtifacts(
+                projectName: 'requirements-kolla-container-{os_release}',
+                selector: copyArtifactSelector,
+                fingerprintArtifacts: true,
+              )
               sshagent (credentials: ['cd8b8dd3-b897-4ecb-985d-180d5b6f8498']) {{
                 sh '''
                   #!/bin/bash
                   set -eux -o pipefail
                   cd {name}
                   export VERSION_TAG=`git describe`
+                  export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                   cd ..
                   export REGISTRY="registry.rc.nectar.org.au"
                   export REGISTRY_AUTH_FILE=auth.json
@@ -284,8 +297,7 @@
                   [[ {kolla_profile_name} == 'false' ]] && PROFILE_NAME={name} || PROFILE_NAME={kolla_profile_name}
                   kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
-                  BASE_IMAGE=`docker image ls --filter reference=$REGISTRY/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE --quiet`
-                  VERSION_TAG=b$BASE_IMAGE-$VERSION_TAG
+                  VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER
 
                   for image in `kolla-build --list-images --profile $PROFILE_NAME --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                   do
@@ -299,22 +311,42 @@
         }}
       }}
 
+
 - job-template:
-    name: '{name}-kolla-container-upstream'
+    name: '{name}-kolla-container-upstream-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
 
-    parameters:
-      - string:
-          name: OPENSTACK_RELEASE
-          default: wallaby
-          description: "Openstack version to use."
+    triggers:
+      - reverse:
+          jobs:
+            - 'requirements-kolla-container-{os_release}'
 
     dsl: |
+      def copyArtifactSelector = upstream()
       pipeline {{
         agent {{ label 'docker' }}
         stages {{
+          stage('Get artifacts') {{
+            steps {{
+              script {{
+                if (currentBuild.upstreamBuilds.size() == 0) {{
+                  build = selectRun(
+                    job: 'requirements-kolla-container-{os_release}',
+                    selector: status('SUCCESSFUL'),
+                    verbose: true
+                  )
+                  copyArtifactSelector = specific(build.getId())
+                }}
+                copyArtifacts(
+                  projectName: 'requirements-kolla-container-{os_release}',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+              }}
+            }}
+          }}
           stage('Clone') {{
             steps {{
               git poll: false,
@@ -333,9 +365,15 @@
               REGISTRY = credentials('registry-nectar')
             }}
             steps {{
+              copyArtifacts(
+                projectName: 'requirements-kolla-container-{os_release}',
+                selector: copyArtifactSelector,
+                fingerprintArtifacts: true,
+              )
               sh '''
                 cd {name}
                 export VERSION_TAG=`git describe`
+                export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                 cd ..
                 export REGISTRY="registry.rc.nectar.org.au"
                 export REGISTRY_AUTH_FILE=auth.json
@@ -351,8 +389,7 @@
 
                 kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
-                BASE_IMAGE=`docker image ls --filter reference=$REGISTRY/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE --quiet`
-                VERSION_TAG=b$BASE_IMAGE-$VERSION_TAG
+                VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER
 
                 for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
@@ -366,54 +403,6 @@
         }}
       }}
 
-- job:
-    name: 'iscsid-kolla-container-upstream'
-    defaults: global
-    project-type: pipeline
-    sandbox: true
-
-    parameters:
-      - string:
-          name: OPENSTACK_RELEASE
-          default: wallaby
-          description: "Openstack version to use."
-
-    dsl: |
-      pipeline {
-        agent { label 'docker' }
-        stages {
-          stage('Clone') {
-            steps {
-              git poll: false,
-                url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
-                credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                branch: 'nectar/${OPENSTACK_RELEASE}'
-            }
-          }
-          stage('Build') {
-            environment {
-              REGISTRY = credentials('registry-nectar')
-            }
-            steps {
-              sh '''
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-                virtualenv kolla
-                . kolla/bin/activate
-                pip install -r requirements.txt
-
-                docker image prune --all -f
-
-                docker pull ${REGISTRY}/kolla/ubuntu-source-base:${OPENSTACK_RELEASE}
-                docker pull ${REGISTRY}/kolla/ubuntu-source-openstack-base:${OPENSTACK_RELEASE}
-
-                kolla-build --config-file etc/kolla-build.conf --profile iscsi --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
-              '''
-            }
-          }
-        }
-      }
 
 - job-template:
     name: '{name}-helm-update-version'
@@ -594,486 +583,6 @@
                 }}
                 build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
             }}
-          }}
-        }}
-      }}
-
-- job-template:
-    name: 'requirements-container-{ubuntu_release}-{os_release}'
-    defaults: global
-    project-type: pipeline
-    sandbox: true
-
-    properties:
-      - copyartifact:
-          projects: '*'
-
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The Loci ref to use."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The Loci branch to use."
-
-    triggers:
-      - pollscm:
-          cron: "H 8 * * *"
-      - gerrit:
-          trigger-on:
-              - change-merged-event
-              - patchset-created-event
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'internal/nectar-loci'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-          silent: false
-          escape-quotes: true
-          skip-vote:
-            successful: true
-            failed: true
-            unstable: true
-            notbuilt: true
-
-    dsl: |
-      pipeline {{
-        agent {{ label 'docker' }}
-        options {{
-            copyArtifactPermission('*')
-        }}
-        stages {{
-          stage('Clone') {{
-            steps {{
-                checkout(
-                  poll: false,
-                  scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: 'origin/$GERRIT_BRANCH']],
-                    extensions: [
-                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
-                      [$class: 'CleanCheckout'],
-                      [$class: 'WipeWorkspace'],
-                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']],
-                    ],
-                    userRemoteConfigs: [[
-                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                      name: 'origin',
-                      refspec: '$GERRIT_REFSPEC',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
-                    ]]
-                  ]
-                )
-                dir('src') {{
-                  git(
-                    url: 'https://github.com/openstack/requirements.git',
-                    branch: 'stable/{os_release}'
-                  )
-                }}
-                sh '''
-                git submodule init
-                git submodule update
-                '''
-            }}
-          }}
-          stage('Build requirements image') {{
-            environment {{
-              REGISTRY = credentials('registry')
-            }}
-            steps {{
-                sh '''
-                export BUILDAH_FORMAT=docker
-
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-
-                make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src requirements
-
-                rm auth.json
-
-                mkdir -p artifacts
-                git -C src rev-parse --verify --short HEAD > artifacts/REQUIREMENTS_VERSION
-                git rev-parse --verify --short HEAD > artifacts/LOCI_VERSION
-                cp IMAGE IMAGE_TAG artifacts/
-                echo "$GERRIT_EVENT_TYPE" > artifacts/GERRIT_EVENT_TYPE
-                '''
-                archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
-            }}
-          }}
-        }}
-      }}
-
-- job-template:
-    name: '{name}-container-{ubuntu_release}-{os_release}'
-    defaults: global
-    project-type: pipeline
-    sandbox: true
-
-    deploy_to_test: 'false'
-
-    properties:
-      - copyartifact:
-          projects: '*'
-
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: "refs/heads/nectar/{os_release}"
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: "nectar/{os_release}"
-          description: "The default branch to test."
-
-    triggers:
-      - gerrit:
-          trigger-on:
-              - change-merged-event
-              - patchset-created-event
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'nectar/{os_release}'
-          silent: false
-          escape-quotes: true
-          skip-vote:
-            successful: true
-            failed: true
-            unstable: true
-            notbuilt: true
-
-      - reverse:
-          jobs:
-            - 'requirements-container-{ubuntu_release}-{os_release}'
-
-    dsl: |
-      def copyArtifactSelector = upstream()
-
-      pipeline {{
-        agent {{ label 'docker' }}
-        stages {{
-          stage('Get artifacts') {{
-            steps {{
-              script {{
-                if (currentBuild.upstreamBuilds.size() == 0) {{
-                  build = selectRun(
-                    job: 'requirements-container-{ubuntu_release}-{os_release}',
-                    selector: status('SUCCESSFUL'),
-                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/master")]),
-                    verbose: true
-                  )
-                  copyArtifactSelector = specific(build.getId())
-                }}
-                copyArtifacts(
-                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
-                  selector: copyArtifactSelector,
-                  fingerprintArtifacts: true,
-                )
-              }}
-            }}
-          }}
-
-          stage('Clone') {{
-            environment {{
-              LOCI_SHA = readFile('artifacts/LOCI_VERSION')
-            }}
-            steps {{
-                checkout(
-                  poll: false,
-                  scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: env.LOCI_SHA]],
-                    extensions: [
-                      [$class: 'CleanCheckout'],
-                    ],
-                    userRemoteConfigs: [[
-                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                      name: 'origin',
-                      refspec: '+refs/heads/*:refs/remotes/origin/* +refs/changes/*:refs/remotes/origin/*',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
-                    ]]
-                  ]
-                )
-                checkout(
-                  poll: false,
-                  scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: 'origin/$GERRIT_BRANCH']],
-                    extensions: [
-                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
-                      [$class: 'RelativeTargetDirectory', relativeTargetDir: 'src'],
-                      [$class: 'CleanCheckout'],
-                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
-                    ],
-                    userRemoteConfigs: [[
-                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                      name: 'origin',
-                      refspec: '$GERRIT_REFSPEC',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
-                    ]]
-                  ]
-                )
-                sh '''
-                git submodule init
-                git submodule update
-                '''
-            }}
-          }}
-
-          stage('Build') {{
-            environment {{
-              REGISTRY = credentials('registry')
-            }}
-            steps {{
-                copyArtifacts(
-                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
-                  selector: copyArtifactSelector,
-                  fingerprintArtifacts: true,
-                )
-                sh '''
-                echo "Building $GERRIT_BRANCH ($GERRIT_REFSPEC)"
-                export BUILDAH_FORMAT=docker
-                export REQUIREMENTS_SHA=`cat artifacts/REQUIREMENTS_VERSION`
-
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-
-                make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
-
-                rm auth.json
-
-                cp IMAGE IMAGE_TAG artifacts/
-                '''
-                archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
-            }}
-          }}
-
-          stage('Deploy to rctest') {{
-            when {{
-                expression {{
-                  return {deploy_to_test} && readFile('artifacts/GERRIT_EVENT_TYPE') != 'patchset-created' && env.GERRIT_EVENT_TYPE != 'patchset-created'
-                }}
-            }}
-            steps {{
-                build(job: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest')
-            }}
-          }}
-        }}
-      }}
-
-- job-template:
-    name: '{name}-container-{ubuntu_release}-{os_release}-upstream'
-    defaults: global
-    project-type: pipeline
-    sandbox: true
-
-    deploy_to_test: 'false'
-
-    properties:
-      - copyartifact:
-          projects: '*'
-
-    triggers:
-      - reverse:
-          jobs:
-            - 'requirements-container-{ubuntu_release}-{os_release}'
-
-    dsl: |
-      def copyArtifactSelector = upstream()
-
-      pipeline {{
-        agent {{ label 'docker' }}
-        stages {{
-          stage('Get artifacts') {{
-            steps {{
-              script {{
-                if (currentBuild.upstreamBuilds.size() == 0) {{
-                  build = selectRun(
-                    job: 'requirements-container-{ubuntu_release}-{os_release}',
-                    selector: status('SUCCESSFUL'),
-                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/master")]),
-                    verbose: true
-                  )
-                  copyArtifactSelector = specific(build.getId())
-                }}
-                copyArtifacts(
-                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
-                  selector: copyArtifactSelector,
-                  fingerprintArtifacts: true,
-                )
-              }}
-            }}
-          }}
-
-          stage('Clone') {{
-            environment {{
-              LOCI_SHA = readFile('artifacts/LOCI_VERSION')
-            }}
-            steps {{
-                checkout(
-                  poll: false,
-                  scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: env.LOCI_SHA]],
-                    extensions: [
-                      [$class: 'CleanCheckout'],
-                    ],
-                    userRemoteConfigs: [[
-                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                      name: 'origin',
-                      refspec: '+refs/heads/*:refs/remotes/origin/* +refs/changes/*:refs/remotes/origin/*',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-loci.git'
-                    ]]
-                  ]
-                )
-                checkout(
-                  poll: false,
-                  scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: 'origin/stable/{os_release}']],
-                    extensions: [
-                      [$class: 'CloneOption', depth: 1, honorRefspec: true, shallow: true],
-                      [$class: 'RelativeTargetDirectory', relativeTargetDir: 'src'],
-                      [$class: 'CleanCheckout'],
-                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
-                    ],
-                    userRemoteConfigs: [[
-                      name: 'origin',
-                      refspec: "refs/heads/stable/{os_release}",
-                      url: 'https://github.com/openstack/{name}.git'
-                    ]]
-                  ]
-                )
-                sh '''
-                git submodule init
-                git submodule update
-                '''
-            }}
-          }}
-
-          stage('Build') {{
-            environment {{
-              REGISTRY = credentials('registry')
-            }}
-            steps {{
-                copyArtifacts(
-                  projectName: 'requirements-container-{ubuntu_release}-{os_release}',
-                  selector: copyArtifactSelector,
-                  fingerprintArtifacts: true,
-                )
-                sh '''
-                echo "Building stable/{os_release} (refs/heads/stable/{os_release})"
-                export BUILDAH_FORMAT=docker
-                export REQUIREMENTS_SHA=`cat artifacts/REQUIREMENTS_VERSION`
-
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-
-                make BUILDER=podman OPENSTACK_VERSION={os_release} UBUNTU_VERSION={ubuntu_release} DOCKER_REPO="$REGISTRY/loci" REPO=src REQUIREMENTS_SHA=$REQUIREMENTS_SHA {name}
-
-                rm auth.json
-
-                cp IMAGE IMAGE_TAG artifacts/
-                '''
-                archiveArtifacts artifacts: 'artifacts/*', fingerprint: true
-            }}
-          }}
-
-          stage('Deploy to rctest') {{
-            when {{
-                expression {{
-                  return {deploy_to_test} && readFile('artifacts/GERRIT_EVENT_TYPE') != 'patchset-created' && env.GERRIT_EVENT_TYPE != 'patchset-created'
-                }}
-            }}
-            steps {{
-                build(job: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest')
-            }}
-          }}
-        }}
-      }}
-
-- job-template:
-    name: '{name}-container-{ubuntu_release}-{os_release}-deploy-rctest'
-    defaults: global
-    project-type: pipeline
-    sandbox: true
-
-    git_credential: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c'
-
-    dsl: |
-      def copyArtifactSelector = upstream()
-
-      pipeline {{
-        agent any
-        stages {{
-          stage("Get artifacts") {{
-            steps {{
-              script {{
-                if (currentBuild.upstreamBuilds.size() == 0) {{
-                  build = selectRun(
-                    job: '{name}-container-{ubuntu_release}-{os_release}',
-                    selector: status('SUCCESSFUL'),
-                    filter: or([parameters("GERRIT_EVENT_TYPE=change-merged"), parameters("GERRIT_REFSPEC=refs/heads/nectar/{os_release}")]),
-                    verbose: true
-                  )
-                  copyArtifactSelector = specific(build.getId())
-                }}
-                copyArtifacts(
-                  projectName: '{name}-container-{ubuntu_release}-{os_release}',
-                  selector: copyArtifactSelector,
-                  fingerprintArtifacts: true,
-                )
-              }}
-            }}
-          }}
-          stage("Update tag") {{
-            environment {{
-              IMAGE_TAG = readFile('artifacts/IMAGE_TAG').trim()
-            }}
-            steps {{
-              git(
-                changelog: false,
-                credentialsId: '{git_credential}',
-                poll: false,
-                url: 'https://jenkins@review.rc.nectar.org.au/a/internal/puppet-site-rctest'
-              )
-              sh('''
-                sed -i \"s/^profile::core::{name}::version: .*/profile::core::{name}::version: $IMAGE_TAG/g\" data/base.yaml
-                git checkout -B master
-                git config user.name 'Jenkins'
-                git config user.email 'jenkins@rc.nectar.org.au'
-                git add data/base.yaml && git commit -am "[Jenkins CI] {name}::version: $IMAGE_TAG"
-              ''')
-            }}
-          }}
-          stage("Push") {{
-            environment {{
-              GIT_AUTH = credentials('{git_credential}')
-            }}
-            steps {{
-              sh('''
-                  git show -q
-                  git config --local credential.helper "!f() {{ echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }}; f"
-                  git push origin HEAD:refs/heads/master
-                  git config --local --unset credential.helper
-              ''')
-            }}
-          }}
-        }}
-        post {{
-          success {{
-            build (
-              job: 'puppet-site-rctest-r10k-deploy-control-repo',
-              parameters: [string(name: 'GERRIT_PROJECT', value: 'internal/puppet-site-rctest')]
-            )
           }}
         }}
       }}
