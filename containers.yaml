@@ -278,8 +278,8 @@
                   set -eux -o pipefail
                   cd {name}
                   export VERSION_TAG=`git describe`
-                  export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                   cd ..
+                  export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                   export REGISTRY="registry.rc.nectar.org.au"
                   export REGISTRY_AUTH_FILE=auth.json
                   echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
@@ -374,8 +374,8 @@
               sh '''
                 cd {name}
                 export VERSION_TAG=`git describe`
-                export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                 cd ..
+                export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                 export REGISTRY="registry.rc.nectar.org.au"
                 export REGISTRY_AUTH_FILE=auth.json
                 echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
