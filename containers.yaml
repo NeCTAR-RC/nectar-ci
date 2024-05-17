@@ -35,6 +35,8 @@
          os_release: '2023.1'
       - '{name}-kolla-container-{os_release}':
          os_release: '2023.2'
+      - '{name}-kolla-container-{os_release}':
+         os_release: '2024.1'
 
 - job-group:
     name: '{name}-kolla-container-upstream'
@@ -49,8 +51,10 @@
          os_release: '2023.1'
       - '{name}-kolla-container-upstream-{os_release}':
          os_release: '2023.2'
+      - '{name}-kolla-container-upstream-{os_release}':
+         os_release: '2024.1'
 
-         
+
 - job-template:
     name: 'dashboard-kolla-container'
     defaults: global
