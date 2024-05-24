@@ -518,6 +518,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppetlabs-kubernetes
+    jobs:
+      - '{name}-puppet-unit':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: puppet-site-ardc
     jobs:
       - '{name}-yaml':
