@@ -107,7 +107,8 @@
       - shell: |
           MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
           cd "$MODULE"
-          find . -iname *.pp -not -path "./.bundled_gems/*" | xargs -L1 /opt/puppetlabs/bin/puppet parser validate --modulepath=`pwd`/modules
+          find . -iname *.pp -not -path "./.bundled_gems/*" -not -path "./plans/*" | xargs -L1 /opt/puppetlabs/bin/puppet parser validate --modulepath=`pwd`/modules
+          find ./plans/ -iname *.pp | xargs -L1 /opt/puppetlabs/bin/puppet parser validate --tasks
           for f in `find . -iname *.erb -not -path "./.bundled_gems/*"` ; do
             erb -P -x -T '-' $f | ruby -c
           done
