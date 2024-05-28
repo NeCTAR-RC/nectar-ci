@@ -20,6 +20,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: barbican-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: blazar-helm
     jobs:
       - '{name}-helm-default-jobs':
