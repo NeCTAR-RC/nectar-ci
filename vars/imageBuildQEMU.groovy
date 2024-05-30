@@ -10,7 +10,7 @@ def call(String imageName) {
         echo "Starting packer build..."
         chmod 600 packer-ssh-key
         # Assume plugins installed in same dir as packer
-        export PACKER_PLUGIN_PATH=$(which packer | xargs dirname)
+        export PACKER_PLUGIN_PATH=`which packer | xargs dirname`
         packer build -color=true \$BUILD_TAG.json
         echo "Shrinking image..."
         echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 \$BUILD_TAG \$BUILD_TAG.qcow2"

@@ -17,6 +17,7 @@ def call(String imageName, String projectName) {
         jq ".builders[0].name = \\"\$BUILD_TAG\\" | .builders[0].image_name = \\"\$BUILD_TAG\\"" \$NAME.json > \$BUILD_TAG.json
         echo "Starting packer build..."
         chmod 600 packer-ssh-key
+        export PACKER_PLUGIN_PATH=`which packer | xargs dirname`
         packer build -color=true \$BUILD_TAG.json
         echo "Downloading built image..."
         mkdir -p raw_image
