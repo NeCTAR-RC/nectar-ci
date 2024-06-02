@@ -517,11 +517,6 @@
       - '{name}-dummy':
          organisation: 'resplat-hpc'
 
-- project:
-    name: midonet
-    jobs:
-      - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: dashboard-dev

@@ -551,15 +551,6 @@
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
-- project:
-    name: networking-midonet
-    jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
 
 - project:
     name: os-brick
