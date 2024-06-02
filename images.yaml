@@ -154,20 +154,6 @@
       - 'image-build-extra-{name}'
 
 - project:
-    name: jenkins-slave-ubuntu-16.04-x86_64
-    jobs:
-      - 'image-build-rctest-{name}':
-         image_name: '{name}'
-         default_user: 'ubuntu'
-
-- project:
-    name: jenkins-slave-ubuntu-18.04-x86_64
-    jobs:
-      - 'image-build-rctest-{name}':
-         image_name: '{name}'
-         default_user: 'ubuntu'
-
-- project:
     name: jenkins-slave-ubuntu-20.04-x86_64
     jobs:
       - 'image-build-rctest-{name}':
@@ -182,28 +168,21 @@
          default_user: 'ubuntu'
 
 - project:
-    name: undercloud-ubuntu-16.04-x86_64
+    name: jenkins-slave-ubuntu-24.04-x86_64
     jobs:
-      - 'image-build-undercloud-{name}':
+      - 'image-build-rctest-{name}':
          image_name: '{name}'
-         default_user: 'root'
-
-- project:
-    name: undercloud-ubuntu-18.04-x86_64
-    jobs:
-      - 'image-build-undercloud-{name}':
-         image_name: '{name}'
-         default_user: 'root'
-
-- project:
-    name: undercloud-ubuntu-20.04-x86_64
-    jobs:
-      - 'image-build-undercloud-{name}':
-         image_name: '{name}'
-         default_user: 'root'
+         default_user: 'ubuntu'
 
 - project:
     name: undercloud-ubuntu-22.04-x86_64
+    jobs:
+      - 'image-build-undercloud-{name}':
+         image_name: '{name}'
+         default_user: 'root'
+
+- project:
+    name: undercloud-ubuntu-24.04-x86_64
     jobs:
       - 'image-build-undercloud-{name}':
          image_name: '{name}'
