@@ -1,19 +1,4 @@
 - project:
-    name: centos-7
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: centos-8
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: centos-stream-8
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
     name: centos-stream-9
     jobs:
       - 'image-build-official-{name}'
@@ -39,11 +24,6 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: debian-10
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
     name: debian-11
     jobs:
       - 'image-build-official-{name}'
@@ -54,37 +34,12 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: fedora-37
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: fedora-38
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
     name: fedora-39
     jobs:
       - 'image-build-official-{name}'
 
 - project:
     name: fedora-40
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: ubuntu-16.04
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: ubuntu-18.04
-    jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: ubuntu-18.04-docker
     jobs:
       - 'image-build-official-{name}'
 
@@ -200,13 +155,6 @@
       - 'image-build-bumblebee-{name}':
          image_name: 'ubuntu-22.04'
          default_user: 'ubuntu'
-
-- project:
-    name: bumblebee-centos-7
-    jobs:
-      - 'image-build-bumblebee-{name}':
-         image_name: 'centos-7'
-         default_user: 'ec2-user'
 
 - project:
     name: bumblebee-neurodesk
