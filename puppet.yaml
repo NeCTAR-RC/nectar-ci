@@ -131,12 +131,6 @@
          organisation: 'NeCTAR-RC'
 
 - project:
-    name: puppet-midonet
-    jobs:
-      - '{name}-puppet-unit':
-         organisation: 'NeCTAR-RC'
-
-- project:
     name: puppet-mlocate
     jobs:
       - '{name}-puppet-unit':
