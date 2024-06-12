@@ -345,6 +345,7 @@
          clean:
            after: true
          choosing-strategy: gerrit
+         honor-refspec: true
 
     wrappers:
       - ssh-agent-credentials:
