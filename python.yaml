@@ -201,24 +201,16 @@
 - project:
     name: cloudkitty
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
 
 - project:
     name: python-cloudkittyclient
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
 
 - project:
     name: cloudkitty-dashboard
@@ -348,12 +340,8 @@
 - project:
     name: nova
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'functional'
