@@ -299,7 +299,7 @@
 - project:
     name: blazar-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -321,7 +321,7 @@
 - project:
     name: ec2api-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -435,7 +435,7 @@
 - project:
     name: octavia-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -587,10 +587,10 @@
 - project:
     name: tempest
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-focal-tox-{environment}':
+         environment: 'py310'
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -647,49 +647,49 @@
 - project:
     name: magnum-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: murano-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: trove-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: designate-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: heat-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: telemetry-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
 - project:
     name: manila-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 
@@ -832,7 +832,7 @@
 - project:
     name: barbican-tempest-plugin
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-default-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
 

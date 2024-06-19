@@ -242,3 +242,54 @@
 #      - cobertura:
 #          report-file: "cover/coverage.xml"
 #          targets: {}
+
+- job-template:
+    name: '{name}-default-tox-{environment}'
+    defaults: global
+    node: 'jammy'
+
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+
+    properties:
+      - build-discarder:
+          num-to-keep: 20
+
+    triggers:
+      - gerrit:
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'uom/.*'
+          silent: false
+          escape-quotes: true
+
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean:
+           after: true
+         choosing-strategy: gerrit
+
+    builders:
+      - python-tox:
+          environment: '{environment}'
