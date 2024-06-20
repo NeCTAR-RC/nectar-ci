@@ -556,7 +556,7 @@
           stage('Build') {{
             steps {{
                 sh '''
-                make build BUILDER=podman TAG=$TAG
+                make build BUILDER=docker TAG=$TAG
                 '''
             }}
           }}
@@ -568,9 +568,9 @@
                 sh '''
                 export REGISTRY="registry.rc.nectar.org.au"
                 export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | podman login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
 
-                make push BUILDER=podman TAG=$TAG
+                make push BUILDER=docker TAG=$TAG
 
                 rm auth.json
                 '''
