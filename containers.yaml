@@ -572,7 +572,7 @@
 
                 make push BUILDER=docker TAG=$TAG
 
-                rm auth.json
+                rm -f auth.json
                 '''
             }}
           }}
