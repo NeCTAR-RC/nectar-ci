@@ -306,13 +306,7 @@
 - project:
     name: ec2-api
     jobs:
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-      - '{name}-os-deb-package':
+      - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
          organisation: 'NeCTAR-RC'
