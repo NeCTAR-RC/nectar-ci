@@ -422,7 +422,7 @@
 
 
 
-- job:
+- job-template:
     name: 'iscsid-kolla-container-{os_release}'
     defaults: global
     project-type: pipeline
