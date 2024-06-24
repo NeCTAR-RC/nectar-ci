@@ -55,6 +55,18 @@
          os_release: '2024.1'
 
 
+# Iscsi build needs special job as we just tag on openstack version
+- job-group:
+    name: 'iscsid-kolla-container-upstream'
+    jobs:
+      - 'iscsid-kolla-container-upstream-{os_release}':
+         os_release: '2023.1'
+      - 'iscsid-kolla-container-upstream-{os_release}':
+         os_release: '2023.2'
+      - 'iscsid-kolla-container-upstream-{os_release}':
+         os_release: '2024.1'
+
+
 - job-template:
     name: 'dashboard-kolla-container'
     defaults: global
@@ -401,6 +413,88 @@
                     docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{os_release} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                     docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                 done
+
+              '''
+            }}
+          }}
+        }}
+      }}
+
+
+
+- job:
+    name: 'iscsid-kolla-container-{os_release}'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+
+    triggers:
+      - reverse:
+          jobs:
+            - 'requirements-kolla-container-{os_release}'
+
+    dsl: |
+      def copyArtifactSelector = upstream()
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Get artifacts') {{
+            steps {{
+              script {{
+                if (currentBuild.upstreamBuilds.size() == 0) {{
+                  build = selectRun(
+                    job: 'requirements-kolla-container-{os_release}',
+                    selector: status('SUCCESSFUL'),
+                    verbose: true
+                  )
+                  copyArtifactSelector = specific(build.getId())
+                }}
+                copyArtifacts(
+                  projectName: 'requirements-kolla-container-{os_release}',
+                  selector: copyArtifactSelector,
+                  fingerprintArtifacts: true,
+                )
+              }}
+            }}
+          }}
+          stage('Clone') {{
+            steps {{
+              git poll: false,
+                url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
+                credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
+                branch: 'nectar/{os_release}'
+              dir ('{name}') {{
+                git poll: false,
+                    url: 'https://github.com/openstack/{name}',
+                    branch: 'stable/{os_release}'
+              }}
+            }}
+          }}
+          stage('Build') {{
+            environment {{
+              REGISTRY = credentials('registry-nectar')
+            }}
+            steps {{
+              copyArtifacts(
+                projectName: 'requirements-kolla-container-{os_release}',
+                selector: copyArtifactSelector,
+                fingerprintArtifacts: true,
+              )
+              sh '''
+                export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
+                export REGISTRY="registry.rc.nectar.org.au"
+                export REGISTRY_AUTH_FILE=auth.json
+                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+                virtualenv kolla
+                . kolla/bin/activate
+                pip install -r requirements.txt
+
+                docker image prune --all -f
+
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{os_release}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{os_release}
+
+                kolla-build --config-file etc/kolla-build.conf --profile iscsi --skip-existing --tag {os_release}-$BASE_BUILD_NUMBER --registry $REGISTRY --push
 
               '''
             }}

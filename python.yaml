@@ -897,7 +897,7 @@
 - project:
     name: iscsid
     jobs:
-      - '{name}-kolla-container-upstream'
+      - 'iscsid-kolla-container-upstream'
 
 
 - project:
