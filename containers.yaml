@@ -463,11 +463,6 @@
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                 branch: 'nectar/{os_release}'
-              dir ('{name}') {{
-                git poll: false,
-                    url: 'https://github.com/openstack/{name}',
-                    branch: 'stable/{os_release}'
-              }}
             }}
           }}
           stage('Build') {{
