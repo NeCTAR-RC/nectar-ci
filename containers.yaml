@@ -59,11 +59,11 @@
 - job-group:
     name: 'iscsid-kolla-container-upstream'
     jobs:
-      - 'iscsid-kolla-container-upstream-{os_release}':
+      - 'iscsid-kolla-container-{os_release}':
          os_release: '2023.1'
-      - 'iscsid-kolla-container-upstream-{os_release}':
+      - 'iscsid-kolla-container-{os_release}':
          os_release: '2023.2'
-      - 'iscsid-kolla-container-upstream-{os_release}':
+      - 'iscsid-kolla-container-{os_release}':
          os_release: '2024.1'
 
 
