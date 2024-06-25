@@ -489,7 +489,15 @@
                 docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{os_release}
                 docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{os_release}
 
-                kolla-build --config-file etc/kolla-build.conf --profile iscsi --skip-existing --tag {os_release}-$BASE_BUILD_NUMBER --registry $REGISTRY --push
+                kolla-build --config-file etc/kolla-build.conf --profile iscsi --skip-existing --tag {os_release} --registry $REGISTRY --push
+
+                VERSION_TAG={os_release}-$BASE_BUILD_NUMBER
+
+                for image in `kolla-build --list-images --profile iscsi --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
+                do
+                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{os_release} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                    docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                done
 
               '''
             }}
