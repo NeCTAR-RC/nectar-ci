@@ -851,10 +851,10 @@
 - project:
     name: bumblebee
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py38'
-      - '{name}-focal-tox-{environment}':
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
       - '{name}-container':
