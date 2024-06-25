@@ -190,7 +190,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-cinder $tmpdir
+          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-cinder --volume-type $VOLUME_TYPE $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -227,6 +227,14 @@
             - lani
             - luna
           description: 'Availability zone.'
+      - choice:
+          name: 'VOLUME_TYPE'
+          choices:
+            - standard
+            - encrypted
+            - performance
+          description: "The volume type to use"
+          default: standard
     properties:
       - authorization:
           'nobody':
