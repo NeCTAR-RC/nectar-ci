@@ -518,6 +518,28 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: puppet-site-adelaide
+    jobs:
+      - '{name}-yaml':
+         organisation: 'Intersect'
+      - '{name}-puppet-git-secrets':
+         organisation: 'Intersect'
+      - '{name}-puppet-unit':
+         organisation: 'Intersect'
+      - '{name}-r10k-deploy':
+         organisation: 'Intersect'
+         r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+         organisation: 'Intersect'
+         puppet_host: 'puppet.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-cleanup':
+         organisation: 'Intersect'
+         r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-r10k-diff-catalog':
+         organisation: 'Intersect'
+         r10k_host: 'r10k.rc.nectar.org.au'
+
+- project:
     name: puppet-site-ardc
     jobs:
       - '{name}-yaml':
