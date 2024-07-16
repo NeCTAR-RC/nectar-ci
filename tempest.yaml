@@ -1148,7 +1148,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py -s coreservices -e testing -j check-compute-host-advanced --block_migration $tmpdir
+          ./setup_tempest.py --host cc5 --target_host cc3 -s coreservices -e testing -j check-compute-host-advanced --block_migration $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
