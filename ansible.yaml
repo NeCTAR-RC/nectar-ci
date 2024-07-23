@@ -111,9 +111,6 @@
 
     builders:
       - shell: |
-          export http_proxy=http://wwwproxy.unimelb.edu.au:8000
-          export https_proxy=http://wwwproxy.unimelb.edu.au:8000
-          export no_proxy=localhost,127.0.0.1,localaddress,169.254.169.254,172.16.0.0/12,115.146.80/20,.melbourne.rc.nectar.org.au,.melbourne.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au,.its.unimelb.edu.au,.unimelb.net.au,.test.rc.nectar.org.au,.dev.rc.nectar.org.au,.rc.nectar.org.au
           export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
           tox -e check-{environment}
