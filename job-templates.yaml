@@ -250,6 +250,57 @@
       - workspace-cleanup
 
 
+# Unique snowflake job for magnum-capi-helm-charts
+# This builds and pushes magnum-capi-helm-charts charts to nectarmagnum repo
+# TODO(jake): We should refactor to share common jobs with other helm jobs
+# NOTE(jake): {chart_name} is only used to make job name look nice
+# e.g. magnum-capi-helm-charts-openstack-build vs magnum-capi-helm-charts-charts/openstack-cluster-build
+- job-template:
+    name: 'magnum-capi-helm-charts-{chart_name}-build'
+    defaults: global
+    node: internal
+    triggers:
+      - gerrit:
+          trigger-on:
+              - patchset-created-event
+              - comment-added-contains-event:
+                   comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+    scm:
+      - git:
+         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+         refspec: $GERRIT_REFSPEC
+         branches:
+          - origin/$GERRIT_BRANCH
+         skip-tag: true
+         wipe-workspace: false
+         clean:
+           after: true
+         choosing-strategy: gerrit
+    builders:
+      - shell: |
+          #!/bin/bash
+          cd {chart_path}
+          helm dependency update
+          helm lint
+          VERSION=`git describe --tags`
+          helm package --version $VERSION .
+          find . -maxdepth 1 -name '*.tgz' | xargs -i -I CHART helm push CHART oci://registry.rc.nectar.org.au/nectarmagnum
+
+    publishers:
+      - workspace-cleanup
+
+
 - job-template:
     name: '{name}-helm-library-lint'
     defaults: global
