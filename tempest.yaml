@@ -886,7 +886,6 @@
 - project:
     name: tempest-nagios-services
     site:
-      - ardc-mel-1
       - auckland
       - intersect-01
       - melbourne-qh2
@@ -911,7 +910,6 @@
 - project:
     name: tempest-nagios-services-volume-backup
     site:
-      - ardc-mel-1
       - auckland
       - melbourne-qh2
       - melbourne-qh2-uom
@@ -933,7 +931,6 @@
 - project:
     name: tempest-nagios-services-advanced-network
     site:
-      - ardc-mel-1
       - auckland
       - intersect-01
       - melbourne-qh2
@@ -1421,7 +1418,6 @@
 - project:
     name: tempest-nagios-site-compute
     site:
-        - ardc-mel-1
         - auckland
         - intersect-01
         - melbourne-qh2
@@ -1443,7 +1439,6 @@
 - project:
     name: tempest-nagios-site-network
     site:
-        - ardc-mel-1
         - auckland
         - intersect-01
         - melbourne-qh2
@@ -1462,7 +1457,6 @@
 - project:
     name: tempest-nagios-site-volume
     site:
-      - ardc-mel-1
       - auckland
       - intersect-01
       - melbourne-qh2
