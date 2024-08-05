@@ -1457,6 +1457,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
