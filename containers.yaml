@@ -314,7 +314,7 @@
                   [[ {kolla_profile_name} == 'false' ]] && PROFILE_NAME={name} || PROFILE_NAME={kolla_profile_name}
                   kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
-                  VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER
+                  VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER-$BUILD_NUMBER
 
                   for image in `kolla-build --list-images --profile $PROFILE_NAME --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                   do
@@ -406,7 +406,8 @@
 
                 kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag {os_release} --registry $REGISTRY --push
 
-                VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER
+                VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER-$BUILD_NUMBER
+
 
                 for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
