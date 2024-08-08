@@ -74,14 +74,11 @@
       - 'image-build-official-{name}'
 
 - project:
-    name: ubuntu-24.04-docker
+    name: windows-2022
     jobs:
-      - 'image-build-official-{name}'
-
-- project:
-    name: ubuntu-24.04-nvidia-vgpu
-    jobs:
-      - 'image-build-official-{name}'
+      - 'image-build-official-{name}':
+         deploy_rctest: false
+         promote_prod: false
 
 - project:
     name: mysql-8.0
@@ -109,35 +106,35 @@
       - 'image-build-extra-{name}'
 
 - project:
-    name: jenkins-slave-ubuntu-20.04-x86_64
+    name: jenkins-slave-ubuntu-20.04
     jobs:
       - 'image-build-rctest-{name}':
          image_name: '{name}'
          default_user: 'ubuntu'
 
 - project:
-    name: jenkins-slave-ubuntu-22.04-x86_64
+    name: jenkins-slave-ubuntu-22.04
     jobs:
       - 'image-build-rctest-{name}':
          image_name: '{name}'
          default_user: 'ubuntu'
 
 - project:
-    name: jenkins-slave-ubuntu-24.04-x86_64
+    name: jenkins-slave-ubuntu-24.04
     jobs:
       - 'image-build-rctest-{name}':
          image_name: '{name}'
          default_user: 'ubuntu'
 
 - project:
-    name: undercloud-ubuntu-22.04-x86_64
+    name: undercloud-ubuntu-22.04
     jobs:
       - 'image-build-undercloud-{name}':
          image_name: '{name}'
          default_user: 'root'
 
 - project:
-    name: undercloud-ubuntu-24.04-x86_64
+    name: undercloud-ubuntu-24.04
     jobs:
       - 'image-build-undercloud-{name}':
          image_name: '{name}'
@@ -187,6 +184,32 @@
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
+    deploy_prod: true
+    promote_prod: true
+    test_prod_az: melbourne-qh2
+    deploy_rctest: true
+    test_rctest_az: coreservices
+    parameters:
+      - bool:
+          name: DEPLOY_PROD
+          description: "Deploy and test in Production"
+          default: true
+      - bool:
+          name: PROMOTE_PROD
+          description: "Promote image in Production"
+          default: true
+      - string:
+          name: TEST_PROD_AZ
+          description: Production availability zone used for testing
+          default: '{test_prod_az}'
+      - bool:
+          name: DEPLOY_RCTEST
+          description: "Deploy and test in RCTest"
+          default: true
+      - string:
+          name: TEST_RCTEST_AZ
+          description: RCTest availability zone used for testing
+          default: '{test_rctest_az}'
     properties:
       - authorization:
           nobody:
@@ -217,6 +240,9 @@
                     }}
                 }}
                 stage('Deploy image to RCTest') {{
+                    when {{
+                        expression {{ return params.DEPLOY_RCTEST }}
+                    }}
                     steps {{
                         setImageID()
                         deployImage 'NeCTAR-Images', 'testing'
@@ -224,27 +250,45 @@
                     }}
                 }}
                 stage('Test image in RCTest') {{
+                    when {{
+                        expression {{ return params.DEPLOY_RCTEST }}
+                    }}
                     steps {{
                         testOfficialImage 'NeCTAR-Images', 'testing', 'coreservices'
                     }}
                 }}
                 stage('Promote image to RCTest') {{
+                    when {{
+                        expression {{ return params.DEPLOY_RCTEST }}
+                    }}
                     steps {{
                         promoteOfficialImage 'NeCTAR-Images', 'testing'
                     }}
                 }}
                 stage('Deploy image to Production') {{
+                    when {{
+                        expression {{ return params.DEPLOY_PROD }}
+                    }}
                     steps {{
                         deployImage 'NeCTAR-Images', 'production'
                         setImageProperties 'NeCTAR-Images', 'production'
                     }}
                 }}
                 stage('Test image in Production') {{
+                    when {{
+                        expression {{ return params.DEPLOY_PROD }}
+                    }}
                     steps {{
-                        testOfficialImage 'NeCTAR-Images', 'production', 'melbourne-qh2'
+                        testOfficialImage 'NeCTAR-Images', 'production', '$AVAILABILITY_ZONE'
                     }}
                 }}
                 stage('Promote image to Production') {{
+                    when {{
+                        allOf {{
+                            expression {{ return params.DEPLOY_PROD }};
+                            expression {{ return params.PROMOTE_PROD }}
+                        }}
+                    }}
                     steps {{
                         promoteOfficialImage 'NeCTAR-Images', 'production'
                     }}
@@ -393,7 +437,7 @@
             stages {{
                 stage('Build Image') {{
                     steps {{
-                        imageBuildExtra '{name}', 'murano'
+                        imageBuildOpenStack '{name}', 'murano'
                     }}
                 }}
                 stage('Deploy image to RCTest') {{
@@ -578,7 +622,7 @@
                 stage('Build Image') {
                     agent { label 'jammy' }
                     steps {
-                        imageBuildQEMU 'manila-ubuntu-x86_64'
+                        imageBuildQEMU 'manila-ubuntu'
                     }
                 }
                 stage('Set Image ID') {

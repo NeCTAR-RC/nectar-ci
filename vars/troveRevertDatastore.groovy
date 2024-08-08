@@ -1,4 +1,4 @@
-def call(String cloud_env) {
+def call(String cloudEnv) {
     unstash 'build'
     script {
         imageId = readFile(file: 'build/.image-id').trim()
@@ -8,9 +8,9 @@ def call(String cloud_env) {
     }
 
     sh """#!/bin/bash
-    echo "\033[33m========== Reverting Trove datastore in $cloud_env ==========\033[0m"
+    echo "\033[33m========== Reverting Trove datastore in $cloudEnv ==========\033[0m"
     echo "Marking datastore version as inactive"
-    echo "==> trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 0"
-    trove-manage --config-file /etc/trove/${cloud_env}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 0
+    echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 0"
+    trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 0
     """
 }

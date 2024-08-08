@@ -4,5 +4,4 @@ def call() {
     echo `uuidgen` > build/.image-id
     """
     stash includes: 'build/**', name: 'build'
-
 }
