@@ -364,7 +364,10 @@
 - project:
     name: heat
     jobs:
-      - '{name}-kolla-container-upstream'
+      - '{name}-os-tox-python3':
+         organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container':
+         organisation: 'NeCTAR-RC'
 
 - project:
     name: designate
