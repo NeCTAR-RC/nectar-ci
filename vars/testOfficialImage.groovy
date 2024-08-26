@@ -21,8 +21,8 @@ def call(String projectName, String cloudEnv, String availabilityZone) {
     }
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD'),
                      file(credentialsId: '10270abc-f1f9-47c7-ae66-114ae8246a71', variable: 'SSH_TESTING_KEY')]) {
-        sh """#!/bin/bash
-        echo "\033[33m========== Deploying to $cloudEnv ==========\033[0m"
+        sh """#!/bin/bash -eux
+        echo "\033[33m========== Running tests in $cloudEnv ==========\033[0m"
 
         export OS_AUTH_URL=$OSAuthURL
         export OS_PROJECT_DOMAIN_NAME=Default
@@ -40,7 +40,7 @@ def call(String projectName, String cloudEnv, String availabilityZone) {
         USER_ACCOUNT=$userAccount
 
         # Run test script
-        $WORKSPACE/scripts/run-image-tests.sh -i \$IMAGE_ID -u \$USER_ACCOUNT -n \$IMAGE_NAME
+        $WORKSPACE/scripts/run-image-tests.sh -i \$IMAGE_ID -u \$USER_ACCOUNT -n "\$IMAGE_NAME"
         """
     }
 }
