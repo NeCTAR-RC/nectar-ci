@@ -34,13 +34,13 @@ def call(String projectName, String cloudEnv) {
 
        echo "================================================================================"
        echo "  NeCTAR \$IMAGE_NAME v\$BUILD_NUMBER build successful!"
-       echo "  Image ID: \$IMAGE_ID
+       echo "  Image ID: \$IMAGE_ID"
        echo "================================================================================"
        openstack image show --max-width=120 \$IMAGE_ID
 
        echo "Promoting image to public..."
        echo "==> scripts/aggrandise.py -e $cloudEnv -i \$IMAGE_ID promote"
-       \$WORKSPACE/scripts/aggrandise.py -e $cloudEnv -i \$IMAGE_ID promote
+       $WORKSPACE/scripts/aggrandise.py -e $cloudEnv -i \$IMAGE_ID promote
        """
     }
 }
