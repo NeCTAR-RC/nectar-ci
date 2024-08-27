@@ -254,7 +254,7 @@
                         expression {{ return params.DEPLOY_RCTEST }}
                     }}
                     steps {{
-                        testOfficialImage 'NeCTAR-Images', 'testing', 'coreservices'
+                        testOfficialImage 'NeCTAR-Images', 'testing', params.TEST_RCTEST_AZ
                     }}
                 }}
                 stage('Promote image to RCTest') {{
@@ -279,7 +279,7 @@
                         expression {{ return params.DEPLOY_PROD }}
                     }}
                     steps {{
-                        testOfficialImage 'NeCTAR-Images', 'production', '$AVAILABILITY_ZONE'
+                        testOfficialImage 'NeCTAR-Images', 'production', params.TEST_PROD_AZ
                     }}
                 }}
                 stage('Promote image to Production') {{
