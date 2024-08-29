@@ -34,10 +34,17 @@ def call(String projectName, String cloudEnv) {
 
         # Loop through and apply facts as image properties
         for FACT in build/.facts/*; do
-           PROP=\${FACT##*/}
-           VAL=`cat \$FACT`
-           echo " -> \$PROP: '\$VAL'"
-           openstack image set --property \$PROP="\$VAL" \$IMAGE_ID
+            PROP=\${FACT##*/}
+            VAL=`cat \$FACT`
+
+            # Skip Windows trait in non-prod environments
+            if [[ "\$PROP" == "trait:CUSTOM_NECTAR_WINDOWS" && "\$CLOUD_ENV" != "production" ]]; then
+               echo " -> Skipping '\$PROP' in '\$CLOUD_ENV'
+               continue
+            fi
+
+            echo " -> \$PROP: '\$VAL'"
+            openstack image set --property \$PROP="\$VAL" \$IMAGE_ID
         done
 
         # Set nectar_build seperately from Jenkins build number
