@@ -37,7 +37,7 @@ def call(String cloudEnv, String active = '1') {
        mkdir -p previous-version
        echo \$PREVIOUS_VERSION > previous-version/${cloudEnv}
        echo "Previous version is: \$PREVIOUS_VERSION"
-       echo "\033[33m========== Updating Trove datastore in ${cloudEnv} ==========\033[0m"
+       echo "\033[35;1m========== Updating Trove datastore in ${cloudEnv} ==========\033[0m"
        echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${datastoreType} ${imageId} '' ${active}"
        trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER ${datastoreType} ${imageId} '' ${active}
        echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf db_load_datastore_config_parameters ${datastoreName} ${datastoreVersion}-\$BUILD_NUMBER /etc/trove/templates/${datastoreType}/validation-rules.json"

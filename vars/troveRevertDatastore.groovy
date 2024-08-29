@@ -8,7 +8,7 @@ def call(String cloudEnv) {
     }
 
     sh """#!/bin/bash
-    echo "\033[33m========== Reverting Trove datastore in $cloudEnv ==========\033[0m"
+    echo "\033[35;1m========== Reverting Trove datastore in $cloudEnv ==========\033[0m"
     echo "Marking datastore version as inactive"
     echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 0"
     trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update $datastoreName ${datastoreVersion}-\$BUILD_NUMBER $datastoreType $imageId '' 0

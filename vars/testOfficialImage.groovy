@@ -22,7 +22,7 @@ def call(String projectName, String cloudEnv, String availabilityZone) {
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD'),
                      file(credentialsId: '10270abc-f1f9-47c7-ae66-114ae8246a71', variable: 'SSH_TESTING_KEY')]) {
         sh """#!/bin/bash -eux
-        echo "\033[33m========== Running tests in $cloudEnv ==========\033[0m"
+        echo "\033[35;1m========== Running tests in $cloudEnv ==========\033[0m"
 
         export OS_AUTH_URL=$OSAuthURL
         export OS_PROJECT_DOMAIN_NAME=Default

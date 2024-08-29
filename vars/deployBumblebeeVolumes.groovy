@@ -20,7 +20,7 @@ def call(String projectName, String cloudEnv, String zones) {
 
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -ex
-       echo "\033[33m========== Deploy Bumblebee volumes for $cloudEnv ==========\033[0m"
+       echo "\033[35;1m========== Deploy Bumblebee volumes for $cloudEnv ==========\033[0m"
        export OS_AUTH_URL=$OSAuthURL
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default

@@ -17,7 +17,7 @@ def call(String projectName, String cloudEnv) {
     }
     withCredentials([usernamePassword(credentialsId: osCredId, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -eu
-       echo "\033[33m========== Building for $cloudEnv ==========\033[0m"
+       echo "\033[35;1m========== Building for $cloudEnv ==========\033[0m"
        export OS_AUTH_URL=$osAuthUrl
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default
