@@ -77,8 +77,6 @@
     name: windows-2022
     jobs:
       - 'image-build-official-{name}':
-         deploy_rctest: false
-         promote_prod: false
 
 - project:
     name: mysql-8.0
@@ -191,25 +189,29 @@
     test_rctest_az: coreservices
     parameters:
       - bool:
-          name: DEPLOY_PROD
-          description: "Deploy and test in Production"
+          name: deploy_production
+          description: Deploy to Production
           default: true
       - bool:
-          name: PROMOTE_PROD
-          description: "Promote image in Production"
+          name: promote_production
+          description: Promote image in Production
           default: true
       - string:
-          name: TEST_PROD_AZ
-          description: Production availability zone used for testing
-          default: '{test_prod_az}'
+          name: az_production
+          description: AZ for testing in Production
+          default: 'melbourne-qh2'
       - bool:
-          name: DEPLOY_RCTEST
-          description: "Deploy and test in RCTest"
+          name: deploy_testing
+          description: Deploy to RCTest
+          default: true
+      - bool:
+          name: promote_testing
+          description: Promote image in RCTest
           default: true
       - string:
-          name: TEST_RCTEST_AZ
-          description: RCTest availability zone used for testing
-          default: '{test_rctest_az}'
+          name: az_testing
+          description: AZ for testing in RCTest
+          default: 'coreservices'
     properties:
       - authorization:
           nobody:
@@ -225,85 +227,49 @@
         def imageId
         def imageName
         pipeline {{
-            agent {{
-                node {{
-                    label 'jammy'
-                }}
-            }}
-            options {{
-                ansiColor('xterm')
-            }}
+            agent {{ node {{ label 'jammy' }} }}
+            options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
-                    steps {{
-                        imageBuildQEMU '{name}'
-                    }}
+                    steps {{ imageBuildQEMU '{name}' }}
                 }}
-                stage('Deploy image to RCTest') {{
-                    when {{
-                        expression {{ return params.DEPLOY_RCTEST }}
-                    }}
-                    steps {{
-                        setImageID()
-                        deployImage 'NeCTAR-Images', 'testing'
-                        setImageProperties 'NeCTAR-Images', 'testing'
-                    }}
+                stage('Set Image ID') {{
+                    steps {{ setImageID() }}
                 }}
-                stage('Test image in RCTest') {{
-                    when {{
-                        expression {{ return params.DEPLOY_RCTEST }}
-                    }}
-                    steps {{
-                        testOfficialImage 'NeCTAR-Images', 'testing', params.TEST_RCTEST_AZ
-                    }}
-                }}
-                stage('Promote image to RCTest') {{
-                    when {{
-                        expression {{ return params.DEPLOY_RCTEST }}
-                    }}
-                    steps {{
-                        promoteOfficialImage 'NeCTAR-Images', 'testing'
-                    }}
-                }}
-                stage('Deploy image to Production') {{
-                    when {{
-                        expression {{ return params.DEPLOY_PROD }}
-                    }}
-                    steps {{
-                        deployImage 'NeCTAR-Images', 'production'
-                        setImageProperties 'NeCTAR-Images', 'production'
-                    }}
-                }}
-                stage('Test image in Production') {{
-                    when {{
-                        expression {{ return params.DEPLOY_PROD }}
-                    }}
-                    steps {{
-                        testOfficialImage 'NeCTAR-Images', 'production', params.TEST_PROD_AZ
-                    }}
-                }}
-                stage('Promote image to Production') {{
-                    when {{
-                        allOf {{
-                            expression {{ return params.DEPLOY_PROD }};
-                            expression {{ return params.PROMOTE_PROD }}
+                stage('Deploy and Test') {{
+                    matrix {{
+                        when {{
+                            expression {{ return params['deploy_' + cloudEnv] }}
+                        }}
+                        axes {{
+                            axis {{
+                                name 'cloudEnv'
+                                values 'testing', 'production'
+                            }}
+                        }}
+                        stages {{
+                            stage('Deploy') {{
+                                steps {{ deployImage 'NeCTAR-Images', cloudEnv }}
+                            }}
+                            stage('Test') {{
+                                steps {{ testOfficialImage 'NeCTAR-Images', 'testing', params['az_' + cloudEnv] }}
+                            }}
+                            stage('Promote') {{
+                                when {{ expression {{ return params['promote_' + cloudEnv] }} }}
+                                steps {{ promoteOfficialImage 'NeCTAR-Images', 'testing' }}
+                            }}
                         }}
                     }}
-                    steps {{
-                        promoteOfficialImage 'NeCTAR-Images', 'production'
-                    }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage 'NeCTAR-Images', 'testing'
-                        deleteImage 'NeCTAR-Images', 'production'
-                    }}
-                }}
-                cleanup {{
-                    node('jammy') {{
-                        deleteDir() /* clean up our workspace */
+                    post {{
+                        failure {{
+                            node('internal') {{
+                                deleteImage 'NeCTAR-Images', 'testing'
+                                deleteImage 'NeCTAR-Images', 'production'
+                            }}
+                        }}
+                        cleanup {{
+                            node('jammy') {{ deleteDir() }}
+                        }}
                     }}
                 }}
             }}
