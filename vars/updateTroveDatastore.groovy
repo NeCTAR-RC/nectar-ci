@@ -21,7 +21,7 @@ def call(String cloudEnv, String active = '1') {
         }
     }
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
-       sh """#!/bin/bash
+       sh """#!/bin/bash -eu
        export OS_AUTH_URL=${OSAuthURL}
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default

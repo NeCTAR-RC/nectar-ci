@@ -19,7 +19,7 @@ def call(String projectName, String cloudEnv) {
     }
 
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
-        sh """#!/bin/bash
+        sh """#!/bin/bash -eu
         echo "\033[35;1m========== Setting image properties for $cloudEnv ==========\033[0m"
 
         export OS_AUTH_URL=$OSAuthURL
