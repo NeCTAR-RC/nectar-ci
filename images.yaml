@@ -236,41 +236,56 @@
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}
                 }}
-                stage('Deploy and Test') {{
-                    matrix {{
-                        when {{
-                            expression {{ return params['deploy_' + cloudEnv] }}
-                        }}
-                        axes {{
-                            axis {{
-                                name 'cloudEnv'
-                                values 'testing', 'production'
-                            }}
-                        }}
-                        stages {{
-                            stage('Deploy') {{
-                                steps {{ deployImage 'NeCTAR-Images', cloudEnv }}
-                            }}
-                            stage('Test') {{
-                                steps {{ testOfficialImage 'NeCTAR-Images', 'testing', params['az_' + cloudEnv] }}
-                            }}
-                            stage('Promote') {{
-                                when {{ expression {{ return params['promote_' + cloudEnv] }} }}
-                                steps {{ promoteOfficialImage 'NeCTAR-Images', 'testing' }}
-                            }}
+                stage('Deploy in testing') {{
+                    when {{ expression {{ return params.deploy_testing }} }}
+                    steps {{
+                        deployImage 'NeCTAR-Images', 'testing'
+                        setImageProperties 'NeCTAR-Images', 'testing'
+                    }}
+                }}
+                stage('Test in testing') {{
+                    when {{ expression {{ return params.deploy_testing }} }}
+                    steps {{ testOfficialImage 'NeCTAR-Images', 'testing', params.az_testing }}
+                }}
+                stage('Promote in testing') {{
+                    when {{
+                        anyOf {{
+                            expression {{ return params.deploy_testing }}
+                            expression {{ return params.promote_testing }}
                         }}
                     }}
-                    post {{
-                        failure {{
-                            node('internal') {{
-                                deleteImage 'NeCTAR-Images', 'testing'
-                                deleteImage 'NeCTAR-Images', 'production'
-                            }}
-                        }}
-                        cleanup {{
-                            node('jammy') {{ deleteDir() }}
+                    steps {{ promoteOfficialImage 'NeCTAR-Images', 'testing' }}
+                }}
+                stage('Deploy in production') {{
+                    when {{ expression {{ return params.deploy_production }} }}
+                    steps {{
+                        deployImage 'NeCTAR-Images', 'production'
+                        setImageProperties 'NeCTAR-Images', 'production'
+                    }}
+                }}
+                stage('Test in production') {{
+                    when {{ expression {{ return params.deploy_production }} }}
+                    steps {{ testOfficialImage 'NeCTAR-Images', 'production', params.az_production }}
+                }}
+                stage('Promote in production') {{
+                    when {{
+                        anyOf {{
+                            expression {{ return params.deploy_production }}
+                            expression {{ return params.promote_production }}
                         }}
                     }}
+                    steps {{ promoteOfficialImage 'NeCTAR-Images', 'production' }}
+                }}
+            }}
+            post {{
+                failure {{
+                    node('internal') {{
+                        deleteImage 'NeCTAR-Images', 'testing'
+                        deleteImage 'NeCTAR-Images', 'production'
+                    }}
+                }}
+                cleanup {{
+                    node('jammy') {{ deleteDir() }}
                 }}
             }}
         }}
