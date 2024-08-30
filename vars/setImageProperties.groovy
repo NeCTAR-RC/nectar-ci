@@ -39,7 +39,7 @@ def call(String projectName, String cloudEnv) {
 
             # Skip Windows trait in non-prod environments
             if [[ "\$PROP" == "trait:CUSTOM_NECTAR_WINDOWS" && "\$CLOUD_ENV" != "production" ]]; then
-               echo " -> Skipping '\$PROP' in '\$CLOUD_ENV'
+               echo " -> Skipping '\$PROP' in '\$CLOUD_ENV'"
                continue
             fi
 
