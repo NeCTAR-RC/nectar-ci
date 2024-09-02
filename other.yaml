@@ -575,6 +575,14 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: nectar-jupyterhub-rstudio
+    jobs:
+      - '{name}-dummy':
+         organisation: 'NeCTAR-RC'
+      - '{name}-container':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: repo2docker
     jobs:
       - '{name}-dummy':
