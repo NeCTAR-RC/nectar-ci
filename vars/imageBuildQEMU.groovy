@@ -6,6 +6,9 @@ def call(String imageName) {
         IMAGE_NAME=$imageName
         OUTPUT_DIR=\$WORKSPACE/builds/build_files/packer-\$IMAGE_NAME
 
+        echo "Starting packer clean..."
+        make clean
+
         echo "Starting packer init..."
         make init target=\$IMAGE_NAME
 

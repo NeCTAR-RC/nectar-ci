@@ -13,6 +13,9 @@ def call(String imageName, String projectName) {
         IMAGE_NAME=$imageName
         OUTPUT_DIR=\$WORKSPACE/builds/build_files/packer-\$IMAGE_NAME
 
+        echo "Starting packer clean..."
+        make clean
+
         echo "Starting packer init..."
         make init only=openstack.vm target=\$IMAGE_NAME
 
