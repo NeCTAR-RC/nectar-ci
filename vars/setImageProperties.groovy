@@ -29,6 +29,7 @@ def call(String projectName, String cloudEnv) {
         export OS_PROJECT_NAME=$projectName
 
         IMAGE_ID=$imageId
+        CLOUD_ENV=$cloudEnv
 
         echo "Applying properties..."
 
