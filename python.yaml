@@ -745,6 +745,42 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: varroa
+    jobs:
+      - '{name}-default-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-default-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-default-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-container':
+         organisation: 'NeCTAR-RC'
+         helm_name: '{name}-helm'
+
+- project:
+    name: python-varroaclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: warre
     jobs:
       - '{name}-os-tox-{environment}':
