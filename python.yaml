@@ -328,7 +328,7 @@
       - '{name}-focal-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'flake8'
-      - '{name}-focal-deb-package':
+      - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
 
 - project:
