@@ -72,14 +72,8 @@
 - project:
     name: magnum-capi-helm-charts
     jobs:
-      - 'magnum-capi-helm-charts-{chart_name}-build':
+      - 'magnum-capi-helm-charts-build':
          organisation: 'NeCTAR-RC'
-         chart_name: 'openstack-cluster'
-         chart_path: 'charts/openstack-cluster'
-      - 'magnum-capi-helm-charts-{chart_name}-build':
-         organisation: 'NeCTAR-RC'
-         chart_name: 'cluster-addons'
-         chart_path: 'charts/cluster-addons'
 
 - project:
     name: manuka-helm

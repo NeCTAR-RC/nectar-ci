@@ -253,10 +253,8 @@
 # Unique snowflake job for magnum-capi-helm-charts
 # This builds and pushes magnum-capi-helm-charts charts to nectarmagnum repo
 # TODO(jake): We should refactor to share common jobs with other helm jobs
-# NOTE(jake): {chart_name} is only used to make job name look nice
-# e.g. magnum-capi-helm-charts-openstack-build vs magnum-capi-helm-charts-charts/openstack-cluster-build
 - job-template:
-    name: 'magnum-capi-helm-charts-{chart_name}-build'
+    name: 'magnum-capi-helm-charts-build'
     defaults: global
     node: internal
     triggers:
@@ -290,13 +288,25 @@
     builders:
       - shell: |
           #!/bin/bash
-          cd {chart_path}
-          helm dependency update
-          helm lint
-          VERSION=`git describe --tags`
-          helm package --version $VERSION .
-          find . -maxdepth 1 -name '*.tgz' | xargs -i -I CHART helm push CHART oci://registry.rc.nectar.org.au/nectarmagnum
-
+          set -eux -o pipefail
+          REGISTRY=oci://registry.rc.nectar.org.au/nectarmagnum
+          # Lint changed charts
+          charts_changed="$(git show --pretty="" --name-only  | grep -o "charts/[^/]*" | sort | uniq || true)"
+          for chart in ${{charts_changed}}; do
+              pushd ${{chart}}
+              helm dependency update
+              helm lint .
+              popd
+          done
+          # Only build and push charts with new version
+          charts_bumped="$(git show --pretty="" --name-only  | grep -o "charts/[^/]*/Chart.yaml" | sort | uniq || true)"
+          if [ ! -z "${{charts_bumped}}" ]; then charts_bumped="$(echo ${{charts_bumped}} | xargs dirname)"; fi
+          for chart in ${{charts_bumped}}; do
+              pushd ${{chart}}
+              helm package .
+              find . -maxdepth 1 -name '*.tgz' | xargs -i -I CHART helm push CHART ${{REGISTRY}}
+              popd
+          done
     publishers:
       - workspace-cleanup
 
