@@ -106,21 +106,21 @@
 - project:
     name: jenkins-slave-ubuntu-20.04
     jobs:
-      - 'image-build-rctest-{name}':
+      - 'image-build-jenkins-{name}':
          image_name: '{name}'
          default_user: 'ubuntu'
 
 - project:
     name: jenkins-slave-ubuntu-22.04
     jobs:
-      - 'image-build-rctest-{name}':
+      - 'image-build-jenkins-{name}':
          image_name: '{name}'
          default_user: 'ubuntu'
 
 - project:
     name: jenkins-slave-ubuntu-24.04
     jobs:
-      - 'image-build-rctest-{name}':
+      - 'image-build-jenkins-{name}':
          image_name: '{name}'
          default_user: 'ubuntu'
 
@@ -707,20 +707,15 @@
 
 
 - job-template:
-    name: 'image-build-rctest-{name}'
+    name: 'image-build-jenkins-{name}'
     defaults: global
     node: jammy
-
+    project_name: 'nectar-ci'
     parameters:
       - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
-
+          name: project_name
+          description: OpenStack project for testing/deployment
+          default: 'nectar-ci'
     properties:
       - authorization:
           nobody:
@@ -730,30 +725,39 @@
           blocking-jobs:
             - '^image-build-.*'
           block-level: 'GLOBAL'
-
-    scm:
-      - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
-    builders:
-      - image-builder-rctest:
-         image_name: "{image_name}"
-         job_name: "{name}"
-
-    wrappers:
-      - credentials-binding:
-        - username-password:
-           credential-id: 60a2f67f-93d4-4e72-900f-39cec212f07b
-           variable: KEYSTONE_CREDS
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {{
+            agent {{ node {{ label 'jammy' }} }}
+            options {{ ansiColor('xterm') }}
+            stages {{
+                stage('Build Image') {{
+                    steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
+                }}
+                stage('Set Image ID') {{
+                    steps {{ setImageID() }}
+                }}
+                stage('Deploy in testing') {{
+                    steps {{
+                        deployImage '{project_name}', 'testing'
+                        setImageProperties '{project_name}', 'testing'
+                    }}
+                }}
+            }}
+            post {{
+                failure {{
+                    node('internal') {{
+                        deleteImage '{project_name}', 'testing'
+                    }}
+                }}
+                cleanup {{
+                    node('jammy') {{ deleteDir() }}
+                }}
+            }}
+        }}
 
 
 - job-template:
