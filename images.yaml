@@ -735,7 +735,7 @@
             options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
-                    steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
+                    steps {{ imageBuildQEMU '{name}' }}
                 }}
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}
