@@ -182,12 +182,17 @@
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
+    project_name: 'NeCTAR-Images'
     deploy_prod: true
     promote_prod: true
     test_prod_az: melbourne-qh2
     deploy_rctest: true
     test_rctest_az: coreservices
     parameters:
+      - string:
+          name: project_name
+          description: AZ for testing in Production
+          default: 'NeCTAR-Images'
       - bool:
           name: deploy_production
           description: Deploy to Production
@@ -239,13 +244,13 @@
                 stage('Deploy in testing') {{
                     when {{ expression {{ return params.deploy_testing }} }}
                     steps {{
-                        deployImage 'NeCTAR-Images', 'testing'
-                        setImageProperties 'NeCTAR-Images', 'testing'
+                        deployImage '{project_name}', 'testing'
+                        setImageProperties '{project_name}', 'testing'
                     }}
                 }}
                 stage('Test in testing') {{
                     when {{ expression {{ return params.deploy_testing }} }}
-                    steps {{ testOfficialImage 'NeCTAR-Images', 'testing', params.az_testing }}
+                    steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
                 }}
                 stage('Promote in testing') {{
                     when {{
@@ -254,18 +259,18 @@
                             expression {{ return params.promote_testing }}
                         }}
                     }}
-                    steps {{ promoteOfficialImage 'NeCTAR-Images', 'testing' }}
+                    steps {{ promoteOfficialImage '{project_name}', 'testing' }}
                 }}
                 stage('Deploy in production') {{
                     when {{ expression {{ return params.deploy_production }} }}
                     steps {{
-                        deployImage 'NeCTAR-Images', 'production'
-                        setImageProperties 'NeCTAR-Images', 'production'
+                        deployImage '{project_name}', 'production'
+                        setImageProperties '{project_name}', 'production'
                     }}
                 }}
                 stage('Test in production') {{
                     when {{ expression {{ return params.deploy_production }} }}
-                    steps {{ testOfficialImage 'NeCTAR-Images', 'production', params.az_production }}
+                    steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
                 }}
                 stage('Promote in production') {{
                     when {{
@@ -274,14 +279,14 @@
                             expression {{ return params.promote_production }}
                         }}
                     }}
-                    steps {{ promoteOfficialImage 'NeCTAR-Images', 'production' }}
+                    steps {{ promoteOfficialImage '{project_name}', 'production' }}
                 }}
             }}
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'NeCTAR-Images', 'testing'
-                        deleteImage 'NeCTAR-Images', 'production'
+                        deleteImage '{project_name}', 'testing'
+                        deleteImage '{project_name}', 'production'
                     }}
                 }}
                 cleanup {{
@@ -392,6 +397,41 @@
 - job-template:
     name: 'image-build-extra-{name}'
     defaults: global
+    project_name: 'murano'
+    deploy_prod: true
+    promote_prod: true
+    test_prod_az: melbourne-qh2
+    deploy_rctest: true
+    test_rctest_az: coreservices
+    parameters:
+      - string:
+          name: project_name
+          description: OpenStack project for testing/deployment
+          default: 'murano'
+      - bool:
+          name: deploy_production
+          description: Deploy to Production
+          default: true
+      - bool:
+          name: promote_production
+          description: Promote image in Production
+          default: true
+      - string:
+          name: az_production
+          description: AZ for testing in Production
+          default: 'melbourne-qh2'
+      - bool:
+          name: deploy_testing
+          description: Deploy to RCTest
+          default: true
+      - bool:
+          name: promote_testing
+          description: Promote image in RCTest
+          default: true
+      - string:
+          name: az_testing
+          description: AZ for testing in RCTest
+          default: 'coreservices'
     properties:
       - authorization:
           nobody:
@@ -407,65 +447,65 @@
         def imageId
         def imageName
         pipeline {{
-            agent {{
-                node {{
-                    label 'jammy'
-                }}
-            }}
-            options {{
-                ansiColor('xterm')
-            }}
+            agent {{ node {{ label 'jammy' }} }}
+            options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
+                    steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
+                }}
+                stage('Set Image ID') {{
+                    steps {{ setImageID() }}
+                }}
+                stage('Deploy in testing') {{
+                    when {{ expression {{ return params.deploy_testing }} }}
                     steps {{
-                        imageBuildOpenStack '{name}', 'murano'
+                        deployImage '{project_name}', 'testing'
+                        setImageProperties '{project_name}', 'testing'
                     }}
                 }}
-                stage('Deploy image to RCTest') {{
+                stage('Test in testing') {{
+                    when {{ expression {{ return params.deploy_testing }} }}
+                    steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
+                }}
+                stage('Promote in testing') {{
+                    when {{
+                        anyOf {{
+                            expression {{ return params.deploy_testing }}
+                            expression {{ return params.promote_testing }}
+                        }}
+                    }}
+                    steps {{ promoteOfficialImage '{project_name}', 'testing' }}
+                }}
+                stage('Deploy in production') {{
+                    when {{ expression {{ return params.deploy_production }} }}
                     steps {{
-                        setImageID()
-                        deployImage 'murano', 'testing'
-                        setImageProperties 'murano', 'testing'
+                        deployImage '{project_name}', 'production'
+                        setImageProperties '{project_name}', 'production'
                     }}
                 }}
-                stage('Test image in RCTest') {{
-                    steps {{
-                        testOfficialImage 'murano', 'testing', 'coreservices'
-                    }}
+                stage('Test in production') {{
+                    when {{ expression {{ return params.deploy_production }} }}
+                    steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
                 }}
-                stage('Promote image to RCTest') {{
-                    steps {{
-                        promoteOfficialImage 'murano', 'testing'
+                stage('Promote in production') {{
+                    when {{
+                        anyOf {{
+                            expression {{ return params.deploy_production }}
+                            expression {{ return params.promote_production }}
+                        }}
                     }}
-                }}
-                stage('Deploy image to Production') {{
-                    steps {{
-                        deployImage 'murano', 'production'
-                        setImageProperties 'murano', 'production'
-                    }}
-                }}
-                stage('Test image in Production') {{
-                    steps {{
-                        testOfficialImage 'murano', 'production', 'melbourne-qh2'
-                    }}
-                }}
-                stage('Promote image to Production') {{
-                    steps {{
-                        promoteOfficialImage 'murano', 'production'
-                    }}
+                    steps {{ promoteOfficialImage '{project_name}', 'production' }}
                 }}
             }}
             post {{
                 failure {{
                     node('internal') {{
-                        deleteImage 'murano', 'testing'
-                        deleteImage 'murano', 'production'
+                        deleteImage '{project_name}', 'testing'
+                        deleteImage '{project_name}', 'production'
                     }}
                 }}
                 cleanup {{
-                    node('jammy') {{
-                        deleteDir() /* clean up our workspace */
-                    }}
+                    node('jammy') {{ deleteDir() }}
                 }}
             }}
         }}
