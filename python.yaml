@@ -792,7 +792,7 @@
          environment: 'py310'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'pep8'
       - '{name}-os-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
