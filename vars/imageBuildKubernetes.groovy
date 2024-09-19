@@ -7,7 +7,7 @@ def call(String imageName, String kubernetesVersion) {
         KUBERNETES_VERSION=$kubernetesVersion
 
         OUTPUT_NAME="\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION"
-        OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$FILE_NAME/"
+        OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$OUTPUT_NAME/"
 
         # Clean up any left over builds
         if [ -d \$OUTPUT_DIR ]; then
