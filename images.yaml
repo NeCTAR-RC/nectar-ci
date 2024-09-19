@@ -799,7 +799,7 @@
             options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
-                    steps {{ imageBuildKubernetes '{name}' }}
+                    steps {{ imageBuildKubernetes '{name}', kubernetes_version }}
                 }}
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}

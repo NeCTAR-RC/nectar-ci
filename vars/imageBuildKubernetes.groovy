@@ -1,5 +1,5 @@
 def call(String imageName, String kubernetesVersion) {
-    git url: 'https://github.com/kubernetes-sigs/image-builder'
+    git branch: 'main', url: 'https://github.com/kubernetes-sigs/image-builder'
     sh """#!/bin/bash -eu
         echo "\033[34m========== Building ==========\033[0m"
 
