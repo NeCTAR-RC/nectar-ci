@@ -1,6 +1,6 @@
 def call(String imageName, String kubernetesVersion) {
     git branch: 'main', url: 'https://github.com/kubernetes-sigs/image-builder'
-    sh """#!/bin/bash -eu
+    sh """#!/bin/bash -eux
         echo "\033[34m========== Building ==========\033[0m"
 
         IMAGE_NAME=$imageName
@@ -32,15 +32,18 @@ def call(String imageName, String kubernetesVersion) {
         mv \$OUTPUT_DIR build
         mkdir -p raw_image
 
+        echo "Compressing QCOW2 image..."
+        qemu-img convert -c -O qcow2 "build/\$FILE_NAME" raw_image/image.qcow2
+        rm -fr build/\$FILE_NAME
+
         mkdir -p build/.facts
         # Set Kube version as image property
         echo "v\$KUBERNETES_VERSION" > build/.facts/kube_version
 
         # Image name will be like: NeCTAR ubuntu-2204-kube-1.29.3-20240920-10
-        echo "\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION-`date '+%Y%m%d'-\$BUILD_NUMBER" > build/.facts/nectar_name
+        echo "\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION-`date '+%Y%m%d'`-\$BUILD_NUMBER" > build/.facts/nectar_name
 
-        echo "Compressing QCOW2 image..."
-        qemu-img convert -c -O qcow2 "build/\$FILE_NAME" raw_image/image.qcow2
+        echo "Build complete!"
     """
     stash includes: 'build/**', name: 'build'
     stash includes: 'raw_image/**', name: 'raw_image'
