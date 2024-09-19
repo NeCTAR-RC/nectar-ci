@@ -6,8 +6,15 @@ def call(String imageName, String kubernetesVersion) {
         IMAGE_NAME=$imageName
         KUBERNETES_VERSION=$kubernetesVersion
 
-        FILE_NAME="\${IMAGE_NAME}-kube-v\${KUBERNETES_VERSION}"
+        OUTPUT_NAME="\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION"
         OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$FILE_NAME/"
+
+        # Clean up any left over builds
+        if [ -d \$OUTPUT_DIR ]; then
+            echo "Cleaning up output dir..."
+            rm -fr \$OUTPUT_DIR
+            rm -fr build
+        fi
 
         echo "Starting build..."
         cd \$WORKSPACE/images/capi
@@ -17,18 +24,20 @@ def call(String imageName, String kubernetesVersion) {
         --var 'kubernetes_series=v\${KUBERNETES_SERIES:-\${KUBERNETES_VERSION%.*}}' \
         --var 'kubernetes_deb_version=\${KUBERNETES_DEB_VERSION:-\${KUBERNETES_VERSION}-1.1}' \
         --var vnc_bind_address=0.0.0.0" \
-        make build-qemu-\${IMAGE_NAME}
+        make build-qemu-\$IMAGE_NAME
+
         cd \$WORKSPACE
 
-        # Clean up any left over build
-        rm -vfr build
         # Move image build files to build directory
         mv \$OUTPUT_DIR build
         mkdir -p raw_image
 
-        # Set the kube version fact here to become an image property
         mkdir -p build/.facts
-        echo "v\$KUBERNETES_VERSION" >> build/.facts/kube_version
+        # Set Kube version as image property
+        echo "v\$KUBERNETES_VERSION" > build/.facts/kube_version
+
+        # Image name will be like: NeCTAR ubuntu-2204-kube-1.29.3-20240920-10
+        echo "\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION-`date '+%Y%m%d'-\$BUILD_NUMBER" > build/.facts/nectar_name
 
         echo "Compressing QCOW2 image..."
         qemu-img convert -c -O qcow2 "build/\$FILE_NAME" raw_image/image.qcow2
