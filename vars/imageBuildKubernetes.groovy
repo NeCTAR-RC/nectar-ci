@@ -33,8 +33,8 @@ def call(String imageName, String kubernetesVersion) {
         mkdir -p raw_image
 
         echo "Compressing QCOW2 image..."
-        qemu-img convert -c -O qcow2 "build/\$FILE_NAME" raw_image/image.qcow2
-        rm -fr build/\$FILE_NAME
+        qemu-img convert -c -O qcow2 "build/\$OUTPUT_NAME" raw_image/image.qcow2
+        rm -fr build/\$OUTPUT_NAME
 
         mkdir -p build/.facts
         # Set Kube version as image property
