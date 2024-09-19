@@ -179,6 +179,12 @@
          image_name: 'rocky-9'
          default_user: 'rocky'
 
+- project:
+    name: ubuntu-2204
+    jobs:
+      - 'image-build-kubernetes-{name}'
+
+
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
@@ -751,6 +757,71 @@
                 failure {{
                     node('internal') {{
                         deleteImage '{project_name}', 'testing'
+                    }}
+                }}
+                cleanup {{
+                    node('jammy') {{ deleteDir() }}
+                }}
+            }}
+        }}
+
+
+- job-template:
+    name: 'image-build-kubernetes-{name}'
+    defaults: global
+    project_name: 'NeCTAR-Images'
+    kubernetes_version: '1.29.3'
+    parameters:
+      - string:
+          name: project_name
+          description: Project name to deploy images to
+          default: 'NeCTAR-Images'
+      - string:
+          name: kubernetes_version
+          description: Kubernetes version to build for (e.g. 1.29.3)
+          default: '1.29.3'
+    properties:
+      - authorization:
+          nobody:
+            - job-read
+            - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - '^image-build-.*'
+          block-level: 'GLOBAL'
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+        def imageId
+        def imageName
+        pipeline {{
+            agent {{ node {{ label 'jammy' }} }}
+            options {{ ansiColor('xterm') }}
+            stages {{
+                stage('Build Image') {{
+                    steps {{ imageBuildKubernetes '{name}' }}
+                }}
+                stage('Set Image ID') {{
+                    steps {{ setImageID() }}
+                }}
+                stage('Deploy in testing') {{
+                    steps {{
+                        deployImage '{project_name}', 'testing'
+                        setImageProperties '{project_name}', 'testing'
+                    }}
+                }}
+                stage('Deploy in production') {{
+                    steps {{
+                        deployImage '{project_name}', 'production'
+                        setImageProperties '{project_name}', 'production'
+                    }}
+                }}
+            }}
+            post {{
+                failure {{
+                    node('internal') {{
+                        deleteImage '{project_name}', 'testing'
+                        deleteImage '{project_name}', 'production'
                     }}
                 }}
                 cleanup {{
