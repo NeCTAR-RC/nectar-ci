@@ -647,6 +647,17 @@
               echo "Already a tag on this commit"
           fi
 
+
+- builder:
+    name: pypi-release
+    builders:
+      - shell: |
+          #!/bin/bash
+          pip install build
+          rm -rf dist/*
+          python3 -m build
+          twine upload --config-file $PYPIRC dist/*
+
 - builder:
     name: run-tests
     builders:

@@ -781,7 +781,7 @@
          environment: 'cover'
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 - project:
