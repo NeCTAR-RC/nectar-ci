@@ -7,7 +7,7 @@ def call(String imageName, String kubernetesVersion) {
         KUBERNETES_VERSION=$kubernetesVersion
 
         OUTPUT_NAME="\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION"
-        OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$OUTPUT_NAME/"
+        OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$OUTPUT_NAME"
 
         # Clean up any left over builds
         if [ -d \$OUTPUT_DIR ]; then
@@ -28,13 +28,10 @@ def call(String imageName, String kubernetesVersion) {
 
         cd \$WORKSPACE
 
-        # Move image build files to build directory
-        mv \$OUTPUT_DIR build
-        mkdir -p raw_image
-
         echo "Compressing QCOW2 image..."
-        qemu-img convert -c -O qcow2 "build/\$OUTPUT_NAME" raw_image/image.qcow2
-        rm -fr build/\$OUTPUT_NAME
+        mkdir -p raw_image
+        qemu-img convert -c -O qcow2 \$OUTPUT_DIR/\$OUTPUT_NAME raw_image/image.qcow2
+        rm -fr \$OUTPUT_DIR/\$OUTPUT_NAME
 
         mkdir -p build/.facts
         # Set Kube version as image property

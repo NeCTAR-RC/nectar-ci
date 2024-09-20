@@ -804,16 +804,26 @@
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}
                 }}
+                stage('Deploy in development') {{
+                    steps {{
+                        deployImage '{project_name}', 'development'
+                        setImageProperties '{project_name}', 'development'
+                        setImageVisibility '{project_name}', 'development', 'community'
+                    }}
+                }}
+
                 stage('Deploy in testing') {{
                     steps {{
                         deployImage '{project_name}', 'testing'
                         setImageProperties '{project_name}', 'testing'
+                        setImageVisibility '{project_name}', 'testing', 'community'
                     }}
                 }}
                 stage('Deploy in production') {{
                     steps {{
                         deployImage '{project_name}', 'production'
                         setImageProperties '{project_name}', 'production'
+                        setImageVisibility '{project_name}', 'production', 'community'
                     }}
                 }}
             }}
