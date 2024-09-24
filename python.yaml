@@ -785,6 +785,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: varroa-dashboard
+    jobs:
+      - '{name}-os-tox-python3':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: warre
     jobs:
       - '{name}-default-tox-{environment}':
