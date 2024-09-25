@@ -82,6 +82,12 @@
          organisation: 'NeCTAR-RC'
 
 - project:
+    name: murano-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+         organisation: 'NeCTAR-RC'
+
+- project:
     name: nectar-dashboard-helm
     jobs:
       - '{name}-helm-default-jobs':
