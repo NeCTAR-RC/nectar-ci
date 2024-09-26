@@ -40,7 +40,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -125,7 +124,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -207,7 +205,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -281,7 +278,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -346,7 +342,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -424,7 +419,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -507,7 +501,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -579,7 +572,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -645,7 +637,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -712,7 +703,6 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -1817,7 +1807,6 @@
           description: 'Availability zone. Use "Any zone" to allow the scheduler to choose.'
           choices:
             - Any zone
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
@@ -1876,7 +1865,6 @@
           description: 'Availability zone. Use "Any zone" to allow the scheduler to choose.'
           choices:
             - Any zone
-            - ardc-mel-1
             - auckland
             - intersect-01
             - melbourne-qh2
