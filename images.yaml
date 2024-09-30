@@ -182,7 +182,7 @@
 - project:
     name: ubuntu-2204
     jobs:
-      - 'image-build-kubernetes-{name}'
+      - 'image-build-capi-{name}'
 
 
 - job-template:
@@ -767,7 +767,7 @@
 
 
 - job-template:
-    name: 'image-build-kubernetes-{name}'
+    name: 'image-build-capi-{name}'
     defaults: global
     project_name: 'NeCTAR-Images'
     kubernetes_version: '1.29.3'
@@ -799,7 +799,7 @@
             options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
-                    steps {{ imageBuildKubernetes '{name}', kubernetes_version }}
+                    steps {{ imageBuildCAPI '{name}', kubernetes_version }}
                 }}
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}
