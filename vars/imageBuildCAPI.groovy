@@ -34,6 +34,18 @@ def call(String imageName, String kubernetesVersion) {
         rm -fr \$OUTPUT_DIR/\$OUTPUT_NAME
 
         mkdir -p build/.facts
+        # Currently only building ubuntu and flatcar
+        case \$IMAGE_NAME in
+            # matches ubuntu-2204, ubuntu-2404, etc
+            ubuntu-*)
+                echo "ubuntu" > build/.facts/os_distro
+                ;;
+            flatcar)
+                echo "flatcar" > build/.facts/os_distro
+                ;;
+            *)
+                ;;
+        esac
         # Set Kube version as image property
         echo "v\$KUBERNETES_VERSION" > build/.facts/kube_version
 
