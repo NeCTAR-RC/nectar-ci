@@ -793,13 +793,13 @@
 - project:
     name: warre
     jobs:
-      - '{name}-default-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py310'
-      - '{name}-default-tox-{environment}':
+         environment: 'py312'
+      - '{name}-noble-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-default-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-container':
