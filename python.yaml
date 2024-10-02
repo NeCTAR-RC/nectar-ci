@@ -232,6 +232,9 @@
 - project:
     name: manuka
     jobs:
+      - '{name}-noble-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py312'
       - '{name}-os-tox-python3':
          organisation: 'NeCTAR-RC'
       - '{name}-os-tox-{environment}':
