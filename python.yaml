@@ -920,13 +920,13 @@
 - project:
     name: taynac
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py310'
-      - '{name}-os-tox-{environment}':
+         environment: 'py312'
+      - '{name}-noble-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-      - '{name}-os-tox-{environment}':
+         environment: 'pep8'
+      - '{name}-noble-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
       - '{name}-container':
