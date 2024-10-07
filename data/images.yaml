@@ -741,14 +741,14 @@
             options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
-                    steps {{ imageBuildJenkins '{name}' }}
+                    steps {{ imageBuildQEMU '{name}' }}
                 }}
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}
                 }}
                 stage('Deploy in testing') {{
                     steps {{
-                        deployImage '{project_name}', 'testing'
+                        deployImageWithBuildNumber '{project_name}', 'testing'
                     }}
                 }}
             }}
