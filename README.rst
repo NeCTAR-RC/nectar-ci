@@ -18,7 +18,7 @@ Example /etc/jenkins_jobs/jenkins_jobs.ini::
    ignore_cache=True
    keep_descriptions=False
    include_path=.:scripts:~/git/
-   
+
    [jenkins]
    user=jenkins
    password=1234567890abcdef1234567890abcdef
