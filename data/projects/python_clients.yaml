@@ -9,7 +9,7 @@
          environment: 'flake8'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -31,7 +31,7 @@
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 
@@ -52,7 +52,7 @@
          environment: 'cover'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 
@@ -75,7 +75,7 @@
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 
@@ -98,7 +98,7 @@
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 
@@ -135,7 +135,7 @@
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 - project:
@@ -178,5 +178,5 @@
          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
