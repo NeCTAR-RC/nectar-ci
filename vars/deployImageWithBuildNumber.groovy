@@ -41,7 +41,7 @@ def call(String projectName, String cloudEnv) {
         fi
 
         # Append build number to name
-        IMAGE_NAME="\$IMAGE_NAME [\$BUILD_NUMBER]\
+        IMAGE_NAME="\$IMAGE_NAME [\$BUILD_NUMBER]"
 
         echo "Creating image..."
         openstack image create -f value -c id --id \$IMAGE_ID --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "NeCTAR \$IMAGE_NAME" > image_id.txt
