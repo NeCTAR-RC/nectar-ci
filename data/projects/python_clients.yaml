@@ -110,14 +110,20 @@
 - project:
     name: python-placementclient
     jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
       - '{name}-focal-deb-package':
          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
          organisation: 'NeCTAR-RC'
-      - '{name}-pypi-upload':
+      - '{name}-pypi-release':
          organisation: 'NeCTAR-RC'
 
 
