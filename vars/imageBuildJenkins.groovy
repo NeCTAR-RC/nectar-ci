@@ -24,8 +24,8 @@ def call(String imageName) {
         mkdir -p raw_image
         mv build/image.qcow2 raw_image/
 
-        # Image name will be like: jenkins-slave-ubuntu-20.04 v10
-        echo "\$IMAGE_NAME v\$BUILD_NUMBER" > build/.facts/nectar_name
+        # Image name will be like: jenkins-slave-ubuntu-20.04-v10
+        echo "\$IMAGE_NAME-v\$BUILD_NUMBER" > build/.facts/nectar_name
     """
     stash includes: 'build/**', name: 'build'
     stash includes: 'raw_image/**', name: 'raw_image'
