@@ -414,14 +414,14 @@
     builders:
       - shell: |
           git checkout $GERRIT_NEWREV
-          jenkins-jobs test -r .
+          jenkins-jobs test -r data
 
 - builder:
     name: jenkins-jobs-update
     builders:
       - shell: |
           git checkout $GERRIT_NEWREV
-          jenkins-jobs update -r .
+          jenkins-jobs update -r data
 
 - builder:
     name: jenkins-jobs-test-diff
@@ -430,10 +430,10 @@
           #!/bin/bash
           echo "Setting up diff:"
           git checkout $GERRIT_NEWREV
-          NEW_CONF=$(jenkins-jobs test -r . 2>&1)
+          NEW_CONF=$(jenkins-jobs test -r data 2>&1)
           git fetch
           git reset --hard origin/master
-          OLD_CONF=$(jenkins-jobs test -r . 2>&1)
+          OLD_CONF=$(jenkins-jobs test -r data 2>&1)
           echo "diff:"
           diff -U0 --color=always  <(echo "$OLD_CONF") <(echo "$NEW_CONF")
           exit 0
