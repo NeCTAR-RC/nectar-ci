@@ -25,33 +25,44 @@ def call(String projectName, String cloudEnv) {
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
         sh """#!/bin/bash -eu
         echo "\033[35;1m========== Deploying to $cloudEnv ==========\033[0m"
+
         export OS_AUTH_URL=$OSAuthURL
         export OS_PROJECT_DOMAIN_NAME=Default
         export OS_USER_DOMAIN_NAME=Default
         export OS_IDENTITY_API_VERSION=3
         export OS_PROJECT_NAME=$projectName
-        IMAGE_NAME=\"NeCTAR $imageName [\$BUILD_NUMBER]\"
-        [ -z "\$IMAGE_NAME" ] && exit 1
-        echo "Creating image \$IMAGE_NAME..."
-        echo "==> openstack image create --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 \"\$IMAGE_NAME\""
-        openstack image create -f value -c id --id $imageId --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "\$IMAGE_NAME" > image_id.txt
+
+        IMAGE_ID=$imageId
+        IMAGE_NAME=\"$imageName\"
+
+        if [ -z "\$IMAGE_NAME" ]; then
+            echo "ERROR: Image name not found!"
+            exit 1
+        fi
+
+        # Append build number to name
+        IMAGE_NAME="\$IMAGE_NAME [\$BUILD_NUMBER]\
+
+        echo "Creating image..."
+        openstack image create -f value -c id --id \$IMAGE_ID --disk-format qcow2 --container-format bare --file raw_image/image.qcow2 "NeCTAR \$IMAGE_NAME" > image_id.txt
         [ -s image_id.txt ] || exit 1
-        echo "Image $imageId created!"
+        echo "Image \$IMAGE_ID created!"
+
         RETRIES=10
         i=1
         while [ \$i -le \$RETRIES ]; do
-            STATUS=\$(openstack image show -f value -c status $imageId)
+            STATUS=\$(openstack image show -f value -c status \$IMAGE_ID)
             echo "Image is \$STATUS (\$i/\$RETRIES)..."
             [ "\$STATUS" = "active" ] && break
             if [ \$i -ge \$RETRIES ]; then
                 echo "ERROR: Limit reached, cleaning up image..."
-                openstack image delete $imageId || true
+                openstack image delete \$IMAGE_ID || true
                 exit 1
             fi
             i=\$((i+1))
             sleep 30
         done
-        openstack image show --max-width=120 $imageId
+        openstack image show --max-width=120 \$IMAGE_ID
         """
     }
 }
