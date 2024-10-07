@@ -741,7 +741,7 @@
             options {{ ansiColor('xterm') }}
             stages {{
                 stage('Build Image') {{
-                    steps {{ imageBuildQEMU '{name}' }}
+                    steps {{ imageBuildJenkins '{name}' }}
                 }}
                 stage('Set Image ID') {{
                     steps {{ setImageID() }}
@@ -749,7 +749,6 @@
                 stage('Deploy in testing') {{
                     steps {{
                         deployImage '{project_name}', 'testing'
-                        setImageProperties '{project_name}', 'testing'
                     }}
                 }}
             }}
