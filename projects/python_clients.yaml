@@ -1,0 +1,182 @@
+- project:
+    name: nectar-osc
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: nectarclient-lib
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+
+- project:
+    name: python-langstrothclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+
+- project:
+    name: python-manukaclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+
+- project:
+    name: python-nectarallocationclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+
+- project:
+    name: python-placementclient
+    jobs:
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'flake8'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+
+- project:
+    name: python-taynacclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
+
+- project:
+    name: python-varroaclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-release':
+         organisation: 'NeCTAR-RC'
+
+
+- project:
+    name: python-warreclient
+    jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'pep8'
+      - '{name}-jammy-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'cover'
+      - '{name}-jammy-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-focal-deb-package':
+         organisation: 'NeCTAR-RC'
+      - '{name}-pypi-upload':
+         organisation: 'NeCTAR-RC'
