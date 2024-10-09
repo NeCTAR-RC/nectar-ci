@@ -3,20 +3,20 @@
     jobs:
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py310'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'pep8'
 
 - project:
     name: hivemind_contrib
     jobs:
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'py27'
+         environment: 'py310'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+         environment: 'pep8'
 
 - project:
     name: langstroth
