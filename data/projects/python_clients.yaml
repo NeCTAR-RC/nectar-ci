@@ -5,6 +5,8 @@
          environment: 'py38'
       - '{name}-jammy-tox-{environment}':
          environment: 'py310'
+      - '{name}-noble-tox-{environment}':
+         environment: 'py312'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'cover'
@@ -12,6 +14,7 @@
          environment: 'pep8'
       - '{name}-focal-deb-package'
       - '{name}-jammy-deb-package'
+      - '{name}-noble-deb-package'
       - '{name}-pypi-release'
 
 - project:
