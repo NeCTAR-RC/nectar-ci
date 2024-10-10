@@ -7,8 +7,6 @@
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-jammy-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: hivemind_contrib
@@ -19,8 +17,6 @@
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
-      - '{name}-jammy-deb-package':
-         organisation: 'NeCTAR-RC'
 
 - project:
     name: langstroth
