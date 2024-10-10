@@ -1,9 +1,15 @@
 - project:
     name: hivemind
     jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py310'
+      - '{name}-noble-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py312'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
@@ -11,9 +17,15 @@
 - project:
     name: hivemind_contrib
     jobs:
+      - '{name}-focal-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py38'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py310'
+      - '{name}-noble-tox-{environment}':
+         organisation: 'NeCTAR-RC'
+         environment: 'py312'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'pep8'
