@@ -29,7 +29,7 @@ Usage
 -----
 To delete a single job::
 
-   $ jenkins-jobs delete . puppet-openvpn-puppet-unit
+   $ jenkins-jobs delete -r data puppet-openvpn-puppet-unit
    INFO:root:Deleting jobs in [.]
    INFO:root:Deleting jobs in [puppet-openvpn-puppet-unit]
    INFO:jenkins_jobs.builder:Deleting jenkins job puppet-openvpn-puppet-unit
@@ -37,13 +37,13 @@ To delete a single job::
 
 To update a single job::
 
-   $ jenkins-jobs update . puppet-openvpn-puppet-unit
+   $ jenkins-jobs update -r data puppet-openvpn-puppet-unit
    INFO:root:Updating jobs in . (['puppet-openvpn-puppet-unit'])
    INFO:jenkins_jobs.builder:Creating jenkins job puppet-openvpn-puppet-unit
 
 To update all jobs::
 
-   $ jenkins-jobs update .
+   $ jenkins-jobs update -r data.
    INFO:root:Updating jobs in . ([])
    INFO:jenkins_jobs.builder:Creating jenkins job nectar-ci-ruby-lint
    INFO:jenkins_jobs.builder:Reconfiguring jenkins job puppet-ceilometer-puppet-unit
