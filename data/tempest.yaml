@@ -1531,7 +1531,7 @@
             - job-read
             - job-discover
       - build-discarder:
-          days-to-keep: 7
+          days-to-keep: 45
       - build-blocker:
           blocking-jobs:
             - "^tempest-cleanup-site-{site}.*"
