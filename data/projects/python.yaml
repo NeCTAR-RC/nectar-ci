@@ -65,9 +65,6 @@
 - project:
     name: hivemind
     jobs:
-      - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py310'
@@ -81,9 +78,6 @@
 - project:
     name: hivemind_contrib
     jobs:
-      - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
       - '{name}-jammy-tox-{environment}':
          organisation: 'NeCTAR-RC'
          environment: 'py310'
