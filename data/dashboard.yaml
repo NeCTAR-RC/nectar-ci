@@ -3,7 +3,6 @@
     defaults: global
     project-type: pipeline
     sandbox: true
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -13,19 +12,17 @@
           name: GERRIT_BRANCH
           default: nectar/wallaby
           description: "The branch to use."
-
     properties:
       - throttle:
           max-total: 5
           option: project
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - change-restored-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - change-restored-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/horizon'
@@ -44,7 +41,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     dsl: |
       pipeline {
         agent { label 'docker' }
@@ -202,13 +198,11 @@
           }
         }
       }
-
 - job:
     name: 'dashboard-devenv-cleanup'
     defaults: global
     project-type: pipeline
     sandbox: true
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -218,12 +212,11 @@
           name: GERRIT_BRANCH
           default: nectar/wallaby
           description: "The branch to use."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-abandoned-event
-              - change-merged-event
+            - change-abandoned-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/horizon'
@@ -242,7 +235,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     dsl: |
       pipeline {
         agent { label 'internal' }

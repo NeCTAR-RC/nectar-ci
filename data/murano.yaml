@@ -3,80 +3,68 @@
     jobs:
       - 'murano-package-check-{name}'
       - 'murano-package-deploy-{name}'
-
 - project:
     name: murano-jupyternotebook
     jobs:
       - 'murano-package-check-{name}'
       - 'murano-package-deploy-{name}'
-
 - project:
     name: murano-glamworkbench
     jobs:
       - 'murano-package-check-{name}'
       - 'murano-package-deploy-{name}'
-
-
 - job-template:
     name: 'murano-package-check-{name}'
     defaults: global
     node: focal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/{name}'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - shell: make check
-
     wrappers:
       - credentials-binding:
-        - username-password-separated:
-           credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
-           username: CREDENTIAL_ID
-           password: CREDENTIAL_SECRET
-        - username-password:
-           credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
-           variable: GERRIT_API
-
-
+          - username-password-separated:
+              credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
+          - username-password:
+              credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
+              variable: GERRIT_API
 - job-template:
     name: 'murano-package-deploy-{name}'
     defaults: global
     node: generic
     project-type: pipeline
     sandbox: true
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/{name}'
@@ -85,45 +73,44 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     dsl: |
-        pipeline {{
-            agent {{ label 'focal' }}
-            options {{
-                ansiColor('xterm')
-            }}
-            stages {{
-                stage('Clone') {{
-                    steps {{
-                        git poll: false,
-                        url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
-                        credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-                    }}
-                }}
-                stage('Build package in RCTest') {{
-                    steps {{
-                        buildMuranoPackage 'murano', 'testing'
-                    }}
-                }}
-                stage('Deploy package in RCTest') {{
-                    steps {{
-                        deployMuranoPackage 'murano', 'testing'
-                    }}
-                }}
-                stage('Build package in Production') {{
-                    steps {{
-                        buildMuranoPackage 'murano', 'production'
-                    }}
-                }}
-                stage('Deploy package in Production') {{
-                    steps {{
-                        deployMuranoPackage 'murano', 'production'
-                    }}
-                }}
-            }}
-            post {{
-                cleanup {{
-                    deleteDir()
-                }}
-            }}
-        }}
+      pipeline {{
+          agent {{ label 'focal' }}
+          options {{
+              ansiColor('xterm')
+          }}
+          stages {{
+              stage('Clone') {{
+                  steps {{
+                      git poll: false,
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+                  }}
+              }}
+              stage('Build package in RCTest') {{
+                  steps {{
+                      buildMuranoPackage 'murano', 'testing'
+                  }}
+              }}
+              stage('Deploy package in RCTest') {{
+                  steps {{
+                      deployMuranoPackage 'murano', 'testing'
+                  }}
+              }}
+              stage('Build package in Production') {{
+                  steps {{
+                      buildMuranoPackage 'murano', 'production'
+                  }}
+              }}
+              stage('Deploy package in Production') {{
+                  steps {{
+                      deployMuranoPackage 'murano', 'production'
+                  }}
+              }}
+          }}
+          post {{
+              cleanup {{
+                  deleteDir()
+              }}
+          }}
+      }}

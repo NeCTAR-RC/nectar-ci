@@ -1,8 +1,7 @@
-
 - job:
     name: testcloud-test-trigger
     description: |
-        Parent job to trigger all tempest rctest jobs
+      Parent job to trigger all tempest rctest jobs
     defaults: global
     node: internal
     concurrent: false

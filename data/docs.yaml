@@ -2,20 +2,18 @@
     name: nectarcloud-tier0doco
     jobs:
       - '{name}-markdown':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-specs
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: tutorials
     jobs:
       - '{name}-jekyll-test-build':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-jekyll-html-check':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-jekyll-test-build-cleanup':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'

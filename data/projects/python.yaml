@@ -2,324 +2,299 @@
     name: aardvark
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'cover'
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: bumblebee
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: bumblebee-stormbee
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: django-select2-forms
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: elasticluster
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
 - project:
     name: external_naginator
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-jammy-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: hivemind
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py312'
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: hivemind_contrib
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py312'
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: langstroth
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'jshint'
+          organisation: 'NeCTAR-RC'
+          environment: 'jshint'
       - '{name}-devenv-create':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-devenv-cleanup':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: manuka
     jobs:
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py312'
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'cover'
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'functional'
+          organisation: 'NeCTAR-RC'
+          environment: 'functional'
       - '{name}-devenv-create':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-devenv-cleanup':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: nectar-dashboard
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - 'dashboard-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-freshdesk
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: nectar-metrics
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-jammy-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-focal-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-openstack
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'internal'
-         environment: 'py38'
+          organisation: 'internal'
+          environment: 'py38'
       - '{name}-focal-deb-package':
-         organisation: 'internal'
+          organisation: 'internal'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'internal'
-         environment: 'py310'
+          organisation: 'internal'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'internal'
-         environment: 'flake8'
+          organisation: 'internal'
+          environment: 'flake8'
       - '{name}-jammy-deb-package':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: nectar-tc-report
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'internal'
-         environment: 'py310'
+          organisation: 'internal'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'internal'
-         environment: 'flake8'
-
+          organisation: 'internal'
+          environment: 'flake8'
 - project:
     name: nectar-tools
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'functional'
+          organisation: 'NeCTAR-RC'
+          environment: 'functional'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'cover'
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-jammy-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nova-pollinate
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: pfup
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
 - project:
     name: prometheus
     jobs:
       - '{name}-kolla-container-upstream'
-
 - project:
     name: python-orcid
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: taynac
     jobs:
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py312'
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'cover'
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-devenv-create':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-devenv-cleanup':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: uom-cloud-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'resplat-cloud'
-         environment: 'py38'
+          organisation: 'resplat-cloud'
+          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         organisation: 'resplat-cloud'
-         environment: 'flake8'
+          organisation: 'resplat-cloud'
+          environment: 'flake8'
       - '{name}-os-deb-package':
-         organisation: 'resplat-cloud'
-
+          organisation: 'resplat-cloud'
 - project:
     name: varroa
     jobs:
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py312'
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'cover'
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-devenv-create':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-devenv-cleanup':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: varroa-dashboard
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: warre
     jobs:
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py312'
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-noble-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'cover'
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: warre-dashboard
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'

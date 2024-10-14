@@ -10,7 +10,6 @@
           else
             rake lint 2>&1
           fi
-
 - builder:
     name: rake-test
     builders:
@@ -23,8 +22,6 @@
           else
             rake test 2>&1
           fi
-
-
 - builder:
     name: octocatalog-diff-rake-test
     builders:
@@ -35,7 +32,6 @@
           export RSPEC_TEST=true
           docker build . --file Dockerfile --tag octocatalog-diff:ruby2.6 --build-arg RUBY_VERSION=2.6-buster
           docker run -e PUPPET_VERSION -e PUPPET_VERSIONS -e RSPEC_TEST -e RUBOCOP_TEST -e ENFORCE_COVERAGE octocatalog-diff:ruby2.6 /app/script/cibuild
-
 - builder:
     name: librarian-install
     builders:
@@ -45,8 +41,6 @@
       - ssh-builder:
           ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh testing
-
-
 - builder:
     name: puppet-git-secrets
     builders:
@@ -70,13 +64,10 @@
           git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-openstack/all.pattern
           git secrets --add-provider -- cat .gitprohibited
           git secrets --scan -r data/
-
 - builder:
     name: git-secrets-sorted
     builders:
       - shell: find . -name '*.pattern' -exec sort -c {} +
-
-
 - builder:
     name: puppet-lint
     builders:
@@ -99,8 +90,6 @@
           else
             ./lint.py rake lint 2>&1
           fi
-
-
 - builder:
     name: puppet-syntax
     builders:
@@ -112,7 +101,6 @@
           for f in `find . -iname *.erb -not -path "./.bundled_gems/*"` ; do
             erb -P -x -T '-' $f | ruby -c
           done
-
 - builder:
     name: puppet-doc
     builders:
@@ -128,7 +116,6 @@
             mv -v "${WORKSPACE}/doc/files/${WORKSPACE}/modules" "${WORKSPACE}/doc/files/modules"
           fi;
           grep -l -R ${WORKSPACE} * | while read fname; do sed -i "s@${WORKSPACE}/@/@g" $fname; done;
-
 - builder:
     name: puppet-openstack-spec
     builders:
@@ -138,17 +125,14 @@
           export PUPPET_GEM_VERSION='~> 7.10.0'
           bundle install --path vendor/bundle
           bundle exec rake spec
-
 - builder:
     name: 'python-tox'
     builders:
       - shell: 'export OS_TEST_TIMEOUT=300; tox -e {environment}'
-
 - builder:
     name: 'pbuilder-create'
     builders:
       - shell: 'hivemind pbuilder.create --os-release {os_release} || hivemind pbuilder.update --os-release {os_release}'
-
 - builder:
     name: 'os-pbuilder-checkout'
     builders:
@@ -184,7 +168,6 @@
 
           git branch -d $GERRIT_BRANCH || true
           git checkout -b $GERRIT_BRANCH origin/$GERRIT_BRANCH
-
 - builder:
     name: 'pbuilder-buildpackage'
     builders:
@@ -194,7 +177,6 @@
           rm -f *.deb
           hivemind packaging.buildpackage --os-release {os_release}
           cp ../../build-area/*/*.deb .
-
 - builder:
     name: 'pbuilder-buildpackage-no-upload'
     builders:
@@ -204,12 +186,10 @@
           rm -f *.deb
           hivemind packaging.buildpackage --os-release {os_release} --no-upload
           cp ../../build-area/*/*.deb .
-
 - builder:
     name: 'os-pbuilder-create'
     builders:
       - shell: 'hivemind pbuilder.create || hivemind pbuilder.update'
-
 - builder:
     name: 'os-pbuilder-buildpackage'
     builders:
@@ -219,13 +199,11 @@
           rm -f *.deb
           hivemind packaging.buildpackage
           cp ../../build-area/*/*.deb .
-
 # Temp to support focal-yoga
 - builder:
     name: 'os-pbuilder-create-focal'
     builders:
       - shell: 'hivemind pbuilder.create --ubuntu-release focal || hivemind pbuilder.update --ubuntu-release focal'
-
 # Temp to support focal-yoga
 - builder:
     name: 'os-pbuilder-buildpackage-focal'
@@ -236,7 +214,6 @@
           rm -f *.deb
           hivemind packaging.buildpackage --ubuntu-release focal
           cp ../../build-area/*/*.deb .
-
 - builder:
     name: yaml-lint
     builders:
@@ -245,38 +222,32 @@
           export GEM_HOME=/tmp/yamls
           gem install --no-document yaml-lint
           find . -type f -iname "*.yml" -o -iname "*.yaml" -o -iname "*.eyaml" | xargs -d '\n' /tmp/yamls/bin/yaml-lint
-
 - builder:
     name: yamllint
     builders:
       - shell: |
           yamllint -d relaxed .
-
 - builder:
     name: 'dummy'
     builders:
       - shell: 'exit 0'
-
 - builder:
     name: helm-lint
     builders:
       - shell: |
-         helm lint
-
+          helm lint
 - builder:
     name: helm-template
     builders:
       - shell: |
-         helm template .
-
+          helm template .
 - builder:
     name: helm-dependency-build
     builders:
       - shell: |
-         # Add bintami repo as we trust it, see https://github.com/helm/helm/issues/8036 for reasons why this is needed
-         helm repo add bitnami https://charts.bitnami.com/bitnami
-         helm dependency build
-
+          # Add bintami repo as we trust it, see https://github.com/helm/helm/issues/8036 for reasons why this is needed
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm dependency build
 - builder:
     name: helm-package
     builders:
@@ -305,8 +276,6 @@
           else
               echo "Already a tag on this commit"
           fi
-
-
 - builder:
     name: helm-push
     builders:
@@ -316,23 +285,20 @@
           export REGISTRY="registry.rc.nectar.org.au"
           echo "$REGISTRY_PSW" | helm registry login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
           find . -maxdepth 1 -name *.tgz | xargs -i helm push {} oci://registry.rc.nectar.org.au/nectar-helm
-
 - builder:
     name: kustomize-validate
     builders:
       - shell: |
-         #!/bin/bash
-         kustomizatons=$(find . -name kustomization.yaml -print0 | xargs -0 -n1 dirname | sort --unique)
-         for kustomization in ${kustomizatons}; do
-           if kustomize build "${kustomization}" -o /tmp/manifest.yaml; then
-             echo "validated ${kustomization}"
-           else
-             echo "validation failed for ${kustomization}"
-             exit 1
-           fi
-         done
-
-
+          #!/bin/bash
+          kustomizatons=$(find . -name kustomization.yaml -print0 | xargs -0 -n1 dirname | sort --unique)
+          for kustomization in ${kustomizatons}; do
+            if kustomize build "${kustomization}" -o /tmp/manifest.yaml; then
+              echo "validated ${kustomization}"
+            else
+              echo "validation failed for ${kustomization}"
+              exit 1
+            fi
+          done
 - builder:
     name: markdown-lint
     builders:
@@ -353,7 +319,6 @@
           EOF
           gem install mdl
           git diff --name-status HEAD~1 | grep '^[^D].*\.md' | cut -f2- | xargs -I filename /tmp/vendor/bin/mdl -s /tmp/vendor/md_style.rb "filename"
-
 - builder:
     name: jekyll-test-build
     builders:
@@ -377,7 +342,6 @@
           curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Listings: true' $SWIFTURL
           curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
           curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Test at: $SWIFTURL'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
-
 - builder:
     name: jekyll-html-check
     builders:
@@ -385,7 +349,6 @@
           bundle install --path vendor/bundle
           bundle exec jekyll build
           bundle exec htmlproofer --allow-hash-href --assume-extension --ignore-urls '/localhost/' --log-level debug ./_site
-
 - builder:
     name: jekyll-test-build-cleanup
     builders:
@@ -396,8 +359,6 @@
           export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
           CONTAINER="jekyll-test-build-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
           openstack container delete --recursive $CONTAINER
-
-
 - builder:
     name: puppet-prod-review
     builders:
@@ -408,21 +369,18 @@
           git checkout production
           git cherry-pick change
           git review production -t "$GERRIT_TOPIC"
-
 - builder:
     name: jenkins-jobs-test
     builders:
       - shell: |
           git checkout $GERRIT_NEWREV
           jenkins-jobs test -r data
-
 - builder:
     name: jenkins-jobs-update
     builders:
       - shell: |
           git checkout $GERRIT_NEWREV
           jenkins-jobs update -r data
-
 - builder:
     name: jenkins-jobs-test-diff
     builders:
@@ -437,14 +395,12 @@
           echo "diff:"
           diff -U0 --color=always  <(echo "$OLD_CONF") <(echo "$NEW_CONF")
           exit 0
-
 - builder:
     name: site-deploy
     builders:
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /usr/local/sbin/deploy-control-repo.sh $GERRIT_PROJECT
-
 - builder:
     name: r10k-deploy-control-repo
     builders:
@@ -469,7 +425,6 @@
             # strips 'internal/puppet-site-nectar' to 'nectar'
             ENVIRONMENT=`echo $GERRIT_PROJECT | cut -f2 -d'/' | cut -f3 -d'-'`
             r10k -c /etc/puppetlabs/r10k/r10k-$ENVIRONMENT.yaml deploy environment --puppetfile master --verbose --generate-types
-
 - builder:
     name: r10k-deploy
     builders:
@@ -492,7 +447,6 @@
           command: |
             export R10K_HOST={r10k_host}
             r10k-deploy.sh -e $GERRIT_PATCHSET_REVISION
-
 - builder:
     name: r10k-cleanup
     builders:
@@ -503,7 +457,6 @@
             # deploy a dummy env (master), which also deletes all environments
             # belonging to deleted branches this returns 1 so || true
             r10k deploy environment --puppetfile master || true
-
 - builder:
     name: r10k-diff-catalog-control-repo
     builders:
@@ -512,7 +465,6 @@
           command: |
             export R10K_HOST={r10k_host}
             r10k-diff-catalog.py --backend {backend} test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
-
 - builder:
     name: r10k-diff-catalog-puppet-library
     builders:
@@ -522,7 +474,6 @@
             export R10K_HOST={r10k_host}
             export R10K_BUILD_ENV={r10k_build_env}
             r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
-
 - builder:
     name: tempest-check-whitelist
     builders:
@@ -537,7 +488,6 @@
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
-
 - builder:
     name: tempest-check-whitelist-noparam
     builders:
@@ -552,7 +502,6 @@
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
-
 - builder:
     name: tempest-check-whitelist-site-agnostic
     builders:
@@ -567,7 +516,6 @@
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
-
 - builder:
     name: tempest-check-whitelist-site-agnostic-noparam
     builders:
@@ -582,8 +530,6 @@
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
-
-
 - builder:
     name: pypi-upload
     builders:
@@ -646,8 +592,6 @@
           else
               echo "Already a tag on this commit"
           fi
-
-
 - builder:
     name: pypi-release
     builders:
@@ -657,7 +601,6 @@
           rm -rf dist/*
           python3 -m build
           twine upload --config-file $PYPIRC dist/*
-
 - builder:
     name: run-tests
     builders:

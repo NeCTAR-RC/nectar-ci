@@ -1,6 +1,6 @@
 - job-group:
     name: '{name}-puppet-unit'
     jobs:
-        - '{name}-puppet-unit-job':
-            node: jammy
-            skip-vote: false
+      - '{name}-puppet-unit-job':
+          node: jammy
+          skip-vote: false

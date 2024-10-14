@@ -2,102 +2,97 @@
     name: '{name}-os-tox-python3'
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            os_release: 'yoga'
-            environment: 'pep8'
-            ubuntu_release: 'focal'
+          os_release: 'yoga'
+          environment: 'pep8'
+          ubuntu_release: 'focal'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            os_release: 'yoga'
-            environment: 'py38'
-            ubuntu_release: 'focal'
+          os_release: 'yoga'
+          environment: 'py38'
+          ubuntu_release: 'focal'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            os_release: 'yoga'
-            environment: 'py310'
-            ubuntu_release: 'jammy'
+          os_release: 'yoga'
+          environment: 'py310'
+          ubuntu_release: 'jammy'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            os_release: 'zed'
-            environment: 'pep8'
-            ubuntu_release: 'focal'
+          os_release: 'zed'
+          environment: 'pep8'
+          ubuntu_release: 'focal'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            os_release: 'zed'
-            environment: 'py310'
-            ubuntu_release: 'jammy'
+          os_release: 'zed'
+          environment: 'py310'
+          ubuntu_release: 'jammy'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            environment: 'pep8'
-            os_release: '2023.1'
+          ubuntu_release: 'jammy'
+          environment: 'pep8'
+          os_release: '2023.1'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            environment: 'py310'
-            os_release: '2023.1'
+          ubuntu_release: 'jammy'
+          environment: 'py310'
+          os_release: '2023.1'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            environment: 'pep8'
-            os_release: '2023.2'
+          ubuntu_release: 'jammy'
+          environment: 'pep8'
+          os_release: '2023.2'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            environment: 'py310'
-            os_release: '2023.2'
+          ubuntu_release: 'jammy'
+          environment: 'py310'
+          os_release: '2023.2'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            environment: 'pep8'
-            os_release: '2024.1'
+          ubuntu_release: 'jammy'
+          environment: 'pep8'
+          os_release: '2024.1'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            environment: 'py310'
-            os_release: '2024.1'
-
+          ubuntu_release: 'jammy'
+          environment: 'py310'
+          os_release: '2024.1'
 - job-group:
     name: '{name}-os-tox-{environment}'
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'focal'
-            os_release: 'ussuri'
+          ubuntu_release: 'focal'
+          os_release: 'ussuri'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'focal'
-            os_release: 'victoria'
+          ubuntu_release: 'focal'
+          os_release: 'victoria'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'focal'
-            os_release: 'wallaby'
+          ubuntu_release: 'focal'
+          os_release: 'wallaby'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'focal'
-            os_release: 'xena'
+          ubuntu_release: 'focal'
+          os_release: 'xena'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'focal'
-            os_release: 'yoga'
+          ubuntu_release: 'focal'
+          os_release: 'yoga'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            os_release: 'zed'
+          ubuntu_release: 'jammy'
+          os_release: 'zed'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            os_release: '2023.1'
+          ubuntu_release: 'jammy'
+          os_release: '2023.1'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            os_release: '2023.2'
+          ubuntu_release: 'jammy'
+          os_release: '2023.2'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-            ubuntu_release: 'jammy'
-            os_release: '2024.1'
-
+          ubuntu_release: 'jammy'
+          os_release: '2024.1'
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
     defaults: global
     node: '{ubuntu_release}'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - build-discarder:
           num-to-keep: 20
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -108,50 +103,43 @@
                   branch-pattern: 'uom/{os_release}'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - python-tox:
           environment: '{environment}'
-
-    #publishers:
-    #  - cobertura:
-    #      report-file: "cover/coverage.xml"
-    #      targets: {}
-
+          #publishers:
+          #  - cobertura:
+          #      report-file: "cover/coverage.xml"
+          #      targets: {}
 - job-template:
     name: '{name}-focal-tox-{environment}'
     defaults: global
     node: 'focal'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - build-discarder:
           num-to-keep: 20
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -164,50 +152,43 @@
                   branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - python-tox:
           environment: '{environment}'
-
-    #publishers:
-    #  - cobertura:
-    #      report-file: "cover/coverage.xml"
-    #      targets: {}
-
+          #publishers:
+          #  - cobertura:
+          #      report-file: "cover/coverage.xml"
+          #      targets: {}
 - job-template:
     name: '{name}-jammy-tox-{environment}'
     defaults: global
     node: 'jammy'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - build-discarder:
           num-to-keep: 20
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -220,45 +201,39 @@
                   branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - python-tox:
           environment: '{environment}'
-
 - job-template:
     name: '{name}-noble-tox-{environment}'
     defaults: global
     node: 'noble'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - build-discarder:
           num-to-keep: 20
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -271,50 +246,43 @@
                   branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - python-tox:
           environment: '{environment}'
-
 #    publishers:
 #      - cobertura:
 #          report-file: "cover/coverage.xml"
 #          targets: {}
-
 - job-template:
     name: '{name}-default-tox-{environment}'
     defaults: global
     node: 'jammy'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - build-discarder:
           num-to-keep: 20
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -327,20 +295,18 @@
                   branch-pattern: 'uom/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - python-tox:
           environment: '{environment}'

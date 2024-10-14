@@ -2,78 +2,68 @@
     name: containers
     jobs:
       - '{name}-yaml':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: docker-shibd
     jobs:
       - '{name}-container':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: argocd-apps-test
     jobs:
       - '{name}-yaml':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: argocd-apps-prod
     jobs:
       - '{name}-yaml':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - job-group:
     name: '{name}-kolla-container'
     jobs:
       - '{name}-kolla-container-{os_release}':
-         os_release: 'xena'
+          os_release: 'xena'
       - '{name}-kolla-container-{os_release}':
-         os_release: 'yoga'
+          os_release: 'yoga'
       - '{name}-kolla-container-{os_release}':
-         os_release: 'zed'
+          os_release: 'zed'
       - '{name}-kolla-container-{os_release}':
-         os_release: '2023.1'
+          os_release: '2023.1'
       - '{name}-kolla-container-{os_release}':
-         os_release: '2023.2'
+          os_release: '2023.2'
       - '{name}-kolla-container-{os_release}':
-         os_release: '2024.1'
-
+          os_release: '2024.1'
 - job-group:
     name: '{name}-kolla-container-upstream'
     jobs:
       - '{name}-kolla-container-upstream-{os_release}':
-         os_release: 'xena'
+          os_release: 'xena'
       - '{name}-kolla-container-upstream-{os_release}':
-         os_release: 'yoga'
+          os_release: 'yoga'
       - '{name}-kolla-container-upstream-{os_release}':
-         os_release: 'zed'
+          os_release: 'zed'
       - '{name}-kolla-container-upstream-{os_release}':
-         os_release: '2023.1'
+          os_release: '2023.1'
       - '{name}-kolla-container-upstream-{os_release}':
-         os_release: '2023.2'
+          os_release: '2023.2'
       - '{name}-kolla-container-upstream-{os_release}':
-         os_release: '2024.1'
-
-
+          os_release: '2024.1'
 # Iscsi build needs special job as we just tag on openstack version
 - job-group:
     name: 'iscsid-kolla-container-upstream'
     jobs:
       - 'iscsid-kolla-container-{os_release}':
-         os_release: '2023.1'
+          os_release: '2023.1'
       - 'iscsid-kolla-container-{os_release}':
-         os_release: '2023.2'
+          os_release: '2023.2'
       - 'iscsid-kolla-container-{os_release}':
-         os_release: '2024.1'
-
-
+          os_release: '2024.1'
 - job-template:
     name: 'dashboard-kolla-container'
     defaults: global
     project-type: pipeline
     sandbox: true
     concurrent: false
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -83,11 +73,10 @@
           name: GERRIT_BRANCH
           default: nectar/wallaby
           description: "The branch to use."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/horizon'
@@ -106,10 +95,7 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     dsl: |
       pipeline {{
         agent {{ label 'docker' }}
@@ -143,18 +129,14 @@
           }}
         }}
       }}
-
-
 - job-template:
     name: 'requirements-kolla-container-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
-
     properties:
       - copyartifact:
           projects: '*-kolla-container-*'
-
     dsl: |
       pipeline {{
         agent {{ label 'docker' }}
@@ -195,16 +177,12 @@
           }}
         }}
       }}
-
-
 - job-template:
     name: '{name}-kolla-container-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
-
     kolla_profile_name: 'false'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -217,11 +195,10 @@
       - string:
           name: PROJECT_BRANCH_OVERRIDE
           description: "If project branch is not the same as gerrit branch you can override this here. Leave blank if project follows standard nectar/openstack_version pattern."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -233,10 +210,7 @@
       - reverse:
           jobs:
             - 'requirements-kolla-container-{os_release}'
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     dsl: |
       def copyArtifactSelector = upstream()
       pipeline {{
@@ -327,19 +301,15 @@
           }}
         }}
       }}
-
-
 - job-template:
     name: '{name}-kolla-container-upstream-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
-
     triggers:
       - reverse:
           jobs:
             - 'requirements-kolla-container-{os_release}'
-
     dsl: |
       def copyArtifactSelector = upstream()
       pipeline {{
@@ -420,20 +390,15 @@
           }}
         }}
       }}
-
-
-
 - job-template:
     name: 'iscsid-kolla-container-{os_release}'
     defaults: global
     project-type: pipeline
     sandbox: true
-
     triggers:
       - reverse:
           jobs:
             - 'requirements-kolla-container-{os_release}'
-
     dsl: |
       def copyArtifactSelector = upstream()
       pipeline {{
@@ -505,15 +470,12 @@
           }}
         }}
       }}
-
-
 - job-template:
     name: '{name}-helm-update-version'
     defaults: global
     project-type: pipeline
     sandbox: true
     concurrent: false
-
     parameters:
       - string:
           name: IMAGE_TAG
@@ -528,7 +490,6 @@
           name: BRANCH
           default: master
           description: "Branch of helm chart repo"
-
     dsl: |
       pipeline {{
         agent {{ label 'internal' }}
@@ -586,7 +547,6 @@
           }}
         }}
       }}
-
 - job-template:
     name: '{name}-container'
     defaults: global
@@ -594,7 +554,6 @@
     sandbox: true
     helm_name: ''
     concurrent: false
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -604,14 +563,13 @@
           name: GERRIT_BRANCH
           default: master
           description: "The branch to use."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - change-merged-event
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -622,7 +580,6 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     dsl: |
       pipeline {{
         agent {{ label 'docker' }}
@@ -691,18 +648,14 @@
           }}
         }}
       }}
-
-
 - job:
     name: 'renovate-testing-env'
     defaults: global
     project-type: pipeline
     sandbox: true
     concurrent: false
-
     triggers:
       - timed: "0 10 * * 1-5"
-
     dsl: |
       pipeline {
         agent {
@@ -725,17 +678,14 @@
           }
         }
       }
-
 - job:
     name: 'renovate-production-env'
     defaults: global
     project-type: pipeline
     sandbox: true
     concurrent: false
-
     triggers:
       - timed: "0 14 * * 1,3"
-
     dsl: |
       pipeline {
         agent {

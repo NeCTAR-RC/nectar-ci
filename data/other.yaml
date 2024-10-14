@@ -2,82 +2,68 @@
     name: bumblebee-dev
     jobs:
       - '{name}-dummy':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: lab-kubernetes
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-images
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: gitea-theme-ardc
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: git-secrets-puppet-internal
     jobs:
       - '{name}-git-secrets-sorted':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: git-secrets-puppet-openstack
     jobs:
       - '{name}-git-secrets-sorted':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: jupyterhub-on-nectar-k8s
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: meliponini
     jobs:
       - '{name}-dummy':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: gh-actions
     jobs:
       - '{name}-yaml':
-         organisation: 'NeCTAR-RC'
-
-
+          organisation: 'NeCTAR-RC'
 - job:
     name: 'librarian-verify'
     concurrent: false
     defaults: global
-
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - authorization:
           'nobody':
             - job-read
             - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-library'
@@ -86,39 +72,33 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - shell: |
           cd testing
           librarian-puppet install --verbose --path ~/puppet-modules-cache/
           cd ../production
           librarian-puppet install --verbose --path ~/puppet-modules-cache/
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job:
     name: 'librarian-diff-library'
     concurrent: false
     defaults: global
-
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -128,7 +108,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     properties:
       - authorization:
           'nobody':
@@ -136,13 +115,12 @@
             - job-discover
       - lockable-resources:
           resources: 'diff-catalog-r10k.mgmt.rc.nectar.org.au'
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-library'
@@ -156,38 +134,32 @@
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
           r10k_host: 'r10k.mgmt.rc.nectar.org.au'
           r10k_build_env: 'production'
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
-
 - job:
     name: 'librarian-diff-library-test'
     concurrent: false
     defaults: global
-
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -197,7 +169,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     properties:
       - authorization:
           'nobody':
@@ -205,13 +176,12 @@
             - job-discover
       - lockable-resources:
           resources: 'diff-catalog-r10k.test.rc.nectar.org.au'
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-library'
@@ -225,38 +195,32 @@
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
           r10k_host: 'r10k.test.rc.nectar.org.au'
           r10k_build_env: 'testing'
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
-
-
 - job:
     name: 'librarian-install'
     defaults: global
     node: internal
     quiet-period: 20
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -266,15 +230,13 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     properties:
       - lockable-resources:
           resources: "puppet-library"
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/puppet-library'
@@ -283,60 +245,50 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/puppet-library.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - librarian-install
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - project:
     name: octocatalog-diff
     jobs:
       - 'octocatalog-diff-test':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - job:
     name: 'octocatalog-diff-test'
     defaults: global
     node: focal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'NeCTAR-RC/octocatalog-diff'
@@ -347,29 +299,25 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/octocatalog-diff.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/octocatalog-diff.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - octocatalog-diff-rake-test
-
 - job:
     name: 'global-hieradata-deploy'
     defaults: global
     node: internal
     quiet-period: 20
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -379,11 +327,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/hieradata'
@@ -392,26 +339,23 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/hieradata.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/hieradata.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - ssh-builder:
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
@@ -419,34 +363,26 @@
       - ssh-builder:
           ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
           command: /usr/local/sbin/global-hieradata-deploy.sh
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job:
     name: 'hieradata-duplicate-check'
     concurrent: false
     defaults: global
-
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     properties:
       - authorization:
           'nobody':
             - job-read
             - job-discover
-
     triggers:
       - gerrit:
           trigger-on:
@@ -461,7 +397,6 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
           url: |
@@ -475,130 +410,109 @@
           clean:
             after: true
           choosing-strategy: gerrit
-
     builders:
       - shell: |
           ./tests/dup-check.sh
-
 - project:
     name: nectar-testing
     jobs:
       - '{name}-yaml':
-         organisation: 'internal'
+          organisation: 'internal'
       - '{name}-jammy-tox-{environment}':
-         environment: 'pep8'
-         organisation: 'internal'
-
-
+          environment: 'pep8'
+          organisation: 'internal'
 - project:
     name: nectar-reports
     jobs:
       - '{name}-focal-tox-{environment}':
-         environment: 'flake8'
-         organisation: 'internal'
-
-
+          environment: 'flake8'
+          organisation: 'internal'
 - project:
     name: murano-docker-apps
     jobs:
       - '{name}-focal-tox-{environment}':
-         environment: 'yamllint'
-         organisation: 'NeCTAR-RC'
+          environment: 'yamllint'
+          organisation: 'NeCTAR-RC'
       - '{name}-focal-tox-{environment}':
-         environment: 'shellcheck'
-         organisation: 'NeCTAR-RC'
+          environment: 'shellcheck'
+          organisation: 'NeCTAR-RC'
       - '{name}-focal-tox-{environment}':
-         environment: 'murano-pkg-check'
-         organisation: 'NeCTAR-RC'
-
-
+          environment: 'murano-pkg-check'
+          organisation: 'NeCTAR-RC'
 - project:
     name: spartan-resplat
     jobs:
       - '{name}-dummy':
-         organisation: 'resplat-hpc'
-
+          organisation: 'resplat-hpc'
 - project:
     name: spartan-slurmconf
     jobs:
       - '{name}-dummy':
-         organisation: 'resplat-hpc'
-
-
+          organisation: 'resplat-hpc'
 - project:
     name: dashboard-dev
     jobs:
       - '{name}-yaml':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-kolla
     jobs:
       - '{name}-dummy':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: nectar-keycloak
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: heat-templates
     jobs:
       - '{name}-yamllint':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: openstack-bash-creds-helper
     jobs:
       - '{name}-run-tests':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-jupyterhub
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-binderhub
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-jupyterhub-binderhub
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-jupyterhub-rstudio
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: repo2docker
     jobs:
       - '{name}-dummy':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: DigitalResearch-Toolbox
     jobs:
       - '{name}-dummy':
-         organisation: 'tas-projects'
+          organisation: 'tas-projects'

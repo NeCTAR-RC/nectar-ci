@@ -2,189 +2,155 @@
     name: centos-stream-9
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: rocky-8
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: rocky-9
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: almalinux-8
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: almalinux-9
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: debian-11
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: debian-12
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: fedora-39
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: fedora-40
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: ubuntu-20.04
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: ubuntu-20.04-nvidia-vgpu
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: ubuntu-22.04
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: ubuntu-22.04-docker
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: ubuntu-22.04-nvidia-vgpu
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: ubuntu-24.04
     jobs:
       - 'image-build-official-{name}'
-
 - project:
     name: windows-2022
     jobs:
       - 'image-build-official-{name}':
-
 - project:
     name: mysql-8.0
     jobs:
       - 'image-build-trove-{name}'
-
 - project:
     name: postgresql-11
     jobs:
       - 'image-build-trove-{name}'
-
 - project:
     name: postgresql-16
     jobs:
       - 'image-build-trove-{name}'
-
 - project:
     name: rstudio
     jobs:
       - 'image-build-extra-{name}'
-
 - project:
     name: jupyterlab
     jobs:
       - 'image-build-extra-{name}'
-
 - project:
     name: jenkins-slave-ubuntu-20.04
     jobs:
       - 'image-build-jenkins-{name}':
-         image_name: '{name}'
-         default_user: 'ubuntu'
-
+          image_name: '{name}'
+          default_user: 'ubuntu'
 - project:
     name: jenkins-slave-ubuntu-22.04
     jobs:
       - 'image-build-jenkins-{name}':
-         image_name: '{name}'
-         default_user: 'ubuntu'
-
+          image_name: '{name}'
+          default_user: 'ubuntu'
 - project:
     name: jenkins-slave-ubuntu-24.04
     jobs:
       - 'image-build-jenkins-{name}':
-         image_name: '{name}'
-         default_user: 'ubuntu'
-
+          image_name: '{name}'
+          default_user: 'ubuntu'
 - project:
     name: undercloud-ubuntu-22.04
     jobs:
       - 'image-build-undercloud-{name}':
-         image_name: '{name}'
-         default_user: 'root'
-
+          image_name: '{name}'
+          default_user: 'root'
 - project:
     name: undercloud-ubuntu-24.04
     jobs:
       - 'image-build-undercloud-{name}':
-         image_name: '{name}'
-         default_user: 'root'
-
+          image_name: '{name}'
+          default_user: 'root'
 - project:
     name: bumblebee-ubuntu-20.04
     jobs:
       - 'image-build-bumblebee-{name}':
-         image_name: 'ubuntu-20.04'
-         default_user: 'ubuntu'
-
+          image_name: 'ubuntu-20.04'
+          default_user: 'ubuntu'
     name: bumblebee-ubuntu-22.04
     jobs:
       - 'image-build-bumblebee-{name}':
-         image_name: 'ubuntu-22.04'
-         default_user: 'ubuntu'
-
+          image_name: 'ubuntu-22.04'
+          default_user: 'ubuntu'
 - project:
     name: bumblebee-neurodesk
     jobs:
       - 'image-build-bumblebee-{name}':
-         image_name: 'neurodesk'
-         default_user: 'ubuntu'
-
+          image_name: 'neurodesk'
+          default_user: 'ubuntu'
 - project:
     name: bumblebee-geodesktop
     jobs:
       - 'image-build-bumblebee-{name}':
-         image_name: 'geodesktop'
-         default_user: 'ubuntu'
-
+          image_name: 'geodesktop'
+          default_user: 'ubuntu'
 - project:
     name: bumblebee-fedora-scientific
     jobs:
       - 'image-build-bumblebee-{name}':
-         image_name: 'fedora-scientific'
-         default_user: 'fedora'
-
+          image_name: 'fedora-scientific'
+          default_user: 'fedora'
 - project:
     name: bumblebee-rocky-9
     jobs:
       - 'image-build-bumblebee-{name}':
-         image_name: 'rocky-9'
-         default_user: 'rocky'
-
+          image_name: 'rocky-9'
+          default_user: 'rocky'
 - project:
     name: ubuntu-2204
     jobs:
       - 'image-build-capi-{name}'
-
-
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
@@ -235,73 +201,71 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {{
-            agent {{ node {{ label 'jammy' }} }}
-            options {{ ansiColor('xterm') }}
-            stages {{
-                stage('Build Image') {{
-                    steps {{ imageBuildQEMU '{name}' }}
-                }}
-                stage('Set Image ID') {{
-                    steps {{ setImageID() }}
-                }}
-                stage('Deploy in testing') {{
-                    when {{ expression {{ return params.deploy_testing }} }}
-                    steps {{
-                        deployImage '{project_name}', 'testing'
-                        setImageProperties '{project_name}', 'testing'
-                    }}
-                }}
-                stage('Test in testing') {{
-                    when {{ expression {{ return params.deploy_testing }} }}
-                    steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
-                }}
-                stage('Promote in testing') {{
-                    when {{
-                        anyOf {{
-                            expression {{ return params.deploy_testing }}
-                            expression {{ return params.promote_testing }}
-                        }}
-                    }}
-                    steps {{ promoteOfficialImage '{project_name}', 'testing' }}
-                }}
-                stage('Deploy in production') {{
-                    when {{ expression {{ return params.deploy_production }} }}
-                    steps {{
-                        deployImage '{project_name}', 'production'
-                        setImageProperties '{project_name}', 'production'
-                    }}
-                }}
-                stage('Test in production') {{
-                    when {{ expression {{ return params.deploy_production }} }}
-                    steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
-                }}
-                stage('Promote in production') {{
-                    when {{
-                        anyOf {{
-                            expression {{ return params.deploy_production }}
-                            expression {{ return params.promote_production }}
-                        }}
-                    }}
-                    steps {{ promoteOfficialImage '{project_name}', 'production' }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage '{project_name}', 'testing'
-                        deleteImage '{project_name}', 'production'
-                    }}
-                }}
-                cleanup {{
-                    node('jammy') {{ deleteDir() }}
-                }}
-            }}
-        }}
-
-
+      def imageId
+      def imageName
+      pipeline {{
+          agent {{ node {{ label 'jammy' }} }}
+          options {{ ansiColor('xterm') }}
+          stages {{
+              stage('Build Image') {{
+                  steps {{ imageBuildQEMU '{name}' }}
+              }}
+              stage('Set Image ID') {{
+                  steps {{ setImageID() }}
+              }}
+              stage('Deploy in testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{
+                      deployImage '{project_name}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
+                  }}
+              }}
+              stage('Test in testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
+              }}
+              stage('Promote in testing') {{
+                  when {{
+                      anyOf {{
+                          expression {{ return params.deploy_testing }}
+                          expression {{ return params.promote_testing }}
+                      }}
+                  }}
+                  steps {{ promoteOfficialImage '{project_name}', 'testing' }}
+              }}
+              stage('Deploy in production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{
+                      deployImage '{project_name}', 'production'
+                      setImageProperties '{project_name}', 'production'
+                  }}
+              }}
+              stage('Test in production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
+              }}
+              stage('Promote in production') {{
+                  when {{
+                      anyOf {{
+                          expression {{ return params.deploy_production }}
+                          expression {{ return params.promote_production }}
+                      }}
+                  }}
+                  steps {{ promoteOfficialImage '{project_name}', 'production' }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage '{project_name}', 'testing'
+                      deleteImage '{project_name}', 'production'
+                  }}
+              }}
+              cleanup {{
+                  node('jammy') {{ deleteDir() }}
+              }}
+          }}
+      }}
 - job-template:
     name: 'image-build-trove-{name}'
     defaults: global
@@ -317,89 +281,87 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {{
-            agent none
-            options {{
-                ansiColor('xterm')
-            }}
-            stages {{
-                stage('Build Image') {{
-                    agent {{ label 'jammy' }}
-                    steps {{
-                        imageBuildQEMU 'trove-{name}'
-                    }}
-                }}
-                stage('Set Image ID') {{
-                    agent {{ label 'jammy' }}
-                    steps {{
-                        setImageID()
-                    }}
-                }}
-                stage('Deploy to Dev Cloud') {{
-                    agent {{ label 'jammy' }}
-                    steps {{
-                        deployImageWithBuildNumber 'trove', 'development'
-                        setImageProperties 'trove', 'development'
-                    }}
-                }}
-                stage('Update dev trove datastore') {{
-                    agent {{ label 'internal' }}
-                    steps {{
-                        updateTroveDatastore 'development'
-                    }}
-                }}
-                stage('Deploy to Test Cloud') {{
-                    agent {{ label 'jammy' }}
-                    steps {{
-                        setImageID()
-                        deployImageWithBuildNumber 'trove', 'testing'
-                        setImageProperties 'trove', 'testing'
-                    }}
-                }}
-                stage('Update test trove datastore') {{
-                    agent {{ label 'internal' }}
-                    steps {{
-                        updateTroveDatastore 'testing'
-                    }}
-                }}
-                stage('Test Image in Test Cloud') {{
-                    agent {{ label 'tempest' }}
-                    steps {{
-                        testTroveImage 'testing', 'coreservices'
-                    }}
-                }}
-                stage('Deploy to Production Cloud') {{
-                    agent {{ label 'jammy' }}
-                    steps {{
-                        deployImageWithBuildNumber 'trove', 'production'
-                        setImageProperties 'trove', 'production'
-                    }}
-                }}
-                stage('Update production trove datastore') {{
-                    agent {{ label 'internal' }}
-                    steps {{
-                        updateTroveDatastore 'production', '0'
-                    }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage 'trove', 'production'
-                        troveRevertDatastore 'testing'
-                        }}
-                    }}
-                cleanup {{
-                    node('jammy') {{
-                        deleteDir() /* clean up our workspace */
-                    }}
-                }}
-            }}
-        }}
-
-
+      def imageId
+      def imageName
+      pipeline {{
+          agent none
+          options {{
+              ansiColor('xterm')
+          }}
+          stages {{
+              stage('Build Image') {{
+                  agent {{ label 'jammy' }}
+                  steps {{
+                      imageBuildQEMU 'trove-{name}'
+                  }}
+              }}
+              stage('Set Image ID') {{
+                  agent {{ label 'jammy' }}
+                  steps {{
+                      setImageID()
+                  }}
+              }}
+              stage('Deploy to Dev Cloud') {{
+                  agent {{ label 'jammy' }}
+                  steps {{
+                      deployImageWithBuildNumber 'trove', 'development'
+                      setImageProperties 'trove', 'development'
+                  }}
+              }}
+              stage('Update dev trove datastore') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      updateTroveDatastore 'development'
+                  }}
+              }}
+              stage('Deploy to Test Cloud') {{
+                  agent {{ label 'jammy' }}
+                  steps {{
+                      setImageID()
+                      deployImageWithBuildNumber 'trove', 'testing'
+                      setImageProperties 'trove', 'testing'
+                  }}
+              }}
+              stage('Update test trove datastore') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      updateTroveDatastore 'testing'
+                  }}
+              }}
+              stage('Test Image in Test Cloud') {{
+                  agent {{ label 'tempest' }}
+                  steps {{
+                      testTroveImage 'testing', 'coreservices'
+                  }}
+              }}
+              stage('Deploy to Production Cloud') {{
+                  agent {{ label 'jammy' }}
+                  steps {{
+                      deployImageWithBuildNumber 'trove', 'production'
+                      setImageProperties 'trove', 'production'
+                  }}
+              }}
+              stage('Update production trove datastore') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      updateTroveDatastore 'production', '0'
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage 'trove', 'production'
+                      troveRevertDatastore 'testing'
+                      }}
+                  }}
+              cleanup {{
+                  node('jammy') {{
+                      deleteDir() /* clean up our workspace */
+                  }}
+              }}
+          }}
+      }}
 - job-template:
     name: 'image-build-extra-{name}'
     defaults: global
@@ -450,73 +412,71 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {{
-            agent {{ node {{ label 'jammy' }} }}
-            options {{ ansiColor('xterm') }}
-            stages {{
-                stage('Build Image') {{
-                    steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
-                }}
-                stage('Set Image ID') {{
-                    steps {{ setImageID() }}
-                }}
-                stage('Deploy in testing') {{
-                    when {{ expression {{ return params.deploy_testing }} }}
-                    steps {{
-                        deployImage '{project_name}', 'testing'
-                        setImageProperties '{project_name}', 'testing'
-                    }}
-                }}
-                stage('Test in testing') {{
-                    when {{ expression {{ return params.deploy_testing }} }}
-                    steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
-                }}
-                stage('Promote in testing') {{
-                    when {{
-                        anyOf {{
-                            expression {{ return params.deploy_testing }}
-                            expression {{ return params.promote_testing }}
-                        }}
-                    }}
-                    steps {{ promoteOfficialImage '{project_name}', 'testing' }}
-                }}
-                stage('Deploy in production') {{
-                    when {{ expression {{ return params.deploy_production }} }}
-                    steps {{
-                        deployImage '{project_name}', 'production'
-                        setImageProperties '{project_name}', 'production'
-                    }}
-                }}
-                stage('Test in production') {{
-                    when {{ expression {{ return params.deploy_production }} }}
-                    steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
-                }}
-                stage('Promote in production') {{
-                    when {{
-                        anyOf {{
-                            expression {{ return params.deploy_production }}
-                            expression {{ return params.promote_production }}
-                        }}
-                    }}
-                    steps {{ promoteOfficialImage '{project_name}', 'production' }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage '{project_name}', 'testing'
-                        deleteImage '{project_name}', 'production'
-                    }}
-                }}
-                cleanup {{
-                    node('jammy') {{ deleteDir() }}
-                }}
-            }}
-        }}
-
-
+      def imageId
+      def imageName
+      pipeline {{
+          agent {{ node {{ label 'jammy' }} }}
+          options {{ ansiColor('xterm') }}
+          stages {{
+              stage('Build Image') {{
+                  steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
+              }}
+              stage('Set Image ID') {{
+                  steps {{ setImageID() }}
+              }}
+              stage('Deploy in testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{
+                      deployImage '{project_name}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
+                  }}
+              }}
+              stage('Test in testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
+              }}
+              stage('Promote in testing') {{
+                  when {{
+                      anyOf {{
+                          expression {{ return params.deploy_testing }}
+                          expression {{ return params.promote_testing }}
+                      }}
+                  }}
+                  steps {{ promoteOfficialImage '{project_name}', 'testing' }}
+              }}
+              stage('Deploy in production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{
+                      deployImage '{project_name}', 'production'
+                      setImageProperties '{project_name}', 'production'
+                  }}
+              }}
+              stage('Test in production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
+              }}
+              stage('Promote in production') {{
+                  when {{
+                      anyOf {{
+                          expression {{ return params.deploy_production }}
+                          expression {{ return params.promote_production }}
+                      }}
+                  }}
+                  steps {{ promoteOfficialImage '{project_name}', 'production' }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage '{project_name}', 'testing'
+                      deleteImage '{project_name}', 'production'
+                  }}
+              }}
+              cleanup {{
+                  node('jammy') {{ deleteDir() }}
+              }}
+          }}
+      }}
 - job:
     name: image-build-octavia-amphora
     defaults: global
@@ -532,97 +492,95 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {
-            agent none
-            options {
-                ansiColor('xterm')
-            }
-            stages {
-                stage('Build Image') {
-                    agent { label 'jammy' }
-                    steps {
-                        imageBuildQEMU 'octavia-amphora'
-                    }
-                }
-                stage('Set Image ID') {
-                    agent { label 'jammy' }
-                    steps {
-                        setImageID()
-                    }
-                }
-                stage('Deploy to Dev Cloud') {
-                    agent { label 'jammy' }
-                    steps {
-                        deployImage 'octavia', 'development'
-                        setImageProperties 'octavia', 'development'
-                        setImageTag 'octavia', 'octavia', 'development'
-                        setImageTag 'octavia', 'octavia_next', 'development'
-                    }
-                }
-                stage('Deploy to Test Cloud') {
-                    agent { label 'jammy' }
-                    steps {
-                        deployImage 'octavia', 'testing'
-                        setImageProperties 'octavia', 'testing'
-                        setImageTag 'octavia', 'octavia', 'testing'
-                        setImageTag 'octavia', 'octavia_next', 'testing'
-                    }
-                }
-                stage('Test Image in Test Cloud') {
-                    agent { label 'tempest' }
-                    steps {
-                        testOctaviaImage 'testing', 'coreservices'
-                    }
-                }
-                stage('Deploy to Production Cloud') {
-                    agent { label 'jammy' }
-                    steps {
-                        deployImage 'octavia', 'production'
-                        setImageProperties 'octavia', 'production'
-                        setImageTag 'octavia', 'octavia', 'production'
-                        setImageTag 'octavia', 'octavia_next', 'production'
-                    }
-                }
-                stage('Test Image in Prod Cloud') {
-                    agent { label 'tempest' }
-                    steps {
-                        testOctaviaImage 'production', 'melbourne-qh2'
-                    }
-                }
-            }
-            post {
-                failure {
-                    node('jammy') {
-                        script {
-                          try {
-                            unsetImageTag 'octavia', 'octavia', 'development'
-                          } catch (err) {
-                            echo "Failed: ${err}"
-                          }
-                          try {
-                            unsetImageTag 'octavia', 'octavia', 'testing'
-                          } catch (err) {
-                            echo "Failed: ${err}"
-                          }
-                          try {
-                            unsetImageTag 'octavia', 'octavia', 'production'
-                          } catch (err) {
-                            echo "Failed: ${err}"
-                          }
+      def imageId
+      def imageName
+      pipeline {
+          agent none
+          options {
+              ansiColor('xterm')
+          }
+          stages {
+              stage('Build Image') {
+                  agent { label 'jammy' }
+                  steps {
+                      imageBuildQEMU 'octavia-amphora'
+                  }
+              }
+              stage('Set Image ID') {
+                  agent { label 'jammy' }
+                  steps {
+                      setImageID()
+                  }
+              }
+              stage('Deploy to Dev Cloud') {
+                  agent { label 'jammy' }
+                  steps {
+                      deployImage 'octavia', 'development'
+                      setImageProperties 'octavia', 'development'
+                      setImageTag 'octavia', 'octavia', 'development'
+                      setImageTag 'octavia', 'octavia_next', 'development'
+                  }
+              }
+              stage('Deploy to Test Cloud') {
+                  agent { label 'jammy' }
+                  steps {
+                      deployImage 'octavia', 'testing'
+                      setImageProperties 'octavia', 'testing'
+                      setImageTag 'octavia', 'octavia', 'testing'
+                      setImageTag 'octavia', 'octavia_next', 'testing'
+                  }
+              }
+              stage('Test Image in Test Cloud') {
+                  agent { label 'tempest' }
+                  steps {
+                      testOctaviaImage 'testing', 'coreservices'
+                  }
+              }
+              stage('Deploy to Production Cloud') {
+                  agent { label 'jammy' }
+                  steps {
+                      deployImage 'octavia', 'production'
+                      setImageProperties 'octavia', 'production'
+                      setImageTag 'octavia', 'octavia', 'production'
+                      setImageTag 'octavia', 'octavia_next', 'production'
+                  }
+              }
+              stage('Test Image in Prod Cloud') {
+                  agent { label 'tempest' }
+                  steps {
+                      testOctaviaImage 'production', 'melbourne-qh2'
+                  }
+              }
+          }
+          post {
+              failure {
+                  node('jammy') {
+                      script {
+                        try {
+                          unsetImageTag 'octavia', 'octavia', 'development'
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                        try {
+                          unsetImageTag 'octavia', 'octavia', 'testing'
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                        try {
+                          unsetImageTag 'octavia', 'octavia', 'production'
+                        } catch (err) {
+                          echo "Failed: ${err}"
                         }
                       }
                     }
-                cleanup {
-                    node('jammy') {
-                        deleteDir() /* clean up our workspace */
-                    }
-                }
-            }
-        }
-
-
+                  }
+              cleanup {
+                  node('jammy') {
+                      deleteDir() /* clean up our workspace */
+                  }
+              }
+          }
+      }
 - job:
     name: image-build-manila-share-server
     defaults: global
@@ -638,80 +596,78 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {
-            agent none
-            options {
-                ansiColor('xterm')
-            }
-            stages {
-                stage('Build Image') {
-                    agent { label 'jammy' }
-                    steps {
-                        imageBuildQEMU 'manila-ubuntu'
-                    }
-                }
-                stage('Set Image ID') {
-                    agent { label 'jammy' }
-                    steps {
-                        setImageID()
-                    }
-                }
-                stage('Deploy to Dev Cloud') {
-                    agent { label 'jammy' }
-                    steps {
-                        deployImage 'manila', 'development'
-                        setImageProperties 'manila', 'development'
-                        setImageTag 'manila', 'manila', 'development'
-                    }
-                }
-                stage('Deploy to Test Cloud') {
-                    agent { label 'jammy' }
-                    steps {
-                        deployImage 'manila', 'testing'
-                        setImageProperties 'manila', 'testing'
-                        setImageTag 'manila', 'manila', 'testing'
-                    }
-                }
-                stage('Test Image in Test Cloud') {
-                    agent { label 'tempest' }
-                    steps {
-                        testManilaImage 'testing', 'coreservices'
-                    }
-                }
-                stage('Deploy to Production Cloud') {
-                    agent { label 'jammy' }
-                    steps {
-                        deployImage 'manila', 'production'
-                        setImageProperties 'manila', 'production'
-                        setImageTag 'manila', 'manila', 'production'
-                    }
-                }
-                stage('Test Image in Prod Cloud') {
-                    agent { label 'tempest' }
-                    steps {
-                        testManilaImage 'production', 'melbourne-qh2'
-                    }
-                }
-            }
-            post {
-                failure {
-                    node('jammy') {
-                        deleteImage 'manila', 'production'
-                        deleteImage 'manila', 'testing'
-                        deleteImage 'manila', 'development'
-                        }
-                    }
-                cleanup {
-                    node('jammy') {
-                        deleteDir() /* clean up our workspace */
-                    }
-                }
-            }
-        }
-
-
+      def imageId
+      def imageName
+      pipeline {
+          agent none
+          options {
+              ansiColor('xterm')
+          }
+          stages {
+              stage('Build Image') {
+                  agent { label 'jammy' }
+                  steps {
+                      imageBuildQEMU 'manila-ubuntu'
+                  }
+              }
+              stage('Set Image ID') {
+                  agent { label 'jammy' }
+                  steps {
+                      setImageID()
+                  }
+              }
+              stage('Deploy to Dev Cloud') {
+                  agent { label 'jammy' }
+                  steps {
+                      deployImage 'manila', 'development'
+                      setImageProperties 'manila', 'development'
+                      setImageTag 'manila', 'manila', 'development'
+                  }
+              }
+              stage('Deploy to Test Cloud') {
+                  agent { label 'jammy' }
+                  steps {
+                      deployImage 'manila', 'testing'
+                      setImageProperties 'manila', 'testing'
+                      setImageTag 'manila', 'manila', 'testing'
+                  }
+              }
+              stage('Test Image in Test Cloud') {
+                  agent { label 'tempest' }
+                  steps {
+                      testManilaImage 'testing', 'coreservices'
+                  }
+              }
+              stage('Deploy to Production Cloud') {
+                  agent { label 'jammy' }
+                  steps {
+                      deployImage 'manila', 'production'
+                      setImageProperties 'manila', 'production'
+                      setImageTag 'manila', 'manila', 'production'
+                  }
+              }
+              stage('Test Image in Prod Cloud') {
+                  agent { label 'tempest' }
+                  steps {
+                      testManilaImage 'production', 'melbourne-qh2'
+                  }
+              }
+          }
+          post {
+              failure {
+                  node('jammy') {
+                      deleteImage 'manila', 'production'
+                      deleteImage 'manila', 'testing'
+                      deleteImage 'manila', 'development'
+                      }
+                  }
+              cleanup {
+                  node('jammy') {
+                      deleteDir() /* clean up our workspace */
+                  }
+              }
+          }
+      }
 - job-template:
     name: 'image-build-jenkins-{name}'
     defaults: global
@@ -734,37 +690,35 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {{
-            agent {{ node {{ label 'jammy' }} }}
-            options {{ ansiColor('xterm') }}
-            stages {{
-                stage('Build Image') {{
-                    steps {{ imageBuildQEMU '{name}' }}
-                }}
-                stage('Set Image ID') {{
-                    steps {{ setImageID() }}
-                }}
-                stage('Deploy in testing') {{
-                    steps {{
-                        deployImageWithBuildNumber '{project_name}', 'testing'
-                    }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage '{project_name}', 'testing'
-                    }}
-                }}
-                cleanup {{
-                    node('jammy') {{ deleteDir() }}
-                }}
-            }}
-        }}
-
-
+      def imageId
+      def imageName
+      pipeline {{
+          agent {{ node {{ label 'jammy' }} }}
+          options {{ ansiColor('xterm') }}
+          stages {{
+              stage('Build Image') {{
+                  steps {{ imageBuildQEMU '{name}' }}
+              }}
+              stage('Set Image ID') {{
+                  steps {{ setImageID() }}
+              }}
+              stage('Deploy in testing') {{
+                  steps {{
+                      deployImageWithBuildNumber '{project_name}', 'testing'
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage '{project_name}', 'testing'
+                  }}
+              }}
+              cleanup {{
+                  node('jammy') {{ deleteDir() }}
+              }}
+          }}
+      }}
 - job-template:
     name: 'image-build-capi-{name}'
     defaults: global
@@ -791,60 +745,57 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {{
-            agent {{ node {{ label 'jammy' }} }}
-            options {{ ansiColor('xterm') }}
-            stages {{
-                stage('Build Image') {{
-                    steps {{ imageBuildCAPI '{name}', kubernetes_version }}
-                }}
-                stage('Set Image ID') {{
-                    steps {{ setImageID() }}
-                }}
-                stage('Deploy in development') {{
-                    steps {{
-                        deployImage '{project_name}', 'development'
-                        setImageProperties '{project_name}', 'development'
-                        setImageVisibility '{project_name}', 'development', 'community'
-                    }}
-                }}
+      def imageId
+      def imageName
+      pipeline {{
+          agent {{ node {{ label 'jammy' }} }}
+          options {{ ansiColor('xterm') }}
+          stages {{
+              stage('Build Image') {{
+                  steps {{ imageBuildCAPI '{name}', kubernetes_version }}
+              }}
+              stage('Set Image ID') {{
+                  steps {{ setImageID() }}
+              }}
+              stage('Deploy in development') {{
+                  steps {{
+                      deployImage '{project_name}', 'development'
+                      setImageProperties '{project_name}', 'development'
+                      setImageVisibility '{project_name}', 'development', 'community'
+                  }}
+              }}
 
-                stage('Deploy in testing') {{
-                    steps {{
-                        deployImage '{project_name}', 'testing'
-                        setImageProperties '{project_name}', 'testing'
-                        setImageVisibility '{project_name}', 'testing', 'community'
-                    }}
-                }}
-                stage('Deploy in production') {{
-                    steps {{
-                        deployImage '{project_name}', 'production'
-                        setImageProperties '{project_name}', 'production'
-                        setImageVisibility '{project_name}', 'production', 'community'
-                    }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage '{project_name}', 'testing'
-                        deleteImage '{project_name}', 'production'
-                    }}
-                }}
-                cleanup {{
-                    node('jammy') {{ deleteDir() }}
-                }}
-            }}
-        }}
-
-
+              stage('Deploy in testing') {{
+                  steps {{
+                      deployImage '{project_name}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
+                      setImageVisibility '{project_name}', 'testing', 'community'
+                  }}
+              }}
+              stage('Deploy in production') {{
+                  steps {{
+                      deployImage '{project_name}', 'production'
+                      setImageProperties '{project_name}', 'production'
+                      setImageVisibility '{project_name}', 'production', 'community'
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage '{project_name}', 'testing'
+                      deleteImage '{project_name}', 'production'
+                  }}
+              }}
+              cleanup {{
+                  node('jammy') {{ deleteDir() }}
+              }}
+          }}
+      }}
 - job-template:
     name: 'image-build-undercloud-{name}'
     defaults: global
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -854,7 +805,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     properties:
       - authorization:
           nobody:
@@ -864,32 +814,27 @@
           blocking-jobs:
             - '^image-build-.*'
           block-level: 'GLOBAL'
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - image-builder-dev-undercloud:
-         image_name: "{image_name}"
-         job_name: "{name}"
-
+          image_name: "{image_name}"
+          job_name: "{name}"
     wrappers:
       - credentials-binding:
-        - username-password:
-           credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
-           variable: KEYSTONE_CREDS
-
-
+          - username-password:
+              credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
+              variable: KEYSTONE_CREDS
 - builder:
     name: 'image-builder'
     builders:
@@ -1005,7 +950,6 @@
               hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
           fi
           exit 1
-
 - builder:
     name: 'image-builder-extra'
     builders:
@@ -1063,7 +1007,6 @@
           echo "================================================================================"
           openstack image show --max-width=120 $IMAGE_ID
           hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
-
 - builder:
     name: 'image-builder-rctest'
     builders:
@@ -1102,8 +1045,6 @@
           echo "      {image_name}-v$BUILD_NUMBER"
           echo ""
           echo "================================================================================"
-
-
 - builder:
     name: 'image-builder-dev-undercloud'
     builders:
@@ -1136,8 +1077,6 @@
           echo "  NeCTAR UnderCloud {image_name} v$BUILD_NUMBER build successful!"
           echo ""
           echo "================================================================================"
-
-
 - job-template:
     name: 'image-build-bumblebee-{name}'
     defaults: global
@@ -1149,76 +1088,76 @@
     project-type: pipeline
     sandbox: true
     dsl: |
-        def imageId
-        def imageName
-        pipeline {{
-            agent {{ label 'jammy' }}
-            options {{
-                ansiColor('xterm')
-            }}
-            stages {{
-                stage('Clone') {{
-                    steps {{
-                        git poll: false,
-                        url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-images.git',
-                        credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                        branch: 'master'
-                    }}
-                }}
-                stage('Build Image') {{
-                    steps {{
-                        imageBuildBumblebee '{image_name}', 'bumblebee'
-                    }}
-                }}
-                stage('Set Image ID') {{
-                    steps {{
-                        setImageID()
-                    }}
-                }}
-                stage('Deploy image to RCTest') {{
-                    steps {{
-                        deployImageBumblebee 'bumblebee', 'testing'
-                        setImageProperties 'bumblebee', 'testing'
-                    }}
-                }}
-                stage('Test image in RCTest') {{
-                    steps {{
-                        testOfficialImage 'bumblebee', 'testing', 'coreservices'
-                    }}
-                }}
-                stage('Deploy volumes to RCTest') {{
-                    steps {{
-                        deployBumblebeeVolumes 'bumblebee', 'testing', 'coreservices'
-                    }}
-                }}
-                stage('Deploy image to Production') {{
-                    steps {{
-                        deployImageBumblebee 'bumblebee', 'production'
-                        setImageProperties 'bumblebee', 'production'
-                    }}
-                }}
-                stage('Test image in Production') {{
-                    steps {{
-                        testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
-                    }}
-                }}
-                stage('Deploy volumes to Production') {{
-                    steps {{
-                        deployBumblebeeVolumes 'bumblebee', 'production', 'melbourne-qh2,QRIScloud,monash-02'
-                    }}
-                }}
-            }}
-            post {{
-                failure {{
-                    node('internal') {{
-                        deleteImage 'bumblebee', 'testing'
-                        deleteImage 'bumblebee', 'production'
-                    }}
-                }}
-                cleanup {{
-                    node('jammy') {{
-                        deleteDir() /* clean up our workspace */
-                    }}
-                }}
-            }}
-        }}
+      def imageId
+      def imageName
+      pipeline {{
+          agent {{ label 'jammy' }}
+          options {{
+              ansiColor('xterm')
+          }}
+          stages {{
+              stage('Clone') {{
+                  steps {{
+                      git poll: false,
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-images.git',
+                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
+                      branch: 'master'
+                  }}
+              }}
+              stage('Build Image') {{
+                  steps {{
+                      imageBuildBumblebee '{image_name}', 'bumblebee'
+                  }}
+              }}
+              stage('Set Image ID') {{
+                  steps {{
+                      setImageID()
+                  }}
+              }}
+              stage('Deploy image to RCTest') {{
+                  steps {{
+                      deployImageBumblebee 'bumblebee', 'testing'
+                      setImageProperties 'bumblebee', 'testing'
+                  }}
+              }}
+              stage('Test image in RCTest') {{
+                  steps {{
+                      testOfficialImage 'bumblebee', 'testing', 'coreservices'
+                  }}
+              }}
+              stage('Deploy volumes to RCTest') {{
+                  steps {{
+                      deployBumblebeeVolumes 'bumblebee', 'testing', 'coreservices'
+                  }}
+              }}
+              stage('Deploy image to Production') {{
+                  steps {{
+                      deployImageBumblebee 'bumblebee', 'production'
+                      setImageProperties 'bumblebee', 'production'
+                  }}
+              }}
+              stage('Test image in Production') {{
+                  steps {{
+                      testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
+                  }}
+              }}
+              stage('Deploy volumes to Production') {{
+                  steps {{
+                      deployBumblebeeVolumes 'bumblebee', 'production', 'melbourne-qh2,QRIScloud,monash-02'
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage 'bumblebee', 'testing'
+                      deleteImage 'bumblebee', 'production'
+                  }}
+              }}
+              cleanup {{
+                  node('jammy') {{
+                      deleteDir() /* clean up our workspace */
+                  }}
+              }}
+          }}
+      }}

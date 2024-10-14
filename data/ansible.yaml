@@ -2,38 +2,33 @@
     name: nectar-ops
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'internal'
-         environment: 'linters'
-
+          organisation: 'internal'
+          environment: 'linters'
 - project:
     name: nectar-ansible
     jobs:
       - 'nectar-ansible-{task}':
-         task: linters
+          task: linters
       - 'nectar-ansible-check-{environment}':
-         environment: rctest
+          environment: rctest
       - 'nectar-ansible-check-{environment}':
-         environment: production
-
-
+          environment: production
 - job-template:
     name: 'nectar-ansible-{task}'
     concurrent: false
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/nectar-ansible'
@@ -42,51 +37,44 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - shell: |
           export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
           tox -e {task}
-
     wrappers:
       - ansicolor
       - ssh-agent-credentials:
           users:
-              - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-
-
+            - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
 - job-template:
     name: 'nectar-ansible-check-{environment}'
     concurrent: false
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: 'internal/nectar-ansible'
@@ -95,47 +83,41 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - shell: |
           export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
           tox -e check-{environment}
-
     wrappers:
       - ansicolor
       - ssh-agent-credentials:
           users:
-              - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+            - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
       - credentials-binding:
-        - username-password-separated:
-           credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
-           username: F5_USERNAME
-           password: F5_PASSWORD
-        - text:
-           credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
-           variable: ANSIBLE_VAULT_PASSWORD
-
-
+          - username-password-separated:
+              credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
+              username: F5_USERNAME
+              password: F5_PASSWORD
+          - text:
+              credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
+              variable: ANSIBLE_VAULT_PASSWORD
 - job:
     name: 'nectar-ansible-deploy'
     concurrent: false
     defaults: global
     node: internal
-
     parameters:
       - choice:
           name: 'ENVIRONMENT'
@@ -150,26 +132,23 @@
             - f5-certificates
             - f5-services
           description: "Playbook to deploy"
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     wrappers:
       - ansicolor
       - ssh-agent-credentials:
           users:
-              - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+            - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
       - credentials-binding:
-        - username-password-separated:
-           credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
-           username: F5_USERNAME
-           password: F5_PASSWORD
-        - text:
-           credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
-           variable: ANSIBLE_VAULT_PASSWORD
-
+          - username-password-separated:
+              credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
+              username: F5_USERNAME
+              password: F5_PASSWORD
+          - text:
+              credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
+              variable: ANSIBLE_VAULT_PASSWORD
     builders:
       - shell: |
           export http_proxy=http://wwwproxy.unimelb.edu.au:8000

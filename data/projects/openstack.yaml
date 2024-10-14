@@ -2,396 +2,351 @@
     name: aodh
     jobs:
       - '{name}-kolla-container-upstream'
-
 - project:
     name: barbican
     jobs:
       - '{name}-kolla-container-upstream'
-
 - project:
     name: barbican-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: blazar
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: blazar-nova
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: blazar-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: ceilometer
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: cinder
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: cloudkitty
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: cloudkitty-dashboard
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: cyborg
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
 - project:
     name: designate
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'flake8'
+          organisation: 'NeCTAR-RC'
+          environment: 'flake8'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container-upstream'
-
 - project:
     name: designate-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: ec2-api
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-         kolla_profile_name: ec2api
-
+          organisation: 'NeCTAR-RC'
+          kolla_profile_name: ec2api
 - project:
     name: ec2api-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: glance
     jobs:
       - '{name}-kolla-container-upstream'
-
 - project:
     name: gnocchi
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36-mysql-influxdb'
+          organisation: 'NeCTAR-RC'
+          environment: 'py36-mysql-influxdb'
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: heat
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: heat-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: horizon
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: iscsid
     jobs:
       - 'iscsid-kolla-container-upstream'
-
 - project:
     name: keystone
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'internal'
+          organisation: 'internal'
       - '{name}-kolla-container':
-         organisation: 'internal'
-
+          organisation: 'internal'
 - project:
     name: kolla
     jobs:
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-focal-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: magnum
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: magnum-capi-helm
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: magnum-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: magnum-ui
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: manila
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: manila-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: manila-ui
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
+          organisation: 'NeCTAR-RC'
+          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: murano
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: murano-agent
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: murano-dashboard
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: murano-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: neutron
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-focal-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: nova
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'functional'
+          organisation: 'NeCTAR-RC'
+          environment: 'functional'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-focal-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: octavia
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: octavia-dashboard
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py36'
+          organisation: 'NeCTAR-RC'
+          environment: 'py36'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'eslint'
+          organisation: 'NeCTAR-RC'
+          environment: 'eslint'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'karma'
+          organisation: 'NeCTAR-RC'
+          environment: 'karma'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: octavia-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: os-brick
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: ospurge
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py27'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'py27'
 - project:
     name: placement
     jobs:
       - '{name}-kolla-container-upstream'
-
 - project:
     name: python-cloudkittyclient
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: python-magnumclient
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: python-troveclient
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: requirements
     os_release:
@@ -403,48 +358,43 @@
       - '2024.1'
     jobs:
       - 'requirements-kolla-container-{os_release}'
-
 - project:
     name: telemetry-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: tempest
     jobs:
       - '{name}-jammy-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py310'
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
-
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
 - project:
     name: trove
     jobs:
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'py38'
+          organisation: 'NeCTAR-RC'
+          environment: 'py38'
       - '{name}-os-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
       - '{name}-os-deb-package':
-         organisation: 'NeCTAR-RC'
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
-         organisation: 'NeCTAR-RC'
-         helm_name: '{name}-helm'
-
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: trove-dashboard
     jobs:
       - '{name}-os-tox-python3':
-         organisation: 'NeCTAR-RC'
-
+          organisation: 'NeCTAR-RC'
 - project:
     name: trove-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
-         organisation: 'NeCTAR-RC'
-         environment: 'pep8'
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'

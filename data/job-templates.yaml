@@ -2,13 +2,12 @@
     name: '{name}-git-secrets-sorted'
     defaults: global
     node: generic
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -19,43 +18,37 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - git-secrets-sorted
-
-
 - job-template:
     id: '{name}-puppet-unit-job'
     name: '{name}-puppet-unit{name-suffix}'
     name-suffix: ''
     defaults: global
     node: '{node}'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -71,63 +64,10 @@
           silent: false
           escape-quotes: true
           skip-vote:
-              successful: '{skip-vote}'
-              failed: '{skip-vote}'
-              unstable: '{skip-vote}'
-              notbuilt: '{skip-vote}'
-
-    scm:
-      - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
-    builders:
-      - puppet-lint
-      - puppet-syntax
-
-    publishers:
-      - warnings:
-          console-log-parsers:
-            - Puppet-Lint
-
-    wrappers:
-      - ansicolor
-
-
-- job-template:
-    name: '{name}-puppet-git-secrets'
-    defaults: global
-    node: generic
-
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default branch to test."
-
-    triggers:
-      - gerrit:
-          trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-          silent: false
-          escape-quotes: true
-
+            successful: '{skip-vote}'
+            failed: '{skip-vote}'
+            unstable: '{skip-vote}'
+            notbuilt: '{skip-vote}'
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
@@ -138,18 +78,58 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-           after: true
+            after: true
           choosing-strategy: gerrit
-
+    builders:
+      - puppet-lint
+      - puppet-syntax
+    publishers:
+      - warnings:
+          console-log-parsers:
+            - Puppet-Lint
+    wrappers:
+      - ansicolor
+- job-template:
+    name: '{name}-puppet-git-secrets'
+    defaults: global
+    node: generic
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+    triggers:
+      - gerrit:
+          trigger-on:
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+          silent: false
+          escape-quotes: true
+    scm:
+      - git:
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - puppet-git-secrets
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-puppet-openstack-spec'
     defaults: global
@@ -162,9 +142,9 @@
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -176,45 +156,41 @@
           silent: false
           escape-quotes: true
           skip-vote:
-              successful: '{skip-vote}'
-              failed: '{skip-vote}'
-              unstable: '{skip-vote}'
-              notbuilt: '{skip-vote}'
+            successful: '{skip-vote}'
+            failed: '{skip-vote}'
+            unstable: '{skip-vote}'
+            notbuilt: '{skip-vote}'
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - puppet-openstack-spec
     wrappers:
       - ansicolor
-
-
 - job-template:
     name: '{name}-helm-lint'
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -227,29 +203,24 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - helm-dependency-build
       - helm-template
       - helm-lint
-
     publishers:
       - workspace-cleanup
-
-
 # Unique snowflake job for magnum-capi-helm-charts
 # This builds and pushes magnum-capi-helm-charts charts to nectarmagnum repo
 # TODO(jake): We should refactor to share common jobs with other helm jobs
@@ -260,9 +231,9 @@
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -275,16 +246,16 @@
           escape-quotes: true
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - shell: |
           #!/bin/bash
@@ -309,25 +280,21 @@
           done
     publishers:
       - workspace-cleanup
-
-
 - job-template:
     name: '{name}-helm-library-lint'
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -340,33 +307,27 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - helm-lint
-
     publishers:
       - workspace-cleanup
-
-
 - job-template:
     name: '{name}-helm-package'
     defaults: global
     node: internal
     concurrent: false
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -376,11 +337,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -393,57 +353,49 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-         honor-refspec: true
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
+          honor-refspec: true
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
-        - username-password-separated:
-           credential-id: registry-nectar
-           username: REGISTRY_USR
-           password: REGISTRY_PSW
-
+          - username-password-separated:
+              credential-id: registry-nectar
+              username: REGISTRY_USR
+              password: REGISTRY_PSW
     builders:
       - helm-dependency-build
       - helm-package
       - helm-push
-
     publishers:
       - workspace-cleanup
-
-
 - job-template:
     name: '{name}-kustomize-validate'
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -456,32 +408,26 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - kustomize-validate
-
     publishers:
       - workspace-cleanup
-
-
 - job-template:
     name: '{name}-focal-deb-package'
     defaults: global
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -491,11 +437,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -512,45 +457,38 @@
                   branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
       - pbuilder-create:
           os_release: "focal"
       - pbuilder-buildpackage:
           os_release: "focal"
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-jammy-deb-package'
     defaults: global
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -560,11 +498,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -581,48 +518,39 @@
                   branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
       - pbuilder-create:
           os_release: "jammy"
       - pbuilder-buildpackage:
           os_release: "jammy"
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 # temp to build focal-yoga package
 - job-template:
     name: '{name}-focal-os-deb-package'
     defaults: global
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -632,11 +560,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -647,44 +574,36 @@
                   branch-pattern: 'nectar/yoga'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
       - os-pbuilder-create-focal
       - os-pbuilder-buildpackage-focal
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-os-deb-package'
     defaults: global
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -694,11 +613,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -713,56 +631,47 @@
                   branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
       - os-pbuilder-create
       - os-pbuilder-buildpackage
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-yaml'
     defaults: global
     node: generic
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -773,7 +682,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
@@ -784,29 +692,25 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-           after: true
+            after: true
           choosing-strategy: gerrit
-
     builders:
       - yaml-lint
-
 - job-template:
     name: '{name}-yamllint'
     defaults: global
     node: focal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -817,7 +721,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
@@ -828,30 +731,25 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-           after: true
+            after: true
           choosing-strategy: gerrit
-
     builders:
       - yamllint
-
-
 - job-template:
     name: '{name}-dummy'
     defaults: global
     node: generic
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -864,40 +762,35 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - dummy
-
 - job-template:
     name: '{name}-dummy-debian'
     defaults: global
     node: generic
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -908,40 +801,35 @@
                   branch-pattern: 'debian/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - dummy
-
 - job-template:
     name: '{name}-markdown'
     defaults: global
     node: generic
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -952,42 +840,35 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - markdown-lint
-
-
 - job-template:
     name: '{name}-jekyll-test-build'
     defaults: global
     node: focal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -996,51 +877,44 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - jekyll-test-build
-
     wrappers:
       - credentials-binding:
-        - username-password-separated:
-           credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
-           username: CREDENTIAL_ID
-           password: CREDENTIAL_SECRET
-        - username-password:
-           credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
-           variable: GERRIT_API
-
-
+          - username-password-separated:
+              credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
+          - username-password:
+              credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
+              variable: GERRIT_API
 - job-template:
     name: '{name}-jekyll-html-check'
     defaults: global
     node: jammy
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1049,29 +923,24 @@
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'nectar/.*'
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: false
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - jekyll-html-check
-
-
 - job-template:
     name: '{name}-jekyll-test-build-cleanup'
     defaults: global
     node: generic
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1081,7 +950,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
@@ -1098,36 +966,30 @@
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - jekyll-test-build-cleanup
-
     wrappers:
       - credentials-binding:
-        - username-password-separated:
-           credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
-           username: CREDENTIAL_ID
-           password: CREDENTIAL_SECRET
-
-
+          - username-password-separated:
+              credential-id: 96a5a52d-2ad9-4f6f-a9fa-76bd2d057416
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
 - job-template:
     name: '{name}-puppet-prod-review'
     defaults: global
     node: generic
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1137,11 +999,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1150,43 +1011,35 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - puppet-prod-review
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-site-deploy'
     defaults: global
     node: internal
     quiet-period: 15
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1200,11 +1053,10 @@
           name: GERRIT_PROJECT
           default: '{organisation}/{name}'
           description: "The fully qualified project name."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1213,42 +1065,34 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - site-deploy
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-r10k-deploy'
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1258,7 +1102,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
@@ -1272,52 +1115,44 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-deploy:
           r10k_host: '{r10k_host}'
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
-        - text:
-           credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
-           variable: TOKEN
-
-
+          - text:
+              credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
+              variable: TOKEN
 - job-template:
     name: '{name}-r10k-deploy-control-repo'
     defaults: global
     node: internal
     quiet-period: 30
-
     properties:
       - build-blocker:
           blocking-jobs:
             - "{name}-r10k-cleanup"
           block-level: 'GLOBAL'
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1331,7 +1166,6 @@
           name: GERRIT_PROJECT
           default: '{organisation}/{name}'
           description: "The fully qualified project name."
-
     triggers:
       - gerrit:
           trigger-on:
@@ -1344,45 +1178,38 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-deploy-control-repo:
           puppet_host: '{puppet_host}'
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
-        - text:
-           credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
-           variable: TOKEN
-
-
+          - text:
+              credential-id: 2810b63c-d4ec-47df-b8f4-660e7902a358
+              variable: TOKEN
 - job-template:
     name: '{name}-r10k-cleanup'
     defaults: global
     node: internal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1396,7 +1223,6 @@
           name: GERRIT_PROJECT
           default: '{organisation}/{name}'
           description: "The fully qualified project name."
-
     triggers:
       - gerrit:
           trigger-on:
@@ -1410,39 +1236,31 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-cleanup:
           r10k_host: '{r10k_host}'
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-
-
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: tempest-{name}-check
     defaults: global
@@ -1450,8 +1268,8 @@
     concurrent: true
     scm:
       - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist:
           check: '{name}'
@@ -1493,15 +1311,13 @@
             - job-read
             - job-discover
       - build-blocker:
-         blocking-jobs:
-           - "tempest-cleanup-operator"
-         block-level: 'GLOBAL'
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
     publishers:
       - trigger:
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
-
-
 - job-template:
     name: tempest-{name}-check-{site}
     defaults: global
@@ -1509,8 +1325,8 @@
     concurrent: true
     scm:
       - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist-noparam:
           check: '{job}'
@@ -1522,14 +1338,11 @@
           'nobody':
             - job-read
             - job-discover
-
-
 - job-template:
     name: '{name}-r10k-diff-catalog'
     defaults: global
     node: internal
     quiet-period: 30
-
     properties:
       - build-blocker:
           blocking-jobs:
@@ -1537,8 +1350,6 @@
           block-level: 'GLOBAL'
       - lockable-resources:
           resources: 'diff-catalog-{r10k_host}'
-
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1548,7 +1359,6 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
@@ -1556,7 +1366,7 @@
                 exclude-no-code-change: true
             - change-restored-event
             - comment-added-contains-event:
-                 comment-contains-value: 'recheck'
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1565,38 +1375,32 @@
                   branch-pattern: 'master'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-control-repo:
           backend: 'octocatalog-diff'
           r10k_host: '{r10k_host}'
-
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
-
-
 - job-template:
     name: '{name}-diff-{backend}'
     defaults: global
@@ -1626,7 +1430,7 @@
                 exclude-no-code-change: true
             - change-restored-event
             - comment-added-contains-event:
-                 comment-contains-value: 'recheck'
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1642,16 +1446,16 @@
             notbuilt: true
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-control-repo:
           backend: '{backend}'
@@ -1659,10 +1463,8 @@
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
-
-
 - job-template:
     name: tempest-{name}-check-site-agnostic
     defaults: global
@@ -1670,8 +1472,8 @@
     concurrent: true
     scm:
       - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist-site-agnostic:
           check: '{name}'
@@ -1690,14 +1492,13 @@
             - job-read
             - job-discover
       - build-blocker:
-         blocking-jobs:
-           - "tempest-cleanup-operator"
-         block-level: 'GLOBAL'
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
     publishers:
       - trigger:
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
-
 - job-template:
     name: tempest-{name}-check-site-agnostic-{cloud}
     defaults: global
@@ -1705,8 +1506,8 @@
     concurrent: true
     scm:
       - git:
-         url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
     builders:
       - tempest-check-whitelist-site-agnostic-noparam:
           check: '{job}'
@@ -1718,21 +1519,18 @@
             - job-read
             - job-discover
       - build-blocker:
-         blocking-jobs:
-           - "tempest-cleanup-operator"
-         block-level: 'GLOBAL'
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
     publishers:
       - trigger:
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
-
-
 - job-template:
     name: '{name}-pypi-upload'
     defaults: global
     node: generic
     concurrent: false
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1742,11 +1540,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - change-merged-event
+            - change-merged-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1757,47 +1554,39 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - pypi-upload
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
-        - file:
-           credential-id: dot-pypirc
-           variable: PYPIRC
-
+          - file:
+              credential-id: dot-pypirc
+              variable: PYPIRC
 - job-template:
     name: '{name}-pypi-release'
     defaults: global
     node: generic
     concurrent: false
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1807,11 +1596,10 @@
           name: GERRIT_BRANCH
           default: master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - ref-updated-event
+            - ref-updated-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1820,58 +1608,49 @@
                   branch-pattern: 'refs/tags/.*'
           silent: false
           escape-quotes: true
-
           skip-vote:
             successful: true
             failed: true
             unstable: true
             notbuilt: true
-
     scm:
       - git:
-         url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-         credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-         refspec: $GERRIT_REFSPEC
-         branches:
-          - origin/$GERRIT_BRANCH
-         skip-tag: true
-         wipe-workspace: true
-         clean:
-           after: true
-         choosing-strategy: gerrit
-
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
     builders:
       - pypi-release
-
-    publishers:
-      !include: publisher.yaml.inc
-
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
-              - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - credentials-binding:
-        - file:
-           credential-id: dot-pypirc
-           variable: PYPIRC
-
+          - file:
+              credential-id: dot-pypirc
+              variable: PYPIRC
 - job-template:
     name: '{name}-run-tests'
     defaults: global
     node: focal
-
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
-
     triggers:
       - gerrit:
           trigger-on:
-              - patchset-created-event
-              - comment-added-contains-event:
-                   comment-contains-value: 'recheck'
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
@@ -1882,7 +1661,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
@@ -1893,8 +1671,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-           after: true
+            after: true
           choosing-strategy: gerrit
-
     builders:
       - run-tests
