@@ -46,6 +46,13 @@
       - '{name}-dummy':
          organisation: 'internal'
 
+- project:
+    name: gh-actions
+    jobs:
+      - '{name}-yaml':
+         organisation: 'NeCTAR-RC'
+
+
 - job:
     name: 'librarian-verify'
     concurrent: false
