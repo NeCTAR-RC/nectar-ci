@@ -1350,6 +1350,8 @@
           block-level: 'GLOBAL'
       - lockable-resources:
           resources: 'diff-catalog-{r10k_host}'
+      - build-discarder:
+          days-to-keep: 30
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1414,6 +1416,8 @@
           block-level: 'GLOBAL'
       - lockable-resources:
           resources: 'diff-catalog-{r10k_host}'
+      - build-discarder:
+          days-to-keep: 30
     parameters:
       - string:
           name: GERRIT_REFSPEC
