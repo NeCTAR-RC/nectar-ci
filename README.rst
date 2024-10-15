@@ -9,6 +9,14 @@ version of JJB, tested up to v1.6.3
 All you need to do is:
 `pip install jenkins-job-builder`
 
+Developing
+==========
+We use pre-commit for this repo for linting and formatting.
+To set this up::
+
+ pip install pre-commit
+ pre-commit install
+
 
 Configuration
 -------------
