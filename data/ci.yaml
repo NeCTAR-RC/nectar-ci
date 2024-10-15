@@ -138,5 +138,7 @@
     name: nectar-ci
     jobs:
       - '{name}-ruby-lint':
+      - '{name}-pre-commit-all':
+          organisation: 'NeCTAR-RC'
       - '{name}-jenkins-jobs-test':
       - '{name}-jenkins-jobs-update':

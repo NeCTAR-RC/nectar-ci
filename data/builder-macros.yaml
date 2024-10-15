@@ -543,3 +543,7 @@
     name: run-tests
     builders:
       - shell: ./run-tests.sh
+- builder:
+    name: pre-commit-all
+    builders:
+      - shell: pre-commit run --all-files --show-diff-on-failure
