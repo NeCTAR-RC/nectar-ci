@@ -1135,8 +1135,6 @@
             - job-discover
       - build-discarder:
           num-to-keep: 20
-
-
 - job:
     name: tempest-rctest-cinder-check
     defaults: global
