@@ -71,6 +71,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -166,6 +168,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -240,6 +244,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -304,6 +310,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -371,6 +379,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -449,6 +459,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -538,6 +550,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -604,6 +618,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -670,6 +686,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -749,6 +767,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 50
       - build-blocker:
           blocking-jobs:
             - "tempest-cleanup-operator"
@@ -1071,6 +1091,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - build-blocker:
          blocking-jobs:
            - "tempest-cleanup-operator"
@@ -1115,6 +1137,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1156,6 +1180,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
 
 
 - job:
@@ -1184,6 +1210,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1216,6 +1244,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1249,6 +1279,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1281,6 +1313,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1313,6 +1347,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1345,6 +1381,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1377,6 +1415,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
@@ -1409,6 +1449,8 @@
           'nobody':
             - job-read
             - job-discover
+      - build-discarder:
+          num-to-keep: 20
       - throttle:
           categories:
             - tempest-rctest
