@@ -427,7 +427,7 @@
 - job-template:
     name: '{name}-focal-deb-package'
     defaults: global
-    node: jammy
+    node: deb-package
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -488,7 +488,7 @@
 - job-template:
     name: '{name}-jammy-deb-package'
     defaults: global
-    node: jammy
+    node: deb-package
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -550,7 +550,7 @@
 - job-template:
     name: '{name}-focal-os-deb-package'
     defaults: global
-    node: jammy
+    node: deb-package
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -603,7 +603,7 @@
 - job-template:
     name: '{name}-os-deb-package'
     defaults: global
-    node: jammy
+    node: deb-package
     parameters:
       - string:
           name: GERRIT_REFSPEC
