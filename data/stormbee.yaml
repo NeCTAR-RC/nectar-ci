@@ -55,8 +55,9 @@
             steps {
               withCredentials([file(credentialsId: 'jenkins-stormbee-ini', variable: 'CONFIG')]) {
                   sh '''
+                  export PYTHONUNBUFFERED=1
                   . ./venv-stormbee/bin/activate
-                  xvfb-run stormbee -c $CONFIG -p --site $ENVIRONMENT scenario lifecycle --zone $ZONE --desktop $DESKTOP
+                  xvfb-run stormbee -c $CONFIG -p --nagios --site $ENVIRONMENT scenario lifecycle --zone $AVAILABILITY_ZONE --desktop $DESKTOP
                   '''
               }
             }
