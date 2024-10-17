@@ -1,9 +1,8 @@
 - project:
     name: nectar-ops
     jobs:
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-pre-commit-all':
           organisation: 'internal'
-          environment: 'linters'
 - project:
     name: nectar-ansible
     jobs:
