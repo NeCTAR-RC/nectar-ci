@@ -1,6 +1,7 @@
 - job:
     name: stormbee-lifecycle-check
     defaults: global
+    node: tempest
     project-type: pipeline
     sandbox: true
     parameters:
