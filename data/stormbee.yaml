@@ -34,7 +34,7 @@
           description: "Desktop availability zone: depends on ENVIRONMENT"
     dsl: |
       pipeline {
-        agent { label 'jammy' }
+        agent { label 'tempest' }
         stages {
           stage('Prepare') {
             steps {
