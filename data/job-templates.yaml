@@ -1285,6 +1285,7 @@
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
+            - adelaide
             - auckland
             - intersect-01
             - intersect-adelaide
