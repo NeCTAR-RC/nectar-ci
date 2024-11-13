@@ -58,7 +58,7 @@
                   sh '''
                   export PYTHONUNBUFFERED=1
                   . ./venv-stormbee/bin/activate
-                  xvfb-run stormbee -c $CONFIG -p --site $ENVIRONMENT scenario lifecycle --zone $AVAILABILITY_ZONE --desktop $DESKTOP
+                  xvfb-run stormbee -c $CONFIG -p --nagios --site $ENVIRONMENT --zone $AVAILABILITY_ZONE --desktop $DESKTOP scenario lifecycle
                   '''
               }
             }
