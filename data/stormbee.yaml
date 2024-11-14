@@ -31,7 +31,7 @@
             - default
             - melbourne-qh2
             - monash-02
-            - qld
+            - QRIScloud
             - coreservices
           description: "Desktop availability zone: depends on ENVIRONMENT"
     triggers:
