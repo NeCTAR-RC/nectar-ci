@@ -1,6 +1,7 @@
 - job:
     name: stormbee-lifecycle-check
     defaults: global
+    concurrent: false
     node: tempest
     project-type: pipeline
     sandbox: true
@@ -33,6 +34,18 @@
             - qld
             - coreservices
           description: "Desktop availability zone: depends on ENVIRONMENT"
+    triggers:
+      - parameterized-timer:
+          cron: |
+            2 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=ubuntu
+            32 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=ubuntu
+            2 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=ubuntu
+            32 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=jammy
+            2 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=jammy
+            32 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=jammy
+            2 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=rocky9
+            32 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=rocky9
+            2 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=rocky9
     dsl: |
       pipeline {
         agent { label 'tempest' }
