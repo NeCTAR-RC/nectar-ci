@@ -4,6 +4,11 @@
       - '{name}-dummy':
           organisation: 'internal'
 - project:
+    name: bumblebee-setup
+    jobs:
+      - '{name}-dummy':
+          organisation: 'internal'
+- project:
     name: lab-kubernetes
     jobs:
       - '{name}-dummy':
