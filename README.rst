@@ -35,6 +35,12 @@ Example /etc/jenkins_jobs/jenkins_jobs.ini::
 
 Usage
 -----
+To test job definitions locally::
+
+   $ jenkins-jobs test -r data
+   INFO:jenkins_jobs.cli.subcommand.update:Updating jobs in ['data', 'data/projects'] ([])
+
+
 To delete a single job::
 
    $ jenkins-jobs delete -r data puppet-openvpn-puppet-unit
