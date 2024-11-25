@@ -674,8 +674,8 @@
             steps {
               withCredentials([file(credentialsId: '42898081-d846-4a3f-a41e-515eb74132e2', variable: 'FILE')]) {
                 sh '''
-                  cp $FILE $FILE.json
-                  RENOVATE_CONFIG_FILE=$FILE.json renovate
+                  cp $FILE $FILE.json5
+                  RENOVATE_CONFIG_FILE=$FILE.json5 renovate
                   '''
               }
             }
@@ -704,8 +704,8 @@
             steps {
               withCredentials([file(credentialsId: 'bbae6659-4494-4484-9b3f-66b28e7a871b', variable: 'FILE')]) {
                 sh '''
-                  cp $FILE $FILE.json
-                  RENOVATE_CONFIG_FILE=$FILE.json renovate
+                  cp $FILE $FILE.json5
+                  RENOVATE_CONFIG_FILE=$FILE.json5 renovate
                   '''
               }
             }
