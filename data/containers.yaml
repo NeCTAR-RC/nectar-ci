@@ -13,10 +13,14 @@
     jobs:
       - '{name}-yaml':
           organisation: 'internal'
+      - '{name}-argocd-diff':
+          organisation: 'internal'
 - project:
     name: argocd-apps-prod
     jobs:
       - '{name}-yaml':
+          organisation: 'internal'
+      - '{name}-argocd-diff':
           organisation: 'internal'
 - job-group:
     name: '{name}-kolla-container'

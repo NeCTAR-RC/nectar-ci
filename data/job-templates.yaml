@@ -1662,3 +1662,60 @@
           choosing-strategy: gerrit
     builders:
       - pre-commit-all
+- job-template:
+    name: '{name}-argocd-diff'
+    defaults: global
+    node: docker
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+    triggers:
+      - gerrit:
+          trigger-on:
+            - patchset-created-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+    scm:
+      - git:
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
+    builders:
+      - argocd-diff
+    publishers:
+      - archive:
+          artifacts: 'output/*'
+          allow-empty: 'true'
+          only-if-success: true
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+      - credentials-binding:
+          - file:
+              credential-id: ac5d10cc-8d6a-4014-a0e0-767f5c8b1b49
+              variable: FILE
