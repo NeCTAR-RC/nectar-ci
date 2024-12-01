@@ -588,7 +588,7 @@
       pipeline {{
         agent {{ label 'docker' }}
         environment {{
-          TAG = "${{env.GERRIT_EVENT_TYPE == "patchset-created" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
+          TAG = "${{env.GERRIT_EVENT_TYPE != "change-merged" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
         }}
         stages {{
           stage('Clone') {{
@@ -640,7 +640,7 @@
           stage('Helm package update') {{
             when {{
                 expression {{
-                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE != 'patchset-created'
+                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'change-merged'
                 }}
             }}
             steps {{
