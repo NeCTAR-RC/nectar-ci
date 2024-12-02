@@ -800,15 +800,6 @@
     name: 'image-build-undercloud-{name}'
     defaults: global
     node: jammy
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
     properties:
       - authorization:
           nobody:
@@ -818,269 +809,38 @@
           blocking-jobs:
             - '^image-build-.*'
           block-level: 'GLOBAL'
-    scm:
-      - git:
-          url: ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/nectar-images.git
-          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-          refspec: $GERRIT_REFSPEC
-          branches:
-            - origin/$GERRIT_BRANCH
-          skip-tag: true
-          wipe-workspace: true
-          clean:
-            after: true
-          choosing-strategy: gerrit
-    builders:
-      - image-builder-dev-undercloud:
-          image_name: "{image_name}"
-          job_name: "{name}"
-    wrappers:
-      - credentials-binding:
-          - username-password:
-              credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
-              variable: KEYSTONE_CREDS
-- builder:
-    name: 'image-builder'
-    builders:
-      - shell: |
-          #!/bin/bash -e
-          export OS_USERNAME=$IMAGE_BUILDER_USERNAME
-          export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
-          export OS_PROJECT_DOMAIN_NAME=Default
-          export OS_USER_DOMAIN_NAME=Default
-          export OS_IDENTITY_API_VERSION=3
-          export OS_PROJECT_NAME=NeCTAR-Images
-          export OS_TENANT_NAME=$OS_PROJECT_NAME  # promote needs this, need to fix hivemind
-          NAME=${JOB_NAME#image-build-}
-          OUTPUT_DIR=$WORKSPACE/output-$BUILD_TAG
-          FACT_DIR=$OUTPUT_DIR/.facts
-          TAG_DIR=$OUTPUT_DIR/.tags
-          rm -fr $FACT_DIR $TAG_DIR
-          jq ".builders[0].name = \"$BUILD_TAG\" | .builders[0].vm_name = \"$BUILD_TAG\"" $NAME.json > $BUILD_TAG.json
-          echo "Starting packer build..."
-          chmod 600 packer-ssh-key
-          export PACKER_PLUGIN_PATH=`which packer | xargs dirname`
-          packer build -color=false $BUILD_TAG.json
-          IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
-          USER_ACCOUNT=$(cat $FACT_DIR/default_user)
-          rm $BUILD_TAG.json
-          cd $OUTPUT_DIR
-          echo "Shrinking image..."
-          echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
-          qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2
-          rm -f $BUILD_TAG
-          echo "Creating image $IMAGE_NAME..."
-          echo "==> openstack image create --disk-format qcow2 --container-format bare --file $BUILD_TAG.qcow2 \"NeCTAR $IMAGE_NAME\""
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file $BUILD_TAG.qcow2 "NeCTAR $IMAGE_NAME")
-          echo "Image $IMAGE_ID created!"
-          echo "Applying properties..."
-          for FACT in $(ls $FACT_DIR); do
-              [[ $FACT =~ ^nectar_ ]] && continue
-              VAL=$(cat $FACT_DIR/$FACT)
-              echo "  -> $FACT: '$VAL'..."
-              openstack image set --property $FACT=$"$VAL" $IMAGE_ID
-          done
-          echo "Applying tags..."
-          for TAG in $(ls $TAG_DIR); do
-              echo "  -> tag: '$TAG'..."
-              openstack image set --tag $TAG $IMAGE_ID
-          done
-          echo "Creating instance..."
-          [ -z $AVAILABILITY_ZONE ] || AZ_OPT="--availability-zone $AVAILABILITY_ZONE"
-          echo "==> openstack server create --image $IMAGE_ID --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing $AZ_OPT test_$BUILD_TAG"
-          INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
-          echo "Found instance ID: $INSTANCE_ID"
-          RETRIES=10
-          i=1
-          while [ $i -le $RETRIES ]; do
-              STATUS=$(openstack server show -f value -c status $INSTANCE_ID)
-              echo "Instance is $STATUS ($i/$RETRIES)..."
-              [ "$STATUS" = "ACTIVE" ] && break
-              if [ $i -ge $RETRIES ]; then
-                  echo "ERROR: Limit reached, cleaning up..."
-                  openstack image delete $IMAGE_ID
-                  openstack server delete $INSTANCE_ID
-                  exit 1
-              fi
-              if [ "$STATUS" = "ERROR" ]; then
-                  echo "Recreating instance due to error: $(openstack server show -f value -c fault $INSTANCE_ID)"
-                  openstack server delete $INSTANCE_ID
-                  INSTANCE_ID=$(openstack server create -f value -c id --image $IMAGE_ID --flavor t3.xsmall --security-group image-build --key-name jenkins-image-testing $AZ_OPT "test_$BUILD_TAG")
-                  echo "Found instance ID: $INSTANCE_ID"
-              fi
-              i=$((i+1))
-              sleep 30
-          done
-          openstack server show --max-width=120 $INSTANCE_ID
-          IP_ADDRESS=$(openstack server show -f value -c accessIPv4 $INSTANCE_ID)
-          chmod 600 $SSH_TESTING_KEY
-          sleep 120 # time to settle for SSH key/fail2ban
-          RETRIES=5
-          j=1
-          while [ $j -le $RETRIES ]; do
-              echo "Checking for SSH to $IP_ADDRESS ($j/$RETRIES)..."
-              ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS exit && break
-              if [ $j -ge $RETRIES ]; then
-                  echo "ERROR: Limit reached. Showing console log..."
-                  openstack console log show $INSTANCE_ID
-                  echo "ERROR: Cleaning up instance and image..."
-                  openstack image delete $IMAGE_ID
-                  openstack server delete $INSTANCE_ID
-                  exit 1
-              fi
-              j=$((j+1))
-              sleep 60
-          done
-          echo "Running tests..."
-          echo "==> ssh $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'"
-          sleep 120 # time for cloud-init to complete
-          set +e
-          ssh -oLogLevel=error -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -i $SSH_TESTING_KEY $USER_ACCOUNT@$IP_ADDRESS '/bin/bash /usr/nectar/run_tests.sh'
-          TEST_RESULT=$?
-          openstack server delete $INSTANCE_ID
-          if [ $TEST_RESULT -eq 0 ]; then
-              export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
-              export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
-              openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
-              openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID
-              echo "================================================================================"
-              echo "  NeCTAR $IMAGE_NAME v$BUILD_NUMBER build successful!"
-              echo "  Image ID: $IMAGE_ID"
-              echo "================================================================================"
-              openstack image show --max-width=120 $IMAGE_ID
-              echo "Promoting image to public..."
-              echo "==> hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID"
-              hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
-          fi
-          exit 1
-- builder:
-    name: 'image-builder-extra'
-    builders:
-      - shell: |
-          #!/bin/bash -e
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
-          export OS_USERNAME=$IMAGE_BUILDER_USERNAME
-          export OS_PASSWORD=$IMAGE_BUILDER_PASSWORD
-          export OS_PROJECT_DOMAIN_NAME=Default
-          export OS_USER_DOMAIN_NAME=Default
-          export OS_IDENTITY_API_VERSION=3
-          export OS_PROJECT_NAME=murano
-          export OS_TENANT_NAME=$OS_PROJECT_NAME  # packer fix
-          export OS_DOMAIN_NAME=$OS_PROJECT_DOMAIN_NAME  # packer fix
-          FACT_DIR=$WORKSPACE/ansible/.facts
-          TAG_DIR=WORKSPACE/ansible/.tags
-          rm -fr $FACT_DIR $TAG_DIR
-          SOURCE_ID=$(openstack image show -f value -c id "{source_image}")
-          echo "Found base image {source_image} ($SOURCE_ID)..."
-          jq ".builders[0].source_image = \"$SOURCE_ID\" | .builders[0].image_name = \"$BUILD_TAG\"" packer.json > $BUILD_TAG.json
-          echo "Starting packer build..."
-          chmod 600 packer-ssh-key
-          export PACKER_PLUGIN_PATH=`which packer | xargs dirname`
-          packer build -color=false $BUILD_TAG.json
-          IMAGE_NAME="$(cat $FACT_DIR/nectar_name)"
-          USER_ACCOUNT=$(cat $FACT_DIR/default_user)
-          openstack image save --file $BUILD_TAG-large.qcow2 $BUILD_TAG
-          openstack image delete $BUILD_TAG
-          echo "Shrinking image..."
-          echo "==> qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG $BUILD_TAG.qcow2"
-          qemu-img convert -c -o compat=0.10 -O qcow2 $BUILD_TAG-large.qcow2 $BUILD_TAG.qcow2
-          rm -f $BUILD_TAG6.json $BUILD_TAG-large.qcow2
-          echo "Creating final image..."
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file $BUILD_TAG.qcow2 "NeCTAR $IMAGE_NAME")
-          echo "Image $IMAGE_ID created!"
-          echo "Applying properties..."
-          for FACT in $(ls $FACT_DIR); do
-              [[ $FACT =~ ^nectar_ ]] && continue
-              VAL=$(cat $FACT_DIR/$FACT)
-              echo "  -> $FACT: '$VAL'..."
-              openstack image set --property $FACT=$"$VAL" $IMAGE_ID
-          done
-          echo "Applying tags..."
-          for TAG in $(ls $TAG_DIR); do
-              echo "  -> tag: '$TAG'..."
-              openstack image set --tag $TAG $IMAGE_ID
-          done
-          export OS_USERNAME=$IMAGE_PROMOTE_USERNAME
-          export OS_PASSWORD=$IMAGE_PROMOTE_PASSWORD
-          openstack image set --property nectar_name="$IMAGE_NAME" $IMAGE_ID
-          openstack image set --property nectar_build=$BUILD_NUMBER $IMAGE_ID  # protected properties require admin
-          echo "================================================================================"
-          echo "  NeCTAR $IMAGE_NAME v$BUILD_NUMBER build successful!"
-          echo "  Image ID: $IMAGE_ID"
-          echo "================================================================================"
-          openstack image show --max-width=120 $IMAGE_ID
-          hivemind glance.promote --no-dry-run --project NeCTAR-Images-Archive $IMAGE_ID && exit 0
-- builder:
-    name: 'image-builder-rctest'
-    builders:
-      - shell: |
-          #!/bin/bash -xe
-          BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
-          set +x
-          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
-          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
-          set -x
-          export OS_AUTH_URL=https://keystone.test.rc.nectar.org.au:5000/v3
-          export OS_PROJECT_DOMAIN_NAME=Default
-          export OS_USER_DOMAIN_NAME=Default
-          export OS_IDENTITY_API_VERSION=3
-          export OS_PROJECT_NAME=nectar-ci
-          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-          chmod 600 packer-ssh-key
-          export PACKER_PLUGIN_PATH=`which packer | xargs dirname`
-          packer build -color=false ${{BUILD_NAME}}.json
-          rm ${{BUILD_NAME}}.json
-          cd output-${{BUILD_NAME}}
-          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
-          rm -f ${{BUILD_NAME}}
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 "{image_name}-v$BUILD_NUMBER")
-          rm ${{BUILD_NAME}}.qcow2
-          set +x
-          echo "================================================================================"
-          echo ""
-          echo "  NeCTAR {image_name} v$BUILD_NUMBER build successful!"
-          echo ""
-          echo "  To use this new image in Jenkins, go to:"
-          echo "      https://jenkins.rc.nectar.org.au/configureClouds/"
-          echo ""
-          echo "  find the node group that you want to update the image for"
-          echo "  and click 'provisioning details' and update the boot source image to:"
-          echo "      {image_name}-v$BUILD_NUMBER"
-          echo ""
-          echo "================================================================================"
-- builder:
-    name: 'image-builder-dev-undercloud'
-    builders:
-      - shell: |
-          #!/bin/bash -xe
-          BUILD_NAME="{job_name}_build_$BUILD_NUMBER"
-          set +x
-          export OS_USERNAME=$(echo $KEYSTONE_CREDS | cut -f1 -d:)
-          export OS_PASSWORD=$(echo $KEYSTONE_CREDS | cut -f2 -d:)
-          set -x
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3/
-          export OS_PROJECT_DOMAIN_NAME=Default
-          export OS_USER_DOMAIN_NAME=Default
-          export OS_IDENTITY_API_VERSION=3
-          export OS_PROJECT_NAME=NeCTAR-Devs
-
-          jq ".builders[0].name = \"$BUILD_NAME\" | .builders[0].vm_name = \"$BUILD_NAME\"" {job_name}.json > ${{BUILD_NAME}}.json
-          chmod 600 packer-ssh-key
-          export PACKER_PLUGIN_PATH=`which packer | xargs dirname`
-          packer build -color=false ${{BUILD_NAME}}.json
-          rm ${{BUILD_NAME}}.json
-          cd output-${{BUILD_NAME}}
-          qemu-img convert -c -o compat=0.10 -O qcow2 ${{BUILD_NAME}} ${{BUILD_NAME}}.qcow2
-          rm -f ${{BUILD_NAME}}
-          IMAGE_ID=$(openstack image create -f value -c id --disk-format qcow2 --container-format bare --file ${{BUILD_NAME}}.qcow2 "{image_name}-v$BUILD_NUMBER")
-          rm ${{BUILD_NAME}}.qcow2
-          set +x
-          echo "================================================================================"
-          echo ""
-          echo "  NeCTAR UnderCloud {image_name} v$BUILD_NUMBER build successful!"
-          echo ""
-          echo "================================================================================"
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+      def imageId
+      def imageName
+      pipeline {{
+          agent {{ node {{ label 'jammy' }} }}
+          options {{ ansiColor('xterm') }}
+          stages {{
+              stage('Build Image') {{
+                  steps {{ imageBuildQEMU '{name}' }}
+              }}
+              stage('Set Image ID') {{
+                  steps {{ setImageID() }}
+              }}
+              stage('Deploy in NeCTAR-Devs') {{
+                  steps {{
+                      deployImageWithBuildNumber 'NeCTAR-Devs', 'production'
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      deleteImage 'NeCTAR-Devs', 'production'
+                  }}
+              }}
+              cleanup {{
+                  node('jammy') {{ deleteDir() }}
+              }}
+          }}
+      }}
 - job-template:
     name: 'image-build-bumblebee-{name}'
     defaults: global
