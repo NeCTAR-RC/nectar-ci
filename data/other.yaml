@@ -4,6 +4,11 @@
       - '{name}-dummy':
           organisation: 'internal'
 - project:
+    name: bumblebee-images
+    jobs:
+      - '{name}-dummy':
+          organisation: 'NeCTAR-RC'
+- project:
     name: bumblebee-setup
     jobs:
       - '{name}-dummy':
