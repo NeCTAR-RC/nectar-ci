@@ -437,8 +437,6 @@
     jobs:
       - '{name}-yaml':
           organisation: 'Intersect'
-      - '{name}-puppet-git-secrets':
-          organisation: 'Intersect'
       - '{name}-puppet-unit':
           organisation: 'Intersect'
       - '{name}-r10k-deploy':
@@ -458,8 +456,6 @@
     jobs:
       - '{name}-yaml':
           organisation: 'internal'
-      - '{name}-puppet-git-secrets':
-          organisation: 'internal'
       - '{name}-puppet-unit':
           organisation: 'internal'
       - '{name}-r10k-deploy':
@@ -478,8 +474,6 @@
     name: puppet-site-ardctest
     jobs:
       - '{name}-yaml':
-          organisation: 'internal'
-      - '{name}-puppet-git-secrets':
           organisation: 'internal'
       - '{name}-puppet-unit':
           organisation: 'internal'
@@ -614,8 +608,6 @@
     jobs:
       - '{name}-yaml':
           organisation: 'internal'
-      - '{name}-puppet-git-secrets':
-          organisation: 'internal'
       - '{name}-puppet-unit':
           organisation: 'internal'
       - '{name}-r10k-deploy':
@@ -634,8 +626,6 @@
     name: puppet-site-nectarunder
     jobs:
       - '{name}-yaml':
-          organisation: 'internal'
-      - '{name}-puppet-git-secrets':
           organisation: 'internal'
       - '{name}-puppet-unit':
           organisation: 'internal'
@@ -770,8 +760,6 @@
     jobs:
       - '{name}-yaml':
           organisation: 'internal'
-      - '{name}-puppet-git-secrets':
-          organisation: 'internal'
       - '{name}-puppet-unit':
           organisation: 'internal'
       - '{name}-r10k-deploy':
@@ -890,8 +878,6 @@
     jobs:
       - '{name}-yaml':
           organisation: 'QRIScloud'
-      - '{name}-puppet-git-secrets':
-          organisation: 'QRIScloud'
       - '{name}-puppet-unit':
           organisation: 'QRIScloud'
       - '{name}-r10k-deploy':
@@ -910,8 +896,6 @@
     name: puppet-site-qld_rest
     jobs:
       - '{name}-yaml':
-          organisation: 'QRIScloud'
-      - '{name}-puppet-git-secrets':
           organisation: 'QRIScloud'
       - '{name}-puppet-unit':
           organisation: 'QRIScloud'

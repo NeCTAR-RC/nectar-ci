@@ -42,29 +42,6 @@
           ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh testing
 - builder:
-    name: puppet-git-secrets
-    builders:
-      - shell: |
-          #!/bin/bash
-          set -eux -o pipefail
-          git clean -ffdx
-          mkdir -p $HOME/bin
-          export PATH=$HOME/bin:${PATH}
-          curl -s https://raw.githubusercontent.com/NeCTAR-RC/git-secrets/master/git-secrets -o $HOME/bin/git-secrets
-          chmod +x $HOME/bin/git-secrets
-          mkdir -p .secrets.repo/git-secrets-puppet-internal/
-          git clone ssh://jenkins@review.rc.nectar.org.au:29418/internal/git-secrets-puppet-internal.git .secrets.repo/git-secrets-puppet-internal/
-          mkdir -p .secrets.repo/git-secrets-puppet-openstack/
-          git clone ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/git-secrets-puppet-openstack.git .secrets.repo/git-secrets-puppet-openstack/
-          git config --unset-all secrets.providers || true
-          git config --unset-all secrets.allowed || true
-          git config --add secrets.allowed '^.*ENC\[GPG.*$'
-          git config --add secrets.allowed '%{lookup'
-          git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-internal/all.pattern
-          git secrets --add-provider -- cat .secrets.repo/git-secrets-puppet-openstack/all.pattern
-          git secrets --add-provider -- cat .gitprohibited
-          git secrets --scan -r data/
-- builder:
     name: git-secrets-sorted
     builders:
       - shell: find . -name '*.pattern' -exec sort -c {} +
