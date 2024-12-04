@@ -1706,11 +1706,6 @@
           choosing-strategy: gerrit
     builders:
       - argocd-diff
-    publishers:
-      - archive:
-          artifacts: 'output/*'
-          allow-empty: 'true'
-          only-if-success: true
     wrappers:
       - ssh-agent-credentials:
           users:
