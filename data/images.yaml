@@ -121,40 +121,32 @@
           image_name: '{name}'
           default_user: 'root'
 - project:
+    name: bumblebee-guacamole
+    jobs:
+      - 'image-build-bumblebee-{name}':
+- project:
     name: bumblebee-ubuntu-20.04
     jobs:
       - 'image-build-bumblebee-{name}':
-          image_name: 'ubuntu-20.04'
-          default_user: 'ubuntu'
     name: bumblebee-ubuntu-22.04
     jobs:
       - 'image-build-bumblebee-{name}':
-          image_name: 'ubuntu-22.04'
-          default_user: 'ubuntu'
 - project:
     name: bumblebee-neurodesk
     jobs:
       - 'image-build-bumblebee-{name}':
-          image_name: 'neurodesk'
-          default_user: 'ubuntu'
 - project:
     name: bumblebee-geodesktop
     jobs:
       - 'image-build-bumblebee-{name}':
-          image_name: 'geodesktop'
-          default_user: 'ubuntu'
 - project:
     name: bumblebee-fedora-scientific
     jobs:
       - 'image-build-bumblebee-{name}':
-          image_name: 'fedora-scientific'
-          default_user: 'fedora'
 - project:
     name: bumblebee-rocky-9
     jobs:
       - 'image-build-bumblebee-{name}':
-          image_name: 'rocky-9'
-          default_user: 'rocky'
 - project:
     name: ubuntu-2204
     jobs:
@@ -848,84 +840,70 @@
 - job-template:
     name: 'image-build-bumblebee-{name}'
     defaults: global
+    project_name: 'bumblebee'
+    deploy_prod: true
+    deploy_rctest: true
+    parameters:
+      - string:
+          name: project_name
+          description: OpenStack project for deployment
+          default: 'bumblebee'
+      - bool:
+          name: deploy_production
+          description: Deploy to Production
+          default: true
+      - bool:
+          name: deploy_testing
+          description: Deploy to RCTest
+          default: true
     properties:
       - authorization:
           nobody:
             - job-read
             - job-discover
+      - build-blocker:
+          blocking-jobs:
+            - '^image-build-.*'
+          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
       def imageId
       def imageName
       pipeline {{
-          agent {{ label 'jammy' }}
-          options {{
-              ansiColor('xterm')
-          }}
+          agent {{ node {{ label 'jammy' }} }}
+          options {{ ansiColor('xterm') }}
           stages {{
-              stage('Clone') {{
-                  steps {{
-                      git poll: false,
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-images.git',
-                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                      branch: 'master'
-                  }}
-              }}
               stage('Build Image') {{
-                  steps {{
-                      imageBuildBumblebee '{image_name}', 'bumblebee'
-                  }}
+                  steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
               }}
               stage('Set Image ID') {{
+                  steps {{ setImageID() }}
+              }}
+              stage('Deploy in testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
-                      setImageID()
+                      deployImageWithBuildNumber '{project_name}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
                   }}
               }}
-              stage('Deploy image to RCTest') {{
+              stage('Deploy in production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      deployImageBumblebee 'bumblebee', 'testing'
-                      setImageProperties 'bumblebee', 'testing'
-                  }}
-              }}
-              stage('Test image in RCTest') {{
-                  steps {{
-                      testOfficialImage 'bumblebee', 'testing', 'coreservices'
-                  }}
-              }}
-              stage('Deploy volumes to RCTest') {{
-                  steps {{
-                      deployBumblebeeVolumes 'bumblebee', 'testing', 'coreservices'
-                  }}
-              }}
-              stage('Deploy image to Production') {{
-                  steps {{
-                      deployImageBumblebee 'bumblebee', 'production'
-                      setImageProperties 'bumblebee', 'production'
-                  }}
-              }}
-              stage('Test image in Production') {{
-                  steps {{
-                      testOfficialImage 'bumblebee', 'production', 'melbourne-qh2'
-                  }}
-              }}
-              stage('Deploy volumes to Production') {{
-                  steps {{
-                      deployBumblebeeVolumes 'bumblebee', 'production', 'melbourne-qh2,QRIScloud,monash-02'
+                      deployImageWithBuildNumber '{project_name}', 'production'
+                      setImageProperties '{project_name}', 'production'
                   }}
               }}
           }}
           post {{
               failure {{
                   node('internal') {{
-                      deleteImage 'bumblebee', 'testing'
-                      deleteImage 'bumblebee', 'production'
+                      deleteImage '{project_name}', 'testing'
+                      deleteImage '{project_name}', 'production'
                   }}
               }}
               cleanup {{
-                  node('jammy') {{
-                      deleteDir() /* clean up our workspace */
-                  }}
+                  node('jammy') {{ deleteDir() }}
               }}
           }}
       }}
