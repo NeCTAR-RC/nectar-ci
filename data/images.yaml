@@ -128,7 +128,12 @@
     name: bumblebee-ubuntu-20.04
     jobs:
       - 'image-build-bumblebee-{name}':
+- project:
     name: bumblebee-ubuntu-22.04
+    jobs:
+      - 'image-build-bumblebee-{name}':
+- project:
+    name: bumblebee-scientific-toolbox
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
@@ -841,8 +846,6 @@
     name: 'image-build-bumblebee-{name}'
     defaults: global
     project_name: 'bumblebee'
-    deploy_prod: true
-    deploy_rctest: true
     parameters:
       - string:
           name: project_name
@@ -852,10 +855,30 @@
           name: deploy_production
           description: Deploy to Production
           default: true
+      - string:
+          name: az_production
+          description: AZ for testing in Production
+          default: 'melbourne-qh2'
       - bool:
           name: deploy_testing
           description: Deploy to RCTest
           default: true
+      - string:
+          name: az_testing
+          description: AZ for testing in RCTest
+          default: 'coreservices'
+      - bool:
+          name: deploy_volumes
+          description: Deploy the volumes for the image
+          default: true
+      - string:
+          name: volume_azs_production
+          description: Deploy the volumes for the image
+          default: 'melbourne-qh2,QRIScloud,monash-02'
+      - string:
+          name: volume_azs_testing
+          description: Deploy the volumes for the image
+          default: 'coreservices'
     properties:
       - authorization:
           nobody:
@@ -880,19 +903,45 @@
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
               }}
-              stage('Deploy in testing') {{
+              stage('Deploy image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
                       deployImageWithBuildNumber '{project_name}', 'testing'
                       setImageProperties '{project_name}', 'testing'
                   }}
               }}
-              stage('Deploy in production') {{
+              stage('Test image in Testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{ testOfficialImage '{project_name}', 'testing', param.az_testing }}
+              }}
+              stage('Deploy volumes to Testing') {{
+                  when {{
+                      allOf {{
+                          expression {{ return params.deploy_testing }}
+                          expression {{ return params.deploy_volumes }}
+                      }}
+                  }}
+                  steps {{ deployBumblebeeVolumes '{project_name}', 'testing', params.volume_azs_testing }}
+              }}
+              stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
                       deployImageWithBuildNumber '{project_name}', 'production'
                       setImageProperties '{project_name}', 'production'
                   }}
+              }}
+              stage('Test image in Production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
+              }}
+              stage('Deploy volumes to Production') {{
+                  when {{
+                      allOf {{
+                          expression {{ return params.deploy_production }}
+                          expression {{ return params.deploy_volumes }}
+                      }}
+                  }}
+                  steps {{ deployBumblebeeVolumes '{project_name}', 'production', params.volume_azs_production }}
               }}
           }}
           post {{
