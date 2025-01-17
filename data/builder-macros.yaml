@@ -323,9 +323,9 @@
     name: jekyll-html-check
     builders:
       - shell: |
-          bundle install --path vendor/bundle
-          bundle exec jekyll build
-          bundle exec htmlproofer --allow-hash-href --assume-extension --ignore-urls '/localhost/' --log-level debug ./_site
+          rake setup
+          rake build
+          rake check
 - builder:
     name: jekyll-test-build-cleanup
     builders:
