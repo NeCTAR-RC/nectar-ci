@@ -1245,6 +1245,7 @@
           name: 'AVAILABILITY_ZONE'
           choices:
             - adelaide
+            - ardc-syd-1
             - auckland
             - intersect-01
             - intersect-adelaide
