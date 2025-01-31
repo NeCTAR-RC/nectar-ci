@@ -531,15 +531,15 @@
           rm -rf base-branch
           rm -rf target-branch
           tmpdir=`mktemp -d --suffix=_argocd`
-          mkdir base-branch
+          mkdir target-branch
           mkdir secrets
           mv $FILE secrets/secrets.yaml
-          mv apps base-branch
-          mkdir target-branch
-          git checkout -b master origin/$GERRIT_BRANCH
+          mv apps target-branch
+          mkdir base-branch
+          git checkout -B master origin/$GERRIT_BRANCH
           git pull
           git reset --hard
-          mv apps target-branch
+          mv apps base-branch
           docker run --network host -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/secrets:/secrets -v ${tmpdir}:/output -v $(pwd)/base-branch:/base-branch -v $(pwd)/target-branch:/target-branch -e TARGET_BRANCH=$GERRIT_REFSPEC -e BASE_BRANCH=$GERRIT_BRANCH -e REPO=$GERRIT_PROJECT registry.rc.nectar.org.au/docker.io/dagandersen/argocd-diff-preview:v0.0.24
           rm -rf secrets
           cat ${tmpdir}/diff.md
