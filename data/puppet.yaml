@@ -470,6 +470,8 @@
       - '{name}-r10k-diff-catalog':
           organisation: 'internal'
           r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - project:
     name: puppet-site-ardctest
     jobs:
@@ -489,6 +491,8 @@
       - '{name}-r10k-diff-catalog':
           organisation: 'internal'
           r10k_host: 'r10k.test.rc.nectar.org.au'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - project:
     name: puppet-site-melbourne
     jobs:
@@ -622,6 +626,8 @@
       - '{name}-r10k-diff-catalog':
           organisation: 'internal'
           r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - project:
     name: puppet-site-nectarunder
     jobs:
@@ -641,6 +647,8 @@
       - '{name}-r10k-diff-catalog':
           organisation: 'internal'
           r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - project:
     name: puppet-site-spartan
     jobs:
@@ -778,6 +786,8 @@
           backend: 'catalog-diff'
           organisation: 'internal'
           r10k_host: 'r10k.test.rc.nectar.org.au'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - project:
     name: puppet-site-undertest
     jobs:
