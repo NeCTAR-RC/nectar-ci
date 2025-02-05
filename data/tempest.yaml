@@ -884,6 +884,7 @@
 - project:
     name: tempest-nagios-services
     site:
+      - ardc-syd-1
       - auckland
       - intersect-01
       - intersect-adelaide
@@ -908,6 +909,7 @@
 - project:
     name: tempest-nagios-services-volume-backup
     site:
+      - ardc-syd-1
       - auckland
       - melbourne-qh2
       - melbourne-qh2-uom
@@ -1405,6 +1407,7 @@
 - project:
     name: tempest-nagios-site-compute
     site:
+      - ardc-syd-1
       - auckland
       - intersect-01
       - intersect-adelaide
@@ -1425,6 +1428,7 @@
 - project:
     name: tempest-nagios-site-network
     site:
+      - ardc-syd-1
       - auckland
       - intersect-01
       - intersect-adelaide
@@ -1443,6 +1447,7 @@
 - project:
     name: tempest-nagios-site-volume
     site:
+      - ardc-syd-1
       - auckland
       - intersect-01
       - intersect-adelaide
@@ -1746,6 +1751,7 @@
           description: 'Availability zone. Use "Any zone" to allow the scheduler to choose.'
           choices:
             - Any zone
+            - ardc-syd-1
             - auckland
             - intersect-01
             - intersect-adelaide
@@ -1802,6 +1808,7 @@
           description: 'Availability zone. Use "Any zone" to allow the scheduler to choose.'
           choices:
             - Any zone
+            - ardc-syd-1
             - auckland
             - intersect-01
             - intersect-adelaide
