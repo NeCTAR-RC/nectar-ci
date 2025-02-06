@@ -929,6 +929,7 @@
 - project:
     name: tempest-nagios-services-advanced-network
     site:
+      - ardc-syd-1
       - auckland
       - intersect-01
       - intersect-adelaide
