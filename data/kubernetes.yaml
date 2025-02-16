@@ -160,9 +160,10 @@
     jobs:
       - '{name}-kustomize-validate':
           organisation: 'internal'
-# Plain Manifests
 - project:
     name: k8s-infra
     jobs:
+      - '{name}-kustomize-validate':
+          organisation: 'internal'
       - '{name}-pre-commit-all':
           organisation: 'internal'
