@@ -48,14 +48,12 @@
 - project:
     name: external_naginator
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py38'
-      - '{name}-focal-tox-{environment}':
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'flake8'
-      - '{name}-jammy-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
