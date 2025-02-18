@@ -912,7 +912,7 @@
               }}
               stage('Test image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
-                  steps {{ testOfficialImage '{project_name}', 'testing', param.az_testing }}
+                  steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
               }}
               stage('Deploy volumes to Testing') {{
                   when {{
