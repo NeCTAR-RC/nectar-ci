@@ -906,13 +906,24 @@
               stage('Deploy image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
-                      deployImageWithBuildNumber '{project_name}', 'testing'
+                      retry(count: 3) {{
+                          deployImageWithBuildNumber '{project_name}', 'testing'
+                      }}
+                  }}
+              }}
+              stage('Set image properties in Testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{
                       setImageProperties '{project_name}', 'testing'
                   }}
               }}
               stage('Test image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
-                  steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
+                  steps {{
+                      retry(count: 3) {{
+                          testOfficialImage '{project_name}', 'testing', params.az_testing
+                      }}
+                  }}
               }}
               stage('Deploy volumes to Testing') {{
                   when {{
@@ -926,13 +937,24 @@
               stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      deployImageWithBuildNumber '{project_name}', 'production'
+                      retry(count: 3) {{
+                          deployImageWithBuildNumber '{project_name}', 'production'
+                      }}
+                  }}
+              }}
+              stage('Set image properties in Production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{
                       setImageProperties '{project_name}', 'production'
                   }}
               }}
               stage('Test image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
-                  steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
+                  steps {{
+                      retry(count: 3) {{
+                          testOfficialImage '{project_name}', 'production', params.az_production
+                      }}
+                  }}
               }}
               stage('Deploy volumes to Production') {{
                   when {{
