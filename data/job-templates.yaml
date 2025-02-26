@@ -1708,11 +1708,6 @@
                   branch-pattern: 'nectar/.*'
           silent: false
           escape-quotes: true
-          skip-vote:
-            successful: true
-            failed: true
-            unstable: true
-            notbuilt: true
     scm:
       - git:
           url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
