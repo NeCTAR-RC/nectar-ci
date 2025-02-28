@@ -874,7 +874,7 @@
       - string:
           name: volume_azs_production
           description: Deploy the volumes for the image
-          default: 'melbourne-qh2,QRIScloud,monash-02'
+          default: 'ardc-syd-1,melbourne-qh2,QRIScloud,monash-02,auckland'
       - string:
           name: volume_azs_testing
           description: Deploy the volumes for the image
