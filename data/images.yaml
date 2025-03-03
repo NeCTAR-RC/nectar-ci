@@ -162,7 +162,7 @@
     project_name: 'NeCTAR-Images'
     deploy_prod: true
     promote_prod: true
-    test_prod_az: melbourne-qh2
+    test_prod_az: ardc-syd-1
     deploy_rctest: true
     test_rctest_az: coreservices
     parameters:
@@ -181,7 +181,7 @@
       - string:
           name: az_production
           description: AZ for testing in Production
-          default: 'melbourne-qh2'
+          default: 'ardc-syd-1'
       - bool:
           name: deploy_testing
           description: Deploy to RCTest
@@ -373,7 +373,7 @@
     project_name: 'murano'
     deploy_prod: true
     promote_prod: true
-    test_prod_az: melbourne-qh2
+    test_prod_az: ardc-syd-1
     deploy_rctest: true
     test_rctest_az: coreservices
     parameters:
@@ -392,7 +392,7 @@
       - string:
           name: az_production
           description: AZ for testing in Production
-          default: 'melbourne-qh2'
+          default: 'ardc-syd-1'
       - bool:
           name: deploy_testing
           description: Deploy to RCTest
@@ -553,7 +553,7 @@
               stage('Test Image in Prod Cloud') {
                   agent { label 'tempest' }
                   steps {
-                      testOctaviaImage 'production', 'melbourne-qh2'
+                      testOctaviaImage 'production', 'ardc-syd-1'
                   }
               }
           }
@@ -654,7 +654,7 @@
               stage('Test Image in Prod Cloud') {
                   agent { label 'tempest' }
                   steps {
-                      testManilaImage 'production', 'melbourne-qh2'
+                      testManilaImage 'production', 'ardc-syd-1'
                   }
               }
           }
@@ -858,7 +858,7 @@
       - string:
           name: az_production
           description: AZ for testing in Production
-          default: 'melbourne-qh2'
+          default: 'ardc-syd-1'
       - bool:
           name: deploy_testing
           description: Deploy to RCTest
