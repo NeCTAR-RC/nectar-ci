@@ -231,7 +231,7 @@
               }}
               stage('Promote in testing') {{
                   when {{
-                      anyOf {{
+                      allOf {{
                           expression {{ return params.deploy_testing }}
                           expression {{ return params.promote_testing }}
                       }}
@@ -251,7 +251,7 @@
               }}
               stage('Promote in production') {{
                   when {{
-                      anyOf {{
+                      allOf {{
                           expression {{ return params.deploy_production }}
                           expression {{ return params.promote_production }}
                       }}
@@ -442,7 +442,7 @@
               }}
               stage('Promote in testing') {{
                   when {{
-                      anyOf {{
+                      allOf {{
                           expression {{ return params.deploy_testing }}
                           expression {{ return params.promote_testing }}
                       }}
@@ -462,7 +462,7 @@
               }}
               stage('Promote in production') {{
                   when {{
-                      anyOf {{
+                      allOf {{
                           expression {{ return params.deploy_production }}
                           expression {{ return params.promote_production }}
                       }}
