@@ -18,20 +18,20 @@
           choices:
             - ubuntu
             - jammy
-            - centos
             - neurodesktop
             - geodesktop
             - rocky9
-            - fedorascientific
             - win2022
           description: "Desktop type to launch: depends on ENVIRONMENT"
       - choice:
           name: 'AVAILABILITY_ZONE'
           choices:
             - default
+            - ardc-syd-1
             - melbourne-qh2
             - monash-02
             - QRIScloud
+            - auckland
             - coreservices
           description: "Desktop availability zone: depends on ENVIRONMENT"
     triggers:
@@ -41,19 +41,22 @@
             22 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=ubuntu
             42 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=ubuntu
             2 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=ubuntu
-            22 1 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=ubuntu
-            42 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=jammy
-            2 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=jammy
-            22 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=jammy
-            42 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=jammy
-            2 3 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=jammy
-            22 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=rocky9
-            42 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=rocky9
-            2 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=rocky9
-            22 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=rocky9
-            42 4 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=rocky9
-            2 5 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=win2022
-            22 5 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=win2022
+            22 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=auckland; DESKTOP=ubuntu
+            42 1 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=ubuntu
+            2 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=jammy
+            22 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=jammy
+            42 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=jammy
+            2 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=jammy
+            22 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=auckland; DESKTOP=jammy
+            42 3 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=jammy
+            2 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=rocky9
+            22 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=rocky9
+            42 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=rocky9
+            2 5 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=rocky9
+            22 5 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=auckland; DESKTOP=rocky9
+            42 5 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=rocky9
+            2 6 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=win2022
+            42 6 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=win2022
     dsl: |
       pipeline {
         agent { label 'tempest' }
