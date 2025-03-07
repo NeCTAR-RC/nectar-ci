@@ -30,6 +30,11 @@
     node: tempest
     project-type: pipeline
     sandbox: true
+    properties:
+      - build-blocker:
+          blocking-jobs:
+            - '^stormbee-lifecycle-check-.*'
+          block-level: 'GLOBAL'
     triggers:
       - timed: 'H H(0-6) * * *'
     wrappers:
