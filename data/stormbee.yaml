@@ -1,68 +1,47 @@
-- job:
+- project:
     name: stormbee-lifecycle-check
+    desktop:
+      - ubuntu
+      - jammy
+      - rocky9
+      - win2022
+    zone:
+      - ardc-syd-1
+      - melbourne-qh2
+      - monash-02
+      - QRIScloud
+      - auckland
+      - coreservices
+    exclude:
+      - desktop: win2022
+        zone: ardc-syd-1
+      - desktop: win2022
+        zone: melbourne-qh2
+      - desktop: win2022
+        zone: monash-02
+      - desktop: win2022
+        zone: auckland
+    jobs:
+      - stormbee-lifecycle-check-{zone}-{desktop}
+- job-template:
+    name: 'stormbee-lifecycle-check-{zone}-{desktop}'
     defaults: global
     concurrent: false
     node: tempest
     project-type: pipeline
     sandbox: true
-    parameters:
-      - choice:
-          name: 'ENVIRONMENT'
-          choices:
-            - production
-            - testing
-            - development
-          description: "Bumblebee installation to test (Production, Testing, etc)."
-      - choice:
-          name: 'DESKTOP'
-          choices:
-            - ubuntu
-            - jammy
-            - neurodesktop
-            - geodesktop
-            - rocky9
-            - win2022
-          description: "Desktop type to launch: depends on ENVIRONMENT"
-      - choice:
-          name: 'AVAILABILITY_ZONE'
-          choices:
-            - default
-            - ardc-syd-1
-            - melbourne-qh2
-            - monash-02
-            - QRIScloud
-            - auckland
-            - coreservices
-          description: "Desktop availability zone: depends on ENVIRONMENT"
     triggers:
-      - parameterized-timer:
-          cron: |
-            2 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=ubuntu
-            22 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=ubuntu
-            42 0 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=ubuntu
-            2 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=ubuntu
-            22 1 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=auckland; DESKTOP=ubuntu
-            42 1 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=ubuntu
-            2 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=jammy
-            22 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=jammy
-            42 2 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=jammy
-            2 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=jammy
-            22 3 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=auckland; DESKTOP=jammy
-            42 3 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=jammy
-            2 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=ardc-syd-1; DESKTOP=rocky9
-            22 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=melbourne-qh2; DESKTOP=rocky9
-            42 4 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=monash-02; DESKTOP=rocky9
-            2 5 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=rocky9
-            22 5 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=auckland; DESKTOP=rocky9
-            42 5 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=rocky9
-            2 6 * * * % ENVIRONMENT=production; AVAILABILITY_ZONE=QRIScloud; DESKTOP=win2022
-            42 6 * * * % ENVIRONMENT=testing; AVAILABILITY_ZONE=coreservices; DESKTOP=win2022
+      - timed: 'H H(0-6) * * *'
+    wrappers:
+      - timeout:
+          timeout: 30
+          fail: true
     dsl: |
-      pipeline {
-        agent { label 'tempest' }
-        stages {
-          stage('Prepare') {
-            steps {
+      pipeline {{
+        agent {{ label 'tempest' }}
+        stages {{
+          stage('Prepare') {{
+            steps {{
               git poll: false,
                   url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/bumblebee-stormbee.git',
                   credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
@@ -74,18 +53,23 @@
                 . ./venv-stormbee/bin/activate
                 pip install -e .
               '''
-            }
-          }
-          stage('Run') {
-            steps {
-              withCredentials([file(credentialsId: 'jenkins-stormbee-ini', variable: 'CONFIG')]) {
+            }}
+          }}
+          stage('Run') {{
+            steps {{
+              withCredentials([file(credentialsId: 'jenkins-stormbee-ini', variable: 'CONFIG')]) {{
                   sh '''
                   export PYTHONUNBUFFERED=1
                   . ./venv-stormbee/bin/activate
-                  xvfb-run stormbee -c $CONFIG -p --nagios --site $ENVIRONMENT --zone $AVAILABILITY_ZONE --desktop $DESKTOP scenario lifecycle
+                  if [[ "{zone}" == "coreservices" ]]; then
+                      SITE=testing
+                  else
+                      SITE=production
+                  fi
+                  xvfb-run stormbee -c $CONFIG -p --nagios --site $SITE --zone {zone} --desktop {desktop} scenario lifecycle
                   '''
-              }
-            }
-          }
-        }
-      }
+              }}
+            }}
+          }}
+        }}
+      }}
