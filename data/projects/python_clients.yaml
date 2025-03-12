@@ -19,7 +19,23 @@
 - project:
     name: nectar-osc
     jobs:
-      - '{name}-clients-default-jobs':
+      - '{name}-jammy-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
+      - '{name}-jammy-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
+      - '{name}-jammy-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
+      - '{name}-jammy-deb-package':
+          organisation: 'NeCTAR-RC'
+      - '{name}-noble-deb-package':
+          organisation: 'NeCTAR-RC'
+      - '{name}-pypi-release':
           organisation: 'NeCTAR-RC'
 - project:
     name: nectarclient-lib
