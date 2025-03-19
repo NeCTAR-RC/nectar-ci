@@ -884,6 +884,7 @@
 - project:
     name: tempest-nagios-services
     site:
+      - adelaide
       - ardc-syd-1
       - auckland
       - intersect-01
@@ -909,6 +910,7 @@
 - project:
     name: tempest-nagios-services-volume-backup
     site:
+      - adelaide
       - ardc-syd-1
       - auckland
       - melbourne-qh2
@@ -929,6 +931,7 @@
 - project:
     name: tempest-nagios-services-advanced-network
     site:
+      - adelaide
       - ardc-syd-1
       - auckland
       - intersect-01
