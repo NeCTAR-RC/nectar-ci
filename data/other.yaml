@@ -442,7 +442,7 @@
 - project:
     name: nectar-reports
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           environment: 'flake8'
           organisation: 'internal'
 - project:
