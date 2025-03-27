@@ -118,7 +118,15 @@
 - project:
     name: glance
     jobs:
-      - '{name}-kolla-container-upstream'
+      - '{name}-os-tox-python3':
+          organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container':
+          organisation: 'NeCTAR-RC'
+- project:
+    name: glance_store
+    jobs:
+      - '{name}-os-tox-python3':
+          organisation: 'NeCTAR-RC'
 - project:
     name: gnocchi
     jobs:
