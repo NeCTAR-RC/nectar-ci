@@ -16,7 +16,7 @@
 - job-template:
     name: 'murano-package-check-{name}'
     defaults: global
-    node: focal
+    node: jammy
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -75,7 +75,7 @@
           escape-quotes: true
     dsl: |
       pipeline {{
-          agent {{ label 'focal' }}
+          agent {{ label 'jammy' }}
           options {{
               ansiColor('xterm')
           }}

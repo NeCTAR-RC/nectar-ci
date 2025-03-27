@@ -42,9 +42,9 @@
 - project:
     name: elasticluster
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py38'
+          environment: 'py310'
 - project:
     name: external_naginator
     jobs:
@@ -142,9 +142,6 @@
 - project:
     name: nectar-metrics
     jobs:
-      - '{name}-focal-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py38'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py310'
@@ -153,16 +150,9 @@
           environment: 'flake8'
       - '{name}-jammy-deb-package':
           organisation: 'NeCTAR-RC'
-      - '{name}-focal-deb-package':
-          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-openstack
     jobs:
-      - '{name}-focal-tox-{environment}':
-          organisation: 'internal'
-          environment: 'py38'
-      - '{name}-focal-deb-package':
-          organisation: 'internal'
       - '{name}-jammy-tox-{environment}':
           organisation: 'internal'
           environment: 'py310'
@@ -212,7 +202,7 @@
 - project:
     name: pfup
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'flake8'
 - project:

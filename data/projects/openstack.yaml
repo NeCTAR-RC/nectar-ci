@@ -71,18 +71,18 @@
 - project:
     name: cloudkitty-dashboard
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py38'
-      - '{name}-focal-tox-{environment}':
+          environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
 - project:
     name: cyborg
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py38'
+          environment: 'py310'
 - project:
     name: designate
     jobs:
@@ -130,10 +130,7 @@
 - project:
     name: gnocchi
     jobs:
-      - '{name}-focal-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py36-mysql-influxdb'
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
       - '{name}-kolla-container':
@@ -171,10 +168,10 @@
 - project:
     name: kolla
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py38'
-      - '{name}-focal-tox-{environment}':
+          environment: 'py310'
+      - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
 - project:
@@ -264,8 +261,6 @@
           organisation: 'NeCTAR-RC'
       - '{name}-os-deb-package':
           organisation: 'NeCTAR-RC'
-      - '{name}-focal-os-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
 - project:
@@ -277,8 +272,6 @@
           organisation: 'NeCTAR-RC'
           environment: 'functional'
       - '{name}-os-deb-package':
-          organisation: 'NeCTAR-RC'
-      - '{name}-focal-os-deb-package':
           organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'

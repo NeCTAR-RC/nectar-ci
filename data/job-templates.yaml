@@ -92,7 +92,7 @@
 - job-template:
     name: '{name}-puppet-openstack-spec'
     defaults: global
-    node: focal
+    node: jammy
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -384,67 +384,6 @@
     publishers:
       - workspace-cleanup
 - job-template:
-    name: '{name}-focal-deb-package'
-    defaults: global
-    node: deb-package
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
-    triggers:
-      - gerrit:
-          trigger-on:
-            - change-merged-event
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'debian'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'uom/.*'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'debian/.*'
-          silent: false
-          escape-quotes: true
-          skip-vote:
-            successful: true
-            failed: true
-            unstable: true
-            notbuilt: true
-    scm:
-      - git:
-          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-          refspec: $GERRIT_REFSPEC
-          branches:
-            - origin/$GERRIT_BRANCH
-          skip-tag: true
-          wipe-workspace: true
-          clean:
-            after: true
-          choosing-strategy: gerrit
-    builders:
-      - os-pbuilder-checkout
-      - pbuilder-create:
-          os_release: "focal"
-      - pbuilder-buildpackage:
-          os_release: "focal"
-    publishers: !include: publisher.yaml.inc
-    wrappers:
-      - ssh-agent-credentials:
-          users:
-            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-- job-template:
     name: '{name}-jammy-deb-package'
     defaults: global
     node: deb-package
@@ -566,60 +505,6 @@
       - ssh-agent-credentials:
           users:
             - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
-# temp to build focal-yoga package
-- job-template:
-    name: '{name}-focal-os-deb-package'
-    defaults: global
-    node: deb-package
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default ref to test."
-      - string:
-          name: GERRIT_BRANCH
-          default: master
-          description: "The default branch to test."
-    triggers:
-      - gerrit:
-          trigger-on:
-            - change-merged-event
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: '{organisation}/{name}'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/yoga'
-          silent: false
-          escape-quotes: true
-          skip-vote:
-            successful: true
-            failed: true
-            unstable: true
-            notbuilt: true
-    scm:
-      - git:
-          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
-          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-          refspec: $GERRIT_REFSPEC
-          branches:
-            - origin/$GERRIT_BRANCH
-          skip-tag: true
-          wipe-workspace: true
-          clean:
-            after: true
-          choosing-strategy: gerrit
-    builders:
-      - os-pbuilder-checkout
-      - os-pbuilder-create-focal
-      - os-pbuilder-buildpackage-focal
-    publishers: !include: publisher.yaml.inc
-    wrappers:
-      - ssh-agent-credentials:
-          users:
-            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
 - job-template:
     name: '{name}-os-deb-package'
     defaults: global
@@ -719,7 +604,7 @@
 - job-template:
     name: '{name}-yamllint'
     defaults: global
-    node: focal
+    node: jammy
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -877,7 +762,7 @@
 - job-template:
     name: '{name}-jekyll-test-build'
     defaults: global
-    node: focal
+    node: jammy
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1609,7 +1494,7 @@
 - job-template:
     name: '{name}-run-tests'
     defaults: global
-    node: focal
+    node: jammy
     parameters:
       - string:
           name: GERRIT_REFSPEC

@@ -176,21 +176,6 @@
           rm -f *.deb
           hivemind packaging.buildpackage
           cp ../../build-area/*/*.deb .
-# Temp to support focal-yoga
-- builder:
-    name: 'os-pbuilder-create-focal'
-    builders:
-      - shell: 'hivemind pbuilder.create --ubuntu-release focal || hivemind pbuilder.update --ubuntu-release focal'
-# Temp to support focal-yoga
-- builder:
-    name: 'os-pbuilder-buildpackage-focal'
-    builders:
-      - shell: |
-          export DEBFULLNAME="$GIT_AUTHOR_NAME"
-          export DEBEMAIL="$GIT_AUTHOR_EMAIL"
-          rm -f *.deb
-          hivemind packaging.buildpackage --ubuntu-release focal
-          cp ../../build-area/*/*.deb .
 - builder:
     name: yaml-lint
     builders:

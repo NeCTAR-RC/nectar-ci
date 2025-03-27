@@ -1,8 +1,6 @@
 - job-group:
     name: '{name}-clients-default-jobs'
     jobs:
-      - '{name}-focal-tox-{environment}':
-          environment: 'py38'
       - '{name}-jammy-tox-{environment}':
           environment: 'py310'
       - '{name}-noble-tox-{environment}':
@@ -12,7 +10,6 @@
           environment: 'cover'
       - '{name}-jammy-tox-{environment}':
           environment: 'pep8'
-      - '{name}-focal-deb-package'
       - '{name}-jammy-deb-package'
       - '{name}-noble-deb-package'
       - '{name}-pypi-release'
@@ -43,9 +40,6 @@
 - project:
     name: python-langstrothclient
     jobs:
-      - '{name}-focal-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py38'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py310'
@@ -55,8 +49,6 @@
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'cover'
-      - '{name}-focal-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-pypi-release':
           organisation: 'NeCTAR-RC'
 - project:
@@ -72,17 +64,12 @@
 - project:
     name: python-placementclient
     jobs:
-      - '{name}-focal-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py38'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py310'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
-      - '{name}-focal-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-jammy-deb-package':
           organisation: 'NeCTAR-RC'
       - '{name}-noble-deb-package':

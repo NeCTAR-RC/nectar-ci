@@ -295,7 +295,7 @@
 - job:
     name: 'octocatalog-diff-test'
     defaults: global
-    node: focal
+    node: jammy
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -448,13 +448,13 @@
 - project:
     name: murano-docker-apps
     jobs:
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           environment: 'yamllint'
           organisation: 'NeCTAR-RC'
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           environment: 'shellcheck'
           organisation: 'NeCTAR-RC'
-      - '{name}-focal-tox-{environment}':
+      - '{name}-jammy-tox-{environment}':
           environment: 'murano-pkg-check'
           organisation: 'NeCTAR-RC'
 - project:
