@@ -33,8 +33,6 @@
           environment: 'pep8'
       - '{name}-jammy-deb-package':
           organisation: 'NeCTAR-RC'
-      - '{name}-noble-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-pypi-release':
           organisation: 'NeCTAR-RC'
 - project:
