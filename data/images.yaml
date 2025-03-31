@@ -153,6 +153,10 @@
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
+    name: bumblebee-whisper
+    jobs:
+      - 'image-build-bumblebee-{name}':
+- project:
     name: ubuntu-2204
     jobs:
       - 'image-build-capi-{name}'
