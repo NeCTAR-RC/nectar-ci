@@ -512,7 +512,7 @@
     builders:
       - shell: |
           #!/bin/bash
-          pip install build
+          pip install -U build twine
           rm -rf dist/*
           python3 -m build
           twine upload --config-file $PYPIRC dist/*
