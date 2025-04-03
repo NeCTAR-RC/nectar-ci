@@ -153,7 +153,7 @@
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
-    name: bumblebee-whisper
+    name: bumblebee-transcription
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
