@@ -1554,7 +1554,8 @@
 - job-template:
     name: '{name}-pypi-release'
     defaults: global
-    node: generic
+    # Not working on Noble, need to fix pip update to be in venv
+    node: jammy
     concurrent: false
     parameters:
       - string:
