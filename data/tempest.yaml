@@ -1443,7 +1443,6 @@
       - monash-01
       - monash-02
       - qld
-      - restricted-qld
       - swinburne-01
       - tasmania
     jobs:
@@ -1463,7 +1462,6 @@
       - monash-01
       - monash-02
       - qld
-      - restricted-qld
       - swinburne-01
       - tasmania
       - tasmania-02
