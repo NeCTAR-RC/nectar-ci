@@ -9,6 +9,13 @@
       - '{name}-puppet-unit':
           organisation: 'internal'
 - project:
+    name: puppet-ardc
+    jobs:
+      - '{name}-puppet-unit':
+          organisation: 'internal'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
+- project:
     name: puppet-barbican
     jobs:
       - '{name}-puppet-unit':
