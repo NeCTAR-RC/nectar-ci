@@ -264,6 +264,13 @@
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
 - project:
+    name: neutron-lib
+    jobs:
+      - '{name}-os-tox-python3':
+          organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
+          organisation: 'NeCTAR-RC'
+- project:
     name: nova
     jobs:
       - '{name}-os-tox-python3':
