@@ -145,10 +145,15 @@
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'flake8'
       - '{name}-jammy-deb-package':
+          organisation: 'NeCTAR-RC'
+      - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
     name: nectar-openstack
@@ -173,19 +178,24 @@
 - project:
     name: nectar-tools
     jobs:
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py311'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'functional'
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'cover'
       - '{name}-jammy-deb-package':
+          organisation: 'NeCTAR-RC'
+      - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
     name: nova-pollinate
