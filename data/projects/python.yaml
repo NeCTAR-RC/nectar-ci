@@ -166,6 +166,8 @@
           environment: 'flake8'
       - '{name}-jammy-deb-package':
           organisation: 'internal'
+      - '{name}-noble-deb-package':
+          organisation: 'internal'
 - project:
     name: nectar-tc-report
     jobs:
