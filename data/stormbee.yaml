@@ -43,7 +43,7 @@
           fail: true
     dsl: |
       pipeline {{
-        agent {{ label 'tempest' }}
+        agent {{ label 'stormbee' }}
         stages {{
           stage('Prepare') {{
             steps {{
