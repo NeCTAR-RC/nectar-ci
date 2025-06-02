@@ -27,7 +27,7 @@
     name: 'stormbee-lifecycle-check-{zone}-{desktop}'
     defaults: global
     concurrent: false
-    node: tempest
+    node: stormbee
     project-type: pipeline
     sandbox: true
     properties:
