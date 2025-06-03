@@ -116,6 +116,11 @@
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
+    name: placement-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'NeCTAR-RC'
+- project:
     name: shibd-helm
     jobs:
       - '{name}-helm-library-lint':
