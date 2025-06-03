@@ -345,9 +345,23 @@
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                 branch: 'nectar/{os_release}'
               dir ('{name}') {{
-                git poll: false,
-                    url: 'https://github.com/openstack/{name}',
-                    branch: 'stable/{os_release}'
+                sh '''
+                  set -eux
+                  cd ..
+                  rm -rf {name}
+                  git clone https://github.com/openstack/{name}
+                  cd {name}
+                  if git ls-remote --exit-code --heads origin stable/{os_release}; then
+                    git fetch --tags origin stable/{os_release}
+                    git checkout -b {os_release} -t origin/stable/{os_release}
+                  elif git ls-remote --exit-code --heads origin unmaintained/{os_release}; then
+                    git fetch --tags origin unmaintained/{os_release}
+                    git checkout -b {os_release} -t origin/unmaintained/{os_release}
+                  else
+                    echo "Neither stable/{os_release} nor unmaintained/{os_release} branch exists in upstream!"
+                    exit 1
+                  fi
+                '''
               }}
             }}
           }}
