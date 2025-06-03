@@ -322,75 +322,6 @@
       - trigger:
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
-- job:
-    name: tempest-ec2api-check
-    defaults: global
-    node: tempest
-    concurrent: true
-    scm:
-      - git:
-          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-    builders:
-      - shell: |
-          #!/bin/bash
-          . /opt/tempest/bin/activate
-          tmpdir=`mktemp -d --suffix=_tempest`
-          cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-ec2api $tmpdir
-          ./setup_ec2api_image.py $tmpdir
-          cd $tmpdir
-          stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-ec2api.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${PIPESTATUS[0]}
-          rm -rf $tmpdir
-          exit $RET
-    parameters:
-      - choice:
-          name: 'CLOUD'
-          choices:
-            - production
-            - testing
-            - development
-          description: "Cloud to run tempest on (production, testing or development). Leave as Production if unsure."
-      - choice:
-          name: 'AVAILABILITY_ZONE'
-          choices:
-            - adelaide
-            - ardc-syd-1
-            - auckland
-            - intersect-01
-            - intersect-adelaide
-            - melbourne-qh2
-            - melbourne-qh2-uom
-            - monash-01
-            - monash-02
-            - qld
-            - swinburne-01
-            - tasmania
-            - tasmania-02
-            - tasmania-s
-            - coreservices
-            - qh2-test
-            - monash-test
-            - aucklandtest
-            - lani
-            - luna
-          description: 'Availability zone.'
-    properties:
-      - authorization:
-          'nobody':
-            - job-read
-            - job-discover
-      - build-discarder:
-          num-to-keep: 50
-      - build-blocker:
-          blocking-jobs:
-            - "tempest-cleanup-operator"
-          block-level: 'GLOBAL'
-    publishers:
-      - trigger:
-          project: 'tempest-cleanup-operator'
-          threshold: 'FAILURE'
 - project:
     name: key-manager
     jobs:
@@ -904,7 +835,6 @@
             - 'orchestration'
             - 'database'
             - 'application'
-            - 'ec2api'
           skip_capacity_check: false
           environment: 'production'
 - project:
@@ -965,7 +895,6 @@
             - 'database'
             - 'coe'
             - 'application'
-            - 'ec2api'
           skip_capacity_check: false
           environment: 'testing'
 - project:
@@ -1199,39 +1128,6 @@
           ./setup_tempest.py -s coreservices -e testing -j check-magnum $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${PIPESTATUS[0]}
-          rm -rf $tmpdir
-          exit $RET
-    properties:
-      - authorization:
-          'nobody':
-            - job-read
-            - job-discover
-      - build-discarder:
-          num-to-keep: 20
-      - throttle:
-          categories:
-            - tempest-rctest
-          option: category
-- job:
-    name: tempest-rctest-ec2api-check
-    defaults: global
-    node: tempest
-    concurrent: true
-    scm:
-      - git:
-          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
-          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-    builders:
-      - shell: |
-          #!/bin/bash
-          . /opt/tempest/bin/activate
-          tmpdir=`mktemp -d --suffix=_tempest`
-          cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-ec2api $tmpdir
-          ./setup_ec2api_image.py $tmpdir
-          cd $tmpdir
-          stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-ec2api.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
