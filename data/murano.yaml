@@ -13,6 +13,11 @@
     jobs:
       - 'murano-package-check-{name}'
       - 'murano-package-deploy-{name}'
+- project:
+    name: murano-aiready-base
+    jobs:
+      - 'murano-package-check-{name}'
+      - 'murano-package-deploy-{name}'
 - job-template:
     name: 'murano-package-check-{name}'
     defaults: global

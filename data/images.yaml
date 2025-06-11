@@ -91,6 +91,10 @@
     jobs:
       - 'image-build-extra-{name}'
 - project:
+    name: aiready-base
+    jobs:
+      - 'image-build-extra-{name}'
+- project:
     name: jenkins-slave-ubuntu-20.04
     jobs:
       - 'image-build-jenkins-{name}':
