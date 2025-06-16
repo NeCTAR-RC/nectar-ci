@@ -171,6 +171,11 @@
       - '{name}-kustomize-validate':
           organisation: 'internal'
 - project:
+    name: mirrors-deploy
+    jobs:
+      - '{name}-kustomize-validate':
+          organisation: 'internal'
+- project:
     name: k8s-infra
     jobs:
       - '{name}-kustomize-validate':
