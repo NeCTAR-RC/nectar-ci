@@ -21,7 +21,7 @@
 - job-template:
     name: 'murano-package-check-{name}'
     defaults: global
-    node: jammy
+    node: noble
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -63,6 +63,22 @@
 - job-template:
     name: 'murano-package-deploy-{name}'
     defaults: global
+    deploy_production: true
+    deploy_rctest: true
+    project_name: 'murano'
+    parameters:
+      - string:
+          name: project_name
+          description: Project name to deploy to
+          default: 'murano'
+      - bool:
+          name: deploy_production
+          description: Deploy to Production
+          default: true
+      - bool:
+          name: deploy_rctest
+          description: Deploy to RCTest
+          default: true
     node: generic
     project-type: pipeline
     sandbox: true
@@ -80,7 +96,7 @@
           escape-quotes: true
     dsl: |
       pipeline {{
-          agent {{ label 'jammy' }}
+          agent {{ label 'noble' }}
           options {{
               ansiColor('xterm')
           }}
@@ -93,23 +109,17 @@
                   }}
               }}
               stage('Build package in RCTest') {{
+                  when {{ expression {{ return params.deploy_rctest }} }}
                   steps {{
-                      buildMuranoPackage 'murano', 'testing'
-                  }}
-              }}
-              stage('Deploy package in RCTest') {{
-                  steps {{
-                      deployMuranoPackage 'murano', 'testing'
+                      buildMuranoPackage '{project_name}', 'testing'
+                      deployMuranoPackage '{project_name}', 'testing'
                   }}
               }}
               stage('Build package in Production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      buildMuranoPackage 'murano', 'production'
-                  }}
-              }}
-              stage('Deploy package in Production') {{
-                  steps {{
-                      deployMuranoPackage 'murano', 'production'
+                      buildMuranoPackage '{project_name}', 'production'
+                      deployMuranoPackage '{project_name}', 'production'
                   }}
               }}
           }}
