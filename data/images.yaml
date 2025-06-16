@@ -226,18 +226,29 @@
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
               }}
-              stage('Deploy in testing') {{
+              stage('Deploy image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
-                      deployImage '{project_name}', 'testing'
+                      retry(count: 3) {{
+                          deployImage '{project_name}', 'testing'
+                      }}
+                  }}
+              }}
+              stage('Set image properties in Testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{
                       setImageProperties '{project_name}', 'testing'
                   }}
               }}
-              stage('Test in testing') {{
+              stage('Test image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
-                  steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
+                  steps {{
+                      retry(count: 3) {{
+                          testOfficialImage '{project_name}', 'testing', params.az_testing
+                      }}
+                  }}
               }}
-              stage('Promote in testing') {{
+              stage('Promote in Testing') {{
                   when {{
                       allOf {{
                           expression {{ return params.deploy_testing }}
@@ -246,18 +257,29 @@
                   }}
                   steps {{ promoteOfficialImage '{project_name}', 'testing' }}
               }}
-              stage('Deploy in production') {{
+              stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      deployImage '{project_name}', 'production'
+                      retry(count: 3) {{
+                          deployImage '{project_name}', 'production'
+                      }}
+                  }}
+              }}
+              stage('Set image properties in Production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{
                       setImageProperties '{project_name}', 'production'
                   }}
               }}
-              stage('Test in production') {{
+              stage('Test image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
-                  steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
+                  steps {{
+                      retry(count: 3) {{
+                          testOfficialImage '{project_name}', 'production', params.az_production
+                      }}
+                  }}
               }}
-              stage('Promote in production') {{
+              stage('Promote in Production') {{
                   when {{
                       allOf {{
                           expression {{ return params.deploy_production }}
@@ -437,18 +459,30 @@
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
               }}
-              stage('Deploy in testing') {{
+
+              stage('Deploy image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
-                      deployImage '{project_name}', 'testing'
+                      retry(count: 3) {{
+                          deployImage '{project_name}', 'testing'
+                      }}
+                  }}
+              }}
+              stage('Set image properties in Testing') {{
+                  when {{ expression {{ return params.deploy_testing }} }}
+                  steps {{
                       setImageProperties '{project_name}', 'testing'
                   }}
               }}
-              stage('Test in testing') {{
+              stage('Test image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
-                  steps {{ testOfficialImage '{project_name}', 'testing', params.az_testing }}
+                  steps {{
+                      retry(count: 3) {{
+                          testOfficialImage '{project_name}', 'testing', params.az_testing
+                      }}
+                  }}
               }}
-              stage('Promote in testing') {{
+              stage('Promote image in Testing') {{
                   when {{
                       allOf {{
                           expression {{ return params.deploy_testing }}
@@ -457,18 +491,29 @@
                   }}
                   steps {{ promoteOfficialImage '{project_name}', 'testing' }}
               }}
-              stage('Deploy in production') {{
+              stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      deployImage '{project_name}', 'production'
+                      retry(count: 3) {{
+                          deployImage '{project_name}', 'production'
+                      }}
+                  }}
+              }}
+              stage('Set image properties in Production') {{
+                  when {{ expression {{ return params.deploy_production }} }}
+                  steps {{
                       setImageProperties '{project_name}', 'production'
                   }}
               }}
-              stage('Test in production') {{
+              stage('Test image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
-                  steps {{ testOfficialImage '{project_name}', 'production', params.az_production }}
+                  steps {{
+                      retry(count: 3) {{
+                          testOfficialImage '{project_name}', 'production', params.az_production
+                      }}
+                  }}
               }}
-              stage('Promote in production') {{
+              stage('Promote image in Production') {{
                   when {{
                       allOf {{
                           expression {{ return params.deploy_production }}
@@ -941,6 +986,15 @@
                       }}
                   }}
                   steps {{ deployBumblebeeVolumes '{project_name}', 'testing', params.volume_azs_testing }}
+              }}
+              stage('Promote in Testing') {{
+                  when {{
+                      allOf {{
+                          expression {{ return params.deploy_testing }}
+                          expression {{ return params.promote_testing }}
+                      }}
+                  }}
+                  steps {{ promoteOfficialImage '{project_name}', 'testing' }}
               }}
               stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
