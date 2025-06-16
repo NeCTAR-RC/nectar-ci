@@ -68,6 +68,10 @@
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
+      - '{name}-jammy-deb-package':
+          organisation: 'NeCTAR-RC'
+      - '{name}-noble-deb-package':
+          organisation: 'NeCTAR-RC'
 - project:
     name: hivemind_contrib
     jobs:
@@ -80,6 +84,10 @@
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
+      - '{name}-jammy-deb-package':
+          organisation: 'NeCTAR-RC'
+      - '{name}-noble-deb-package':
+          organisation: 'NeCTAR-RC'
 - project:
     name: langstroth
     jobs:
