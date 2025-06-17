@@ -11,11 +11,19 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
+    name: rocky-10
+    jobs:
+      - 'image-build-official-{name}'
+- project:
     name: almalinux-8
     jobs:
       - 'image-build-official-{name}'
 - project:
     name: almalinux-9
+    jobs:
+      - 'image-build-official-{name}'
+- project:
+    name: almalinux-10
     jobs:
       - 'image-build-official-{name}'
 - project:
@@ -27,15 +35,11 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
-    name: fedora-39
-    jobs:
-      - 'image-build-official-{name}'
-- project:
-    name: fedora-40
-    jobs:
-      - 'image-build-official-{name}'
-- project:
     name: fedora-41
+    jobs:
+      - 'image-build-official-{name}'
+- project:
+    name: fedora-42
     jobs:
       - 'image-build-official-{name}'
 - project:
