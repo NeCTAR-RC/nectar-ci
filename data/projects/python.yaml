@@ -182,7 +182,7 @@
     jobs:
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py311'
+          environment: 'py312'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py310'
