@@ -71,7 +71,7 @@
                   else
                       SITE=production
                   fi
-                  xvfb-run stormbee -c $CONFIG -p --site $SITE reset
+                  xvfb-run stormbee -c $CONFIG -p --site $SITE clear
                   xvfb-run stormbee -c $CONFIG -p --nagios --site $SITE --zone {zone} --desktop {desktop} scenario lifecycle
                   '''
               }}
