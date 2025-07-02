@@ -1,4 +1,9 @@
 - project:
+    name: beeswax
+    jobs:
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
+- project:
     name: nectar-ops
     jobs:
       - '{name}-pre-commit-all':
