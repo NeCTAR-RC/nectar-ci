@@ -491,7 +491,7 @@
           r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
           organisation: 'internal'
-          puppet_host: 'r10k.svc.artm.rctest.nectar.org.au'
+          puppet_host: 'puppet.test.nectar.org.au'
       - '{name}-r10k-cleanup':
           organisation: 'internal'
           r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
