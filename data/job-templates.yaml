@@ -1040,6 +1040,7 @@
     builders:
       - r10k-deploy:
           r10k_host: '{r10k_host}'
+          r10k_host_public: '{r10k_host_public}'
     wrappers:
       - ssh-agent-credentials:
           users:

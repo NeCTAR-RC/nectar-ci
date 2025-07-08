@@ -407,7 +407,7 @@
       - ssh-builder:
           ssh-user-ip: puppet@{r10k_host}:22
           command: |
-            export R10K_HOST={r10k_host}
+            export R10K_HOST={r10k_host_public}
             r10k-deploy.sh -e $GERRIT_PATCHSET_REVISION
 - builder:
     name: r10k-cleanup
