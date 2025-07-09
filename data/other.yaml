@@ -21,7 +21,7 @@
 - project:
     name: nectar-images
     jobs:
-      - '{name}-dummy':
+      - '{name}-pre-commit-all':
           organisation: 'NeCTAR-RC'
 - project:
     name: gitea-theme-ardc
