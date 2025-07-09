@@ -446,418 +446,150 @@
     jobs:
       - '{name}-puppet-unit':
           organisation: 'NeCTAR-RC'
+- job-group:
+    name: '{name}-puppet-site-test-jobs'
+    jobs:
+      - '{name}-yaml'
+      - '{name}-puppet-unit-job':
+          node: jammy
+          skip-vote: false
+      - '{name}-r10k-deploy':
+          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
+          r10k_host_public: 'r10k.rctest.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+          puppet_host: 'puppet.test.rc.nectar.org.au'
+      - '{name}-r10k-cleanup':
+          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
+      - '{name}-r10k-diff-catalog':
+          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
+- job-group:
+    name: '{name}-puppet-site-prod-jobs'
+    jobs:
+      - '{name}-yaml'
+      - '{name}-puppet-unit-job':
+          node: jammy
+          skip-vote: false
+      - '{name}-r10k-deploy':
+          r10k_host: 'r10k.rc.nectar.org.au'
+          r10k_host_public: 'r10k.rc.nectar.org.au'
+      - '{name}-r10k-deploy-control-repo':
+          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
+      - '{name}-r10k-cleanup':
+          r10k_host: 'r10k.rc.nectar.org.au'
+      - '{name}-r10k-diff-catalog':
+          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-adelaide
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'Intersect'
-      - '{name}-puppet-unit':
-          organisation: 'Intersect'
-      - '{name}-r10k-deploy':
-          organisation: 'Intersect'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'Intersect'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'Intersect'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'Intersect'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-ardc
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
     name: puppet-site-ardctest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.test.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
     name: puppet-site-melbourne
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'resplat-cloud'
-      - '{name}-puppet-unit':
-          organisation: 'resplat-cloud'
-      - '{name}-r10k-deploy':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'resplat-cloud'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-melbournetest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'resplat-cloud'
-      - '{name}-puppet-unit':
-          organisation: 'resplat-cloud'
-      - '{name}-r10k-deploy':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'resplat-cloud'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
 - project:
     name: puppet-site-monashtest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'nectar-monash'
-      - '{name}-puppet-unit':
-          organisation: 'nectar-monash'
-      - '{name}-r10k-deploy':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'nectar-monash'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
 - project:
     name: puppet-site-monashunder
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'nectar-monash'
-      - '{name}-puppet-unit':
-          organisation: 'nectar-monash'
-      - '{name}-r10k-deploy':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'nectar-monash'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-monash
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'nectar-monash'
-      - '{name}-puppet-unit':
-          organisation: 'nectar-monash'
-      - '{name}-r10k-deploy':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'nectar-monash'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-monashprivate
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'nectar-monash'
-      - '{name}-puppet-unit':
-          organisation: 'nectar-monash'
-      - '{name}-r10k-deploy':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'nectar-monash'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'nectar-monash'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-nectar
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
     name: puppet-site-nectarunder
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
     name: puppet-site-pawsey
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
     name: puppet-site-pawseytest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
     name: puppet-site-spartan
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'resplat-hpc'
-      - '{name}-puppet-unit':
-          organisation: 'resplat-hpc'
-      - '{name}-r10k-deploy':
-          organisation: 'resplat-hpc'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'resplat-hpc'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'resplat-hpc'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'resplat-hpc'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-tas
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'tas-gerrit'
-      - '{name}-puppet-unit':
-          organisation: 'tas-gerrit'
-      - '{name}-r10k-deploy':
-          organisation: 'tas-gerrit'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'tas-gerrit'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'tas-gerrit'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'tas-gerrit'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-tasunder
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'tas-gerrit'
-      - '{name}-puppet-unit':
-          organisation: 'tas-gerrit'
-      - '{name}-r10k-deploy':
-          organisation: 'tas-gerrit'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'tas-gerrit'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'tas-gerrit'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'tas-gerrit'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-thespian
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'resplat-hpc'
-      - '{name}-puppet-unit':
-          organisation: 'resplat-hpc'
-      - '{name}-r10k-deploy':
-          organisation: 'resplat-hpc'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'resplat-hpc'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'resplat-hpc'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'resplat-hpc'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
 - project:
     name: puppet-site-swinburne
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-uommediafluxtest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'resplat-cloud'
-      - '{name}-puppet-unit':
-          organisation: 'resplat-cloud'
-      - '{name}-r10k-deploy':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'resplat-cloud'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'resplat-cloud'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
 - project:
     name: puppet-site-rctest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-diff-{backend}':
           backend: 'catalog-diff'
           organisation: 'internal'
@@ -867,183 +599,48 @@
 - project:
     name: puppet-site-undertest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
 - project:
     name: puppet-site-auckland
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-aucklandunder
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-aucklandtest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-          r10k_host_public: 'r10k.rctest.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.test.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
 - project:
     name: puppet-site-auckland_sre
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'Auckland'
-      - '{name}-puppet-unit':
-          organisation: 'Auckland'
-      - '{name}-r10k-deploy':
-          organisation: 'Auckland'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'Auckland'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'Auckland'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'Auckland'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-auckland_sreunder
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'Auckland'
-      - '{name}-puppet-unit':
-          organisation: 'Auckland'
-      - '{name}-r10k-deploy':
-          organisation: 'Auckland'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'Auckland'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'Auckland'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'Auckland'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-intersect
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
-      - '{name}-puppet-unit':
-          organisation: 'internal'
-      - '{name}-r10k-deploy':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'internal'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'internal'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-qld_ctrl
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'QRIScloud'
-      - '{name}-puppet-unit':
-          organisation: 'QRIScloud'
-      - '{name}-r10k-deploy':
-          organisation: 'QRIScloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'QRIScloud'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'QRIScloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'QRIScloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-site-qld_rest
     jobs:
-      - '{name}-yaml':
+      - '{name}-puppet-site-prod-jobs':
           organisation: 'QRIScloud'
-      - '{name}-puppet-unit':
-          organisation: 'QRIScloud'
-      - '{name}-r10k-deploy':
-          organisation: 'QRIScloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
-          r10k_host_public: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-deploy-control-repo':
-          organisation: 'QRIScloud'
-          puppet_host: 'puppet.mgmt.rc.nectar.org.au'
-      - '{name}-r10k-cleanup':
-          organisation: 'QRIScloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          organisation: 'QRIScloud'
-          r10k_host: 'r10k.rc.nectar.org.au'
 - project:
     name: puppet-snmp
     jobs:
