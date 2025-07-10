@@ -460,8 +460,8 @@
           block-level: 'GLOBAL'
     publishers:
       - trigger:
-          project: murano-package-deploy-murano-{name}
-          threshold: SUCCESS
+          project: 'murano-package-deploy-murano-{name}'
+          threshold: 'SUCCESS'
     project-type: pipeline
     sandbox: true
     dsl: |
