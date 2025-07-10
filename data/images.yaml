@@ -99,6 +99,22 @@
     jobs:
       - 'image-build-extra-{name}'
 - project:
+    name: aiready-llms
+    jobs:
+      - 'image-build-extra-{name}'
+- project:
+    name: aiready-pytorch
+    jobs:
+      - 'image-build-extra-{name}'
+- project:
+    name: aiready-tensorflow
+    jobs:
+      - 'image-build-extra-{name}'
+- project:
+    name: aiready-torchvision
+    jobs:
+      - 'image-build-extra-{name}'
+- project:
     name: jenkins-slave-ubuntu-20.04
     jobs:
       - 'image-build-jenkins-{name}':
