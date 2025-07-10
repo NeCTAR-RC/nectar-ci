@@ -458,10 +458,6 @@
           blocking-jobs:
             - '^image-build-.*'
           block-level: 'GLOBAL'
-    publishers:
-      - trigger:
-          project: 'murano-package-deploy-murano-{name}'
-          threshold: 'SUCCESS'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -542,6 +538,13 @@
               }}
           }}
           post {{
+              success {{
+                  build job: 'murano-package-deploy-murano-{name}',
+                      parameters: [
+                          booleanParam(name: 'deploy_rctest', value: params.deploy_testing)
+                          booleanParam(name: 'deploy_production', value: params.deploy_production)
+                      ]
+              }}
               failure {{
                   node('internal') {{
                       deleteImage params.project_name, 'testing'
