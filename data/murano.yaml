@@ -63,9 +63,6 @@
 - job-template:
     name: 'murano-package-deploy-{name}'
     defaults: global
-    deploy_production: true
-    deploy_rctest: true
-    project_name: 'murano'
     parameters:
       - string:
           name: project_name
@@ -78,7 +75,7 @@
       - bool:
           name: deploy_rctest
           description: Deploy to RCTest
-          default: true
+          default: false
     node: generic
     project-type: pipeline
     sandbox: true
@@ -111,15 +108,15 @@
               stage('Build package in RCTest') {{
                   when {{ expression {{ return params.deploy_rctest }} }}
                   steps {{
-                      buildMuranoPackage '{project_name}', 'testing'
-                      deployMuranoPackage '{project_name}', 'testing'
+                      buildMuranoPackage params.project_name, 'testing'
+                      deployMuranoPackage params.project_name, 'testing'
                   }}
               }}
               stage('Build package in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      buildMuranoPackage '{project_name}', 'production'
-                      deployMuranoPackage '{project_name}', 'production'
+                      buildMuranoPackage params.project_name, 'production'
+                      deployMuranoPackage params.project_name, 'production'
                   }}
               }}
           }}
