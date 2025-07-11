@@ -465,7 +465,10 @@
       def imageName
       pipeline {{
           agent {{ node {{ label 'noble' }} }}
-          options {{ ansiColor('xterm') }}
+          options {{
+              ansiColor('xterm')
+              timeout(time: 4, unit: 'HOURS')
+          }}
           stages {{
               stage('Build Image') {{
                   steps {{ imageBuildOpenStack '{name}', params.project_name }}
@@ -538,14 +541,6 @@
               }}
           }}
           post {{
-              success {{
-                  build job: 'murano-package-deploy-murano-{name}',
-                      parameters: [
-                          booleanParam(name: 'deploy_rctest', value: params.deploy_testing),
-                          booleanParam(name: 'deploy_production', value: params.deploy_production)
-                      ],
-                      wait: false
-              }}
               failure {{
                   node('internal') {{
                       deleteImage params.project_name, 'testing'
