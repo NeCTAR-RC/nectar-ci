@@ -14,9 +14,10 @@
       - 'murano-package-check-{name}'
       - 'murano-package-deploy-{name}'
 - project:
-    name: murano-aiready-base
+    name: murano-aiready
     jobs:
-      - 'murano-package-check-{name}'
+      - '{name}-pre-commit-all':
+          organisation: 'NeCTAR-RC'
       - 'murano-package-deploy-{name}'
 - job-template:
     name: 'murano-package-check-{name}'
