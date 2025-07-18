@@ -161,7 +161,7 @@
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
-    name: bumblebee-neurodesk
+    name: bumblebee-neurodesktop
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
