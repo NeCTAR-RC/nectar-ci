@@ -467,7 +467,7 @@
           agent {{ node {{ label 'noble' }} }}
           options {{
               ansiColor('xterm')
-              timeout(time: 4, unit: 'HOURS')
+              timeout(time: 6, unit: 'HOURS')
           }}
           stages {{
               stage('Build Image') {{
