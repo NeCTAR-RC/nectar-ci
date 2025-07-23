@@ -519,12 +519,6 @@
               }}
           }}
           post {{
-              failure {{
-                  node('internal') {{
-                      deleteImage params.project_name, 'testing'
-                      deleteImage params.project_name, 'production'
-                  }}
-              }}
               cleanup {{
                   node('noble') {{ deleteDir() }}
               }}
@@ -1024,12 +1018,6 @@
               }}
           }}
           post {{
-              failure {{
-                  node('internal') {{
-                      deleteImage '{project_name}', 'testing'
-                      deleteImage '{project_name}', 'production'
-                  }}
-              }}
               cleanup {{
                   node('noble') {{ deleteDir() }}
               }}
