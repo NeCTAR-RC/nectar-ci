@@ -39,7 +39,7 @@
           ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh production
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.test.rc.nectar.org.au:22
+          ssh-user-ip: puppet@puppet.svc.artm.rctest.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh testing
 - builder:
     name: git-secrets-sorted
