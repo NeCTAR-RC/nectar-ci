@@ -180,6 +180,103 @@
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
 - job:
+    name: tempest-instance-migration
+    defaults: global
+    node: tempest
+    concurrent: true
+    scm:
+      - git:
+          url: ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+    builders:
+      - shell: |
+          #!/bin/bash
+          echo
+          echo "================================================================="
+          echo
+          echo "                   CLOUD: $CLOUD"
+          echo "                   AZ:    $AVAILABILITY_ZONE"
+          echo "                   HOST:  $HOST"
+          echo "                   TARGET_HOST: $TARGET_HOST"
+          echo "                   BLOCK_MIGRATION: $BLOCK_MIGRATION"
+          echo "                   STARTED: $(date)"
+          echo
+          echo "================================================================="
+          echo
+          . /opt/tempest/bin/activate
+          tmpdir=`mktemp -d --suffix=_tempest`
+          cd $WORKSPACE/tempest
+          [ $BLOCK_MIGRATION = true ] && enable_block="--block_migration"
+          ./setup_tempest.py --host $HOST --target_host $TARGET_HOST $enable_block -s $AVAILABILITY_ZONE -e $CLOUD -j check-instance-migration $tmpdir
+          cd $tmpdir
+          stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-instance-migration.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          RET=${PIPESTATUS[0]}
+          rm -rf $tmpdir
+          exit $RET
+    parameters:
+      - choice:
+          name: 'CLOUD'
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud to run tempest on (Production, Test, Dev). Leave as Production if unsure."
+      - choice:
+          name: 'AVAILABILITY_ZONE'
+          choices:
+            - adelaide
+            - ardc-syd-1
+            - auckland
+            - intersect-01
+            - intersect-adelaide
+            - melbourne-qh2
+            - melbourne-qh2-uom
+            - monash-01
+            - monash-02
+            - qld
+            - swinburne-01
+            - tasmania
+            - tasmania-02
+            - tasmania-s
+            - coreservices
+            - qh2-test
+            - monash-test
+            - aucklandtest
+            - lani
+            - luna
+          description: 'Availability zone.'
+      - string:
+          name: 'HOST'
+          description: |
+            Nova host to test. <br>
+            - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+            - Leave blank to let scheduler choose a host.
+      - string:
+          name: 'TARGET_HOST'
+          description: |
+            Nova target host used by migration tests. <br>
+            - Host must be in AVAILABILITY_ZONE; if not nova will return a 'No Valid Host' error.<br>
+            - Leave blank to let scheduler choose a host.
+      - bool:
+          name: 'BLOCK_MIGRATION'
+          default: false
+          description: "Whether to enable block migration during live migration. (Should enable it when no shared storage)"
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+      - build-discarder:
+          num-to-keep: 50
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-cleanup-operator"
+          block-level: 'GLOBAL'
+    publishers:
+      - trigger:
+          project: 'tempest-cleanup-operator'
+          threshold: 'FAILURE'
+- job:
     name: tempest-cinder-check
     defaults: global
     node: tempest
