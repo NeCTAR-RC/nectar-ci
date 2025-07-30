@@ -470,14 +470,14 @@
           node: jammy
           skip-vote: false
       - '{name}-r10k-deploy':
-          r10k_host: 'r10k.rc.nectar.org.au'
+          r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
           r10k_host_public: 'r10k.rc.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
           puppet_host: 'puppet.mgmt.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
-          r10k_host: 'r10k.rc.nectar.org.au'
+          r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
       - '{name}-r10k-diff-catalog':
-          r10k_host: 'r10k.rc.nectar.org.au'
+          r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
 - project:
     name: puppet-site-adelaide
     jobs:
