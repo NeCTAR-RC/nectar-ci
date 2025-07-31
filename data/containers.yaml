@@ -15,12 +15,16 @@
           organisation: 'internal'
       - '{name}-argocd-diff':
           organisation: 'internal'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - project:
     name: argocd-apps-prod
     jobs:
       - '{name}-yaml':
           organisation: 'internal'
       - '{name}-argocd-diff':
+          organisation: 'internal'
+      - '{name}-pre-commit-all':
           organisation: 'internal'
 - job-group:
     name: '{name}-kolla-container'
