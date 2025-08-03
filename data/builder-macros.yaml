@@ -36,7 +36,7 @@
     name: librarian-install
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@puppet.svc.artm.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh production
       - ssh-builder:
           ssh-user-ip: puppet@puppet.svc.artm.rctest.nectar.org.au:22
@@ -361,7 +361,7 @@
     name: site-deploy
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.mgmt.rc.nectar.org.au:22
+          ssh-user-ip: puppet@puppet.svc.artm.rc.nectar.org.au:22
           command: /usr/local/sbin/deploy-control-repo.sh $GERRIT_PROJECT
 - builder:
     name: r10k-deploy-control-repo
