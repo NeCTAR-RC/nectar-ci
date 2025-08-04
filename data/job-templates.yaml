@@ -1104,6 +1104,7 @@
     builders:
       - r10k-deploy-control-repo:
           puppet_host: '{puppet_host}'
+    publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
           users:
