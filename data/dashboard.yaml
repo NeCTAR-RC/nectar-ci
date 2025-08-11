@@ -155,7 +155,7 @@
                     helm install -n ${TAG} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
                       -f dev/dashboard/values.yaml --set image.tag=${TAG} \
                       --set conf.token_url=https://${TAG}.dev.rc.nectar.org.au/auth/websso/ \
-                      --set gateway.hostnames={{${{TAG}}.dev.rc.nectar.org.au}}
+                      --set gateway.hostnames={${TAG}.dev.rc.nectar.org.au}
                     '''
                   }
                 }
