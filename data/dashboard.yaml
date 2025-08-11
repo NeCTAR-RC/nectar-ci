@@ -98,7 +98,7 @@
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
               export OS_PROJECT_NAME=NeCTAR-Devs
-              openstack recordset create dev.rc.nectar.org.au. ${TAG}.dev.rc.nectar.org.au. --type CNAME --record k8s-worker-1.dev.rc.nectar.org.au.
+              openstack recordset create dev.rc.nectar.org.au. ${TAG}.dev.rc.nectar.org.au. --type CNAME --record default-ingress-gw.dev.rc.nectar.org.au.
               '''
             }
           }
@@ -155,8 +155,7 @@
                     helm install -n ${TAG} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
                       -f dev/dashboard/values.yaml --set image.tag=${TAG} \
                       --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
-                      --set ingress.hosts.0.host=${TAG}.dev.rc.nectar.org.au \
-                      --set ingress.hosts.0.paths.0.path=/
+                      --set gateway.hostnames.0=${{TAG}}.dev.rc.nectar.org.au
                     '''
                   }
                 }
@@ -165,7 +164,7 @@
                 BRANCH=`printf %s $GERRIT_BRANCH | jq -sRr @uri`
                 CHANGE_ID=${PROJECT}~${BRANCH}~${GERRIT_CHANGE_ID}
                 curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' \
-                  -d "{'message': 'Test at: http://${TAG}.dev.rc.nectar.org.au:31974'}" \
+                  -d "{'message': 'Test at: https://${TAG}.dev.rc.nectar.org.au'}" \
                   https://$GERRIT_HOST/a/changes/$CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
                 '''
               }
