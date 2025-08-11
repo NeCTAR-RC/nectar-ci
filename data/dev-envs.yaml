@@ -157,7 +157,7 @@
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${{TAG}} --create-namespace {name} oci://registry.rc.nectar.org.au/nectar-helm/{name} \
                       -f dev/{name}/values.yaml --set image.tag=${{TAG}} \
-                      --set gateway.hostnames=\{{${{TAG}}.dev.rc.nectar.org.au\}}
+                      --set gateway.hostnames={{${{TAG}}.dev.rc.nectar.org.au}}
                     '''
                   }}
                 }}
