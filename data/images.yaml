@@ -43,14 +43,6 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
-    name: ubuntu-20.04
-    jobs:
-      - 'image-build-official-{name}'
-- project:
-    name: ubuntu-20.04-nvidia-vgpu
-    jobs:
-      - 'image-build-official-{name}'
-- project:
     name: ubuntu-22.04
     jobs:
       - 'image-build-official-{name}'
@@ -76,10 +68,6 @@
       - 'image-build-official-{name}':
 - project:
     name: mysql-8.0
-    jobs:
-      - 'image-build-trove-{name}'
-- project:
-    name: postgresql-11
     jobs:
       - 'image-build-trove-{name}'
 - project:
@@ -115,12 +103,6 @@
     jobs:
       - 'image-build-extra-{name}'
 - project:
-    name: jenkins-slave-ubuntu-20.04
-    jobs:
-      - 'image-build-jenkins-{name}':
-          image_name: '{name}'
-          default_user: 'ubuntu'
-- project:
     name: jenkins-slave-ubuntu-22.04
     jobs:
       - 'image-build-jenkins-{name}':
@@ -146,10 +128,6 @@
           default_user: 'root'
 - project:
     name: bumblebee-guacamole
-    jobs:
-      - 'image-build-bumblebee-{name}':
-- project:
-    name: bumblebee-ubuntu-20.04
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
