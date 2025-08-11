@@ -154,8 +154,8 @@
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${TAG} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
                       -f dev/dashboard/values.yaml --set image.tag=${TAG} \
-                      --set conf.token_url=http://${TAG}.dev.rc.nectar.org.au:31974/auth/websso/ \
-                      --set gateway.hostnames.0=${{TAG}}.dev.rc.nectar.org.au
+                      --set conf.token_url=https://${TAG}.dev.rc.nectar.org.au/auth/websso/ \
+                      --set gateway.hostnames=\{{${{TAG}}.dev.rc.nectar.org.au\}}
                     '''
                   }
                 }
