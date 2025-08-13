@@ -1,0 +1,20 @@
+- project:
+    name: mks-argocd-prod
+    jobs:
+      - '{name}-yaml':
+          organisation: 'MKS'
+      - '{name}-argocd-diff':
+          organisation: 'MKS'
+      - '{name}-pre-commit-all':
+          organisation: 'MKS'
+          organisation: 'MKS'
+- project:
+    name: mks-argocd-test
+    jobs:
+      - '{name}-yaml':
+          organisation: 'MKS'
+      - '{name}-argocd-diff':
+          organisation: 'MKS'
+      - '{name}-pre-commit-all':
+          organisation: 'MKS'
+          organisation: 'MKS'
