@@ -35,6 +35,10 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
+    name: debian-13
+    jobs:
+      - 'image-build-official-{name}'
+- project:
     name: fedora-41
     jobs:
       - 'image-build-official-{name}'
