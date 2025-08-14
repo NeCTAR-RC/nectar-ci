@@ -139,6 +139,10 @@
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
+    name: bumblebee-ubuntu-24.04
+    jobs:
+      - 'image-build-bumblebee-{name}':
+- project:
     name: bumblebee-scientific-toolbox
     jobs:
       - 'image-build-bumblebee-{name}':
