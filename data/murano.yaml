@@ -1,12 +1,14 @@
 - project:
     name: murano-rstudio
     jobs:
-      - 'murano-package-check-{name}'
+      - '{name}-pre-commit-all':
+          organisation: 'NeCTAR-RC'
       - 'murano-package-deploy-{name}'
 - project:
     name: murano-jupyternotebook
     jobs:
-      - 'murano-package-check-{name}'
+      - '{name}-pre-commit-all':
+          organisation: 'NeCTAR-RC'
       - 'murano-package-deploy-{name}'
 - project:
     name: murano-glamworkbench
