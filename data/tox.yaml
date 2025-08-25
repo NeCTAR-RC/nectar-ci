@@ -41,6 +41,10 @@
           ubuntu_release: 'noble'
           environment: 'py312'
           os_release: '2024.1'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+          ubuntu_release: 'noble'
+          environment: 'py312'
+          os_release: '2025.1'
 - job-group:
     name: '{name}-os-tox-{environment}'
     jobs:
@@ -56,6 +60,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
           ubuntu_release: 'jammy'
           os_release: '2024.1'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+          ubuntu_release: 'noble'
+          os_release: '2025.1'
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
     defaults: global
