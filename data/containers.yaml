@@ -41,6 +41,8 @@
           os_release: '2023.2'
       - '{name}-kolla-container-{os_release}':
           os_release: '2024.1'
+      - '{name}-kolla-container-{os_release}':
+          os_release: '2025.1'
 - job-group:
     name: '{name}-kolla-container-upstream'
     jobs:
@@ -56,6 +58,8 @@
           os_release: '2023.2'
       - '{name}-kolla-container-upstream-{os_release}':
           os_release: '2024.1'
+      - '{name}-kolla-container-upstream-{os_release}':
+          os_release: '2025.1'
 # Iscsi build needs special job as we just tag on openstack version
 - job-group:
     name: 'iscsid-kolla-container-upstream'
