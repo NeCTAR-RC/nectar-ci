@@ -170,6 +170,10 @@
     name: ubuntu-2204
     jobs:
       - 'image-build-capi-{name}'
+- project:
+    name: ubuntu-2404
+    jobs:
+      - 'image-build-capi-{name}'
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
