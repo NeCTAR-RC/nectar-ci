@@ -147,12 +147,31 @@
                   withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
                                   serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
                   ]) {
-                    sh '''
+                    sh '''#!/bin/bash
+
+                    # Assume GERRIT_BRANCH is set in the environment
+                    input="$GERRIT_BRANCH"
+
+                    # Extract year and release number
+                    year=$(echo "$input" | cut -d'/' -f2 | cut -d'.' -f1)
+                    release=$(echo "$input" | cut -d'.' -f2)
+
+                    # Determine value based on year and release
+                    if [[ "$year" == "2023" && "$release" == "2" ]]; then
+                      helm_version="3"
+                    elif [[ "$year" == "2025" && "$release" == "1" ]]; then
+                      helm_version="4"
+                    else
+                      echo "Error: Unrecognized GERRIT_BRANCH format or unsupported year/release combination: $input" >&2
+                      exit 1
+                    fi
+
                     kubectl get namespaces
                     export HELM_EXPERIMENTAL_OCI=1
                     echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${TAG} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
+                      --version ^${helm_version} \
                       -f dev/dashboard/values.yaml --set image.tag=${TAG} \
                       --set conf.token_url=https://${TAG}.dev.rc.nectar.org.au/auth/websso/ \
                       --set gateway.hostnames={${TAG}.dev.rc.nectar.org.au}
