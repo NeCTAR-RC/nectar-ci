@@ -169,6 +169,11 @@
       - '{name}-noble-deb-package':
           organisation: 'internal'
 - project:
+    name: nectar-access-report
+    jobs:
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
+- project:
     name: nectar-tc-report
     jobs:
       - '{name}-jammy-tox-{environment}':
