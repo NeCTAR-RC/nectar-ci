@@ -492,7 +492,7 @@
 - project:
     name: openstack-bash-creds-helper
     jobs:
-      - '{name}-run-tests':
+      - '{name}-pre-commit-all':
           organisation: 'NeCTAR-RC'
 - project:
     name: nectar-jupyterhub
