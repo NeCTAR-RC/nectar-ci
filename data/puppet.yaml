@@ -319,9 +319,9 @@
     name: puppet-pawsey
     jobs:
       - '{name}-puppet-unit':
-          organisation: 'internal'
+          organisation: 'Pawsey'
       - '{name}-pre-commit-all':
-          organisation: 'internal'
+          organisation: 'Pawsey'
 - project:
     name: puppet-physical
     jobs:
@@ -545,16 +545,16 @@
     name: puppet-site-pawsey
     jobs:
       - '{name}-puppet-site-prod-jobs':
-          organisation: 'internal'
+          organisation: 'Pawsey'
       - '{name}-pre-commit-all':
-          organisation: 'internal'
+          organisation: 'Pawsey'
 - project:
     name: puppet-site-pawseytest
     jobs:
       - '{name}-puppet-site-test-jobs':
-          organisation: 'internal'
+          organisation: 'Pawsey'
       - '{name}-pre-commit-all':
-          organisation: 'internal'
+          organisation: 'Pawsey'
 - project:
     name: puppet-site-spartan
     jobs:
