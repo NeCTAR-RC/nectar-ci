@@ -285,7 +285,7 @@
     name: jekyll-test-build
     builders:
       - shell: |
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3/
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
           export OS_AUTH_TYPE=v3applicationcredential
           export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
           export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
@@ -315,7 +315,7 @@
     name: jekyll-test-build-cleanup
     builders:
       - shell: |
-          export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3/
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
           export OS_AUTH_TYPE=v3applicationcredential
           export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
           export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET

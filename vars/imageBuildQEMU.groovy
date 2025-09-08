@@ -4,7 +4,7 @@ def call(String imageName, String projectName = 'NeCTAR-Images') {
         sh """#!/bin/bash -eu
         echo "\033[35;1m========== Building ==========\033[0m"
 
-        export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+        export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
         export OS_IDENTITY_API_VERSION=3
         export OS_PROJECT_NAME=$projectName
         export OS_PROJECT_DOMAIN_NAME=Default

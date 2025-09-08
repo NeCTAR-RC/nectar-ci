@@ -48,7 +48,7 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
@@ -83,7 +83,7 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
@@ -179,7 +179,7 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
@@ -240,7 +240,7 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3
+              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
