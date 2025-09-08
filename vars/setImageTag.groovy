@@ -9,7 +9,7 @@ def call(String projectName, String tag, String cloudEnv) {
             break
           case "testing":
             OSCredID = 'cc826c4e-07fe-4a0c-b334-fb8100b23c7b'
-            OSAuthURL = 'https://keystone.test.rc.nectar.org.au:5000/v3'
+            OSAuthURL = 'https://identity.rctest.nectar.org.au/v3'
             break
           case "development":
             OSCredID = 'bcb39a6c-5aca-4900-94aa-63fb4364d8c2'
