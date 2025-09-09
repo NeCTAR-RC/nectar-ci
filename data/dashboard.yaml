@@ -6,11 +6,11 @@
     parameters:
       - string:
           name: GERRIT_REFSPEC
-          default: refs/heads/nectar/wallaby
+          default: refs/heads/nectar/2025.1
           description: "The ref to use."
       - string:
           name: GERRIT_BRANCH
-          default: nectar/wallaby
+          default: nectar/2025.1
           description: "The branch to use."
     properties:
       - throttle:
@@ -224,11 +224,11 @@
     parameters:
       - string:
           name: GERRIT_REFSPEC
-          default: refs/heads/nectar/wallaby
+          default: refs/heads/nectar/2025.1
           description: "The ref to use."
       - string:
           name: GERRIT_BRANCH
-          default: nectar/wallaby
+          default: nectar/2025.1
           description: "The branch to use."
     triggers:
       - gerrit:
