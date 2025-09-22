@@ -57,7 +57,7 @@ To update a single job::
 
 To update all jobs::
 
-   $ jenkins-jobs update -r data.
+   $ jenkins-jobs update -r data
    INFO:root:Updating jobs in . ([])
    INFO:jenkins_jobs.builder:Creating jenkins job nectar-ci-ruby-lint
    INFO:jenkins_jobs.builder:Reconfiguring jenkins job puppet-ceilometer-puppet-unit
