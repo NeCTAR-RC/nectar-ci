@@ -162,7 +162,7 @@
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
-          r10k_host: 'r10k.mgmt.rc.nectar.org.au'
+          r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
           r10k_build_env: 'production'
     wrappers:
       - ssh-agent-credentials:
