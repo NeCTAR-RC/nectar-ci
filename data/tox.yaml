@@ -40,10 +40,6 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
           ubuntu_release: 'noble'
           environment: 'py312'
-          os_release: '2024.1'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'noble'
-          environment: 'py312'
           os_release: '2025.1'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
           ubuntu_release: 'noble'
