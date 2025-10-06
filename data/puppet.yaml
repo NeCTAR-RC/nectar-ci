@@ -723,7 +723,7 @@
             - change-merged-event
           projects:
             - project-compare-type: 'REG_EXP'
-              project-pattern: '.*/puppet-(?!site-|library|melbourne|pawsey|spartan|tas).*'
+              project-pattern: '.*/puppet-(?!site-|library|ardc|melbourne|pawsey|spartan|tas).*'
               branches:
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
