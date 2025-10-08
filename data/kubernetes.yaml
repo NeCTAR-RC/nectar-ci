@@ -187,3 +187,8 @@
           organisation: 'internal'
       - '{name}-pre-commit-all':
           organisation: 'internal'
+- project:
+    name: nectar-grafana-dashboards
+    jobs:
+      - '{name}-kustomize-validate':
+          organisation: 'NeCTAR-RC'
