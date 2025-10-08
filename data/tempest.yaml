@@ -1255,7 +1255,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py --host cc1 --target_host cc2 -s ardctest-artm -e testing -j check-compute-host-advanced --block_migration $tmpdir
+          ./setup_tempest.py --host cc1.svc.artm.ardctest.nectar.org.au --target_host cc2.svc.artm.ardctest.nectar.org.au -s ardctest-artm -e testing -j check-compute-host-advanced --block_migration $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
