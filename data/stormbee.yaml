@@ -11,7 +11,7 @@
       - monash-02
       - QRIScloud
       - auckland
-      - coreservices
+      - ardctest-artm
     exclude:
       - desktop: win2022
         zone: ardc-syd-1
@@ -66,7 +66,7 @@
                   sh '''
                   export PYTHONUNBUFFERED=1
                   . ./venv-stormbee/bin/activate
-                  if [[ "{zone}" == "coreservices" ]]; then
+                  if [[ "{zone}" == "ardctest-artm" ]]; then
                       SITE=testing
                   else
                       SITE=production

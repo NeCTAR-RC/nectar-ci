@@ -182,7 +182,7 @@
     promote_prod: true
     test_prod_az: ardc-syd-1
     deploy_rctest: true
-    test_rctest_az: coreservices
+    test_rctest_az: ardctest-artm
     parameters:
       - string:
           name: project_name
@@ -211,7 +211,7 @@
       - string:
           name: az_testing
           description: AZ for testing in RCTest
-          default: 'coreservices'
+          default: 'ardctest-artm'
     properties:
       - authorization:
           nobody:
@@ -376,7 +376,7 @@
               stage('Test Image in Test Cloud') {{
                   agent {{ label 'tempest' }}
                   steps {{
-                      testTroveImage 'testing', 'coreservices'
+                      testTroveImage 'testing', 'ardctest-artm'
                   }}
               }}
               stage('Deploy to Production Cloud') {{
@@ -438,7 +438,7 @@
       - string:
           name: az_testing
           description: AZ for testing in RCTest
-          default: 'coreservices'
+          default: 'ardctest-artm'
     properties:
       - authorization:
           nobody:
@@ -592,7 +592,7 @@
               stage('Test Image in Test Cloud') {
                   agent { label 'tempest' }
                   steps {
-                      testOctaviaImage 'testing', 'coreservices'
+                      testOctaviaImage 'testing', 'ardctest-artm'
                   }
               }
               stage('Deploy to Production Cloud') {
@@ -694,7 +694,7 @@
               stage('Test Image in Test Cloud') {
                   agent { label 'tempest' }
                   steps {
-                      testManilaImage 'testing', 'coreservices'
+                      testManilaImage 'testing', 'ardctest-artm'
                   }
               }
               stage('Deploy to Production Cloud') {
@@ -920,7 +920,7 @@
       - string:
           name: az_testing
           description: AZ for testing in RCTest
-          default: 'coreservices'
+          default: 'ardctest-artm'
       - bool:
           name: deploy_volumes
           description: Deploy the volumes for the image
@@ -932,7 +932,7 @@
       - string:
           name: volume_azs_testing
           description: Deploy the volumes for the image
-          default: 'coreservices'
+          default: 'ardctest-artm'
     properties:
       - authorization:
           nobody:

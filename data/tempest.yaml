@@ -54,7 +54,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -141,7 +141,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -236,7 +236,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -329,7 +329,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -413,7 +413,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -489,7 +489,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - aucklandtest
             - lani
@@ -566,7 +566,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -649,7 +649,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -723,7 +723,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -791,7 +791,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -859,7 +859,7 @@
             - tasmania
             - tasmania-02
             - tasmania-s
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -926,7 +926,7 @@
           whitelist: 'octavia'
           cloud: 'testing'
           site:
-            - coreservices
+            - ardctest-artm
 - project:
     name: s3-rctest
     jobs:
@@ -942,7 +942,7 @@
           whitelist: 'heat'
           cloud: 'testing'
           site:
-            - coreservices
+            - ardctest-artm
             - qh2-test
             - monash-test
             - aucklandtest
@@ -1071,7 +1071,7 @@
 - project:
     name: tempest-nagios-services-rctest
     site:
-      - coreservices
+      - ardctest-artm
       - qh2-test
       - monash-test
       - aucklandtest
@@ -1120,7 +1120,7 @@
           job: 'telemetry'
           whitelist: 'telemetry'
           site:
-            - coreservices
+            - ardctest-artm
       - 'tempest-cleanup-telemetry-{cloud}'
 - project:
     name: glance-scenario
@@ -1206,7 +1206,7 @@
           echo "================================================================="
           echo
           echo "                   CLOUD:   testing"
-          echo "                   AZ:      coreservices"
+          echo "                   AZ:      ardctest-artm"
           echo "                   STARTED: $(date)"
           echo
           echo "================================================================="
@@ -1214,7 +1214,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py -s coreservices -e testing -j check-compute-host $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-compute-host $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1247,7 +1247,7 @@
           echo "================================================================="
           echo
           echo "                   CLOUD:   testing"
-          echo "                   AZ:      coreservices"
+          echo "                   AZ:      ardctest-artm"
           echo "                   STARTED: $(date)"
           echo
           echo "================================================================="
@@ -1255,7 +1255,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
-          ./setup_tempest.py --host cc5 --target_host cc3 -s coreservices -e testing -j check-compute-host-advanced --block_migration $tmpdir
+          ./setup_tempest.py --host cc1 --target_host cc2 -s ardctest-artm -e testing -j check-compute-host-advanced --block_migration $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1283,7 +1283,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-cinder $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-cinder $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1315,7 +1315,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-magnum $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-magnum $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1347,7 +1347,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1379,7 +1379,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-scenario $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1411,7 +1411,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-murano $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-murano $tmpdir
           cd $tmpdir
           stestr run -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
@@ -1443,7 +1443,7 @@
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest/
-          ./setup_tempest.py -s coreservices -e testing -j check-trove $tmpdir
+          ./setup_tempest.py -s ardctest-artm -e testing -j check-trove $tmpdir
           cd $tmpdir
           stestr run -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${PIPESTATUS[0]}
