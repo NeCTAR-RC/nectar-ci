@@ -962,15 +962,6 @@
       - 'tempest-{name}-check':
           whitelist: 'manila-cephfs'
 - project:
-    name: manila-cephfs-rctest
-    jobs:
-      - 'tempest-{name}-check-{site}':
-          job: 'manila-cephfs'
-          whitelist: 'manila-cephfs'
-          cloud: 'testing'
-          site:
-            - coreservices
-- project:
     name: tempest-nagios-services-manila-nfs
     site:
       - auckland
@@ -990,16 +981,6 @@
             - 'share_cephfs'
           skip_capacity_check: true
           environment: 'production'
-- project:
-    name: tempest-nagios-services-manila-cephfs-rctest
-    site:
-      - coreservices
-    jobs:
-      - 'tempest-nagios-services-{site}-{test}':
-          test:
-            - 'share_cephfs'
-          skip_capacity_check: true
-          environment: 'testing'
 - project:
     name: tempest-nagios-services
     site:
