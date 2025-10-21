@@ -73,7 +73,7 @@
               done
               '''
 
-              withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd8',
+              withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd89',
                     serverUrl: 'https://138.44.21.152:6443',
               ]) {
                 sh '''
@@ -144,7 +144,7 @@
                     credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                     branch: 'master'
                 retry(3) {
-                  withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd8',
+                  withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd89',
                                   serverUrl: 'https://138.44.21.152:6443',
                   ]) {
                     sh '''#!/bin/bash
@@ -280,7 +280,7 @@
               done
               '''
 
-              withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd8',
+              withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd89',
                     serverUrl: 'https://138.44.21.152:6443',
               ]) {
                 sh '''
