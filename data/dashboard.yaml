@@ -69,12 +69,12 @@
               recordsets=`openstack recordset list dev.rc.nectar.org.au. | grep ${TAG_BASE} | awk '{print $2}'`
               for i in $recordsets
               do
-                  openstack recordset delete dev.rc.nectar.org.au. $i
+                  openstack recordset delete rcdev.nectar.org.au. $i
               done
               '''
 
-              withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
-                    serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
+              withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd8',
+                    serverUrl: 'https://138.44.21.152:6443',
               ]) {
                 sh '''
                   TAG_BASE=review-$GERRIT_CHANGE_NUMBER
@@ -98,7 +98,7 @@
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
               export OS_PROJECT_NAME=NeCTAR-Devs
-              openstack recordset create dev.rc.nectar.org.au. ${TAG}.dev.rc.nectar.org.au. --type CNAME --record default-ingress-gw.dev.rc.nectar.org.au.
+              openstack recordset create rcdev.nectar.org.au. ${TAG}.rcdev.nectar.org.au. --type CNAME --record lb.rcdev.nectar.org.au.
               '''
             }
           }
@@ -144,8 +144,8 @@
                     credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                     branch: 'master'
                 retry(3) {
-                  withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
-                                  serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
+                  withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd8',
+                                  serverUrl: 'https://138.44.21.152:6443',
                   ]) {
                     sh '''#!/bin/bash
 
@@ -173,8 +173,8 @@
                     helm install -n ${TAG} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
                       --version ^${helm_version} \
                       -f dev/dashboard/values.yaml --set image.tag=${TAG} \
-                      --set conf.token_url=https://${TAG}.dev.rc.nectar.org.au/auth/websso/ \
-                      --set gateway.hostnames={${TAG}.dev.rc.nectar.org.au}
+                      --set conf.token_url=https://${TAG}.rcdev.nectar.org.au/auth/websso/ \
+                      --set gateway.hostnames={${TAG}.rcdev.nectar.org.au}
                     '''
                   }
                 }
@@ -183,7 +183,7 @@
                 BRANCH=`printf %s $GERRIT_BRANCH | jq -sRr @uri`
                 CHANGE_ID=${PROJECT}~${BRANCH}~${GERRIT_CHANGE_ID}
                 curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' \
-                  -d "{'message': 'Test at: https://${TAG}.dev.rc.nectar.org.au'}" \
+                  -d "{'message': 'Test at: https://${TAG}.rcdev.nectar.org.au'}" \
                   https://$GERRIT_HOST/a/changes/$CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
                 '''
               }
@@ -201,10 +201,10 @@
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
               export OS_PROJECT_NAME=NeCTAR-Devs
-              recordsets=`openstack recordset list dev.rc.nectar.org.au. | grep ${TAG} | awk '{print $2}'`
+              recordsets=`openstack recordset list rcdev.nectar.org.au. | grep ${TAG} | awk '{print $2}'`
               for i in $recordsets
               do
-                  openstack recordset delete dev.rc.nectar.org.au. $i
+                  openstack recordset delete rcdev.nectar.org.au. $i
               done
               '''
             }
@@ -273,15 +273,15 @@
 
               TAG_BASE=review-$GERRIT_CHANGE_NUMBER
 
-              recordsets=`openstack recordset list dev.rc.nectar.org.au. | grep ${TAG_BASE} | awk '{print $2}'`
+              recordsets=`openstack recordset list rcdev.nectar.org.au. | grep ${TAG_BASE} | awk '{print $2}'`
               for i in $recordsets
               do
-                  openstack recordset delete dev.rc.nectar.org.au. $i
+                  openstack recordset delete rcdev.nectar.org.au. $i
               done
               '''
 
-              withKubeConfig([credentialsId: 'd6011820-5ff7-42de-9722-8fbf66aa479d',
-                    serverUrl: 'https://k8s-api.dev.rc.nectar.org.au:6443',
+              withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd8',
+                    serverUrl: 'https://138.44.21.152:6443',
               ]) {
                 sh '''
                   TAG_BASE=review-$GERRIT_CHANGE_NUMBER
