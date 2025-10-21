@@ -9,6 +9,15 @@
       - '{name}-container':
           organisation: 'internal'
 - project:
+    name: argocd-apps-dev
+    jobs:
+      - '{name}-yaml':
+          organisation: 'internal'
+      - '{name}-argocd-diff':
+          organisation: 'internal'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
+- project:
     name: argocd-apps-test
     jobs:
       - '{name}-yaml':
