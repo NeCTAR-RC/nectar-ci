@@ -255,6 +255,8 @@
     jobs:
       - '{name}-puppet-unit':
           organisation: 'internal'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
       - '{name}-puppet-prod-review':
           organisation: 'internal'
 - project:
@@ -357,6 +359,8 @@
     jobs:
       - '{name}-puppet-unit':
           organisation: 'internal'
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
       - '{name}-puppet-prod-review':
           organisation: 'internal'
 - project:
@@ -383,6 +387,8 @@
     name: puppet-role
     jobs:
       - '{name}-puppet-unit':
+          organisation: 'internal'
+      - '{name}-pre-commit-all':
           organisation: 'internal'
       - '{name}-puppet-prod-review':
           organisation: 'internal'
