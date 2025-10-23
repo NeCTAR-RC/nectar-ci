@@ -1054,6 +1054,7 @@
     defaults: global
     node: internal
     quiet-period: 30
+    concurrent: false
     properties:
       - build-blocker:
           blocking-jobs:
