@@ -17,3 +17,8 @@
           organisation: 'NeCTAR-RC'
       - '{name}-jekyll-test-build-cleanup':
           organisation: 'NeCTAR-RC'
+- project:
+    name: nectar-architecture
+    jobs:
+      - '{name}-dummy':
+          organisation: 'internal'
