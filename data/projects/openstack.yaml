@@ -369,6 +369,13 @@
     jobs:
       - 'requirements-kolla-container-{os_release}'
 - project:
+    name: swift
+    jobs:
+      - '{name}-os-tox-python3':
+          organisation: 'NeCTAR-RC'
+      - '{name}-os-deb-package':
+          organisation: 'NeCTAR-RC'
+- project:
     name: telemetry-tempest-plugin
     jobs:
       - '{name}-default-tox-{environment}':
