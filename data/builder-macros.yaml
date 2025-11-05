@@ -109,7 +109,7 @@
 - builder:
     name: 'pbuilder-create'
     builders:
-      - shell: 'hivemind pbuilder.create --os-release {os_release} || hivemind pbuilder.update --os-release {os_release}'
+      - shell: 'hivemind pbuilder.create --ubuntu-release {ubuntu_release} || hivemind pbuilder.update --ubuntu-release {ubuntu_release}'
 - builder:
     name: 'os-pbuilder-checkout'
     builders:
@@ -152,7 +152,7 @@
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
           rm -f *.deb
-          hivemind packaging.buildpackage --os-release {os_release}
+          hivemind packaging.buildpackage --ubuntu-release {ubuntu_release}
           cp ../../build-area/*/*.deb .
 - builder:
     name: 'pbuilder-buildpackage-no-upload'
@@ -161,7 +161,7 @@
           export DEBFULLNAME="$GIT_AUTHOR_NAME"
           export DEBEMAIL="$GIT_AUTHOR_EMAIL"
           rm -f *.deb
-          hivemind packaging.buildpackage --os-release {os_release} --no-upload
+          hivemind packaging.buildpackage --ubuntu-release {ubuntu_release} --no-upload
           cp ../../build-area/*/*.deb .
 - builder:
     name: 'os-pbuilder-create'

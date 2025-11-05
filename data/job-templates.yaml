@@ -436,9 +436,9 @@
     builders:
       - os-pbuilder-checkout
       - pbuilder-create:
-          os_release: "jammy"
+          ubuntu_release: "jammy"
       - pbuilder-buildpackage:
-          os_release: "jammy"
+          ubuntu_release: "jammy"
     publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
@@ -497,9 +497,9 @@
     builders:
       - os-pbuilder-checkout
       - pbuilder-create:
-          os_release: "noble"
+          ubuntu_release: "noble"
       - pbuilder-buildpackage:
-          os_release: "noble"
+          ubuntu_release: "noble"
     publishers: !include: publisher.yaml.inc
     wrappers:
       - ssh-agent-credentials:
