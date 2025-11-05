@@ -375,6 +375,8 @@
           organisation: 'NeCTAR-RC'
       - '{name}-os-deb-package':
           organisation: 'NeCTAR-RC'
+      - '{name}-jammy-deb-package':
+          organisation: 'NeCTAR-RC'
 - project:
     name: telemetry-tempest-plugin
     jobs:
