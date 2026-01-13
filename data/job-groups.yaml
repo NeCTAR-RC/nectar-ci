@@ -2,5 +2,5 @@
     name: '{name}-puppet-unit'
     jobs:
       - '{name}-puppet-unit-job':
-          node: jammy
+          node: noble
           skip-vote: false

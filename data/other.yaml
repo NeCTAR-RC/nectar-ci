@@ -295,7 +295,7 @@
 - job:
     name: 'octocatalog-diff-test'
     defaults: global
-    node: jammy
+    node: noble
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -390,7 +390,7 @@
     name: 'hieradata-duplicate-check'
     concurrent: false
     defaults: global
-    node: jammy
+    node: noble
     parameters:
       - string:
           name: GERRIT_REFSPEC

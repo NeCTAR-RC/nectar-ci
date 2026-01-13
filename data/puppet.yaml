@@ -457,7 +457,7 @@
     jobs:
       - '{name}-yaml'
       - '{name}-puppet-unit-job':
-          node: jammy
+          node: noble
           skip-vote: false
       - '{name}-r10k-deploy':
           r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
@@ -473,7 +473,7 @@
     jobs:
       - '{name}-yaml'
       - '{name}-puppet-unit-job':
-          node: jammy
+          node: noble
           skip-vote: false
       - '{name}-r10k-deploy':
           r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
