@@ -1923,3 +1923,217 @@
               credential-id: 7a2e4b77-a292-47a1-b852-c0cfd9c1c383
               username: OS_USERNAME
               password: OS_PASSWORD
+- job:
+    name: tempest-nagios-toggle
+    project-type: pipeline
+    concurrent: false
+    description: |
+      Toggle (enable/disable) tempest nagios monitoring jobs.
+      Use this during cloud issues to reduce system load.
+
+      Security Note: This job requires Jenkins Script Security approval for:
+      - Jenkins.instance access
+      - Job.isDisabled(), Job.enable(), Job.disable() methods
+      Approve these in: Manage Jenkins > In-process Script Approval
+    parameters:
+      - choice:
+          name: 'ACTION'
+          choices:
+            - disable
+            - enable
+          description: "Action to perform on matching jobs"
+      - choice:
+          name: 'SCOPE'
+          choices:
+            - all-tests
+            - all-compute-tests
+            - all-network-tests
+            - all-volume-tests
+            - all-production-sites
+            - all-testing-sites
+            - site-adelaide
+            - site-ardc-syd-1
+            - site-auckland
+            - site-intersect-01
+            - site-intersect-adelaide
+            - site-melbourne-qh2
+            - site-melbourne-qh2-uom
+            - site-monash-01
+            - site-monash-02
+            - site-pawsey
+            - site-qld
+            - site-swinburne-01
+            - site-tasmania
+            - site-tasmania-02
+            - site-tasmania-s
+            - site-ardctest-artm
+            - site-qh2-test
+            - site-monash-test
+            - site-aucklandtest
+          description: "Scope of jobs to toggle"
+      - bool:
+          name: 'DRY_RUN'
+          default: true
+          description: "If checked, only list jobs that would be affected without making changes"
+    dsl: |
+      // Get parameters
+      def action = params.ACTION
+      def scope = params.SCOPE
+      def dryRun = params.DRY_RUN
+
+      node('internal') {
+          stage('Toggle Nagios Jobs') {
+              // Site definitions (must match SCOPE parameter site-* choices)
+              def PRODUCTION_SITES = ['adelaide', 'ardc-syd-1', 'auckland', 'intersect-01',
+                                      'intersect-adelaide', 'melbourne-qh2', 'melbourne-qh2-uom',
+                                      'monash-01', 'monash-02', 'pawsey', 'qld', 'swinburne-01',
+                                      'tasmania', 'tasmania-02', 'tasmania-s']
+              def TEST_SITES = ['ardctest-artm', 'qh2-test', 'monash-test', 'aucklandtest']
+
+              // Audit logging
+              def buildUser = currentBuild.getBuildCauses()[0]?.userId ?: 'SYSTEM'
+              echo "=" * 50
+              echo "[AUDIT] Tempest Nagios Job Toggle"
+              echo "[AUDIT] User: ${buildUser}"
+              echo "[AUDIT] Timestamp: ${new Date()}"
+              echo "[AUDIT] Action: ${action}"
+              echo "[AUDIT] Scope: ${scope}"
+              echo "[AUDIT] DRY RUN: ${dryRun}"
+              echo "=" * 50
+              echo ""
+
+              // Get Jenkins instance and find ALL tempest nagios jobs
+              def jenkins = Jenkins.instance
+              def allNagiosJobs = jenkins.getAllItems(hudson.model.Job.class).findAll { job ->
+                  job.name.startsWith('tempest-nagios-')
+              }
+
+              // Filter jobs based on scope
+              def matchingJobs = []
+              switch (scope) {
+                  case 'all-tests':
+                      matchingJobs = allNagiosJobs
+                      break
+
+                  case 'all-compute-tests':
+                      matchingJobs = allNagiosJobs.findAll { it.name.contains('-compute') }
+                      break
+
+                  case 'all-network-tests':
+                      matchingJobs = allNagiosJobs.findAll { it.name.contains('-network') }
+                      break
+
+                  case 'all-volume-tests':
+                      matchingJobs = allNagiosJobs.findAll {
+                          it.name.contains('-volume') && !it.name.contains('volume_backup')
+                      }
+                      break
+
+                  case 'all-production-sites':
+                      matchingJobs = allNagiosJobs.findAll { job ->
+                          PRODUCTION_SITES.any { site -> job.name =~ /tempest-nagios-(site|services)-${site}-/ }
+                      }
+                      break
+
+                  case 'all-testing-sites':
+                      matchingJobs = allNagiosJobs.findAll { job ->
+                          TEST_SITES.any { site -> job.name =~ /tempest-nagios-(site|services)-${site}-/ }
+                      }
+                      break
+
+                  default:
+                      // Handle site-specific: site-adelaide -> adelaide
+                      if (scope.startsWith('site-')) {
+                          def site = scope.substring(5)
+
+                          // Validate site is in known site list
+                          def allSites = PRODUCTION_SITES + TEST_SITES
+                          if (!allSites.contains(site)) {
+                              error("Invalid site: ${site}. Must be one of: ${allSites.join(', ')}")
+                          }
+
+                          // Use regex for precise matching: tempest-nagios-site-{site}- or tempest-nagios-services-{site}-
+                          matchingJobs = allNagiosJobs.findAll { job ->
+                              job.name =~ /tempest-nagios-(site|services)-${site}-/
+                          }
+                      }
+                      break
+              }
+
+              echo "Found ${matchingJobs.size()} matching job(s):"
+              echo "=" * 50
+
+              // Track statistics
+              def alreadyInState = 0
+              def toggledCount = 0
+
+              // Process each job using for loop (CPS-friendly)
+              for (int i = 0; i < matchingJobs.size(); i++) {
+                  def job = matchingJobs[i]
+                  def isDisabled = job.isDisabled()
+
+                  // Check if action needed
+                  if (action == 'enable' && !isDisabled) {
+                      echo "  ✓ ${job.name} (already enabled)"
+                      alreadyInState++
+                  } else if (action == 'disable' && isDisabled) {
+                      echo "  ✓ ${job.name} (already disabled)"
+                      alreadyInState++
+                  } else {
+                      // Perform action
+                      if (dryRun) {
+                          echo "  → ${job.name} (would ${action})"
+                      } else {
+                          try {
+                              if (action == 'enable') {
+                                  job.enable()
+                              } else {
+                                  job.disable()
+                              }
+                              echo "  → ${job.name}... ${action}d ✓"
+                              toggledCount++
+                          } catch (Exception e) {
+                              echo "  → ${job.name}... FAILED ✗ (${e.message})"
+                          }
+                      }
+                  }
+              }
+
+              // Print summary
+              echo "=" * 50
+              echo "Summary:"
+              echo "  Total matching jobs: ${matchingJobs.size()}"
+              echo "  Already in desired state: ${alreadyInState}"
+
+              if (dryRun) {
+                  def wouldToggle = matchingJobs.size() - alreadyInState
+                  echo "  Would toggle: ${wouldToggle}"
+                  echo ""
+                  echo "⚠️  DRY RUN MODE - No changes made"
+                  echo "Run with DRY_RUN=false to apply changes"
+              } else {
+                  echo "  Successfully toggled: ${toggledCount}"
+                  if (toggledCount > 0) {
+                      echo ""
+                      echo "[AUDIT] ${toggledCount} jobs ${action}d by ${buildUser}"
+                  }
+              }
+              echo "=" * 50
+          }
+      }
+    properties:
+      - authorization:
+          'nobody':
+            - job-read
+            - job-discover
+          'coreservices':
+            - job-build
+            - job-cancel
+            - job-read
+            - job-discover
+      - build-discarder:
+          num-to-keep: 50
+      - build-blocker:
+          blocking-jobs:
+            - "tempest-nagios-toggle"
+          block-level: 'GLOBAL'
