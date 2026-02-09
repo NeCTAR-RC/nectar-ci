@@ -12,11 +12,9 @@
     name: nectar-ansible
     jobs:
       - 'nectar-ansible-{task}':
-          task: linters
-      - 'nectar-ansible-check-{environment}':
-          environment: rctest
-      - 'nectar-ansible-check-{environment}':
-          environment: production
+          task: check
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
 - job-template:
     name: 'nectar-ansible-{task}'
     concurrent: false
@@ -53,57 +51,6 @@
           clean:
             after: true
           choosing-strategy: gerrit
-    builders:
-      - shell: |
-          export OS_TEST_TIMEOUT=300
-          export ANSIBLE_FORCE_COLOR=true
-          tox -e {task}
-    wrappers:
-      - ansicolor
-      - ssh-agent-credentials:
-          users:
-            - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-- job-template:
-    name: 'nectar-ansible-check-{environment}'
-    concurrent: false
-    defaults: global
-    node: internal
-    parameters:
-      - string:
-          name: GERRIT_REFSPEC
-          default: refs/heads/master
-          description: "The default branch to test."
-    triggers:
-      - gerrit:
-          trigger-on:
-            - patchset-created-event
-            - comment-added-contains-event:
-                comment-contains-value: 'recheck'
-          projects:
-            - project-compare-type: 'PLAIN'
-              project-pattern: 'internal/nectar-ansible'
-              branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-          silent: false
-          escape-quotes: true
-    scm:
-      - git:
-          url: ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-ansible.git
-          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
-          refspec: $GERRIT_REFSPEC
-          branches:
-            - origin/$GERRIT_BRANCH
-          skip-tag: true
-          wipe-workspace: false
-          clean:
-            after: true
-          choosing-strategy: gerrit
-    builders:
-      - shell: |
-          export OS_TEST_TIMEOUT=300
-          export ANSIBLE_FORCE_COLOR=true
-          tox -e check-{environment}
     wrappers:
       - ansicolor
       - ssh-agent-credentials:
@@ -111,12 +58,14 @@
             - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
       - credentials-binding:
           - username-password-separated:
-              credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
-              username: F5_USERNAME
-              password: F5_PASSWORD
-          - text:
-              credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
-              variable: ANSIBLE_VAULT_PASSWORD
+              credential-id: 84081149-2b09-4038-93a6-ea964e8ceba8
+              username: AWS_ACCESS_KEY_ID
+              password: AWS_SECRET_ACCESS_KEY
+    builders:
+      - shell: |
+          export OS_TEST_TIMEOUT=300
+          export ANSIBLE_FORCE_COLOR=true
+          tox -e {task}
 - job:
     name: 'nectar-ansible-deploy'
     concurrent: false
@@ -124,17 +73,9 @@
     node: internal
     parameters:
       - choice:
-          name: 'ENVIRONMENT'
-          choices:
-            - production
-            - rctest
-          description: "Environment to deploy to"
-      - choice:
           name: 'PLAYBOOK'
           choices:
-            - f5-base
-            - f5-certificates
-            - f5-services
+            - s3
           description: "Playbook to deploy"
     scm:
       - git:
@@ -147,16 +88,10 @@
             - cd8b8dd3-b897-4ecb-985d-180d5b6f8498
       - credentials-binding:
           - username-password-separated:
-              credential-id: 753d4c5e-f072-4916-b40f-a633157f8333
-              username: F5_USERNAME
-              password: F5_PASSWORD
-          - text:
-              credential-id: 5d3f798c-7bad-4594-881e-b83fdb211668
-              variable: ANSIBLE_VAULT_PASSWORD
+              credential-id: 84081149-2b09-4038-93a6-ea964e8ceba8
+              username: AWS_ACCESS_KEY_ID
+              password: AWS_SECRET_ACCESS_KEY
     builders:
       - shell: |
-          export http_proxy=http://wwwproxy.unimelb.edu.au:8000
-          export https_proxy=http://wwwproxy.unimelb.edu.au:8000
-          export no_proxy=localhost,127.0.0.1,localaddress,169.254.169.254,172.16.0.0/12,115.146.80/20,.melbourne.rc.nectar.org.au,.melbourne.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au,.its.unimelb.edu.au,.unimelb.net.au,.test.rc.nectar.org.au,.dev.rc.nectar.org.au,.rc.nectar.org.au
           export ANSIBLE_FORCE_COLOR=true
-          tox -e deploy-${ENVIRONMENT} -- playbook-${PLAYBOOK}.yaml
+          tox -e deploy -- playbook-${PLAYBOOK}.yaml
