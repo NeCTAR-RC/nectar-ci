@@ -63,7 +63,7 @@
       - shell: |
           export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
-          tox -e {task} -- playbook-${PLAYBOOK}.yaml
+          tox -e {task} -- playbook-*.yaml
 - job:
     name: 'nectar-ansible-deploy'
     concurrent: false
