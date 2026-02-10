@@ -11,12 +11,10 @@
 - project:
     name: nectar-ansible
     jobs:
-      - 'nectar-ansible-{task}':
-          task: check
       - '{name}-pre-commit-all':
           organisation: 'internal'
-- job-template:
-    name: 'nectar-ansible-{task}'
+- job:
+    name: 'nectar-ansible-check'
     concurrent: false
     defaults: global
     node: internal
@@ -65,7 +63,7 @@
       - shell: |
           export OS_TEST_TIMEOUT=300
           export ANSIBLE_FORCE_COLOR=true
-          tox -e {task}
+          tox -e {task} -- playbook-${PLAYBOOK}.yaml
 - job:
     name: 'nectar-ansible-deploy'
     concurrent: false
