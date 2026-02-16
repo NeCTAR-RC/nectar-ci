@@ -44,6 +44,16 @@
       - '{name}-dummy':
           organisation: 'NeCTAR-RC'
 - project:
+    name: nectar-jupyter-docker-stacks
+    jobs:
+      - '{name}-dummy':
+          organisation: 'NeCTAR-RC'
+- project:
+    name: nectar-jupyterlab-theme
+    jobs:
+      - '{name}-dummy':
+          organisation: 'NeCTAR-RC'
+- project:
     name: meliponini
     jobs:
       - '{name}-dummy':
