@@ -1965,7 +1965,6 @@
             - site-swinburne-01
             - site-tasmania
             - site-tasmania-02
-            - site-tasmania-s
             - site-ardctest-artm
             - site-qh2-test
             - site-monash-test
@@ -1987,7 +1986,7 @@
               def PRODUCTION_SITES = ['adelaide', 'ardc-syd-1', 'auckland', 'intersect-01',
                                       'intersect-adelaide', 'melbourne-qh2', 'melbourne-qh2-uom',
                                       'monash-01', 'monash-02', 'pawsey', 'qld', 'swinburne-01',
-                                      'tasmania', 'tasmania-02', 'tasmania-s']
+                                      'tasmania', 'tasmania-02']
               def TEST_SITES = ['ardctest-artm', 'qh2-test', 'monash-test', 'aucklandtest']
 
               // Audit logging
