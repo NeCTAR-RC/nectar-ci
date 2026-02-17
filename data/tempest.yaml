@@ -54,7 +54,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -142,7 +141,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -238,7 +236,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -332,7 +329,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -417,7 +413,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -494,7 +489,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - aucklandtest
@@ -572,7 +566,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -656,7 +649,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -731,7 +723,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -800,7 +791,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -869,7 +859,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
             - ardctest-artm
             - qh2-test
             - monash-test
@@ -1009,7 +998,6 @@
       - swinburne-01
       - tasmania
       - tasmania-02
-      - tasmania-s
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
@@ -1033,7 +1021,6 @@
       - swinburne-01
       - tasmania
       - tasmania-02
-      - tasmania-s
     jobs:
       - 'tempest-nagios-services-{site}-{test}':
           test:
@@ -1504,7 +1491,6 @@
       - swinburne-01
       - tasmania
       - tasmania-02
-      - tasmania-s
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
           test:
@@ -1547,7 +1533,6 @@
       - swinburne-01
       - tasmania
       - tasmania-02
-      - tasmania-s
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
           test:
@@ -1852,7 +1837,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
     builders:
       - shell: |
           #!/bin/bash -eu
@@ -1911,7 +1895,6 @@
             - swinburne-01
             - tasmania
             - tasmania-02
-            - tasmania-s
     builders:
       - shell: |
           #!/bin/bash -eu
