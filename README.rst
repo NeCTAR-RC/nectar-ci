@@ -3,11 +3,11 @@ Jenkins Job Builder Repository for NeCTAR
 
 Installation
 ------------
-We no longer require any extra packages to be installed, or any specific
-version of JJB, tested up to v1.6.3
 
 All you need to do is:
-`pip install jenkins-job-builder`
+`pip install -U jenkins-job-builder==3.11.0`
+
+NOTE: jenkins-slave1 runs jenkins-job-builder from package. Noble version is 3.11.0-6.
 
 Developing
 ==========
