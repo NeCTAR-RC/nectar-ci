@@ -66,13 +66,13 @@
                   sh '''
                   export PYTHONUNBUFFERED=1
                   . ./venv-stormbee/bin/activate
-                  if [[ "{zone}" == "ardctest-artm" ]]; then
+                  if [[ "{{zone}}" == "ardctest-artm" ]]; then
                       SITE=testing
                   else
                       SITE=production
                   fi
                   xvfb-run stormbee -c $CONFIG -p --site $SITE clear
-                  xvfb-run stormbee -c $CONFIG -p --nagios --site $SITE --zone {zone} --desktop {desktop} scenario lifecycle
+                  xvfb-run stormbee -c $CONFIG -p --nagios --site $SITE --zone {{zone}} --desktop {{desktop}} scenario lifecycle
                   '''
               }}
             }}

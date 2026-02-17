@@ -44,7 +44,7 @@
 - builder:
     name: git-secrets-sorted
     builders:
-      - shell: find . -name '*.pattern' -exec sort -c {} +
+      - shell: find . -name '*.pattern' -exec sort -c {{}} +
 - builder:
     name: puppet-lint
     builders:
@@ -220,7 +220,7 @@
           #get highest tag number
           TAG_VERSION=`git describe --abbrev=0 --tags`
           # Project version
-          PROJECT_VERSION=`cat Chart.yaml | grep "^version" | awk '{print $2}'`
+          PROJECT_VERSION=`cat Chart.yaml | grep "^version" | awk '{{print $2}}'`
           if [[ "$PROJECT_VERSION" == "$TAG_VERSION" ]]; then
               echo "No change in version"
               exit 0
@@ -231,7 +231,7 @@
           NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
           #only tag if no tag already
           if [ -z "$NEEDS_TAG" ]; then
-              git tag -a $PROJECT_VERSION -m "New auto tagged release ${PROJECT_VERSION}"
+              git tag -a $PROJECT_VERSION -m "New auto tagged release ${{PROJECT_VERSION}}"
               echo "Tagged with $PROJECT_VERSION"
               helm package .
               git push origin --tags
@@ -246,18 +246,18 @@
           export HELM_EXPERIMENTAL_OCI=1
           export REGISTRY="registry.rc.nectar.org.au"
           echo "$REGISTRY_PSW" | helm registry login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-          find . -maxdepth 1 -name *.tgz | xargs -i helm push {} oci://registry.rc.nectar.org.au/nectar-helm
+          find . -maxdepth 1 -name *.tgz | xargs -i helm push {{}} oci://registry.rc.nectar.org.au/nectar-helm
 - builder:
     name: kustomize-validate
     builders:
       - shell: |
           #!/bin/bash
           kustomizatons=$(find . -name kustomization.yaml -print0 | xargs -0 -n1 dirname | sort --unique)
-          for kustomization in ${kustomizatons}; do
-            if kustomize build "${kustomization}" -o /tmp/manifest.yaml; then
-              echo "validated ${kustomization}"
+          for kustomization in ${{kustomizatons}}; do
+            if kustomize build "${{kustomization}}" -o /tmp/manifest.yaml; then
+              echo "validated ${{kustomization}}"
             else
-              echo "validation failed for ${kustomization}"
+              echo "validation failed for ${{kustomization}}"
               exit 1
             fi
           done
@@ -303,7 +303,7 @@
           curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
           curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Listings: true' $SWIFTURL
           curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
-          curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Test at: $SWIFTURL'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
+          curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{{'message': 'Test at: $SWIFTURL'}}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
 - builder:
     name: jekyll-html-check
     builders:
@@ -525,6 +525,6 @@
           git pull
           git reset --hard
           mv apps* base-branch
-          docker run --network host -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/secrets:/secrets -v ${tmpdir}:/output -v $(pwd)/base-branch:/base-branch -v $(pwd)/target-branch:/target-branch -e TARGET_BRANCH=$GERRIT_REFSPEC -e BASE_BRANCH=$GERRIT_BRANCH -e REPO=$GERRIT_PROJECT registry.rc.nectar.org.au/docker.io/dagandersen/argocd-diff-preview:v0.1.18
+          docker run --network host -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/secrets:/secrets -v ${{tmpdir}}:/output -v $(pwd)/base-branch:/base-branch -v $(pwd)/target-branch:/target-branch -e TARGET_BRANCH=$GERRIT_REFSPEC -e BASE_BRANCH=$GERRIT_BRANCH -e REPO=$GERRIT_PROJECT registry.rc.nectar.org.au/docker.io/dagandersen/argocd-diff-preview:v0.1.18
           rm -rf secrets
-          cat ${tmpdir}/diff.md
+          cat ${{tmpdir}}/diff.md

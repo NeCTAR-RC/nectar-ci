@@ -170,7 +170,7 @@
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                branch: 'nectar/{os_release}'
+                branch: 'nectar/{{os_release}}'
             }}
           }}
           stage('Build') {{
@@ -189,7 +189,7 @@
 
                 docker image prune --all -f
 
-                kolla-build --config-file etc/kolla-build.conf --profile requirements --pull --tag {os_release} --registry $REGISTRY --push
+                kolla-build --config-file etc/kolla-build.conf --profile requirements --pull --tag {{os_release}} --registry $REGISTRY --push
                 mkdir -p artifacts
                 echo "$BUILD_NUMBER" > artifacts/BUILD_NUMBER
               '''
@@ -242,14 +242,14 @@
               script {{
                 if (currentBuild.upstreamBuilds.size() == 0) {{
                   build = selectRun(
-                    job: 'requirements-kolla-container-{os_release}',
+                    job: 'requirements-kolla-container-{{os_release}}',
                     selector: status('SUCCESSFUL'),
                     verbose: true
                   )
                   copyArtifactSelector = specific(build.getId())
                 }}
                 copyArtifacts(
-                  projectName: 'requirements-kolla-container-{os_release}',
+                  projectName: 'requirements-kolla-container-{{os_release}}',
                   selector: copyArtifactSelector,
                   fingerprintArtifacts: true,
                 )
@@ -265,9 +265,9 @@
                   url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                   credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                   branch: '$GERRIT_BRANCH'
-              dir ('{name}') {{
+              dir ('{{name}}') {{
                 git poll: false,
-                    url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git',
+                    url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{{organisation}}/{{name}}.git',
                     credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                     branch: "${{env.PROJECT_BRANCH}}"
               }}
@@ -279,7 +279,7 @@
             }}
             steps {{
               copyArtifacts(
-                projectName: 'requirements-kolla-container-{os_release}',
+                projectName: 'requirements-kolla-container-{{os_release}}',
                 selector: copyArtifactSelector,
                 fingerprintArtifacts: true,
               )
@@ -287,7 +287,7 @@
                 sh '''
                   #!/bin/bash
                   set -eux -o pipefail
-                  cd {name}
+                  cd {{name}}
                   export VERSION_TAG=`git describe`
                   cd ..
                   export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
@@ -306,7 +306,7 @@
                   docker pull registry.rc.nectar.org.au/kolla/ubuntu-source-openstack-base:$OPENSTACK_RELEASE
 
                   # in rare cases, kolla profile name is not equal to project name, so we can override the profile name.
-                  [[ {kolla_profile_name} == 'false' ]] && PROFILE_NAME={name} || PROFILE_NAME={kolla_profile_name}
+                  [[ {{kolla_profile_name}} == 'false' ]] && PROFILE_NAME={{name}} || PROFILE_NAME={{kolla_profile_name}}
                   kolla-build --config-file etc/kolla-build.conf --profile $PROFILE_NAME --skip-existing --tag $OPENSTACK_RELEASE --registry $REGISTRY --push
 
                   VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER-$BUILD_NUMBER
@@ -341,14 +341,14 @@
               script {{
                 if (currentBuild.upstreamBuilds.size() == 0) {{
                   build = selectRun(
-                    job: 'requirements-kolla-container-{os_release}',
+                    job: 'requirements-kolla-container-{{os_release}}',
                     selector: status('SUCCESSFUL'),
                     verbose: true
                   )
                   copyArtifactSelector = specific(build.getId())
                 }}
                 copyArtifacts(
-                  projectName: 'requirements-kolla-container-{os_release}',
+                  projectName: 'requirements-kolla-container-{{os_release}}',
                   selector: copyArtifactSelector,
                   fingerprintArtifacts: true,
                 )
@@ -360,22 +360,22 @@
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                branch: 'nectar/{os_release}'
-              dir ('{name}') {{
+                branch: 'nectar/{{os_release}}'
+              dir ('{{name}}') {{
                 sh '''
                   set -eux
                   cd ..
-                  rm -rf {name}
-                  git clone https://github.com/openstack/{name}
-                  cd {name}
-                  if git ls-remote --exit-code --heads origin stable/{os_release}; then
-                    git fetch --tags origin stable/{os_release}
-                    git checkout -b {os_release} -t origin/stable/{os_release}
-                  elif git ls-remote --exit-code --heads origin unmaintained/{os_release}; then
-                    git fetch --tags origin unmaintained/{os_release}
-                    git checkout -b {os_release} -t origin/unmaintained/{os_release}
+                  rm -rf {{name}}
+                  git clone https://github.com/openstack/{{name}}
+                  cd {{name}}
+                  if git ls-remote --exit-code --heads origin stable/{{os_release}}; then
+                    git fetch --tags origin stable/{{os_release}}
+                    git checkout -b {{os_release}} -t origin/stable/{{os_release}}
+                  elif git ls-remote --exit-code --heads origin unmaintained/{{os_release}}; then
+                    git fetch --tags origin unmaintained/{{os_release}}
+                    git checkout -b {{os_release}} -t origin/unmaintained/{{os_release}}
                   else
-                    echo "Neither stable/{os_release} nor unmaintained/{os_release} branch exists in upstream!"
+                    echo "Neither stable/{{os_release}} nor unmaintained/{{os_release}} branch exists in upstream!"
                     exit 1
                   fi
                 '''
@@ -388,12 +388,12 @@
             }}
             steps {{
               copyArtifacts(
-                projectName: 'requirements-kolla-container-{os_release}',
+                projectName: 'requirements-kolla-container-{{os_release}}',
                 selector: copyArtifactSelector,
                 fingerprintArtifacts: true,
               )
               sh '''
-                cd {name}
+                cd {{name}}
                 export VERSION_TAG=`git describe`
                 cd ..
                 export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
@@ -406,17 +406,17 @@
 
                 docker image prune --all -f
 
-                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{os_release}
-                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{os_release}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{{os_release}}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{{os_release}}
 
-                kolla-build --config-file etc/kolla-build.conf --profile {name} --skip-existing --tag {os_release} --registry $REGISTRY --push
+                kolla-build --config-file etc/kolla-build.conf --profile {{name}} --skip-existing --tag {{os_release}} --registry $REGISTRY --push
 
                 VERSION_TAG=$VERSION_TAG-$BASE_BUILD_NUMBER-$BUILD_NUMBER
 
 
-                for image in `kolla-build --list-images --profile {name} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
+                for image in `kolla-build --list-images --profile {{name}} --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
-                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{os_release} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{{os_release}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                     docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                 done
 
@@ -444,14 +444,14 @@
               script {{
                 if (currentBuild.upstreamBuilds.size() == 0) {{
                   build = selectRun(
-                    job: 'requirements-kolla-container-{os_release}',
+                    job: 'requirements-kolla-container-{{os_release}}',
                     selector: status('SUCCESSFUL'),
                     verbose: true
                   )
                   copyArtifactSelector = specific(build.getId())
                 }}
                 copyArtifacts(
-                  projectName: 'requirements-kolla-container-{os_release}',
+                  projectName: 'requirements-kolla-container-{{os_release}}',
                   selector: copyArtifactSelector,
                   fingerprintArtifacts: true,
                 )
@@ -463,7 +463,7 @@
               git poll: false,
                 url: 'ssh://jenkins@review.rc.nectar.org.au:29418/internal/nectar-kolla.git',
                 credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                branch: 'nectar/{os_release}'
+                branch: 'nectar/{{os_release}}'
             }}
           }}
           stage('Build') {{
@@ -472,7 +472,7 @@
             }}
             steps {{
               copyArtifacts(
-                projectName: 'requirements-kolla-container-{os_release}',
+                projectName: 'requirements-kolla-container-{{os_release}}',
                 selector: copyArtifactSelector,
                 fingerprintArtifacts: true,
               )
@@ -487,16 +487,16 @@
 
                 docker image prune --all -f
 
-                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{os_release}
-                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{os_release}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-base:{{os_release}}
+                docker pull ${{REGISTRY}}/kolla/ubuntu-source-openstack-base:{{os_release}}
 
-                kolla-build --config-file etc/kolla-build.conf --profile iscsi --skip-existing --tag {os_release} --registry $REGISTRY --push
+                kolla-build --config-file etc/kolla-build.conf --profile iscsi --skip-existing --tag {{os_release}} --registry $REGISTRY --push
 
-                VERSION_TAG={os_release}-$BASE_BUILD_NUMBER
+                VERSION_TAG={{os_release}}-$BASE_BUILD_NUMBER
 
                 for image in `kolla-build --list-images --profile iscsi --config-file etc/kolla-build.conf | awk '{{print $3}}' | egrep -v '^(base|openstack-base)$'`
                 do
-                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{os_release} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
+                    docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:{{os_release}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                     docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                 done
 
@@ -532,7 +532,7 @@
           stage('Clone') {{
             steps {{
               git poll: false,
-                  url: 'https://jenkins@review.rc.nectar.org.au/a/{organisation}/{name}',
+                  url: 'https://jenkins@review.rc.nectar.org.au/a/{{organisation}}/{{name}}',
                   credentialsId: '2f00f9a5-00c3-42fe-82bf-cc787af1df8c',
                   branch: '$BRANCH'
             }}
@@ -570,7 +570,7 @@
           }}
           stage("Package") {{
               steps {{
-                build job: '{name}-helm-package', parameters: [string(name: 'GERRIT_REFSPEC', value: "refs/heads/${{env.BRANCH}}"),string(name: 'GERRIT_BRANCH', value: "${{env.BRANCH}}")]
+                build job: '{{name}}-helm-package', parameters: [string(name: 'GERRIT_REFSPEC', value: "refs/heads/${{env.BRANCH}}"),string(name: 'GERRIT_BRANCH', value: "${{env.BRANCH}}")]
               }}
           }}
         }}
@@ -638,7 +638,7 @@
                       credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{{organisation}}/{{name}}.git'
                     ]]
                   ]
                 )
@@ -671,14 +671,14 @@
           stage('Helm package update') {{
             when {{
                 expression {{
-                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'change-merged'
+                  return '{{helm_name}}' != '' && env.GERRIT_EVENT_TYPE == 'change-merged'
                 }}
             }}
             steps {{
                 script {{
                   env.IMAGE_TAG = sh(script: "git describe --tags --always", returnStdout: true).trim()
                 }}
-                build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
+                build job: '{{helm_name}}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
             }}
           }}
         }}
@@ -692,27 +692,27 @@
     triggers:
       - timed: "0 10 * * 1-5"
     dsl: |
-      pipeline {
-        agent {
-          docker {
+      pipeline {{
+        agent {{
+          docker {{
             image 'registry.rc.nectar.org.au/docker.io/renovate/renovate'
             reuseNode true
             args '--group-add root'
-          }
-        }
-        stages {
-          stage('Run renovate') {
-            steps {
-              withCredentials([file(credentialsId: '42898081-d846-4a3f-a41e-515eb74132e2', variable: 'FILE')]) {
+          }}
+        }}
+        stages {{
+          stage('Run renovate') {{
+            steps {{
+              withCredentials([file(credentialsId: '42898081-d846-4a3f-a41e-515eb74132e2', variable: 'FILE')]) {{
                 sh '''
                   cp $FILE $FILE.json5
                   RENOVATE_CONFIG_FILE=$FILE.json5 renovate
                   '''
-              }
-            }
-          }
-        }
-      }
+              }}
+            }}
+          }}
+        }}
+      }}
 - job:
     name: 'renovate-production-env'
     defaults: global
@@ -722,24 +722,24 @@
     triggers:
       - timed: "0 14 * * 1,3"
     dsl: |
-      pipeline {
-        agent {
-          docker {
+      pipeline {{
+        agent {{
+          docker {{
             image 'registry.rc.nectar.org.au/docker.io/renovate/renovate'
             reuseNode true
             args '--group-add root'
-          }
-        }
-        stages {
-          stage('Run renovate') {
-            steps {
-              withCredentials([file(credentialsId: 'bbae6659-4494-4484-9b3f-66b28e7a871b', variable: 'FILE')]) {
+          }}
+        }}
+        stages {{
+          stage('Run renovate') {{
+            steps {{
+              withCredentials([file(credentialsId: 'bbae6659-4494-4484-9b3f-66b28e7a871b', variable: 'FILE')]) {{
                 sh '''
                   cp $FILE $FILE.json5
                   RENOVATE_CONFIG_FILE=$FILE.json5 renovate
                   '''
-              }
-            }
-          }
-        }
-      }
+              }}
+            }}
+          }}
+        }}
+      }}
