@@ -104,7 +104,7 @@
               stage('Clone') {{
                   steps {{
                       git poll: false,
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{{name}}.git',
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/NeCTAR-RC/{name}.git',
                       credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
                   }}
               }}

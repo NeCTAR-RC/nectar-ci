@@ -231,7 +231,7 @@
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
-                  steps {{ imageBuildQEMU '{{name}}' }}
+                  steps {{ imageBuildQEMU '{name}' }}
               }}
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
@@ -240,21 +240,21 @@
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
                       retry(count: 3) {{
-                          deployImage '{{project_name}}', 'testing'
+                          deployImage '{project_name}', 'testing'
                       }}
                   }}
               }}
               stage('Set image properties in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
-                      setImageProperties '{{project_name}}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
                   }}
               }}
               stage('Test image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
                       retry(count: 3) {{
-                          testOfficialImage '{{project_name}}', 'testing', params.az_testing
+                          testOfficialImage '{project_name}', 'testing', params.az_testing
                       }}
                   }}
               }}
@@ -265,27 +265,27 @@
                           expression {{ return params.promote_testing }}
                       }}
                   }}
-                  steps {{ promoteOfficialImage '{{project_name}}', 'testing' }}
+                  steps {{ promoteOfficialImage '{project_name}', 'testing' }}
               }}
               stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
                       retry(count: 3) {{
-                          deployImage '{{project_name}}', 'production'
+                          deployImage '{project_name}', 'production'
                       }}
                   }}
               }}
               stage('Set image properties in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      setImageProperties '{{project_name}}', 'production'
+                      setImageProperties '{project_name}', 'production'
                   }}
               }}
               stage('Test image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
                       retry(count: 3) {{
-                          testOfficialImage '{{project_name}}', 'production', params.az_production
+                          testOfficialImage '{project_name}', 'production', params.az_production
                       }}
                   }}
               }}
@@ -296,14 +296,14 @@
                           expression {{ return params.promote_production }}
                       }}
                   }}
-                  steps {{ promoteOfficialImage '{{project_name}}', 'production' }}
+                  steps {{ promoteOfficialImage '{project_name}', 'production' }}
               }}
           }}
           post {{
               failure {{
                   node('internal') {{
-                      deleteImage '{{project_name}}', 'testing'
-                      deleteImage '{{project_name}}', 'production'
+                      deleteImage '{project_name}', 'testing'
+                      deleteImage '{project_name}', 'production'
                   }}
               }}
               cleanup {{
@@ -337,7 +337,7 @@
               stage('Build Image') {{
                   agent {{ label 'noble' }}
                   steps {{
-                      imageBuildQEMU 'trove-{{name}}'
+                      imageBuildQEMU 'trove-{name}'
                   }}
               }}
               stage('Set Image ID') {{
@@ -461,7 +461,7 @@
           }}
           stages {{
               stage('Build Image') {{
-                  steps {{ imageBuildOpenStack '{{name}}', params.project_name }}
+                  steps {{ imageBuildOpenStack '{name}', params.project_name }}
               }}
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
@@ -553,93 +553,93 @@
     dsl: |
       def imageId
       def imageName
-      pipeline {{
+      pipeline {
           agent none
-          options {{
+          options {
               ansiColor('xterm')
-          }}
-          stages {{
-              stage('Build Image') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+          }
+          stages {
+              stage('Build Image') {
+                  agent { label 'noble' }
+                  steps {
                       imageBuildQEMU 'octavia-amphora'
-                  }}
-              }}
-              stage('Set Image ID') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Set Image ID') {
+                  agent { label 'noble' }
+                  steps {
                       setImageID()
-                  }}
-              }}
-              stage('Deploy to Dev Cloud') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Deploy to Dev Cloud') {
+                  agent { label 'noble' }
+                  steps {
                       deployImage 'octavia', 'development'
                       setImageProperties 'octavia', 'development'
                       setImageTag 'octavia', 'octavia', 'development'
                       setImageTag 'octavia', 'octavia_next', 'development'
-                  }}
-              }}
-              stage('Deploy to Test Cloud') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Deploy to Test Cloud') {
+                  agent { label 'noble' }
+                  steps {
                       deployImage 'octavia', 'testing'
                       setImageProperties 'octavia', 'testing'
                       setImageTag 'octavia', 'octavia', 'testing'
                       setImageTag 'octavia', 'octavia_next', 'testing'
-                  }}
-              }}
-              stage('Test Image in Test Cloud') {{
-                  agent {{ label 'tempest' }}
-                  steps {{
+                  }
+              }
+              stage('Test Image in Test Cloud') {
+                  agent { label 'tempest' }
+                  steps {
                       testOctaviaImage 'testing', 'ardctest-artm'
-                  }}
-              }}
-              stage('Deploy to Production Cloud') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Deploy to Production Cloud') {
+                  agent { label 'noble' }
+                  steps {
                       deployImage 'octavia', 'production'
                       setImageProperties 'octavia', 'production'
                       setImageTag 'octavia', 'octavia', 'production'
                       setImageTag 'octavia', 'octavia_next', 'production'
-                  }}
-              }}
-              stage('Test Image in Prod Cloud') {{
-                  agent {{ label 'tempest' }}
-                  steps {{
+                  }
+              }
+              stage('Test Image in Prod Cloud') {
+                  agent { label 'tempest' }
+                  steps {
                       testOctaviaImage 'production', 'ardc-syd-1'
-                  }}
-              }}
-          }}
-          post {{
-              failure {{
-                  node('noble') {{
-                      script {{
-                        try {{
+                  }
+              }
+          }
+          post {
+              failure {
+                  node('noble') {
+                      script {
+                        try {
                           unsetImageTag 'octavia', 'octavia', 'development'
-                        }} catch (err) {{
-                          echo "Failed: ${{err}}"
-                        }}
-                        try {{
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                        try {
                           unsetImageTag 'octavia', 'octavia', 'testing'
-                        }} catch (err) {{
-                          echo "Failed: ${{err}}"
-                        }}
-                        try {{
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                        try {
                           unsetImageTag 'octavia', 'octavia', 'production'
-                        }} catch (err) {{
-                          echo "Failed: ${{err}}"
-                        }}
-                      }}
-                    }}
-                  }}
-              cleanup {{
-                  node('noble') {{
+                        } catch (err) {
+                          echo "Failed: ${err}"
+                        }
+                      }
+                    }
+                  }
+              cleanup {
+                  node('noble') {
                       deleteDir() /* clean up our workspace */
-                  }}
-              }}
-          }}
-      }}
+                  }
+              }
+          }
+      }
 - job:
     name: image-build-manila-share-server
     defaults: global
@@ -657,76 +657,76 @@
     dsl: |
       def imageId
       def imageName
-      pipeline {{
+      pipeline {
           agent none
-          options {{
+          options {
               ansiColor('xterm')
-          }}
-          stages {{
-              stage('Build Image') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+          }
+          stages {
+              stage('Build Image') {
+                  agent { label 'noble' }
+                  steps {
                       imageBuildQEMU 'manila-ubuntu'
-                  }}
-              }}
-              stage('Set Image ID') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Set Image ID') {
+                  agent { label 'noble' }
+                  steps {
                       setImageID()
-                  }}
-              }}
-              stage('Deploy to Dev Cloud') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Deploy to Dev Cloud') {
+                  agent { label 'noble' }
+                  steps {
                       deployImage 'manila', 'development'
                       setImageProperties 'manila', 'development'
                       setImageTag 'manila', 'manila', 'development'
-                  }}
-              }}
-              stage('Deploy to Test Cloud') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Deploy to Test Cloud') {
+                  agent { label 'noble' }
+                  steps {
                       deployImage 'manila', 'testing'
                       setImageProperties 'manila', 'testing'
                       setImageTag 'manila', 'manila', 'testing'
-                  }}
-              }}
-              stage('Test Image in Test Cloud') {{
-                  agent {{ label 'tempest' }}
-                  steps {{
+                  }
+              }
+              stage('Test Image in Test Cloud') {
+                  agent { label 'tempest' }
+                  steps {
                       testManilaImage 'testing', 'ardctest-artm'
-                  }}
-              }}
-              stage('Deploy to Production Cloud') {{
-                  agent {{ label 'noble' }}
-                  steps {{
+                  }
+              }
+              stage('Deploy to Production Cloud') {
+                  agent { label 'noble' }
+                  steps {
                       deployImage 'manila', 'production'
                       setImageProperties 'manila', 'production'
                       setImageTag 'manila', 'manila', 'production'
-                  }}
-              }}
-              stage('Test Image in Prod Cloud') {{
-                  agent {{ label 'tempest' }}
-                  steps {{
+                  }
+              }
+              stage('Test Image in Prod Cloud') {
+                  agent { label 'tempest' }
+                  steps {
                       testManilaImage 'production', 'ardc-syd-1'
-                  }}
-              }}
-          }}
-          post {{
-              failure {{
-                  node('noble') {{
+                  }
+              }
+          }
+          post {
+              failure {
+                  node('noble') {
                       deleteImage 'manila', 'production'
                       deleteImage 'manila', 'testing'
                       deleteImage 'manila', 'development'
-                      }}
-                  }}
-              cleanup {{
-                  node('noble') {{
+                      }
+                  }
+              cleanup {
+                  node('noble') {
                       deleteDir() /* clean up our workspace */
-                  }}
-              }}
-          }}
-      }}
+                  }
+              }
+          }
+      }
 - job-template:
     name: 'image-build-jenkins-{name}'
     defaults: global
@@ -756,21 +756,21 @@
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
-                  steps {{ imageBuildQEMU '{{name}}' }}
+                  steps {{ imageBuildQEMU '{name}' }}
               }}
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
               }}
               stage('Deploy in testing') {{
                   steps {{
-                      deployImageWithBuildNumber '{{project_name}}', 'testing'
+                      deployImageWithBuildNumber '{project_name}', 'testing'
                   }}
               }}
           }}
           post {{
               failure {{
                   node('internal') {{
-                      deleteImage '{{project_name}}', 'testing'
+                      deleteImage '{project_name}', 'testing'
                   }}
               }}
               cleanup {{
@@ -811,39 +811,39 @@
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
-                  steps {{ imageBuildCAPI '{{name}}', kubernetes_version }}
+                  steps {{ imageBuildCAPI '{name}', kubernetes_version }}
               }}
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
               }}
               stage('Deploy in development') {{
                   steps {{
-                      deployImage '{{project_name}}', 'development'
-                      setImageProperties '{{project_name}}', 'development'
-                      setImageVisibility '{{project_name}}', 'development', 'community'
+                      deployImage '{project_name}', 'development'
+                      setImageProperties '{project_name}', 'development'
+                      setImageVisibility '{project_name}', 'development', 'community'
                   }}
               }}
 
               stage('Deploy in testing') {{
                   steps {{
-                      deployImage '{{project_name}}', 'testing'
-                      setImageProperties '{{project_name}}', 'testing'
-                      setImageVisibility '{{project_name}}', 'testing', 'community'
+                      deployImage '{project_name}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
+                      setImageVisibility '{project_name}', 'testing', 'community'
                   }}
               }}
               stage('Deploy in production') {{
                   steps {{
-                      deployImage '{{project_name}}', 'production'
-                      setImageProperties '{{project_name}}', 'production'
-                      setImageVisibility '{{project_name}}', 'production', 'community'
+                      deployImage '{project_name}', 'production'
+                      setImageProperties '{project_name}', 'production'
+                      setImageVisibility '{project_name}', 'production', 'community'
                   }}
               }}
           }}
           post {{
               failure {{
                   node('internal') {{
-                      deleteImage '{{project_name}}', 'testing'
-                      deleteImage '{{project_name}}', 'production'
+                      deleteImage '{project_name}', 'testing'
+                      deleteImage '{project_name}', 'production'
                   }}
               }}
               cleanup {{
@@ -874,7 +874,7 @@
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
-                  steps {{ imageBuildQEMU '{{name}}' }}
+                  steps {{ imageBuildQEMU '{name}' }}
               }}
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
@@ -952,7 +952,7 @@
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
-                  steps {{ imageBuildOpenStack '{{name}}', '{{project_name}}' }}
+                  steps {{ imageBuildOpenStack '{name}', '{project_name}' }}
               }}
               stage('Set Image ID') {{
                   steps {{ setImageID() }}
@@ -961,21 +961,21 @@
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
                       retry(count: 3) {{
-                          deployImageWithBuildNumber '{{project_name}}', 'testing'
+                          deployImageWithBuildNumber '{project_name}', 'testing'
                       }}
                   }}
               }}
               stage('Set image properties in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
-                      setImageProperties '{{project_name}}', 'testing'
+                      setImageProperties '{project_name}', 'testing'
                   }}
               }}
               stage('Test image in Testing') {{
                   when {{ expression {{ return params.deploy_testing }} }}
                   steps {{
                       retry(count: 3) {{
-                          testOfficialImage '{{project_name}}', 'testing', params.az_testing
+                          testOfficialImage '{project_name}', 'testing', params.az_testing
                       }}
                   }}
               }}
@@ -986,7 +986,7 @@
                           expression {{ return params.deploy_volumes }}
                       }}
                   }}
-                  steps {{ deployBumblebeeVolumes '{{project_name}}', 'testing', params.volume_azs_testing }}
+                  steps {{ deployBumblebeeVolumes '{project_name}', 'testing', params.volume_azs_testing }}
               }}
               stage('Promote in Testing') {{
                   when {{
@@ -995,27 +995,27 @@
                           expression {{ return params.promote_testing }}
                       }}
                   }}
-                  steps {{ promoteOfficialImage '{{project_name}}', 'testing' }}
+                  steps {{ promoteOfficialImage '{project_name}', 'testing' }}
               }}
               stage('Deploy image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
                       retry(count: 3) {{
-                          deployImageWithBuildNumber '{{project_name}}', 'production'
+                          deployImageWithBuildNumber '{project_name}', 'production'
                       }}
                   }}
               }}
               stage('Set image properties in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
-                      setImageProperties '{{project_name}}', 'production'
+                      setImageProperties '{project_name}', 'production'
                   }}
               }}
               stage('Test image in Production') {{
                   when {{ expression {{ return params.deploy_production }} }}
                   steps {{
                       retry(count: 3) {{
-                          testOfficialImage '{{project_name}}', 'production', params.az_production
+                          testOfficialImage '{project_name}', 'production', params.az_production
                       }}
                   }}
               }}
@@ -1026,7 +1026,7 @@
                           expression {{ return params.deploy_volumes }}
                       }}
                   }}
-                  steps {{ deployBumblebeeVolumes '{{project_name}}', 'production', params.volume_azs_production }}
+                  steps {{ deployBumblebeeVolumes '{project_name}', 'production', params.volume_azs_production }}
               }}
           }}
           post {{

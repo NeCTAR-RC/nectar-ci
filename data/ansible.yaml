@@ -92,4 +92,4 @@
     builders:
       - shell: |
           export ANSIBLE_FORCE_COLOR=true
-          tox -e deploy -- playbook-${{PLAYBOOK}}.yaml
+          tox -e deploy -- playbook-${PLAYBOOK}.yaml

@@ -26,7 +26,7 @@
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -113,7 +113,7 @@
           ./setup_tempest.py --host $HOST --target_host $TARGET_HOST $enable_block -s $AVAILABILITY_ZONE -e $CLOUD -j check-compute-host-advanced $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -208,7 +208,7 @@
           ./setup_tempest.py --host $HOST --target_host $TARGET_HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-instance-cold-migration $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-instance-cold-migration.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -301,7 +301,7 @@
           ./setup_tempest.py --host $HOST --target_host $TARGET_HOST $enable_block -s $AVAILABILITY_ZONE -e $CLOUD -j check-instance-live-migration $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-instance-live-migration.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -385,7 +385,7 @@
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-cinder --volume-type $VOLUME_TYPE $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -461,7 +461,7 @@
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-magnum $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -538,7 +538,7 @@
           ./setup_tempest.py -e $CLOUD -s $AVAILABILITY_ZONE -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -621,7 +621,7 @@
           ./setup_tempest.py --host $HOST -s $AVAILABILITY_ZONE -e $CLOUD -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -695,7 +695,7 @@
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-murano $tmpdir
           cd $tmpdir
           stestr run -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -763,7 +763,7 @@
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD -j check-trove $tmpdir
           cd $tmpdir
           stestr run -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -831,7 +831,7 @@
           ./setup_tempest.py -s $AVAILABILITY_ZONE -e $CLOUD --blazar-resource-properties "$BLAZAR_RESOURCE_PROPERTIES" --blazar-extra-specs "$BLAZAR_EXTRA_SPECS" -j check-blazar $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-blazar.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -877,7 +877,7 @@
           description: |
             Optional. Specify Blazar extra_specs. <br>
             - e.g. To test creating a lease for a P40 GPU, specify <br>
-            - '{{"pci_passthrough:alias":"P40:1"}}'
+            - '{"pci_passthrough:alias":"P40:1"}'
     properties:
       - authorization:
           'nobody':
@@ -1146,7 +1146,7 @@
           ./setup_tempest.py -e $CLOUD -j check-designate $tmpdir
           cd $tmpdir
           stestr run -n designate_tempest_plugin.tests.scenario.v2.test_recordsets.RecordsetsTest 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     parameters:
@@ -1199,7 +1199,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-compute-host $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1240,7 +1240,7 @@
           ./setup_tempest.py --host cc1.svc.artm.ardctest.nectar.org.au --target_host cc2.svc.artm.ardctest.nectar.org.au -s ardctest-artm -e testing -j check-compute-host-advanced --block_migration $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-compute-host-advanced.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1268,7 +1268,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-cinder $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-cinder.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1300,7 +1300,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-magnum $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-magnum.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1332,7 +1332,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-neutron.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1364,7 +1364,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-scenario $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-scenario.yaml 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1396,7 +1396,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-murano $tmpdir
           cd $tmpdir
           stestr run -n murano_tempest_tests.tests.scenario.application_catalog.test_deployment.TestMuranoDeployment.test_app_deployment 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1428,7 +1428,7 @@
           ./setup_tempest.py -s ardctest-artm -e testing -j check-trove $tmpdir
           cd $tmpdir
           stestr run -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1460,7 +1460,7 @@
           ./setup_tempest.py -e testing -j check-designate $tmpdir
           cd $tmpdir
           stestr run -n designate_tempest_plugin.tests.scenario.v2.test_recordsets.RecordsetsTest 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     properties:
@@ -1847,12 +1847,12 @@
           export OS_USER_DOMAIN_NAME=Default
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Images
-          IMAGES=$(openstack image list --long --public | grep 28eadf5ad64b42a4929b2fb7df99275c | grep NeCTAR | awk '{{print $2}}')
+          IMAGES=$(openstack image list --long --public | grep 28eadf5ad64b42a4929b2fb7df99275c | grep NeCTAR | awk '{print $2}')
           for IMAGE in $IMAGES; do
             echo "==> Triggering tempest-image-check job for $IMAGE..."
             curl -s -X POST https://jenkins.rc.nectar.org.au/job/tempest-image-check/build \
               --user $JENKINS_API_USER:$JENKINS_API_TOKEN \
-              --data-urlencode json="{{\"parameter\": [{{\"name\": \"IMAGE\", \"value\": \"$IMAGE\"}}, {{\"name\": \"AVAILABILITY_ZONE\", \"value\": \"$AVAILABILITY_ZONE\"}}]}}"
+              --data-urlencode json="{'parameter': [{'name':'IMAGE', 'value':'$IMAGE'}, {'name':'AVAILABILITY_ZONE', 'value':'$AVAILABILITY_ZONE'}]}"
           done
     wrappers:
       - credentials-binding:
@@ -1906,7 +1906,7 @@
           export OS_IDENTITY_API_VERSION=3
           export OS_PROJECT_NAME=NeCTAR-Images
           openstack image show --max-width=120 $IMAGE
-          default_user=$(openstack image show -f value -c properties $IMAGE | sed 's/, /\n/g' | grep default_user | sed "s/'//g" | awk '{{print $NF}}')
+          default_user=$(openstack image show -f value -c properties $IMAGE | sed 's/, /\n/g' | grep default_user | sed "s/'//g" | awk '{print $NF}')
           . /opt/tempest/bin/activate
           tmpdir=`mktemp -d --suffix=_tempest`
           cd $WORKSPACE/tempest
@@ -1914,7 +1914,7 @@
           ./setup_tempest.py $SET_AZ -e production --image $IMAGE --username $default_user -j check-image $tmpdir
           cd $tmpdir
           stestr run --serial --include-list $WORKSPACE/tempest/whitelists/check-image.yaml 2>&1 | grep --line-buffered -vE '   \w+Warning: |self._sock = None'
-          RET=${{PIPESTATUS[0]}}
+          RET=${PIPESTATUS[0]}
           rm -rf $tmpdir
           exit $RET
     wrappers:

@@ -108,7 +108,7 @@
                       credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
                       name: 'origin',
                       refspec: '$GERRIT_REFSPEC',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{{organisation}}/{{name}}.git'
+                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
                     ]]
                   ]
                 )
@@ -155,8 +155,8 @@
                     export HELM_EXPERIMENTAL_OCI=1
                     echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
                       --username "$REGISTRY_USR" --password-stdin
-                    helm install -n ${{TAG}} --create-namespace {{name}} oci://registry.rc.nectar.org.au/nectar-helm/{{name}} \
-                      -f dev/{{name}}/values.yaml --set image.tag=${{TAG}} \
+                    helm install -n ${{TAG}} --create-namespace {name} oci://registry.rc.nectar.org.au/nectar-helm/{name} \
+                      -f dev/{name}/values.yaml --set image.tag=${{TAG}} \
                       --set gateway.hostnames={{${{TAG}}.rcdev.nectar.org.au}}
                     '''
                   }}
