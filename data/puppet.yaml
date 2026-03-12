@@ -577,11 +577,6 @@
       - '{name}-puppet-site-prod-jobs':
           organisation: 'tas-gerrit'
 - project:
-    name: puppet-site-thespian
-    jobs:
-      - '{name}-puppet-site-test-jobs':
-          organisation: 'resplat-hpc'
-- project:
     name: puppet-site-swinburne
     jobs:
       - '{name}-puppet-site-prod-jobs':
