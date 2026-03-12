@@ -408,11 +408,6 @@
       - '{name}-puppet-unit':
           organisation: 'internal'
 - project:
-    name: puppet-spartan
-    jobs:
-      - '{name}-puppet-unit':
-          organisation: 'resplat-hpc'
-- project:
     name: puppet-sut
     jobs:
       - '{name}-puppet-unit':
