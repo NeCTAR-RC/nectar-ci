@@ -562,11 +562,6 @@
       - '{name}-pre-commit-all':
           organisation: 'Pawsey'
 - project:
-    name: puppet-site-spartan
-    jobs:
-      - '{name}-puppet-site-prod-jobs':
-          organisation: 'resplat-hpc'
-- project:
     name: puppet-site-tas
     jobs:
       - '{name}-puppet-site-prod-jobs':
