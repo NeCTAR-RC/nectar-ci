@@ -54,11 +54,6 @@
       - '{name}-dummy':
           organisation: 'NeCTAR-RC'
 - project:
-    name: nectar-eligibility
-    jobs:
-      - '{name}-dummy':
-          organisation: 'NeCTAR-RC'
-- project:
     name: meliponini
     jobs:
       - '{name}-dummy':

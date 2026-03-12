@@ -1,0 +1,11 @@
+- project:
+    name: nectar-eligibility
+    jobs:
+      - '{name}-nodejs-lint':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-test':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-test-e2e':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-build':
+          organisation: 'NeCTAR-RC'

@@ -528,3 +528,31 @@
           docker run --network host -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/secrets:/secrets -v ${tmpdir}:/output -v $(pwd)/base-branch:/base-branch -v $(pwd)/target-branch:/target-branch -e TARGET_BRANCH=$GERRIT_REFSPEC -e BASE_BRANCH=$GERRIT_BRANCH -e REPO=$GERRIT_PROJECT registry.rc.nectar.org.au/docker.io/dagandersen/argocd-diff-preview:v0.1.18
           rm -rf secrets
           cat ${tmpdir}/diff.md
+- builder:
+    name: nodejs-install
+    builders:
+      - shell: |
+          corepack enable
+          pnpm install
+- builder:
+    name: nodejs-lint
+    builders:
+      - shell: |
+          pnpm lint
+- builder:
+    name: nodejs-test
+    builders:
+      - shell: |
+          pnpm test
+- builder:
+    name: nodejs-test-e2e
+    builders:
+      - shell: |
+          pnpm test:e2e:install
+          pnpm preview
+          pnpm test:e2e
+- builder:
+    name: nodejs-build
+    builders:
+      - shell: |
+          pnpm build
