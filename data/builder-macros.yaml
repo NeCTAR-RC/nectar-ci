@@ -532,24 +532,28 @@
     name: nodejs-install
     builders:
       - shell: |
-          mkdir -p ~/bin
-          export PATH=~/bin/:$PATH
+          mkdir -p ~/nodejs-bin
+          export PATH=~/nodejs-bin/:$PATH
           corepack enable --install-directory ~/bin
+          pnpm set registry https://verdaccio.artm.rc.nectar.org.au/
           pnpm install
 - builder:
     name: nodejs-lint
     builders:
       - shell: |
+          export PATH=~/nodejs-bin/:$PATH
           pnpm lint
 - builder:
     name: nodejs-test
     builders:
       - shell: |
+          export PATH=~/nodejs-bin/:$PATH
           pnpm test
 - builder:
     name: nodejs-test-e2e
     builders:
       - shell: |
+          export PATH=~/nodejs-bin/:$PATH
           pnpm test:e2e:install
           pnpm preview
           pnpm test:e2e
@@ -557,4 +561,5 @@
     name: nodejs-build
     builders:
       - shell: |
+          export PATH=~/nodejs-bin/:$PATH
           pnpm build
