@@ -534,9 +534,9 @@
       - shell: |
           mkdir -p ~/nodejs-bin
           export PATH=~/nodejs-bin/:$PATH
-          corepack enable --install-directory ~/bin
-          pnpm install
+          corepack enable --install-directory ~/nodejs-bin
           pnpm set registry https://verdaccio.artm.rc.nectar.org.au/
+          pnpm install
 - builder:
     name: nodejs-lint
     builders:
