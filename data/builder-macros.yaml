@@ -532,7 +532,9 @@
     name: nodejs-install
     builders:
       - shell: |
-          corepack enable
+          mkdir -p ~/bin
+          export PATH=~/bin/:$PATH
+          corepack enable --install-directory ~/bin
           pnpm install
 - builder:
     name: nodejs-lint
