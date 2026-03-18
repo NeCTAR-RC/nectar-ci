@@ -17,6 +17,10 @@ To set this up::
  pip install pre-commit
  pre-commit install
 
+To run all configured checks manually::
+
+ pre-commit run --all-files
+
 
 Configuration
 -------------
