@@ -1738,7 +1738,6 @@
           choosing-strategy: gerrit
     builders:
       - nodejs-install
-      - nodejs-build
       - nodejs-test-e2e
 - job-template:
     name: '{name}-nodejs-build'

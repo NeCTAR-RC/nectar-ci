@@ -558,6 +558,7 @@
     builders:
       - shell: |
           export PATH=~/nodejs-bin/:$PATH
+          pnpm build
           pnpm test:e2e:install
           pnpm test:e2e
 - builder:
