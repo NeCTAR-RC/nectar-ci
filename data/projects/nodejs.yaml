@@ -9,3 +9,5 @@
           organisation: 'NeCTAR-RC'
       - '{name}-nodejs-build':
           organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-build-clean':
+          organisation: 'NeCTAR-RC'

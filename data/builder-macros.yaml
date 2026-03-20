@@ -565,4 +565,57 @@
     builders:
       - shell: |
           export PATH=~/nodejs-bin/:$PATH
+
+          CONTAINER="review-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
+
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
+          export OS_AUTH_TYPE=v3applicationcredential
+          export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
+          export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
+          openstack container delete --recursive $CONTAINER || true
+          AUTH=$(openstack container create $CONTAINER -f value -c account)
+          BASEURL=v1/$AUTH/$CONTAINER
+
+          pnpm build --base="/$BASEURL"
+
+          set +x
+          OS_TOKEN=$(openstack token issue -c id -f value)
+          SWIFTURL=https://object-store.rc.nectar.org.au/$BASEURL
+          tar -C $WORKSPACE/dist -zcf - . | curl -sSf -X PUT -H "X-Auth-Token: $OS_TOKEN" -H "X-Detect-Content-Type: true" -H "X-Delete-After: 7776000" --data-binary @- $SWIFTURL/?extract-archive=tar.gz
+          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
+          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
+          curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Test at: $SWIFTURL/'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
+- builder:
+    name: nodejs-build-clean
+    builders:
+      - shell: |
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
+          export OS_AUTH_TYPE=v3applicationcredential
+          export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
+          export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
+          CONTAINER="review-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
+          openstack container delete --recursive $CONTAINER
+- builder:
+    name: nodejs-deploy
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+
           pnpm build
+
+          CONTAINER="nectar-eligibility"
+
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
+          export OS_AUTH_TYPE=v3applicationcredential
+          export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
+          export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
+          openstack container delete --recursive $CONTAINER || true
+          AUTH=$(openstack container create $CONTAINER -f value -c account)
+          BASEURL=v1/$AUTH/$CONTAINER
+
+          set +x
+          OS_TOKEN=$(openstack token issue -c id -f value)
+          SWIFTURL=https://object-store.rc.nectar.org.au/$BASEURL
+          tar -C $WORKSPACE/dist -zcf - . | curl -sSf -X PUT -H "X-Auth-Token: $OS_TOKEN" -H "X-Detect-Content-Type: true" -H "X-Delete-After: 7776000" --data-binary @- $SWIFTURL/?extract-archive=tar.gz
+          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
+          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL

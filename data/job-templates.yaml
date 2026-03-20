@@ -1780,3 +1780,100 @@
     builders:
       - nodejs-install
       - nodejs-build
+    wrappers:
+      - credentials-binding:
+          - username-password-separated:
+              credential-id: 597a52ce-0395-4407-b633-ae549e711363
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
+          - username-password:
+              credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
+              variable: GERRIT_API
+- job-template:
+    name: '{name}-nodejs-build-clean'
+    defaults: global
+    node: noble
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+    triggers:
+      - gerrit:
+          trigger-on:
+            - change-merged-event
+            - change-abandoned-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+    scm:
+      - git:
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
+    builders:
+      - nodejs-build-clean
+    wrappers:
+      - credentials-binding:
+          - username-password-separated:
+              credential-id: 597a52ce-0395-4407-b633-ae549e711363
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
+- job-template:
+    name: '{name}-nodejs-deploy'
+    defaults: global
+    node: noble
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default branch to test."
+    triggers:
+      - gerrit:
+          trigger-on:
+            - change-merged-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: 'master'
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'nectar/.*'
+          silent: false
+          escape-quotes: true
+    scm:
+      - git:
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: false
+          clean:
+            after: true
+          choosing-strategy: gerrit
+    builders:
+      - nodejs-install
+      - nodejs-deploy
+    wrappers:
+      - credentials-binding:
+          - username-password-separated:
+              credential-id: 597a52ce-0395-4407-b633-ae549e711363
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
