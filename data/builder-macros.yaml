@@ -501,6 +501,8 @@
     builders:
       - shell: |
           #!/bin/bash
+          virtualenv /tmp/twine
+          . /tmp/twine/bin/activate
           pip install -U build twine
           rm -rf dist/*
           python3 -m build
