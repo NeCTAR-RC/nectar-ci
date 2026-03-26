@@ -579,7 +579,7 @@
           AUTH=$(openstack container create $CONTAINER -f value -c account)
           BASEURL=v1/$AUTH/$CONTAINER
 
-          pnpm build --base="/$BASEURL"
+          pnpm build --base="/$BASEURL/"
 
           set +x
           OS_TOKEN=$(openstack token issue -c id -f value)
