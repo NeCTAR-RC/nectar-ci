@@ -11,3 +11,5 @@
           organisation: 'NeCTAR-RC'
       - '{name}-nodejs-build-clean':
           organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-deploy':
+          organisation: 'NeCTAR-RC'
