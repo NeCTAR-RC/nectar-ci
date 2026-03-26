@@ -1060,6 +1060,8 @@
           blocking-jobs:
             - "{name}-r10k-cleanup"
           block-level: 'GLOBAL'
+      - build-discarder:
+          num-to-keep: 20
     parameters:
       - string:
           name: GERRIT_REFSPEC

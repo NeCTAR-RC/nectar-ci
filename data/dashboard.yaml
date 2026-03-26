@@ -16,6 +16,8 @@
       - throttle:
           max-total: 5
           option: project
+      - build-discarder:
+          num-to-keep: 30
     triggers:
       - gerrit:
           trigger-on:
