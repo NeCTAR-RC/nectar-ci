@@ -3,7 +3,7 @@
     jobs:
       - '{name}-os-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py310'
+          environment: 'py312'
       - '{name}-os-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
