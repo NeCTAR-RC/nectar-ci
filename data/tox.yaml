@@ -45,6 +45,14 @@
           ubuntu_release: 'noble'
           environment: 'pep8'
           os_release: '2025.1'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+          ubuntu_release: 'noble'
+          environment: 'py312'
+          os_release: '2026.1'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+          ubuntu_release: 'noble'
+          environment: 'pep8'
+          os_release: '2026.1'
 - job-group:
     name: '{name}-os-tox-{environment}'
     jobs:
@@ -63,6 +71,9 @@
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
           ubuntu_release: 'noble'
           os_release: '2025.1'
+      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
+          ubuntu_release: 'noble'
+          os_release: '2026.1'
 - job-template:
     name: '{name}-{ubuntu_release}-{os_release}-tox-{environment}'
     defaults: global
