@@ -1789,6 +1789,9 @@
           - username-password:
               credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
               variable: GERRIT_API
+          - text:
+              credential-id: d9b97c28-1005-4e24-9220-cff1e0a20a9b
+              variable: VITE_GA_MEASUREMENT_ID
 - job-template:
     name: '{name}-nodejs-build-clean'
     defaults: global
@@ -1877,3 +1880,6 @@
               credential-id: 597a52ce-0395-4407-b633-ae549e711363
               username: CREDENTIAL_ID
               password: CREDENTIAL_SECRET
+          - text:
+              credential-id: 977bcda3-8942-41f1-b086-1bc7683d42b9
+              variable: VITE_GA_MEASUREMENT_ID
