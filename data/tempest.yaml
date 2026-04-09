@@ -2132,6 +2132,11 @@
             - "tempest-nagios-toggle"
           block-level: 'GLOBAL'
 - project:
+    name: heat-comprehensive
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: '{name}'
+- project:
     name: neutron-comprehensive
     jobs:
       - 'tempest-{name}-check':
