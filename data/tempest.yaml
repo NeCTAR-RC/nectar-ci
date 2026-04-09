@@ -588,11 +588,6 @@
       - trigger:
           project: 'tempest-cleanup-operator'
           threshold: 'FAILURE'
-- project:
-    name: neutron-upgrade
-    jobs:
-      - 'tempest-{name}-check':
-          whitelist: 'upgrade-neutron'
 - job:
     name: tempest-scenario-check
     defaults: global
@@ -2136,3 +2131,8 @@
           blocking-jobs:
             - "tempest-nagios-toggle"
           block-level: 'GLOBAL'
+- project:
+    name: neutron-comprehensive
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: '{name}'
