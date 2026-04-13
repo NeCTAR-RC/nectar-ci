@@ -139,6 +139,7 @@
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+      - '{name}-kolla-container-upstream'
 - project:
     name: heat-tempest-plugin
     jobs:
