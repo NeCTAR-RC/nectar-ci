@@ -2151,3 +2151,8 @@
     jobs:
       - 'tempest-{name}-check':
           whitelist: '{name}'
+- project:
+    name: glance-comprehensive
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: '{name}'
