@@ -2146,3 +2146,8 @@
     jobs:
       - 'tempest-{name}-check':
           whitelist: '{name}'
+- project:
+    name: cinder-comprehensive
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: '{name}'
