@@ -83,13 +83,16 @@
 - project:
     name: langstroth
     jobs:
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'flake8'
-      - '{name}-jammy-tox-{environment}':
+          environment: 'pep8'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'jshint'
       - '{name}-devenv-create':
