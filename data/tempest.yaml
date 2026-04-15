@@ -2141,3 +2141,8 @@
     jobs:
       - 'tempest-{name}-check':
           whitelist: '{name}'
+- project:
+    name: aodh-comprehensive
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: '{name}'
