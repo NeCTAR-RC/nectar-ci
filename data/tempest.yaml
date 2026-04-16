@@ -2156,3 +2156,8 @@
     jobs:
       - 'tempest-{name}-check':
           whitelist: '{name}'
+- project:
+    name: nova-comprehensive
+    jobs:
+      - 'tempest-{name}-check':
+          whitelist: '{name}'
