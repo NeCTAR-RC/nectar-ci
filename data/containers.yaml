@@ -621,7 +621,7 @@
       pipeline {{
         agent {{ label 'docker' }}
         environment {{
-          TAG = "${{env.GERRIT_EVENT_TYPE != "ref-updated-event" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
+          TAG = "${{env.GERRIT_EVENT_TYPE != "ref-updated" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
         }}
         stages {{
           stage('Clone') {{
@@ -673,7 +673,7 @@
           stage('Helm package update') {{
             when {{
                 expression {{
-                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'ref-updated-event'
+                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'ref-updated'
                 }}
             }}
             steps {{
