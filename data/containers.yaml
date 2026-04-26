@@ -601,7 +601,7 @@
     triggers:
       - gerrit:
           trigger-on:
-            - change-merged-event
+            - ref-updated-event
             - patchset-created-event
             - comment-added-contains-event:
                 comment-contains-value: 'recheck'
@@ -613,13 +613,15 @@
                   branch-pattern: 'nectar/.*'
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
+                - branch-compare-type: 'ANT'
+                  branch-pattern: 'refs/tags/**'
           silent: false
           escape-quotes: true
     dsl: |
       pipeline {{
         agent {{ label 'docker' }}
         environment {{
-          TAG = "${{env.GERRIT_EVENT_TYPE != "change-merged" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
+          TAG = "${{env.GERRIT_EVENT_TYPE != "ref-updated-event" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
         }}
         stages {{
           stage('Clone') {{
@@ -671,7 +673,7 @@
           stage('Helm package update') {{
             when {{
                 expression {{
-                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'change-merged'
+                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'ref-updated-event'
                 }}
             }}
             steps {{
