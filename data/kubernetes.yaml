@@ -1,5 +1,4 @@
 # Helm
-
 - job-group:
     name: '{name}-helm-default-jobs'
     jobs:
