@@ -67,6 +67,10 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
+    name: ubuntu-26.04
+    jobs:
+      - 'image-build-official-{name}'
+- project:
     name: windows-2022
     jobs:
       - 'image-build-official-{name}':
