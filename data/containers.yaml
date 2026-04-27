@@ -624,63 +624,72 @@
           TAG = "${{env.GERRIT_EVENT_TYPE != "ref-updated" ? "review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER: "" }}"
         }}
         stages {{
-          stage('Clone') {{
-            steps {{
-                checkout(
-                  poll: false,
-                  scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: 'origin/$GERRIT_BRANCH']],
-                    extensions: [
-                      [$class: 'CloneOption', honorRefspec: true],
-                      [$class: 'CleanCheckout'],
-                      [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
-                    ],
-                    userRemoteConfigs: [[
-                      credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
-                      name: 'origin',
-                      refspec: '$GERRIT_REFSPEC',
-                      url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
-                    ]]
-                  ]
-                )
-            }}
-          }}
-
-          stage('Build') {{
-            steps {{
-                sh '''
-                make build BUILDER=docker TAG=$TAG
-                '''
-            }}
-          }}
-          stage('Push') {{
-            environment {{
-              REGISTRY = credentials('registry-nectar')
-            }}
-            steps {{
-                sh '''
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-
-                make push BUILDER=docker TAG=$TAG
-
-                rm -f auth.json
-                '''
-            }}
-          }}
-          stage('Helm package update') {{
+          stage('Container') {{
             when {{
                 expression {{
-                  return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'ref-updated'
+                  return env.GERRIT_EVENT_TYPE != 'ref-updated' || env.GERRIT_REFNAME ==~ /refs\/tags\/.*/
                 }}
             }}
-            steps {{
-                script {{
-                  env.IMAGE_TAG = sh(script: "git describe --tags --always", returnStdout: true).trim()
+            stages {{
+              stage('Clone') {{
+                steps {{
+                    checkout(
+                      poll: false,
+                      scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: 'origin/$GERRIT_BRANCH']],
+                        extensions: [
+                          [$class: 'CloneOption', honorRefspec: true],
+                          [$class: 'CleanCheckout'],
+                          [$class: 'BuildChooserSetting', buildChooser: [$class: 'GerritTriggerBuildChooser']]
+                        ],
+                        userRemoteConfigs: [[
+                          credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
+                          name: 'origin',
+                          refspec: '$GERRIT_REFSPEC',
+                          url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git'
+                        ]]
+                      ]
+                    )
                 }}
-                build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
+              }}
+
+              stage('Build') {{
+                steps {{
+                    sh '''
+                    make build BUILDER=docker TAG=$TAG
+                    '''
+                }}
+              }}
+              stage('Push') {{
+                environment {{
+                  REGISTRY = credentials('registry-nectar')
+                }}
+                steps {{
+                    sh '''
+                    export REGISTRY="registry.rc.nectar.org.au"
+                    export REGISTRY_AUTH_FILE=auth.json
+                    echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+
+                    make push BUILDER=docker TAG=$TAG
+
+                    rm -f auth.json
+                    '''
+                }}
+              }}
+              stage('Helm package update') {{
+                when {{
+                    expression {{
+                      return '{helm_name}' != '' && env.GERRIT_EVENT_TYPE == 'ref-updated'
+                    }}
+                }}
+                steps {{
+                    script {{
+                      env.IMAGE_TAG = sh(script: "git describe --tags --always", returnStdout: true).trim()
+                    }}
+                    build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.GERRIT_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.GERRIT_CHANGE_SUBJECT}}")]
+                }}
+              }}
             }}
           }}
         }}
