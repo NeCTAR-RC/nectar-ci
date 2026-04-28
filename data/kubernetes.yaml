@@ -73,6 +73,11 @@
       - 'magnum-capi-helm-charts-build':
           organisation: 'NeCTAR-RC'
 - project:
+    name: magnum-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'NeCTAR-RC'
+- project:
     name: manuka-helm
     jobs:
       - '{name}-helm-default-jobs':
