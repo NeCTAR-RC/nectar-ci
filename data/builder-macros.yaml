@@ -581,12 +581,24 @@
 
           pnpm build --base="/$BASEURL/"
 
+          swift post $CONTAINER \
+            --header 'X-Container-Meta-Web-Index: index.html' \
+            --header 'X-Container-Read: .r:*,.rlistings'
+
+          cd "$WORKSPACE/dist"
+
+          # no-store so reviewers always see the latest patchset.
+          swift upload "$CONTAINER" assets \
+            --header 'X-Detect-Content-Type: true' \
+            --header 'Cache-Control: no-store'
+
+          find . -maxdepth 1 -type f -print0 | xargs -0 -I{} \
+            swift upload "$CONTAINER" {} \
+              --header 'X-Detect-Content-Type: true' \
+              --header 'Cache-Control: no-store'
+
           set +x
-          OS_TOKEN=$(openstack token issue -c id -f value)
           SWIFTURL=https://object-store.rc.nectar.org.au/$BASEURL
-          tar -C $WORKSPACE/dist -zcf - . | curl -sSf -X PUT -H "X-Auth-Token: $OS_TOKEN" -H "X-Detect-Content-Type: true" -H "X-Delete-After: 7776000" --data-binary @- $SWIFTURL/?extract-archive=tar.gz
-          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
-          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
           curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Test at: $SWIFTURL/'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
 - builder:
     name: nodejs-build-clean
@@ -612,13 +624,26 @@
           export OS_AUTH_TYPE=v3applicationcredential
           export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
           export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
-          openstack container delete --recursive $CONTAINER || true
-          AUTH=$(openstack container create $CONTAINER -f value -c account)
-          BASEURL=v1/$AUTH/$CONTAINER
 
-          set +x
-          OS_TOKEN=$(openstack token issue -c id -f value)
-          SWIFTURL=https://object-store.rc.nectar.org.au/$BASEURL
-          tar -C $WORKSPACE/dist -zcf - . | curl -sSf -X PUT -H "X-Auth-Token: $OS_TOKEN" -H "X-Detect-Content-Type: true" -H "X-Delete-After: 7776000" --data-binary @- $SWIFTURL/?extract-archive=tar.gz
-          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Meta-Web-Index: index.html' $SWIFTURL
-          curl -sSf -X POST -H "X-Auth-Token: $OS_TOKEN" -H 'X-Container-Read: .r:*,.rlistings' $SWIFTURL
+          openstack container create $CONTAINER >/dev/null
+          swift post $CONTAINER \
+            --header 'X-Container-Meta-Web-Index: index.html' \
+            --header 'X-Container-Read: .r:*,.rlistings'
+
+          cd "$WORKSPACE/dist"
+
+          # Schedule existing assets for deletion in 90 days. Re-uploading below clears the timer on still-current files; orphans expire.
+          swift list "$CONTAINER" --prefix assets/ | while read -r OBJ; do
+            swift post "$CONTAINER" "$OBJ" --header 'X-Delete-After: 7776000'
+          done
+
+          # Upload assets first so new HTML below references files that already exist.
+          swift upload "$CONTAINER" assets \
+            --header 'X-Detect-Content-Type: true' \
+            --header 'Cache-Control: public, max-age=31536000, immutable'
+
+          # must-revalidate so clients pick up fresh bundle hashes on next visit.
+          find . -maxdepth 1 -type f -print0 | xargs -0 -I{} \
+            swift upload "$CONTAINER" {} \
+              --header 'X-Detect-Content-Type: true' \
+              --header 'Cache-Control: public, max-age=0, must-revalidate'
