@@ -22,6 +22,9 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
