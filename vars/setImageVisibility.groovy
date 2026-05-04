@@ -1,4 +1,7 @@
 def call(String projectName, String cloudEnv, String visibility) {
+    def imageId
+    def OSCredID
+    def OSAuthURL
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         switch(cloudEnv) {

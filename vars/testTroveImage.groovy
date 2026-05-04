@@ -1,12 +1,13 @@
 def call(String cloudEnv, String availabilityZone) {
     unstash 'build'
     unstash 'previous-version'
+    def datastoreName
+    def datastoreVersion
+    def previousVersion
     script {
         datastoreName = readFile(file: 'build/.facts/datastore_name').trim()
-        datastoreType = readFile(file: 'build/.facts/datastore_type').trim()
         datastoreVersion = readFile(file: 'build/.facts/datastore_version').trim()
-        previousFile = "previous-version/" + cloudEnv
-        previousVersion = readFile(file: previousFile).trim()
+        previousVersion = readFile(file: "previous-version/" + cloudEnv).trim()
     }
     git credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498', url: 'ssh://review.rc.nectar.org.au:29418/internal/nectar-testing.git'
     sh """#!/bin/bash
