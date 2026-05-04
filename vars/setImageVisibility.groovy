@@ -1,7 +1,6 @@
 def call(String projectName, String cloudEnv, String visibility) {
     script {
         imageId = readFile(file: 'build/.image-id').trim()
-        imageName = readFile(file: 'build/.facts/nectar_name').trim()
         switch(cloudEnv) {
           case "production":
             OSCredID = '6c8091b5-0e7d-4be5-8458-4e5a999acdd6'
