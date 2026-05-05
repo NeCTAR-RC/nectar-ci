@@ -1,4 +1,6 @@
 def call(String projectName, String cloudEnv) {
+    def osCredId
+    def osAuthUrl
     script {
         switch(cloudEnv) {
           case "production":

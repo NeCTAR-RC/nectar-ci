@@ -1,7 +1,9 @@
 def call(String projectName, String tag, String cloudEnv) {
+    def imageId
+    def OSCredID
+    def OSAuthURL
     script {
         imageId = readFile(file: 'build/.image-id').trim()
-        imageName = readFile(file: 'build/.facts/nectar_name').trim()
         switch(cloudEnv) {
           case "production":
             OSCredID = '6c8091b5-0e7d-4be5-8458-4e5a999acdd6'
@@ -19,13 +21,13 @@ def call(String projectName, String tag, String cloudEnv) {
     }
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -eu
-       echo "\033[35;1m========== Promote to image in $cloudEnv ==========\033[0m"
+       echo "\033[35;1m========== Unsetting image tag in $cloudEnv ==========\033[0m"
        export OS_AUTH_URL=$OSAuthURL
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=$projectName
-       echo "Setting tag..."
+       echo "Unsetting tag..."
        echo "==> openstack image unset --tag $tag $imageId"
        openstack image unset --tag $tag $imageId
        """

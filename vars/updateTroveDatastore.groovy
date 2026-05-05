@@ -1,5 +1,11 @@
 def call(String cloudEnv, String active = '1') {
     unstash 'build'
+    def imageId
+    def datastoreName
+    def datastoreType
+    def datastoreVersion
+    def OSCredID
+    def OSAuthURL
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         datastoreName = readFile(file: 'build/.facts/datastore_name').trim()

@@ -1,5 +1,9 @@
 def call(String cloudEnv) {
     unstash 'build'
+    def imageId
+    def datastoreName
+    def datastoreType
+    def datastoreVersion
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         datastoreName = readFile(file: 'build/.facts/datastore_name').trim()

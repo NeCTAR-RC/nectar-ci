@@ -1,6 +1,10 @@
 def call(String projectName, String cloudEnv) {
     unstash 'build'
     unstash 'raw_image'
+    def imageId
+    def imageName
+    def OSCredID
+    def OSAuthURL
     script {
         imageId = readFile(file: 'build/.image-id').trim()
         imageName = readFile(file: 'build/.facts/nectar_name').trim()
