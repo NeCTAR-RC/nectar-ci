@@ -25,6 +25,11 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'cover'
+      - '{name}-devenv-create':
+          organisation: 'NeCTAR-RC'
+          hostname_var: 'gateway.hostnames'
+      - '{name}-devenv-cleanup':
+          organisation: 'NeCTAR-RC'
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
