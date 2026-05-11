@@ -181,10 +181,10 @@
 - project:
     name: magnum-capi-helm
     jobs:
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
 - project:
