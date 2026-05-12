@@ -221,10 +221,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -323,10 +319,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -448,10 +440,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -548,10 +536,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -652,10 +636,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -746,10 +726,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -801,10 +777,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -864,10 +836,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
@@ -942,10 +910,6 @@
           nobody:
             - job-read
             - job-discover
-      - build-blocker:
-          blocking-jobs:
-            - '^image-build-.*'
-          block-level: 'GLOBAL'
     project-type: pipeline
     sandbox: true
     dsl: |
