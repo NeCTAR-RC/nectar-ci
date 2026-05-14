@@ -136,9 +136,6 @@
     jobs:
       - '{name}-os-tox-python3':
           organisation: 'NeCTAR-RC'
-      - '{name}-kolla-container':
-          organisation: 'NeCTAR-RC'
-          helm_name: '{name}-helm'
       - '{name}-kolla-container-upstream'
 - project:
     name: heat-tempest-plugin
