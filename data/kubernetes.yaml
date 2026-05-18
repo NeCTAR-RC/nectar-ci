@@ -158,6 +158,11 @@
     jobs:
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
+- project:
+    name: huber-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'NeCTAR-RC'
 # Kustomize
 - project:
     name: keycloak-deploy
