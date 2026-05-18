@@ -316,6 +316,21 @@
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
 - project:
+    name: huber
+    jobs:
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
+      - '{name}-container':
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
+- project:
     name: warre-dashboard
     jobs:
       - '{name}-os-tox-python3':
