@@ -1,4 +1,9 @@
 - project:
+    name: agent-skills
+    jobs:
+      - '{name}-dummy':
+          organisation: 'internal'
+- project:
     name: bumblebee-dev
     jobs:
       - '{name}-dummy':
