@@ -39,11 +39,11 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
-    name: fedora-41
+    name: fedora-43
     jobs:
       - 'image-build-official-{name}'
 - project:
-    name: fedora-42
+    name: fedora-44
     jobs:
       - 'image-build-official-{name}'
 - project:
@@ -152,14 +152,6 @@
       - 'image-build-bumblebee-{name}':
 - project:
     name: bumblebee-neurodesktop
-    jobs:
-      - 'image-build-bumblebee-{name}':
-- project:
-    name: bumblebee-geodesktop
-    jobs:
-      - 'image-build-bumblebee-{name}':
-- project:
-    name: bumblebee-fedora-scientific
     jobs:
       - 'image-build-bumblebee-{name}':
 - project:
