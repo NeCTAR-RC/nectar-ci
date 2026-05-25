@@ -13,3 +13,18 @@
           organisation: 'NeCTAR-RC'
       - '{name}-nodejs-deploy':
           organisation: 'NeCTAR-RC'
+- project:
+    name: ardc-ui-react
+    jobs:
+      - '{name}-nodejs-lint':
+          organisation: 'internal'
+      - '{name}-nodejs-storybook-test':
+          organisation: 'internal'
+      - '{name}-nodejs-storybook-build':
+          organisation: 'internal'
+      - '{name}-nodejs-build-clean':
+          organisation: 'internal'
+      - '{name}-nodejs-storybook-deploy':
+          organisation: 'internal'
+      - '{name}-nodejs-publish':
+          organisation: 'internal'

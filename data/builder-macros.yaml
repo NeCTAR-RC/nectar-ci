@@ -647,3 +647,114 @@
             swift upload "$CONTAINER" {} \
               --header 'X-Detect-Content-Type: true' \
               --header 'Cache-Control: public, max-age=0, must-revalidate'
+# ardc-react ships two artifacts the nodejs-build/deploy builders above don't cover:
+# an npm component library (vite lib build -> dist/, published to Verdaccio) and a
+# Storybook docs site (build-storybook -> storybook-static/, served from Swift). It
+# reuses nodejs-install/lint/build-clean; the four builders below add Storybook
+# testing, a per-patchset Storybook preview, the Storybook deploy, and npm publish.
+- builder:
+    name: nodejs-storybook-test
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+          # `pnpm test` renders every story in a real headless chromium (Vitest browser
+          # mode via @storybook/addon-vitest) and fails on a11y violations. test:install
+          # fetches chromium into the ephemeral build container, same as nectar-eligibility's
+          # test:e2e:install. Future Chromatic visual tests will hang off here.
+          pnpm test:install
+          pnpm test
+- builder:
+    name: nodejs-storybook-build
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+
+          CONTAINER="review-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
+
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
+          export OS_AUTH_TYPE=v3applicationcredential
+          export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
+          export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
+          openstack container delete --recursive $CONTAINER || true
+          AUTH=$(openstack container create $CONTAINER -f value -c account)
+          BASEURL=v1/$AUTH/$CONTAINER
+
+          pnpm build-storybook
+
+          swift post $CONTAINER \
+            --header 'X-Container-Meta-Web-Index: index.html' \
+            --header 'X-Container-Read: .r:*,.rlistings'
+
+          cd "$WORKSPACE/storybook-static"
+
+          # no-store so reviewers always see the latest patchset.
+          find . -type f -print0 | xargs -0 -I{} \
+            swift upload "$CONTAINER" {} \
+              --header 'X-Detect-Content-Type: true' \
+              --header 'Cache-Control: no-store'
+
+          set +x
+          SWIFTURL=https://object-store.rc.nectar.org.au/$BASEURL
+          curl -sSf --user $GERRIT_API -X POST -H 'Content-Type: application/json' -d "{'message': 'Storybook preview at: $SWIFTURL/index.html'}" https://review.rc.nectar.org.au/a/changes/$GERRIT_CHANGE_ID/revisions/$GERRIT_PATCHSET_NUMBER/review
+- builder:
+    name: nodejs-storybook-deploy
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+
+          pnpm build-storybook
+
+          CONTAINER="ardc-ui"
+
+          export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
+          export OS_AUTH_TYPE=v3applicationcredential
+          export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
+          export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
+
+          openstack container create $CONTAINER >/dev/null
+          swift post $CONTAINER \
+            --header 'X-Container-Meta-Web-Index: index.html' \
+            --header 'X-Container-Read: .r:*,.rlistings'
+
+          cd "$WORKSPACE/storybook-static"
+
+          # Schedule everything for deletion in 90 days. Re-uploading below clears the
+          # timer on still-current files; orphans from removed stories expire on their own.
+          swift list "$CONTAINER" | while read -r OBJ; do
+            swift post "$CONTAINER" "$OBJ" --header 'X-Delete-After: 7776000'
+          done
+
+          # Storybook fingerprints its bundles into assets/, sb-*/ and components/, so
+          # those are immutable; the entry HTML/JSON at the root must revalidate to pick
+          # up new bundle hashes. Upload immutable dirs first so fresh HTML never points
+          # at a file that isn't there yet.
+          for DIR in assets sb-addons sb-common-assets sb-manager addon-visual-tests-assets components; do
+            [ -d "$DIR" ] && swift upload "$CONTAINER" "$DIR" \
+              --header 'X-Detect-Content-Type: true' \
+              --header 'Cache-Control: public, max-age=31536000, immutable'
+          done
+
+          find . -path ./assets -prune -o -path ./sb-addons -prune \
+            -o -path ./sb-common-assets -prune -o -path ./sb-manager -prune \
+            -o -path ./addon-visual-tests-assets -prune -o -path ./components -prune \
+            -o -type f -print0 | xargs -0 -I{} \
+            swift upload "$CONTAINER" {} \
+              --header 'X-Detect-Content-Type: true' \
+              --header 'Cache-Control: public, max-age=0, must-revalidate'
+- builder:
+    name: nodejs-publish
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+
+          pnpm build
+
+          # Basic auth (registry-scoped _auth = base64 of user:password), bound from the
+          # Jenkins username/password credential. Written fresh into the ephemeral build
+          # container each run and never committed. Mirrors the previous Bamboo pipeline.
+          REGISTRY=verdaccio.artm.rc.nectar.org.au
+          echo "//$REGISTRY/:_auth=$(echo -n "$VERDACCIO_USR:$VERDACCIO_PSW" | base64)" > "$HOME/.npmrc"
+
+          # --ignore-scripts: the prepare hook (git-hooks installer) is irrelevant here.
+          # --no-git-checks: publishing from a detached Gerrit checkout, not a branch tip.
+          pnpm publish --no-git-checks --ignore-scripts
