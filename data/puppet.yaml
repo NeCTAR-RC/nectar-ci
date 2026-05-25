@@ -186,11 +186,6 @@
       - '{name}-puppet-unit':
           organisation: 'NeCTAR-RC'
 - project:
-    name: puppet-karaage
-    jobs:
-      - '{name}-puppet-unit':
-          organisation: 'NeCTAR-RC'
-- project:
     name: puppet-kexec
     jobs:
       - '{name}-puppet-unit':
