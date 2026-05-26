@@ -38,7 +38,7 @@
           TAG = "${{"review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER}}"
           REGISTRY = credentials('registry-nectar')
           REGISTRY_HOST="registry.rc.nectar.org.au"
-          KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
+          KEYSTONE = credentials('6457de6c-a455-49b4-a217-382a8425b4d6')
           GERRIT_API = credentials('2f00f9a5-00c3-42fe-82bf-cc787af1df8c')
         }}
         stages {{
@@ -48,11 +48,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=https://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
 
               TAG_BASE=review-$GERRIT_CHANGE_NUMBER
 
@@ -83,11 +83,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=https://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
               openstack recordset create rcdev.nectar.org.au. ${{TAG}}.rcdev.nectar.org.au. --type CNAME --record lb.rcdev.nectar.org.au.
               '''
             }}
@@ -179,11 +179,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=https://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
               recordsets=`openstack recordset list rcdev.nectar.org.au. | grep ${{TAG}} | awk '{{print $2}}'`
               for i in $recordsets
               do
@@ -232,7 +232,7 @@
       pipeline {{
         agent {{ label 'internal' }}
         environment {{
-          KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
+          KEYSTONE = credentials('6457de6c-a455-49b4-a217-382a8425b4d6')
         }}
         stages {{
           stage('Cleanup') {{
@@ -240,11 +240,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=https://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
 
               TAG_BASE=review-$GERRIT_CHANGE_NUMBER
 

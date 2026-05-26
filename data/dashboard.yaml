@@ -50,7 +50,7 @@
           TAG = "${"review-" + env.GERRIT_CHANGE_NUMBER + "-" + env.GERRIT_PATCHSET_NUMBER}"
           REGISTRY = credentials('registry-nectar')
           REGISTRY_HOST="registry.rc.nectar.org.au"
-          KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
+          KEYSTONE = credentials('6457de6c-a455-49b4-a217-382a8425b4d6')
           GERRIT_API = credentials('2f00f9a5-00c3-42fe-82bf-cc787af1df8c')
         }
         stages {
@@ -259,7 +259,7 @@
       pipeline {
         agent { label 'internal' }
         environment {
-          KEYSTONE = credentials('66ae35f1-6e11-4b79-aa1d-f71e6ac752b4')
+          KEYSTONE = credentials('6457de6c-a455-49b4-a217-382a8425b4d6')
         }
         stages {
           stage('Cleanup') {
