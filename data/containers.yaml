@@ -546,7 +546,19 @@
               script {{
                 def chart = readYaml file: 'Chart.yaml'
                 def split = chart.version.split('\\.')
-                split[2] = Integer.parseInt(split[2]) + 1
+                def majorOf = {{ v ->
+                  def m = (v ?: '').toString().replaceFirst(/^v/, '') =~ /^(\d+)\./
+                  m ? (m[0][1] as Integer) : null
+                }}
+                def oldMajor = majorOf(chart.appVersion)
+                def newMajor = majorOf("$IMAGE_TAG")
+                if (oldMajor != null && newMajor != null && newMajor != oldMajor) {{
+                  split[0] = Integer.parseInt(split[0]) + 1
+                  split[1] = 0
+                  split[2] = 0
+                }} else {{
+                  split[2] = Integer.parseInt(split[2]) + 1
+                }}
                 chart.version = split.join('.')
                 chart.appVersion = "$IMAGE_TAG"
                 def new_chart = writeYaml file: 'Chart.yaml',  data: chart, overwrite:true
