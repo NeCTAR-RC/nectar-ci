@@ -23,16 +23,7 @@
 - project:
     name: python-langstrothclient
     jobs:
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'flake8'
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'cover'
-      - '{name}-pypi-release':
+      - '{name}-clients-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
     name: python-manukaclient
