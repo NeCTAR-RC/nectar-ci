@@ -60,11 +60,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=http://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
 
               TAG_BASE=review-$GERRIT_CHANGE_NUMBER
 
@@ -95,11 +95,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=http://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
               openstack recordset create rcdev.nectar.org.au. ${TAG}.rcdev.nectar.org.au. --type CNAME --record lb.rcdev.nectar.org.au.
               '''
             }
@@ -198,11 +198,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=http://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
               recordsets=`openstack recordset list rcdev.nectar.org.au. | grep ${TAG} | awk '{print $2}'`
               for i in $recordsets
               do
@@ -267,11 +267,11 @@
               sh '''
               export OS_USERNAME=$KEYSTONE_USR
               export OS_PASSWORD=$KEYSTONE_PSW
-              export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3
+              export OS_AUTH_URL=http://ucc1.svc.artm.rcunder.nectar.org.au:5000/v3
               export OS_PROJECT_DOMAIN_NAME=Default
               export OS_USER_DOMAIN_NAME=Default
               export OS_IDENTITY_API_VERSION=3
-              export OS_PROJECT_NAME=NeCTAR-Devs
+              export OS_PROJECT_NAME=rcdev
 
               TAG_BASE=review-$GERRIT_CHANGE_NUMBER
 
