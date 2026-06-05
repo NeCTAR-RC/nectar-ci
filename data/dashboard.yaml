@@ -76,7 +76,7 @@
               '''
 
               withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd89',
-                    serverUrl: 'https://138.44.21.152:6443',
+                    serverUrl: 'https://k8s-api.rcdev.nectar.org.au:6443',
               ]) {
                 sh '''
                   TAG_BASE=review-$GERRIT_CHANGE_NUMBER
@@ -147,7 +147,7 @@
                     branch: 'master'
                 retry(3) {
                   withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd89',
-                                  serverUrl: 'https://138.44.21.152:6443',
+                                  serverUrl: 'https://k8s-api.rcdev.nectar.org.au:6443',
                   ]) {
                     sh '''#!/bin/bash
 
@@ -283,7 +283,7 @@
               '''
 
               withKubeConfig([credentialsId: 'ef3bf1e0-6c6b-4bb9-80cc-4bd51e8edd89',
-                    serverUrl: 'https://138.44.21.152:6443',
+                    serverUrl: 'https://k8s-api.rcdev.nectar.org.au:6443',
               ]) {
                 sh '''
                   TAG_BASE=review-$GERRIT_CHANGE_NUMBER
