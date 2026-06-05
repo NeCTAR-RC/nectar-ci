@@ -544,11 +544,23 @@
           pnpm set registry https://verdaccio.artm.rc.nectar.org.au/
           pnpm install
 - builder:
-    name: nodejs-lint
+    name: nodejs-lint-js
     builders:
       - shell: |
           export PATH=~/nodejs-bin/:$PATH
-          pnpm lint
+          pnpm lint:js
+- builder:
+    name: nodejs-lint-scss
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+          pnpm lint:scss
+- builder:
+    name: nodejs-format
+    builders:
+      - shell: |
+          export PATH=~/nodejs-bin/:$PATH
+          pnpm format:check
 - builder:
     name: nodejs-test
     builders:
@@ -755,6 +767,17 @@
           REGISTRY=verdaccio.artm.rc.nectar.org.au
           echo "//$REGISTRY/:_auth=$(echo -n "$VERDACCIO_USR:$VERDACCIO_PSW" | base64)" > "$HOME/.npmrc"
 
-          # --ignore-scripts: the prepare hook (git-hooks installer) is irrelevant here.
-          # --no-git-checks: publishing from a detached Gerrit checkout, not a branch tip.
-          pnpm publish --no-git-checks --ignore-scripts
+          # Publish only when package.json carries a version not yet on the registry.
+          # Versions are bumped on release, not every commit, so most merges (deps,
+          # tooling, CI) reuse the current version — publishing those would 403 on the
+          # existing version and red-fail the job. Skip them instead; a real release
+          # bumps the version and falls through to publish.
+          PKG=$(node -p "require('./package.json').name")
+          VER=$(node -p "require('./package.json').version")
+          if pnpm view "$PKG@$VER" version --registry "https://$REGISTRY" >/dev/null 2>&1; then
+            echo "$PKG@$VER already on $REGISTRY; nothing to publish."
+          else
+            # --ignore-scripts: the prepare hook (git-hooks installer) is irrelevant here.
+            # --no-git-checks: publishing from a detached Gerrit checkout, not a branch tip.
+            pnpm publish --no-git-checks --ignore-scripts
+          fi

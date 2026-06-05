@@ -1659,7 +1659,9 @@
           choosing-strategy: gerrit
     builders:
       - nodejs-install
-      - nodejs-lint
+      - nodejs-lint-js
+      - nodejs-lint-scss
+      - nodejs-format
 - job-template:
     name: '{name}-nodejs-test'
     defaults: global
