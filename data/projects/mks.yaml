@@ -7,7 +7,6 @@
           organisation: 'MKS'
       - '{name}-pre-commit-all':
           organisation: 'MKS'
-          organisation: 'MKS'
 - project:
     name: mks-argocd-test
     jobs:
@@ -17,4 +16,17 @@
           organisation: 'MKS'
       - '{name}-pre-commit-all':
           organisation: 'MKS'
+- project:
+    name: mks-argocd-clusters-prod
+    jobs:
+      - '{name}-yaml':
+          organisation: 'MKS'
+      - '{name}-pre-commit-all':
+          organisation: 'MKS'
+- project:
+    name: mks-argocd-clusters-test
+    jobs:
+      - '{name}-yaml':
+          organisation: 'MKS'
+      - '{name}-pre-commit-all':
           organisation: 'MKS'
