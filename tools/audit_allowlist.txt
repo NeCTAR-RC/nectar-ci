@@ -1,0 +1,12 @@
+# Allowlist for tools/audit_projects.py `orphans`.
+#
+# Jobs listed here exist on Jenkins but are intentionally NOT produced by this
+# JJB repo, so they should never be flagged as orphans or deleted.
+#
+# One fnmatch glob per line. Blank lines and # comments are ignored.
+# Examples:
+#   my-hand-built-job
+#   experimental-*
+#   *-sandbox
+#
+# (Empty by default. Add entries as you confirm legitimately unmanaged jobs.)

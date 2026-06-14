@@ -1,0 +1,8 @@
+# Runtime dependencies for tools/audit_projects.py
+#
+# jenkins-job-builder is also required (to render the JJB job set) but is the
+# repo's primary tool; install it per the top-level README (==3.11.0 for parity
+# with jenkins-slave1). On Python 3.12 install it with PyYAML 6, mirroring the
+# Noble package: see tools/README.md.
+ruamel.yaml>=0.17
+requests>=2.25
