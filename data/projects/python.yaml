@@ -65,6 +65,18 @@
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
+    name: hiera-gc
+    jobs:
+      - '{name}-jammy-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py310'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
+- project:
     name: hivemind
     jobs:
       - '{name}-jammy-tox-{environment}':
