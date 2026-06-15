@@ -109,7 +109,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - shell: |
@@ -173,7 +173,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
@@ -236,7 +236,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
@@ -293,7 +293,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - librarian-install
@@ -342,7 +342,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - octocatalog-diff-rake-test
@@ -387,7 +387,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - ssh-builder:
@@ -441,7 +441,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - shell: |

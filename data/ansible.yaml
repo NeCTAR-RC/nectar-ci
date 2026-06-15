@@ -47,7 +47,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     wrappers:
       - ansicolor

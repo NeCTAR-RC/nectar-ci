@@ -533,93 +533,93 @@
     dsl: |
       def imageId
       def imageName
-      pipeline {
+      pipeline {{
           agent none
-          options {
+          options {{
               ansiColor('xterm')
-          }
-          stages {
-              stage('Build Image') {
-                  agent { label 'noble' }
-                  steps {
+          }}
+          stages {{
+              stage('Build Image') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       imageBuildQEMU 'octavia-amphora'
-                  }
-              }
-              stage('Set Image ID') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Set Image ID') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       setImageID()
-                  }
-              }
-              stage('Deploy to Dev Cloud') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Deploy to Dev Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       deployImage 'octavia', 'development'
                       setImageProperties 'octavia', 'development'
                       setImageTag 'octavia', 'octavia', 'development'
                       setImageTag 'octavia', 'octavia_next', 'development'
-                  }
-              }
-              stage('Deploy to Test Cloud') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Deploy to Test Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       deployImage 'octavia', 'testing'
                       setImageProperties 'octavia', 'testing'
                       setImageTag 'octavia', 'octavia', 'testing'
                       setImageTag 'octavia', 'octavia_next', 'testing'
-                  }
-              }
-              stage('Test Image in Test Cloud') {
-                  agent { label 'tempest' }
-                  steps {
+                  }}
+              }}
+              stage('Test Image in Test Cloud') {{
+                  agent {{ label 'tempest' }}
+                  steps {{
                       testOctaviaImage 'testing', 'ardctest-artm'
-                  }
-              }
-              stage('Deploy to Production Cloud') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Deploy to Production Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       deployImage 'octavia', 'production'
                       setImageProperties 'octavia', 'production'
                       setImageTag 'octavia', 'octavia', 'production'
                       setImageTag 'octavia', 'octavia_next', 'production'
-                  }
-              }
-              stage('Test Image in Prod Cloud') {
-                  agent { label 'tempest' }
-                  steps {
+                  }}
+              }}
+              stage('Test Image in Prod Cloud') {{
+                  agent {{ label 'tempest' }}
+                  steps {{
                       testOctaviaImage 'production', 'ardc-syd-1'
-                  }
-              }
-          }
-          post {
-              failure {
-                  node('noble') {
-                      script {
-                        try {
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('noble') {{
+                      script {{
+                        try {{
                           unsetImageTag 'octavia', 'octavia', 'development'
-                        } catch (err) {
-                          echo "Failed: ${err}"
-                        }
-                        try {
+                        }} catch (err) {{
+                          echo "Failed: ${{err}}"
+                        }}
+                        try {{
                           unsetImageTag 'octavia', 'octavia', 'testing'
-                        } catch (err) {
-                          echo "Failed: ${err}"
-                        }
-                        try {
+                        }} catch (err) {{
+                          echo "Failed: ${{err}}"
+                        }}
+                        try {{
                           unsetImageTag 'octavia', 'octavia', 'production'
-                        } catch (err) {
-                          echo "Failed: ${err}"
-                        }
-                      }
-                    }
-                  }
-              cleanup {
-                  node('noble') {
+                        }} catch (err) {{
+                          echo "Failed: ${{err}}"
+                        }}
+                      }}
+                    }}
+                  }}
+              cleanup {{
+                  node('noble') {{
                       deleteDir() /* clean up our workspace */
-                  }
-              }
-          }
-      }
+                  }}
+              }}
+          }}
+      }}
 - job:
     name: image-build-manila-share-server
     defaults: global
@@ -633,76 +633,76 @@
     dsl: |
       def imageId
       def imageName
-      pipeline {
+      pipeline {{
           agent none
-          options {
+          options {{
               ansiColor('xterm')
-          }
-          stages {
-              stage('Build Image') {
-                  agent { label 'noble' }
-                  steps {
+          }}
+          stages {{
+              stage('Build Image') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       imageBuildQEMU 'manila-share-server'
-                  }
-              }
-              stage('Set Image ID') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Set Image ID') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       setImageID()
-                  }
-              }
-              stage('Deploy to Dev Cloud') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Deploy to Dev Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       deployImage 'manila', 'development'
                       setImageProperties 'manila', 'development'
                       setImageTag 'manila', 'manila', 'development'
-                  }
-              }
-              stage('Deploy to Test Cloud') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Deploy to Test Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       deployImage 'manila', 'testing'
                       setImageProperties 'manila', 'testing'
                       setImageTag 'manila', 'manila', 'testing'
-                  }
-              }
-              stage('Test Image in Test Cloud') {
-                  agent { label 'tempest' }
-                  steps {
+                  }}
+              }}
+              stage('Test Image in Test Cloud') {{
+                  agent {{ label 'tempest' }}
+                  steps {{
                       testManilaImage 'testing', 'ardctest-artm'
-                  }
-              }
-              stage('Deploy to Production Cloud') {
-                  agent { label 'noble' }
-                  steps {
+                  }}
+              }}
+              stage('Deploy to Production Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
                       deployImage 'manila', 'production'
                       setImageProperties 'manila', 'production'
                       setImageTag 'manila', 'manila', 'production'
-                  }
-              }
-              stage('Test Image in Prod Cloud') {
-                  agent { label 'tempest' }
-                  steps {
+                  }}
+              }}
+              stage('Test Image in Prod Cloud') {{
+                  agent {{ label 'tempest' }}
+                  steps {{
                       testManilaImage 'production', 'ardc-syd-1'
-                  }
-              }
-          }
-          post {
-              failure {
-                  node('noble') {
+                  }}
+              }}
+          }}
+          post {{
+              failure {{
+                  node('noble') {{
                       deleteImage 'manila', 'production'
                       deleteImage 'manila', 'testing'
                       deleteImage 'manila', 'development'
-                      }
-                  }
-              cleanup {
-                  node('noble') {
+                      }}
+                  }}
+              cleanup {{
+                  node('noble') {{
                       deleteDir() /* clean up our workspace */
-                  }
-              }
-          }
-      }
+                  }}
+              }}
+          }}
+      }}
 - job-template:
     name: 'image-build-jenkins-{name}'
     defaults: global

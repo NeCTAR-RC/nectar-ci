@@ -28,7 +28,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - git-secrets-sorted
@@ -78,7 +78,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - puppet-lint
@@ -129,7 +129,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - puppet-openstack-spec
@@ -172,7 +172,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - helm-dependency-build
@@ -213,7 +213,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - shell: |
@@ -276,7 +276,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - helm-lint
@@ -322,7 +322,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
           honor-refspec: true
     wrappers:
@@ -377,7 +377,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - kustomize-validate
@@ -423,7 +423,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
@@ -476,7 +476,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
@@ -535,7 +535,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - os-pbuilder-checkout
@@ -581,7 +581,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - yaml-lint
@@ -620,7 +620,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - yamllint
@@ -661,7 +661,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - dummy
@@ -700,7 +700,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - dummy
@@ -739,7 +739,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - markdown-lint
@@ -776,7 +776,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - jekyll-test-build
@@ -822,7 +822,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - jekyll-html-check
@@ -865,7 +865,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - jekyll-test-build-cleanup
@@ -915,7 +915,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - puppet-prod-review
@@ -969,7 +969,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - site-deploy
@@ -1019,7 +1019,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-deploy:
@@ -1086,7 +1086,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-deploy-control-repo:
@@ -1145,7 +1145,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-cleanup:
@@ -1287,7 +1287,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-control-repo:
@@ -1353,7 +1353,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-control-repo:
@@ -1466,7 +1466,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - pypi-release
@@ -1629,7 +1629,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - run-tests
@@ -1668,7 +1668,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - pre-commit-all
@@ -1707,7 +1707,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - argocd-diff
@@ -1754,7 +1754,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -1796,7 +1796,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -1836,7 +1836,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -1876,7 +1876,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -1927,7 +1927,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-build-clean
@@ -1970,7 +1970,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -2019,7 +2019,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -2059,7 +2059,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -2106,7 +2106,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install
@@ -2150,7 +2150,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - nodejs-install

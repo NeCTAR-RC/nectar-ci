@@ -1,0 +1,10 @@
+# Jenkins Job Builder for rendering and pushing the job set in data/.
+# Pin must match the version running on jenkins-slave1, since the job XML JJB
+# renders is version specific (see README.rst).
+#
+#   pip install -U -r requirements.txt
+#
+# setuptools<81 is required because JJB 6.5.0 still imports pkg_resources,
+# which newer setuptools removed.
+jenkins-job-builder==6.5.0
+setuptools<81

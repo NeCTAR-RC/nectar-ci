@@ -31,7 +31,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - rake-lint
@@ -71,7 +71,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - jenkins-jobs-test
@@ -125,7 +125,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - jenkins-jobs-update

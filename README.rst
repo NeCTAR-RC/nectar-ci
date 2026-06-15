@@ -5,9 +5,14 @@ Installation
 ------------
 
 All you need to do is:
-`pip install -U jenkins-job-builder==3.11.0`
+`pip install -U -r requirements.txt`
 
-NOTE: jenkins-slave1 runs jenkins-job-builder from package. Noble version is 3.11.0-6.
+This pins `jenkins-job-builder==6.5.0`.
+
+NOTE: jenkins-slave1 must run the same version (6.5.0). The Noble distro package
+is older (3.11.0-6), so install 6.5.0 with pip there too. The job XML 6.5.0
+renders differs from 3.11.0 (for example the git SCM credentials format), so the
+server and local dev must stay on matching versions.
 
 Developing
 ==========

@@ -25,22 +25,15 @@ Use the repo virtualenv. The tool needs `requests` and `ruamel.yaml`, plus
 
 ```bash
 python3 -m venv .venv
-# jenkins-job-builder 3.11.0 (the version on jenkins-slave1) caps PyYAML<6, but
-# PyYAML 5.x has no Python 3.12 wheel and the Noble package actually runs JJB
-# 3.11.0 against PyYAML 6. Mirror that here:
-.venv/bin/pip install --no-deps jenkins-job-builder==3.11.0
-.venv/bin/pip install "PyYAML>=6" six pbr stevedore python-jenkins fasteners Jinja2 "setuptools<81"
+# jenkins-job-builder 6.5.0 supports PyYAML 6 and Python 3.12 natively, so a
+# plain install works:
+.venv/bin/pip install "jenkins-job-builder==6.5.0" "setuptools<81"
 .venv/bin/pip install -r tools/requirements.txt
-# JJB 3.11.0 loads its modules through pkg_resources, which would otherwise
-# reject PyYAML 6 at runtime (VersionConflict). Relax the recorded cap, exactly
-# as the Noble package does:
-find .venv -path '*jenkins_job_builder*/METADATA' \
-  -exec sed -i 's/PyYAML (<6,>=3.10.0)/PyYAML (>=3.10.0)/' {} +
 ```
 
-`setuptools<81` is required because newer setuptools removed `pkg_resources`,
-which JJB 3.11.0 imports. On jenkins-slave1 none of this applies: the distro
-package already runs against the system PyYAML 6.
+`setuptools<81` is required because JJB 6.5.0 still imports `pkg_resources`,
+which newer setuptools removed. jenkins-slave1 must run the same 6.5.0 via pip
+(the Noble distro package 3.11.0-6 is too old).
 
 Run with the venv active, or call `.venv/bin/python` directly — the tool finds
 `jenkins-jobs` next to its own interpreter.

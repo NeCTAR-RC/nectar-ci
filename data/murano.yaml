@@ -50,7 +50,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - shell: make check

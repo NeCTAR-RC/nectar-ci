@@ -719,27 +719,27 @@
     triggers:
       - timed: "0 10 * * 1-5"
     dsl: |
-      pipeline {
-        agent {
-          docker {
+      pipeline {{
+        agent {{
+          docker {{
             image 'registry.rc.nectar.org.au/docker.io/renovate/renovate'
             reuseNode true
             args '--group-add root'
-          }
-        }
-        stages {
-          stage('Run renovate') {
-            steps {
-              withCredentials([file(credentialsId: '42898081-d846-4a3f-a41e-515eb74132e2', variable: 'FILE')]) {
+          }}
+        }}
+        stages {{
+          stage('Run renovate') {{
+            steps {{
+              withCredentials([file(credentialsId: '42898081-d846-4a3f-a41e-515eb74132e2', variable: 'FILE')]) {{
                 sh '''
                   cp $FILE $FILE.json5
                   RENOVATE_CONFIG_FILE=$FILE.json5 renovate
                   '''
-              }
-            }
-          }
-        }
-      }
+              }}
+            }}
+          }}
+        }}
+      }}
 - job:
     name: 'renovate-production-env'
     defaults: global
@@ -749,24 +749,24 @@
     triggers:
       - timed: "0 14 * * 1,3"
     dsl: |
-      pipeline {
-        agent {
-          docker {
+      pipeline {{
+        agent {{
+          docker {{
             image 'registry.rc.nectar.org.au/docker.io/renovate/renovate'
             reuseNode true
             args '--group-add root'
-          }
-        }
-        stages {
-          stage('Run renovate') {
-            steps {
-              withCredentials([file(credentialsId: 'bbae6659-4494-4484-9b3f-66b28e7a871b', variable: 'FILE')]) {
+          }}
+        }}
+        stages {{
+          stage('Run renovate') {{
+            steps {{
+              withCredentials([file(credentialsId: 'bbae6659-4494-4484-9b3f-66b28e7a871b', variable: 'FILE')]) {{
                 sh '''
                   cp $FILE $FILE.json5
                   RENOVATE_CONFIG_FILE=$FILE.json5 renovate
                   '''
-              }
-            }
-          }
-        }
-      }
+              }}
+            }}
+          }}
+        }}
+      }}
