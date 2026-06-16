@@ -628,7 +628,12 @@
       - shell: |
           export PATH=~/nodejs-bin/:$PATH
 
-          pnpm build
+          # build:geo prerenders the landing page into dist/index.html for
+          # crawlers/LLMs, which needs a Playwright browser (same install the
+          # test-e2e job uses). Production is the only build that prerenders;
+          # the review-preview build/test-e2e jobs run plain `pnpm build`.
+          pnpm test:e2e:install
+          pnpm build:geo
 
           CONTAINER="nectar-eligibility"
 
