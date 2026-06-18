@@ -93,6 +93,11 @@
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
+    name: nectar-conformance-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'internal'
+- project:
     name: nectar-dashboard-helm
     jobs:
       - '{name}-helm-default-jobs':

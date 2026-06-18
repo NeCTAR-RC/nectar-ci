@@ -146,6 +146,24 @@
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
 - project:
+    name: nectar-conformance
+    jobs:
+      - '{name}-noble-tox-{environment}':
+          organisation: 'internal'
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'internal'
+          environment: 'pep8'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'internal'
+          environment: 'frontend'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'internal'
+          environment: 'cover'
+      - '{name}-container':
+          organisation: 'internal'
+          helm_name: '{name}-helm'
+- project:
     name: nectar-dashboard
     jobs:
       - '{name}-os-tox-python3':
