@@ -549,3 +549,12 @@
     jobs:
       - '{name}-dummy':
           organisation: 'tas-projects'
+- project:
+    name: nectar-cloudinit-crowdstrike
+    jobs:
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
