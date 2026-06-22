@@ -149,20 +149,30 @@
     name: nectar-conformance
     jobs:
       - '{name}-noble-tox-{environment}':
-          organisation: 'internal'
+          organisation: 'NeCTAR-RC'
           environment: 'py312'
       - '{name}-noble-tox-{environment}':
-          organisation: 'internal'
+          organisation: 'NeCTAR-RC'
           environment: 'pep8'
       - '{name}-noble-tox-{environment}':
-          organisation: 'internal'
+          organisation: 'NeCTAR-RC'
           environment: 'frontend'
       - '{name}-noble-tox-{environment}':
-          organisation: 'internal'
+          organisation: 'NeCTAR-RC'
           environment: 'cover'
       - '{name}-container':
-          organisation: 'internal'
+          organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+      - '{name}-pypi-release':
+          organisation: 'NeCTAR-RC'
+- project:
+    name: nectar-conformance-checks
+    jobs:
+      # Data-only repo (conformance definitions + changelog). The lint tox env runs
+      # `nectar-conformance changelog lint` to validate it on every change.
+      - '{name}-noble-tox-{environment}':
+          organisation: 'internal'
+          environment: 'lint'
 - project:
     name: nectar-dashboard
     jobs:
