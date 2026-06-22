@@ -642,7 +642,7 @@
               stage('Build Image') {
                   agent { label 'noble' }
                   steps {
-                      imageBuildQEMU 'manila-ubuntu'
+                      imageBuildQEMU 'manila-share-server'
                   }
               }
               stage('Set Image ID') {
