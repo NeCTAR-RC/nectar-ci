@@ -491,6 +491,10 @@
     jobs:
       - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
+      - '{name}-diff-{backend}':
+          backend: 'catalog-diff'
+          organisation: 'internal'
+          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
