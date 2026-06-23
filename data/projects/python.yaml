@@ -76,6 +76,8 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
+      - '{name}-pypi-release':
+          organisation: 'NeCTAR-RC'
 - project:
     name: hivemind
     jobs:
