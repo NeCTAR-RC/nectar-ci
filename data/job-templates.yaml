@@ -1272,6 +1272,65 @@
             - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       - ansicolor
 - job-template:
+    name: '{name}-r10k-diff-module-{branch}'
+    defaults: global
+    node: '{label}'
+    quiet-period: 30
+    backend: catalog-diff
+    properties:
+      - build-discarder:
+          days-to-keep: 30
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/{branch}
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: '{branch}'
+          description: "The default branch to test."
+    triggers:
+      - gerrit:
+          trigger-on:
+            - patchset-created-event:
+                exclude-no-code-change: true
+            - change-restored-event
+            - comment-added-contains-event:
+                comment-contains-value: 'recheck'
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'PLAIN'
+                  branch-pattern: '{branch}'
+          silent: false
+          escape-quotes: true
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+    scm:
+      - git:
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
+    builders:
+      - r10k-diff-catalog-module:
+          backend: '{backend}'
+    wrappers:
+      - ssh-agent-credentials:
+          users:
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
+      - ansicolor
+- job-template:
     name: tempest-{name}-check-site-agnostic
     defaults: global
     node: tempest

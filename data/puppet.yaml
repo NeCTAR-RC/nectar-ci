@@ -358,6 +358,14 @@
           organisation: 'internal'
       - '{name}-puppet-prod-review':
           organisation: 'internal'
+      - '{name}-r10k-diff-module-{branch}':
+          organisation: 'internal'
+          branch: 'master'
+          label: 'r10k-test'
+      - '{name}-r10k-diff-module-{branch}':
+          organisation: 'internal'
+          branch: 'production'
+          label: 'r10k-prod'
 - project:
     name: puppet-python
     jobs:

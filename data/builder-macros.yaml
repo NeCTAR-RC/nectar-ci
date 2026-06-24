@@ -198,6 +198,10 @@
             export R10K_BUILD_ENV={r10k_build_env}
             r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
 - builder:
+    name: r10k-diff-catalog-module
+    builders:
+      - shell: 'r10k-diff-catalog.py --backend {backend} test-module $GERRIT_PROJECT $GERRIT_REFSPEC'
+- builder:
     name: tempest-check-whitelist
     builders:
       - inject:
