@@ -243,9 +243,6 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py312'
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py310'
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
@@ -255,8 +252,9 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'cover'
-      - '{name}-jammy-deb-package':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
+          environment: 'releasenotes'
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
