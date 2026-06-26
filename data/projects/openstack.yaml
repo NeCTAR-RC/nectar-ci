@@ -46,8 +46,6 @@
     jobs:
       - '{name}-os-tox-python3':
           organisation: 'NeCTAR-RC'
-      - '{name}-jammy-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
 - project:
@@ -64,21 +62,6 @@
           organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
-- project:
-    name: cloudkitty-dashboard
-    jobs:
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'pep8'
-- project:
-    name: cyborg
-    jobs:
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py310'
 - project:
     name: designate
     jobs:
@@ -162,10 +145,10 @@
 - project:
     name: kolla
     jobs:
-      - '{name}-jammy-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py310'
-      - '{name}-jammy-tox-{environment}':
+          environment: 'py312'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
 - project:
@@ -253,8 +236,6 @@
     jobs:
       - '{name}-os-tox-python3':
           organisation: 'NeCTAR-RC'
-      - '{name}-jammy-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
 - project:
@@ -272,8 +253,6 @@
       - '{name}-os-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'functional'
-      - '{name}-jammy-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
 - project:
@@ -369,8 +348,6 @@
       - '{name}-os-tox-python3':
           organisation: 'NeCTAR-RC'
       - '{name}-os-deb-package':
-          organisation: 'NeCTAR-RC'
-      - '{name}-jammy-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
     name: telemetry-tempest-plugin
