@@ -399,21 +399,13 @@
     triggers:
       - gerrit:
           trigger-on:
-            - change-merged-event
+            - ref-updated-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
               branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'debian'
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'uom/.*'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'debian/.*'
+                  branch-pattern: 'refs/tags/.*'
           silent: false
           escape-quotes: true
           skip-vote:
@@ -460,21 +452,13 @@
     triggers:
       - gerrit:
           trigger-on:
-            - change-merged-event
+            - ref-updated-event
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'
               branches:
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'master'
-                - branch-compare-type: 'PLAIN'
-                  branch-pattern: 'debian'
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'uom/.*'
-                - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'debian/.*'
+                  branch-pattern: 'refs/tags/.*'
           silent: false
           escape-quotes: true
           skip-vote:
