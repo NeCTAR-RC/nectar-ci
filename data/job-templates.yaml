@@ -1526,6 +1526,12 @@
       - reno-release-notes:
           container: '{name}-release-notes'
     wrappers:
+      # Load the Jenkins SSH key so the `git fetch --tags` in the build step can
+      # reach the Gerrit remote (the SCM checkout's credential is not in scope
+      # for shell steps).
+      - ssh-agent-credentials:
+          users:
+            - 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498'
       # OpenStack application credential for the project that owns the
       # release-notes Swift container(s). Shared with the mks-release-notes job.
       - credentials-binding:
