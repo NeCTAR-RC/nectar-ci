@@ -1480,6 +1480,60 @@
               credential-id: dot-pypirc
               variable: PYPIRC
 - job-template:
+    name: '{name}-reno-release-notes'
+    defaults: global
+    node: noble
+    concurrent: false
+    parameters:
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/master
+          description: "The default ref to test."
+      - string:
+          name: GERRIT_BRANCH
+          default: master
+          description: "The default branch to test."
+    triggers:
+      - gerrit:
+          trigger-on:
+            - ref-updated-event
+          projects:
+            - project-compare-type: 'PLAIN'
+              project-pattern: '{organisation}/{name}'
+              branches:
+                - branch-compare-type: 'REG_EXP'
+                  branch-pattern: 'refs/tags/.*'
+          silent: false
+          escape-quotes: true
+          skip-vote:
+            successful: true
+            failed: true
+            unstable: true
+            notbuilt: true
+    scm:
+      - git:
+          url: ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git
+          credentials-id: cd8b8dd3-b897-4ecb-985d-180d5b6f8498
+          refspec: $GERRIT_REFSPEC
+          branches:
+            - origin/$GERRIT_BRANCH
+          skip-tag: true
+          wipe-workspace: true
+          clean:
+            after: true
+          choosing-strategy: gerrit
+    builders:
+      - reno-release-notes:
+          container: '{name}-release-notes'
+    wrappers:
+      # OpenStack application credential for the project that owns the
+      # release-notes Swift container(s). Shared with the mks-release-notes job.
+      - credentials-binding:
+          - username-password-separated:
+              credential-id: 597a52ce-0395-4407-b633-ae549e711363
+              username: CREDENTIAL_ID
+              password: CREDENTIAL_SECRET
+- job-template:
     name: '{name}-mks-release-notes'
     defaults: global
     node: noble

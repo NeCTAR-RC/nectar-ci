@@ -257,6 +257,8 @@
           environment: 'releasenotes'
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
+      - '{name}-reno-release-notes':
+          organisation: 'NeCTAR-RC'
 - project:
     name: nova-pollinate
     jobs:
