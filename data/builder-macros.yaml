@@ -54,12 +54,7 @@
 - builder:
     name: puppet-openstack-spec
     builders:
-      - shell: |
-          export STRICT_VARIABLES=no
-          export RSPEC_PUPPET_VERSION='= 2.9.0'
-          export PUPPET_GEM_VERSION='~> 7.10.0'
-          bundle install --path vendor/bundle
-          bundle exec rake spec
+      - shell: !include-raw-escape: scripts/puppet-openstack-spec.sh
 - builder:
     name: 'python-tox'
     builders:
@@ -286,13 +281,7 @@
 - builder:
     name: puppet-prod-review
     builders:
-      - shell: |
-          git config gitreview.username jenkins
-          git config core.hooksPath /tmp/jenkins-git-hooks
-          git branch change
-          git checkout production
-          git cherry-pick change
-          git review production -t "$GERRIT_TOPIC"
+      - shell: !include-raw-escape: scripts/puppet-prod-review.sh
 - builder:
     name: jenkins-jobs-test
     builders:
