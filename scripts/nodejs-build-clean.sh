@@ -7,5 +7,9 @@ export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
 export OS_AUTH_TYPE=v3applicationcredential
 export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
 export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
-CONTAINER="review-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
-openstack container delete --recursive "$CONTAINER"
+
+# nodejs-build creates one container per patchset (review-<change-id>-<patchset>),
+# so clean up every patchset's container for this change, not just the latest.
+for CONTAINER in $(openstack container list --prefix "review-$GERRIT_CHANGE_ID-" -f value -c Name); do
+  openstack container delete --recursive "$CONTAINER"
+done
