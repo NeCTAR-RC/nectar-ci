@@ -17,37 +17,15 @@
 - builder:
     name: rake-lint
     builders:
-      - shell: |
-          if [ -f Gemfile ]; then
-            mkdir -p /tmp/rake-lint
-            export GEM_HOME=/tmp/rake-lint
-            bundle install
-            bundle exec rake lint 2>&1
-          else
-            rake lint 2>&1
-          fi
+      - shell: !include-raw-escape: scripts/rake-lint.sh
 - builder:
     name: rake-test
     builders:
-      - shell: |
-          if [ -f Gemfile ]; then
-            mkdir -p /tmp/rake-test
-            export GEM_HOME=/tmp/rake-test
-            bundle install
-            bundle exec rake test 2>&1
-          else
-            rake test 2>&1
-          fi
+      - shell: !include-raw-escape: scripts/rake-test.sh
 - builder:
     name: octocatalog-diff-rake-test
     builders:
-      - shell: |
-          export PUPPET_VERSION="7.3.0"
-          export PUPPET_VERSIONS="7.3.0"
-          export RUBOCOP_TEST=false
-          export RSPEC_TEST=true
-          docker build . --file Dockerfile --tag octocatalog-diff:ruby2.6 --build-arg RUBY_VERSION=2.6-buster
-          docker run -e PUPPET_VERSION -e PUPPET_VERSIONS -e RSPEC_TEST -e RUBOCOP_TEST -e ENFORCE_COVERAGE octocatalog-diff:ruby2.6 /app/script/cibuild
+      - shell: !include-raw-escape: scripts/octocatalog-diff-rake-test.sh
 - builder:
     name: librarian-install
     builders:
