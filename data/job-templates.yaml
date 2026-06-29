@@ -1523,8 +1523,7 @@
             after: true
           choosing-strategy: gerrit
     builders:
-      - reno-release-notes:
-          container: '{name}-release-notes'
+      - reno-release-notes
     wrappers:
       # Load the Jenkins SSH key so the `git fetch --tags` in the build step can
       # reach the Gerrit remote (the SCM checkout's credential is not in scope
