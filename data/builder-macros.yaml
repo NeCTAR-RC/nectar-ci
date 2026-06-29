@@ -48,51 +48,15 @@
 - builder:
     name: puppet-lint
     builders:
-      - shell: |
-          MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
-          if [ -n "$MODULE" ]; then
-            rm -rf $MODULE
-            git clone . $MODULE
-            cd "$MODULE"
-          fi
-
-          wget https://raw.githubusercontent.com/NeCTAR-RC/flake8-diff/master/lint.py
-          chmod +x lint.py
-
-          if [ -f Gemfile ]; then
-            mkdir .bundled_gems
-            export GEM_HOME=`pwd`/.bundled_gems
-            bundle install
-            bundle exec ./lint.py rake lint 2>&1
-          else
-            ./lint.py rake lint 2>&1
-          fi
+      - shell: !include-raw-escape: scripts/puppet-lint.sh
 - builder:
     name: puppet-syntax
     builders:
-      - shell: |
-          MODULE=$(basename `pwd` | sed 's/puppet-\(.*\)-puppet-unit/\1/')
-          cd "$MODULE"
-          find . -iname *.pp -not -path "./.bundled_gems/*" -not -path "./plans/*" | xargs -L1 /opt/puppetlabs/bin/puppet parser validate --modulepath=`pwd`/modules
-          find ./plans/ -iname *.pp | xargs -L1 /opt/puppetlabs/bin/puppet parser validate --tasks
-          for f in `find . -iname *.erb -not -path "./.bundled_gems/*"` ; do
-            erb -P -x -T '-' $f | ruby -c
-          done
+      - shell: !include-raw-escape: scripts/puppet-syntax.sh
 - builder:
     name: puppet-doc
     builders:
-      - shell: |
-          # Cleanup old docs.
-          [ -d doc/ ] && rm -rf doc/
-          ## Dummy manifests folder.
-          ! [ -d manifests/ ] && mkdir manifests/
-          ## Generate docs
-          puppet doc --mode rdoc --manifestdir manifests/ --modulepath ./modules/ --outputdir doc
-          ## Fix docs to how I want them, I don't like that the complete workspace is included in all file paths.
-          if [ -d ${{WORKSPACE}}/doc/files/${{WORKSPACE}}/modules ]; then
-            mv -v "${{WORKSPACE}}/doc/files/${{WORKSPACE}}/modules" "${{WORKSPACE}}/doc/files/modules"
-          fi;
-          grep -l -R ${{WORKSPACE}} * | while read fname; do sed -i "s@${{WORKSPACE}}/@/@g" $fname; done;
+      - shell: !include-raw-escape: scripts/puppet-doc.sh
 - builder:
     name: puppet-openstack-spec
     builders:
