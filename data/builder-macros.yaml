@@ -123,51 +123,15 @@
 - builder:
     name: helm-dependency-build
     builders:
-      - shell: |
-          # Add bintami repo as we trust it, see https://github.com/helm/helm/issues/8036 for reasons why this is needed
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          # Switch to use pull through cache to save on dockerhub reguests
-          sed -i 's,registry-1.docker.io,registry.rc.nectar.org.au/docker.io,g' Chart.yaml
-          # We need an update here as opposed to a build as the Chart.lock changes with the sed
-          # All charts should be pinned to a specific version so this should be ok.
-          helm dependency update
+      - shell: !include-raw-escape: scripts/helm-dependency-build.sh
 - builder:
     name: helm-package
     builders:
-      - shell: |
-          #!/bin/bash
-          rm -rf *.tgz
-          git fetch --tags
-          #get highest tag number
-          TAG_VERSION=`git describe --abbrev=0 --tags`
-          # Project version
-          PROJECT_VERSION=`cat Chart.yaml | grep "^version" | awk '{{print $2}}'`
-          if [[ "$PROJECT_VERSION" == "$TAG_VERSION" ]]; then
-              echo "No change in version"
-              exit 0
-          fi
-          echo "Tagging release to $PROJECT_VERSION"
-          #get current hash and see if it already has a tag
-          GIT_COMMIT=`git rev-parse HEAD`
-          NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
-          #only tag if no tag already
-          if [ -z "$NEEDS_TAG" ]; then
-              git tag -a $PROJECT_VERSION -m "New auto tagged release ${{PROJECT_VERSION}}"
-              echo "Tagged with $PROJECT_VERSION"
-              helm package .
-              git push origin --tags
-          else
-              echo "Already a tag on this commit"
-          fi
+      - shell: !include-raw-escape: scripts/helm-package.sh
 - builder:
     name: helm-push
     builders:
-      - shell: |
-          #!/bin/bash
-          export HELM_EXPERIMENTAL_OCI=1
-          export REGISTRY="registry.rc.nectar.org.au"
-          echo "$REGISTRY_PSW" | helm registry login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
-          find . -maxdepth 1 -name *.tgz | xargs -i helm push {{}} oci://registry.rc.nectar.org.au/nectar-helm
+      - shell: !include-raw-escape: scripts/helm-push.sh
 - builder:
     name: kustomize-validate
     builders:
