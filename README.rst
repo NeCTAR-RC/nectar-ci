@@ -27,6 +27,44 @@ To run all configured checks manually::
  pre-commit run --all-files
 
 
+Shell scripts in builder macros
+-------------------------------
+Following the `Linux Foundation global-jjb best practices
+<https://docs.releng.linuxfoundation.org/projects/global-jjb/en/latest/best-practices.html>`_,
+multi-line shell for a ``builder`` macro lives in its own file under
+``scripts/`` rather than inlined in ``data/builder-macros.yaml``. The macro
+references it with JJB's include directive::
+
+   - builder:
+       name: puppet-lint
+       builders:
+         - shell: !include-raw-escape: scripts/puppet-lint.sh
+
+Why ``!include-raw-escape:`` (not ``!include-raw:``)? The scripts contain shell
+``${VAR}`` and ``awk '{...}'`` braces; ``-escape`` doubles every ``{``/``}`` so
+JJB's templating leaves them intact. This renders byte-identical job XML to the
+old inline ``{{ }}``-escaped form, so a pure extraction is verifiable with::
+
+   jenkins-jobs test -r data -o /tmp/after
+   diff -r /tmp/before /tmp/after   # empty == XML-neutral
+
+Conventions for these scripts:
+
+* ``scripts/`` is already on ``include_path`` in ``jenkins_jobs.ini``.
+* Start each with ``#!/bin/bash`` and a ``set`` line that preserves the
+  behaviour of Jenkins' implicit ``sh -xe`` — use ``set -ex``, or
+  ``set -euo pipefail`` where a script already declared it. Do not add
+  ``-u``/``pipefail`` to a retrofitted script without checking it still passes
+  (for example a ``grep ... | while read`` would start failing under
+  ``pipefail`` when grep matches nothing).
+* Pass values as environment variables, or derive them from Jenkins env
+  (``$GERRIT_PROJECT``, ``$WORKSPACE``), instead of JJB ``{params}``. This keeps
+  the script self-contained and lets ShellCheck analyse it.
+* Trivial one-liners may stay inline in the macro.
+
+The ShellCheck pre-commit hook lints every ``scripts/*.sh`` automatically.
+
+
 Configuration
 -------------
 Example /etc/jenkins_jobs/jenkins_jobs.ini::

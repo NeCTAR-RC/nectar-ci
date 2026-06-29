@@ -1,3 +1,19 @@
+# ============================================================================
+# Builder macros
+# ----------------------------------------------------------------------------
+# Reusable `builder` definitions referenced by job-templates.
+#
+# Shell convention (see README.rst "Shell scripts in builder macros"):
+#   * Multi-line shell lives in scripts/<macro>.sh, referenced with
+#       - shell: !include-raw-escape: scripts/<macro>.sh
+#     so the pre-commit ShellCheck hook lints it and braces need no `{{ }}`
+#     escaping. Trivial one-liners may stay inline.
+#   * Pass values as environment variables or derive them from Jenkins env
+#     ($GERRIT_*, $WORKSPACE), not JJB `{params}`, inside those scripts.
+#   * Each script starts with `#!/bin/bash` and a `set` line preserving the
+#     behaviour of Jenkins' implicit `sh -xe` (`set -ex`, or `set -euo
+#     pipefail` where a script already declared it).
+# ============================================================================
 - builder:
     name: rake-lint
     builders:
