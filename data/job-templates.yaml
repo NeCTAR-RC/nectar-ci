@@ -746,7 +746,7 @@
 - job-template:
     name: '{name}-jekyll-test-build'
     defaults: global
-    node: jammy
+    node: noble
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -792,7 +792,7 @@
 - job-template:
     name: '{name}-jekyll-html-check'
     defaults: global
-    node: jammy
+    node: noble
     parameters:
       - string:
           name: GERRIT_REFSPEC
