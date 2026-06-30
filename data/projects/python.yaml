@@ -99,6 +99,9 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py312'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-jammy-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
