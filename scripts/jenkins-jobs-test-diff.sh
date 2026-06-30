@@ -1,6 +1,11 @@
 #!/bin/bash
 echo "Setting up diff:"
-git checkout "$GERRIT_NEWREV"
+# GERRIT_NEWREV is empty on patchset-created events (it is only populated on
+# ref-updated). Leave it unquoted so the empty value word-splits away and
+# `git checkout` is a harmless no-op; quoting passes an empty pathspec, which
+# git rejects with "empty string is not a valid pathspec".
+# shellcheck disable=SC2086
+git checkout $GERRIT_NEWREV
 NEW_CONF=$(jenkins-jobs test -r data 2>&1)
 git fetch
 git reset --hard origin/master
