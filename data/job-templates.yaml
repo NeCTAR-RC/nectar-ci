@@ -1758,7 +1758,7 @@
               credential-id: 2f00f9a5-00c3-42fe-82bf-cc787af1df8c
               variable: GERRIT_API
           - text:
-              credential-id: d9b97c28-1005-4e24-9220-cff1e0a20a9b
+              credential-id: '{ga_measurement_id_credential}'
               variable: VITE_GA_MEASUREMENT_ID
 - job-template:
     name: '{name}-nodejs-build-clean'
@@ -1840,6 +1840,8 @@
             after: {}
           choosing-strategy: gerrit
     builders:
+      - inject:
+          properties-content: 'DEPLOY_CONTAINER={container}'
       - nodejs-install
       - nodejs-deploy
     wrappers:
@@ -1849,7 +1851,7 @@
               username: CREDENTIAL_ID
               password: CREDENTIAL_SECRET
           - text:
-              credential-id: 977bcda3-8942-41f1-b086-1bc7683d42b9
+              credential-id: '{ga_measurement_id_credential}'
               variable: VITE_GA_MEASUREMENT_ID
 - job-template:
     name: '{name}-nodejs-storybook-test'
@@ -1976,6 +1978,8 @@
             after: {}
           choosing-strategy: gerrit
     builders:
+      - inject:
+          properties-content: 'DEPLOY_CONTAINER={container}'
       - nodejs-install
       - nodejs-storybook-deploy
     wrappers:

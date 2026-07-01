@@ -9,10 +9,13 @@
           organisation: 'NeCTAR-RC'
       - '{name}-nodejs-build':
           organisation: 'NeCTAR-RC'
+          ga_measurement_id_credential: 'd9b97c28-1005-4e24-9220-cff1e0a20a9b'
       - '{name}-nodejs-build-clean':
           organisation: 'NeCTAR-RC'
       - '{name}-nodejs-deploy':
           organisation: 'NeCTAR-RC'
+          container: 'nectar-eligibility'
+          ga_measurement_id_credential: '977bcda3-8942-41f1-b086-1bc7683d42b9'
 - project:
     name: ardc-ui-bootstrap
     jobs:
@@ -31,5 +34,6 @@
           organisation: 'internal'
       - '{name}-nodejs-storybook-deploy':
           organisation: 'internal'
+          container: 'ardc-ui'
       - '{name}-nodejs-publish':
           organisation: 'internal'
