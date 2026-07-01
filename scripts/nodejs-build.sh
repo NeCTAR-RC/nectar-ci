@@ -15,7 +15,10 @@ openstack container delete --recursive "$CONTAINER" || true
 AUTH=$(openstack container create "$CONTAINER" -f value -c account)
 BASEURL=v1/$AUTH/$CONTAINER
 
+# build:geo is a post-build step for generative engine optimization (GEO),
+# run after the bundle is built.
 pnpm build --base="/$BASEURL/"
+pnpm build:geo
 
 swift post "$CONTAINER" \
   --header 'X-Container-Meta-Web-Index: index.html' \
