@@ -19,10 +19,6 @@
     builders:
       - shell: !include-raw-escape: scripts/rake-lint.sh
 - builder:
-    name: rake-test
-    builders:
-      - shell: !include-raw-escape: scripts/rake-test.sh
-- builder:
     name: octocatalog-diff-rake-test
     builders:
       - shell: !include-raw-escape: scripts/octocatalog-diff-rake-test.sh
@@ -47,10 +43,6 @@
     name: puppet-syntax
     builders:
       - shell: !include-raw-escape: scripts/puppet-syntax.sh
-- builder:
-    name: puppet-doc
-    builders:
-      - shell: !include-raw-escape: scripts/puppet-doc.sh
 - builder:
     name: puppet-openstack-spec
     builders:
@@ -77,12 +69,6 @@
       - inject:
           properties-content: 'UBUNTU_RELEASE={ubuntu_release}'
       - shell: !include-raw-escape: scripts/pbuilder-buildpackage.sh
-- builder:
-    name: 'pbuilder-buildpackage-no-upload'
-    builders:
-      - inject:
-          properties-content: 'UBUNTU_RELEASE={ubuntu_release}'
-      - shell: !include-raw-escape: scripts/pbuilder-buildpackage-no-upload.sh
 - builder:
     name: 'os-pbuilder-create'
     builders:
@@ -162,12 +148,6 @@
     name: jenkins-jobs-test-diff
     builders:
       - shell: !include-raw-escape: scripts/jenkins-jobs-test-diff.sh
-- builder:
-    name: site-deploy
-    builders:
-      - ssh-builder:
-          ssh-user-ip: puppet@puppet.svc.artm.rc.nectar.org.au:22
-          command: /usr/local/sbin/deploy-control-repo.sh $GERRIT_PROJECT
 - builder:
     name: r10k-deploy-control-repo
     builders:
@@ -256,10 +236,6 @@
     name: pypi-release
     builders:
       - shell: !include-raw-escape: scripts/pypi-release.sh
-- builder:
-    name: run-tests
-    builders:
-      - shell: ./run-tests.sh
 - builder:
     name: pre-commit-all
     builders:
