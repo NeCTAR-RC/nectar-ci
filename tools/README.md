@@ -129,3 +129,74 @@ tox                 # or: .venv/bin/python -m pytest tools/tests
 
 Tests cover the pure logic (name expansion, Case A/B classification, allowlist,
 YAML editing, command wiring) and do not touch Jenkins or the network.
+
+---
+
+# tools/find_unused.py
+
+Find reusable JJB definitions in `data/` that nothing references, so they can be
+removed (or a missing `- project:` binding spotted):
+
+| Definition       | Reported unused when...                                    |
+|------------------|------------------------------------------------------------|
+| **job-template** | not reachable from any `- project:` entry (by `name` or `id`) |
+| **job-group**    | not reachable from any `- project:` entry                  |
+| **builder macro**| not referenced by any `builders:` list (`- job:`, `- job-template:`, `- defaults:`, or another macro) |
+
+This tool only **reads** the YAML in `data/`. It never renders JJB, contacts
+Jenkins or edits anything, so the output is advisory: confirm a finding (e.g.
+with `git grep`) before deleting it. A definition can also show up here because
+its `- project:` binding was dropped by mistake, not because it is dead.
+
+## How references are resolved
+
+JJB keeps `{placeholder}` tokens literal in both a definition's `name`/`id` and
+in the strings that reference it, so a reference matches its definition by plain
+string equality (e.g. a project entry `'{name}-nodejs-lint'` matches the
+job-template `name: '{name}-nodejs-lint'`). Reachability starts at every
+`- project:` `jobs:` entry and follows job-groups (which may nest) down to
+job-templates. Builder macros are traced from every rendered job's `builders:`
+list (following macro-to-macro composition); this is independent of template
+reachability, so a builder is only reported unused when **no** job mentions it.
+
+## Usage
+
+```bash
+tools/find_unused.py                      # text report
+tools/find_unused.py --json               # machine-readable findings
+tools/find_unused.py --ignore dummy       # treat matching names as used (repeatable glob)
+tools/find_unused.py --exit-code          # exit 1 if anything is unused (for CI)
+tools/find_unused.py --fix                # remove the unused definitions (+ orphaned scripts)
+tools/find_unused.py --fix --keep-scripts # ... but leave scripts/*.sh in place
+```
+
+`--fix` deletes each reported block from its YAML file by dropping exactly its
+line range, so the rest of the file (and its formatting) is left byte-for-byte
+unchanged; it re-parses the result to be sure the edit stayed valid YAML. It
+then deletes any `scripts/*.sh` file that a removed builder macro pulled in via
+`!include-raw-escape:` **and** that no surviving definition still references
+(`--keep-scripts` reports these but leaves them on disk). A shared include such
+as `data/publisher.yaml.inc` is never deleted, since it does not live under
+`scripts/`. `--fix` never commits, so the changes are left in the working tree
+for you to review and submit with `git review`. As with the `audit` tool, run
+afterwards:
+
+```bash
+pre-commit run --all-files
+jenkins-jobs test -r data
+git review
+```
+
+Two follow-ups worth knowing about:
+
+- **Cascades.** Removing a job-template can leave a builder macro (or another
+  template, via a job-group) with no remaining user. `--fix` removes only what
+  the current pass reports, so re-run it until it reports nothing to catch the
+  next tier.
+- **Orphaned comments.** A comment that documented a removed block is left in
+  place (it may sit at column 0 and could equally head the next block); tidy any
+  stray comments by hand.
+
+Only needs `ruamel.yaml` (already in `tools/requirements.txt`); it does not need
+`jenkins-job-builder` or Jenkins credentials. Tests live in
+`tools/tests/test_find_unused.py` and run under the same `tox` env.
