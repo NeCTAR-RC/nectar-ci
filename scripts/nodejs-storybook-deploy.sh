@@ -7,15 +7,15 @@ export PATH=~/nodejs-bin/:$PATH
 
 pnpm build-storybook
 
-CONTAINER="ardc-ui"
+CONTAINER="$DEPLOY_CONTAINER"
 
 export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
 export OS_AUTH_TYPE=v3applicationcredential
 export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
 export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
 
-openstack container create $CONTAINER >/dev/null
-swift post $CONTAINER \
+openstack container create "$CONTAINER" >/dev/null
+swift post "$CONTAINER" \
   --header 'X-Container-Meta-Web-Index: index.html' \
   --header 'X-Container-Read: .r:*,.rlistings'
 

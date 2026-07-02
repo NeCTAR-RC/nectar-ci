@@ -6,7 +6,7 @@ set -ex
 export PATH=~/nodejs-bin/:$PATH
 # `pnpm test` renders every story in a real headless chromium (Vitest browser
 # mode via @storybook/addon-vitest) and fails on a11y violations. test:install
-# fetches chromium into the ephemeral build container, same as nectar-eligibility's
-# test:e2e:install. Future Chromatic visual tests will hang off here.
+# fetches chromium into the ephemeral build container. Future Chromatic visual
+# tests will hang off here.
 pnpm test:install
 pnpm test
