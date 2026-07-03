@@ -605,6 +605,14 @@
     sandbox: true
     helm_name: ''
     concurrent: false
+    # Projects with a {name}-devenv-create job already build a review-N-M
+    # image per patchset, so they override this to only ref-updated-event
+    # (tag pushes).
+    container_trigger_on:
+      - ref-updated-event
+      - patchset-created-event
+      - comment-added-contains-event:
+          comment-contains-value: 'recheck'
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -616,11 +624,7 @@
           description: "The branch to use."
     triggers:
       - gerrit:
-          trigger-on:
-            - ref-updated-event
-            - patchset-created-event
-            - comment-added-contains-event:
-                comment-contains-value: 'recheck'
+          trigger-on: '{obj:container_trigger_on}'
           projects:
             - project-compare-type: 'PLAIN'
               project-pattern: '{organisation}/{name}'

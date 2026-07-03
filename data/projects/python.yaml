@@ -33,6 +33,8 @@
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+          container_trigger_on:
+            - ref-updated-event
 - project:
     name: bumblebee-stormbee
     jobs:
@@ -128,6 +130,8 @@
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+          container_trigger_on:
+            - ref-updated-event
 - project:
     name: manuka
     jobs:
@@ -150,6 +154,8 @@
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+          container_trigger_on:
+            - ref-updated-event
 - project:
     name: nectar-conformance
     jobs:
@@ -309,6 +315,8 @@
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+          container_trigger_on:
+            - ref-updated-event
 - project:
     name: uom-cloud-dashboard
     jobs:
@@ -340,6 +348,8 @@
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+          container_trigger_on:
+            - ref-updated-event
 - project:
     name: varroa-dashboard
     jobs:
