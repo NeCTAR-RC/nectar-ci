@@ -127,15 +127,17 @@
               REGISTRY = credentials('registry-nectar')
             }}
             steps {{
-                sh '''
-                export REGISTRY="registry.rc.nectar.org.au"
-                export REGISTRY_AUTH_FILE=auth.json
-                echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
+                retry(3) {{
+                  sh '''
+                  export REGISTRY="registry.rc.nectar.org.au"
+                  export REGISTRY_AUTH_FILE=auth.json
+                  echo "$REGISTRY_PSW" | docker login -u "$REGISTRY_USR" --password-stdin "$REGISTRY"
 
-                make push BUILDER=docker TAG=$TAG
+                  make push BUILDER=docker TAG=$TAG
 
-                rm -f auth.json
-                '''
+                  rm -f auth.json
+                  '''
+                }}
             }}
           }}
           stage('Deploy') {{
