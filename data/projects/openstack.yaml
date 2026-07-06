@@ -374,6 +374,8 @@
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+      - '{name}-backup-container':
+          organisation: 'NeCTAR-RC'
 - project:
     name: trove-dashboard
     jobs:

@@ -714,6 +714,62 @@
           }}
         }}
       }}
+# Builds the trove db-backup datastore images from the backup/ dir of a trove
+# checkout. The build/push shell lives in resources/trove-backup-build.sh and is
+# loaded with libraryResource so it stays lintable and reusable. One job per
+# datastore version so a failure building one image doesn't block the others and
+# each can be re-run on its own. Datastore-version tagged and independent of the
+# trove git version, so these run on a weekly timer (and on demand) rather than
+# per merge.
+- job-group:
+    name: '{name}-backup-container'
+    jobs:
+      - '{name}-backup-container-{datastore}-{version}':
+          datastore: 'mysql'
+          version: '8.0'
+      - '{name}-backup-container-{datastore}-{version}':
+          datastore: 'mysql'
+          version: '8.4'
+      - '{name}-backup-container-{datastore}-{version}':
+          datastore: 'postgresql'
+          version: '16'
+- job-template:
+    name: '{name}-backup-container-{datastore}-{version}'
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+    concurrent: false
+    parameters:
+      - string:
+          name: BRANCH
+          default: nectar/2026.1
+          description: "The {name} branch to build the backup images from."
+    triggers:
+      - timed: "H H(2-6) * * 1"
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Clone') {{
+            steps {{
+              git poll: false,
+                  url: 'ssh://jenkins@review.rc.nectar.org.au:29418/{organisation}/{name}.git',
+                  credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
+                  branch: '$BRANCH'
+            }}
+          }}
+          stage('Build and push') {{
+            environment {{
+              DATASTORE = '{datastore}'
+              DATASTORE_VERSION = '{version}'
+              REGISTRY = credentials('registry-nectar')
+            }}
+            steps {{
+              sh libraryResource('trove-backup-build.sh')
+            }}
+          }}
+        }}
+      }}
 - job:
     name: 'renovate-testing-env'
     defaults: global
