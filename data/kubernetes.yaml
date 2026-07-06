@@ -170,6 +170,11 @@
     jobs:
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
+- project:
+    name: tempurl-route
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'internal'
 # Kustomize
 - project:
     name: keycloak-deploy
