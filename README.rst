@@ -65,6 +65,41 @@ Conventions for these scripts:
 The ShellCheck pre-commit hook lints every ``scripts/*.sh`` automatically.
 
 
+Shell scripts in pipeline DSLs
+------------------------------
+The ``scripts/`` + ``!include-raw-escape:`` mechanism above only works for
+freestyle ``builder`` macros — JJB cannot expand an include *inside* a pipeline
+``dsl:`` block scalar (it renders as literal text). To keep multi-line shell out
+of a pipeline ``dsl`` instead, put it under ``resources/`` and load it at
+runtime with Jenkins' ``libraryResource`` (this repo is configured as an
+implicit global shared library, which is also why ``vars/*.groovy`` steps like
+``kollaBuild`` resolve without ``@Library``)::
+
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        stages {{
+          stage('Build') {{
+            environment {{
+              DATASTORE = '{datastore}'
+              REGISTRY = credentials('registry-nectar')
+            }}
+            steps {{
+              sh libraryResource('trove-backup-build.sh')
+            }}
+          }}
+        }}
+      }}
+
+The ``dsl`` stays inline (so JJB ``{param}`` templating and ``environment {{
+credentials() }}`` auth keep working), while the shell body lives in a linted,
+reusable file. Conventions match ``scripts/`` above: start with ``#!/bin/bash``
+and a ``set`` line, and pass inputs as environment variables (set them in the
+stage ``environment`` block) rather than JJB ``{params}`` so ShellCheck can
+analyse the script standalone. The ShellCheck pre-commit hook lints
+``resources/*.sh`` too.
+
+
 Configuration
 -------------
 Example /etc/jenkins_jobs/jenkins_jobs.ini::
