@@ -480,8 +480,8 @@
           puppet_host: 'puppet.svc.artm.rctest.nectar.org.au'
       - '{name}-r10k-cleanup':
           r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
+      - '{name}-catalog-diff':
+          label: 'r10k-test'
 - job-group:
     name: '{name}-puppet-site-prod-jobs'
     jobs:
@@ -515,10 +515,6 @@
     jobs:
       - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-diff-{backend}':
-          backend: 'catalog-diff'
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
@@ -604,10 +600,6 @@
     jobs:
       - '{name}-puppet-site-test-jobs':
           organisation: 'internal'
-      - '{name}-diff-{backend}':
-          backend: 'catalog-diff'
-          organisation: 'internal'
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
