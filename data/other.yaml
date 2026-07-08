@@ -125,7 +125,7 @@
     name: 'librarian-diff-library'
     concurrent: false
     defaults: global
-    node: internal
+    node: r10k-prod
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -140,8 +140,6 @@
           'nobody':
             - job-read
             - job-discover
-      - lockable-resources:
-          resources: 'diff-catalog-r10k.mgmt.rc.nectar.org.au'
       - build-discarder:
           num-to-keep: 20
     triggers:
@@ -177,7 +175,6 @@
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
-          r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
           r10k_build_env: 'production'
     wrappers:
       - ssh-agent-credentials:
@@ -188,7 +185,7 @@
     name: 'librarian-diff-library-test'
     concurrent: false
     defaults: global
-    node: internal
+    node: r10k-test
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -203,8 +200,6 @@
           'nobody':
             - job-read
             - job-discover
-      - lockable-resources:
-          resources: 'diff-catalog-r10k.test.rc.nectar.org.au'
       - build-discarder:
           num-to-keep: 20
     triggers:
@@ -240,7 +235,6 @@
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-puppet-library:
-          r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
           r10k_build_env: 'testing'
     wrappers:
       - ssh-agent-credentials:

@@ -496,8 +496,8 @@
           puppet_host: 'puppet.svc.artm.rc.nectar.org.au'
       - '{name}-r10k-cleanup':
           r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
-      - '{name}-r10k-diff-catalog':
-          r10k_host: 'r10k.svc.artm.rc.nectar.org.au'
+      - '{name}-catalog-diff':
+          label: 'r10k-prod'
 - project:
     name: puppet-site-adelaide
     jobs:

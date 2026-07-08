@@ -177,26 +177,15 @@
             # belonging to deleted branches this returns 1 so || true
             r10k deploy environment --puppetfile master || true
 - builder:
-    name: r10k-diff-catalog-control-repo
-    builders:
-      - ssh-builder:
-          ssh-user-ip: puppet@{r10k_host}:22
-          command: |
-            export R10K_HOST={r10k_host}
-            r10k-diff-catalog.py --backend {backend} test-control-repo $GERRIT_PROJECT $GERRIT_PATCHSET_REVISION
-- builder:
     name: r10k-diff-catalog-puppet-library
     builders:
-      - ssh-builder:
-          ssh-user-ip: puppet@{r10k_host}:22
-          command: |
-            export R10K_HOST={r10k_host}
-            export R10K_BUILD_ENV={r10k_build_env}
-            r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
+      - shell: |
+          export R10K_BUILD_ENV={r10k_build_env}
+          r10k-diff-catalog.py test-puppet-library $GERRIT_REFSPEC
 - builder:
     name: r10k-diff-catalog-module
     builders:
-      - shell: 'r10k-diff-catalog.py --backend {backend} test-module $GERRIT_PROJECT $GERRIT_REFSPEC'
+      - shell: 'r10k-diff-catalog.py test-module $GERRIT_PROJECT $GERRIT_REFSPEC'
 - builder:
     name: catalog-diff-control-repo
     builders:
