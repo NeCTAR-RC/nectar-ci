@@ -11,6 +11,8 @@
 - project:
     name: tutorials
     jobs:
+      - '{name}-pre-commit-all':
+          organisation: 'NeCTAR-RC'
       - '{name}-jekyll-test-build':
           organisation: 'NeCTAR-RC'
       - '{name}-jekyll-html-check':
