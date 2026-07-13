@@ -171,7 +171,7 @@
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
-    name: tempurl-route
+    name: tempurl-httproute
     jobs:
       - '{name}-helm-default-jobs':
           organisation: 'internal'
