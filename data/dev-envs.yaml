@@ -154,7 +154,7 @@
                   ]) {{
                     sh '''
                     kubectl get namespaces
-                    echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
+                    echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au \
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${{TAG}} --create-namespace {name} oci://registry.rc.nectar.org.au/nectar-helm/{name} \
                       -f dev/{name}/values.yaml --set image.tag=${{TAG}} \

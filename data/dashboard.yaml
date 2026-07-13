@@ -169,7 +169,7 @@
                     fi
 
                     kubectl get namespaces
-                    echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
+                    echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au \
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${{TAG}} --create-namespace dashboard oci://registry.rc.nectar.org.au/nectar-helm/dashboard \
                       --version ^${{helm_version}} \
