@@ -1231,7 +1231,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - catalog-diff-control-repo
@@ -1292,7 +1292,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - r10k-diff-catalog-module
@@ -1457,7 +1457,7 @@
           skip-tag: true
           wipe-workspace: true
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - reno-release-notes
@@ -1516,7 +1516,7 @@
           skip-tag: true
           wipe-workspace: false
           clean:
-            after: true
+            after: {}
           choosing-strategy: gerrit
     builders:
       - mks-release-notes
