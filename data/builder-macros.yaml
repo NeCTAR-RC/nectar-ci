@@ -22,7 +22,7 @@
     name: librarian-install
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.svc.artm.rc.nectar.org.au:22
+          ssh-user-ip: puppet@openvox.svc.artm.rc.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh production
       - ssh-builder:
           ssh-user-ip: puppet@openvox.svc.artm.rctest.nectar.org.au:22
