@@ -90,7 +90,7 @@
     name: helm-lint
     builders:
       - shell: |
-          helm lint
+          helm lint .
 - builder:
     name: helm-template
     builders:

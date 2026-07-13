@@ -154,7 +154,6 @@
                   ]) {{
                     sh '''
                     kubectl get namespaces
-                    export HELM_EXPERIMENTAL_OCI=1
                     echo "$REGISTRY_PSW" | helm registry login registry.rc.nectar.org.au/nectar-helm \
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${{TAG}} --create-namespace {name} oci://registry.rc.nectar.org.au/nectar-helm/{name} \
