@@ -477,7 +477,7 @@
           r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
           r10k_host_public: 'r10k.rctest.nectar.org.au'
       - '{name}-r10k-deploy-control-repo':
-          puppet_host: 'puppet.svc.artm.rctest.nectar.org.au'
+          puppet_host: 'openvox.svc.artm.rctest.nectar.org.au'
       - '{name}-r10k-cleanup':
           r10k_host: 'r10k.svc.artm.rctest.nectar.org.au'
       - '{name}-catalog-diff':
@@ -749,7 +749,7 @@
             notbuilt: true
     builders:
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.svc.artm.rctest.nectar.org.au:22
+          ssh-user-ip: puppet@openvox.svc.artm.rctest.nectar.org.au:22
           command: /usr/local/sbin/update-test-modules.sh $GERRIT_PROJECT
     publishers: !include: publisher.yaml.inc
     wrappers:

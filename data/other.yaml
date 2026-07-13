@@ -344,7 +344,7 @@
           ssh-user-ip: puppet@puppet.svc.artm.rc.nectar.org.au:22
           command: /usr/local/sbin/global-hieradata-deploy.sh
       - ssh-builder:
-          ssh-user-ip: puppet@puppet.svc.artm.rctest.nectar.org.au:22
+          ssh-user-ip: puppet@openvox.svc.artm.rctest.nectar.org.au:22
           command: /usr/local/sbin/global-hieradata-deploy.sh
     publishers: !include: publisher.yaml.inc
     wrappers:
