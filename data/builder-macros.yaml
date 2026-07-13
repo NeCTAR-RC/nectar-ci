@@ -109,6 +109,10 @@
     builders:
       - shell: !include-raw-escape: scripts/helm-push.sh
 - builder:
+    name: helm-unittest
+    builders:
+      - shell: !include-raw-escape: scripts/helm-unittest.sh
+- builder:
     name: kustomize-validate
     builders:
       - shell: !include-raw-escape: scripts/kustomize-validate.sh

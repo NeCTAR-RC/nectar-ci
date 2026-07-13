@@ -107,6 +107,8 @@
     jobs:
       - '{name}-helm-library-lint':
           organisation: 'NeCTAR-RC'
+      - '{name}-helm-unittest':
+          organisation: 'NeCTAR-RC'
       - '{name}-helm-package':
           organisation: 'NeCTAR-RC'
 - project:
