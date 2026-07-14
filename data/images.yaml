@@ -75,14 +75,6 @@
     jobs:
       - 'image-build-official-{name}':
 - project:
-    name: mysql-8.0
-    jobs:
-      - 'image-build-trove-{name}'
-- project:
-    name: postgresql-16
-    jobs:
-      - 'image-build-trove-{name}'
-- project:
     name: rstudio
     jobs:
       - 'image-build-extra-{name}'
@@ -303,8 +295,8 @@
               }}
           }}
       }}
-- job-template:
-    name: 'image-build-trove-{name}'
+- job:
+    name: image-build-trove
     defaults: global
     properties:
       - authorization:
@@ -316,6 +308,17 @@
     dsl: |
       def imageId
       def imageName
+      // One generic guest image serves every datastore (container model). We
+      // validate it against a single representative datastore via a throwaway
+      // "<version>-test" datastore version pinned to the new image, then promote
+      // by moving the 'trove' glance tag (newest tagged image wins). The active
+      // datastore versions (mysql 8.4, postgresql 16, ...) are registered
+      // out-of-band with --image-tags trove and pick up the promoted image.
+      def testDatastore = 'mysql'
+      def testManager = 'mysql'
+      def testVersion = '8.4'            // active version name; also upgrade-from in the test
+      def testVersionName = '8.4-test'   // throwaway test version name (won't collide with active)
+      def testVersionNumber = '8.4.10'   // version number -> DB container tag (mysql:8.4.10)
       pipeline {{
           agent none
           options {{
@@ -325,7 +328,7 @@
               stage('Build Image') {{
                   agent {{ label 'noble' }}
                   steps {{
-                      imageBuildQEMU 'trove-{name}'
+                      imageBuildQEMU 'trove'
                   }}
               }}
               stage('Set Image ID') {{
@@ -339,32 +342,38 @@
                   steps {{
                       deployImageWithBuildNumber 'trove', 'development'
                       setImageProperties 'trove', 'development'
-                  }}
-              }}
-              stage('Update dev trove datastore') {{
-                  agent {{ label 'internal' }}
-                  steps {{
-                      updateTroveDatastore 'development'
+                      setImageTag 'trove', 'trove', 'development'
                   }}
               }}
               stage('Deploy to Test Cloud') {{
                   agent {{ label 'noble' }}
                   steps {{
-                      setImageID()
                       deployImageWithBuildNumber 'trove', 'testing'
                       setImageProperties 'trove', 'testing'
                   }}
               }}
-              stage('Update test trove datastore') {{
+              stage('Register test datastore') {{
                   agent {{ label 'internal' }}
                   steps {{
-                      updateTroveDatastore 'testing'
+                      troveRegisterTestDatastore 'testing', testDatastore, testManager, testVersionName, testVersionNumber
                   }}
               }}
               stage('Test Image in Test Cloud') {{
                   agent {{ label 'tempest' }}
                   steps {{
-                      testTroveImage 'testing', 'ardctest-artm'
+                      testTroveImage 'testing', 'ardctest-artm', testDatastore, testVersionName, testVersion
+                  }}
+              }}
+              stage('Promote in Test Cloud') {{
+                  agent {{ label 'noble' }}
+                  steps {{
+                      setImageTag 'trove', 'trove', 'testing'
+                  }}
+              }}
+              stage('Deactivate test datastore') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      troveRevertDatastore 'testing', testDatastore, testVersionName, testVersionNumber
                   }}
               }}
               stage('Deploy to Production Cloud') {{
@@ -372,12 +381,7 @@
                   steps {{
                       deployImageWithBuildNumber 'trove', 'production'
                       setImageProperties 'trove', 'production'
-                  }}
-              }}
-              stage('Update production trove datastore') {{
-                  agent {{ label 'internal' }}
-                  steps {{
-                      updateTroveDatastore 'production', '0'
+                      setImageTag 'trove', 'trove', 'production'
                   }}
               }}
           }}
@@ -385,7 +389,7 @@
               failure {{
                   node('internal') {{
                       deleteImage 'trove', 'production'
-                      troveRevertDatastore 'testing'
+                      troveRevertDatastore 'testing', 'mysql', '8.4-test', '8.4.10'
                       }}
                   }}
               cleanup {{
