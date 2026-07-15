@@ -1,0 +1,129 @@
+# Trove datastore version lifecycle.
+#
+# In the container model the database runs as a docker container whose tag is the
+# datastore version's version number. A datastore version is named for its *family*
+# (mysql '8.4', postgresql '16') and carries a pinned, tested patch as its version
+# number ('8.4.10') -- users pick the family, we own the patch. This matches what
+# every managed database service does.
+#
+# These jobs ship a new container patch for one family:
+#
+#   register  a candidate named for its patch ('8.4.10'), on the current guest image
+#   test      check-trove, upgrading an instance from the family head to the candidate
+#   promote   rename-swap: retire the head to its own patch name, candidate takes '8.4'
+#
+# Promotion is a rename because Trove cannot change a version's number in place, and
+# two rows sharing a name break the datastore. Existing instances reference their
+# version by UUID, so they keep running the retired row until trove-datastore-upgrades
+# moves them.
+#
+# version_number is the value to bump when a new patch ships -- eventually by renovate,
+# hardcoded for now.
+- project:
+    name: mysql-8.0
+    datastore: mysql
+    manager: mysql
+    family: '8.0'
+    # renovate: datasource=docker depName=mysql versioning=docker
+    version_number: '8.0.46'
+    jobs:
+      - 'trove-datastore-version-{name}'
+- project:
+    name: mysql-8.4
+    datastore: mysql
+    manager: mysql
+    family: '8.4'
+    # renovate: datasource=docker depName=mysql versioning=docker
+    version_number: '8.4.10'
+    jobs:
+      - 'trove-datastore-version-{name}'
+- project:
+    name: postgresql-16
+    datastore: postgresql
+    manager: postgresql
+    family: '16'
+    # renovate: datasource=docker depName=postgres versioning=docker
+    version_number: '16.14'
+    jobs:
+      - 'trove-datastore-version-{name}'
+- job-template:
+    name: 'trove-datastore-version-{name}'
+    defaults: global
+    properties:
+      - authorization:
+          nobody:
+            - job-read
+            - job-discover
+    project-type: pipeline
+    sandbox: true
+    dsl: |
+      pipeline {{
+          agent none
+          options {{
+              ansiColor('xterm')
+          }}
+          stages {{
+              stage('Register in Dev Cloud') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      troveRegisterDatastoreVersion 'development', '{datastore}', '{manager}', '{version_number}'
+                  }}
+              }}
+              stage('Promote in Dev Cloud') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      trovePromoteDatastoreVersion 'development', '{datastore}', '{family}', '{version_number}'
+                  }}
+              }}
+              stage('Register in Test Cloud') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      troveRegisterDatastoreVersion 'testing', '{datastore}', '{manager}', '{version_number}'
+                  }}
+              }}
+              stage('Test in Test Cloud') {{
+                  agent {{ label 'tempest' }}
+                  steps {{
+                      testTroveImage 'testing', 'ardctest-artm', '{datastore}', '{version_number}', '{family}'
+                  }}
+              }}
+              stage('Promote in Test Cloud') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      trovePromoteDatastoreVersion 'testing', '{datastore}', '{family}', '{version_number}'
+                  }}
+              }}
+              // Production rollout is disabled until the container-model upgrade
+              // has been done. Uncomment both stages to enable.
+              /*
+              stage('Register in Production Cloud') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      troveRegisterDatastoreVersion 'production', '{datastore}', '{manager}', '{version_number}'
+                  }}
+              }}
+              stage('Promote in Production Cloud') {{
+                  agent {{ label 'internal' }}
+                  steps {{
+                      trovePromoteDatastoreVersion 'production', '{datastore}', '{family}', '{version_number}'
+                  }}
+              }}
+              */
+          }}
+          post {{
+              failure {{
+                  node('internal') {{
+                      /* Only bites if the candidate is still un-promoted, i.e. the
+                         tests failed. Once promoted it is named '{family}' and this
+                         is a no-op. */
+                      troveDeactivateDatastoreVersion 'testing', '{datastore}', '{version_number}'
+                      troveDeactivateDatastoreVersion 'development', '{datastore}', '{version_number}'
+                  }}
+              }}
+              cleanup {{
+                  node('tempest') {{
+                      deleteDir() /* clean up the nectar-testing checkout */
+                  }}
+              }}
+          }}
+      }}
