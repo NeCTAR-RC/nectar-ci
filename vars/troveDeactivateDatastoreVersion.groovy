@@ -33,6 +33,11 @@ def call(String cloudEnv, String datastore, String versionName) {
     }
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -eu
+       # `openstack database ...` needs python-troveclient, which only the
+       # /opt/trove venv has (profile::core::trove_manage). The system
+       # python3-openstackclient on the internal slaves has no database subcommand.
+       . /opt/trove/bin/activate
+
        export OS_AUTH_URL=${OSAuthURL}
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default

@@ -9,6 +9,9 @@
 
 def call(String cloudEnv, String datastore, String versionName, String versionNumber) {
     sh """#!/bin/bash
+    # trove-manage comes from this venv (profile::core::trove_manage).
+    . /opt/trove/bin/activate
+
     echo "\033[35;1m========== Deactivating datastore version ${datastore} ${versionName} (version ${versionNumber}) in ${cloudEnv} ==========\033[0m"
     echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update ${datastore} ${versionName} ${datastore} '' '' 0 --version ${versionNumber}"
     trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update ${datastore} ${versionName} ${datastore} '' '' 0 --version ${versionNumber}

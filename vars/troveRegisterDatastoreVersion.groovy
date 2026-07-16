@@ -34,11 +34,21 @@ def call(String cloudEnv, String datastore, String manager, String versionNumber
     }
     withCredentials([usernamePassword(credentialsId: OSCredID, usernameVariable: 'OS_USERNAME', passwordVariable: 'OS_PASSWORD')]) {
        sh """#!/bin/bash -eu
+       # trove-manage, and an openstack client carrying python-troveclient, both
+       # come from this venv (profile::core::trove_manage).
+       . /opt/trove/bin/activate
+
        export OS_AUTH_URL=${OSAuthURL}
        export OS_PROJECT_DOMAIN_NAME=Default
        export OS_USER_DOMAIN_NAME=Default
        export OS_IDENTITY_API_VERSION=3
        export OS_PROJECT_NAME=trove
+
+       # trove's setup.cfg only installs api-paste.ini under etc/trove, so a pip
+       # install leaves the datastore templates inside the package rather than in
+       # /etc/trove/templates as the distro package would. Resolve them from the
+       # installed package so this doesn't hardcode a python version.
+       TEMPLATES=\$(python -c 'import trove, os.path; print(os.path.join(os.path.dirname(trove.__file__), "templates"))')
 
        echo "\033[35;1m========== Registering ${datastore} ${versionNumber} (container ${manager}:${versionNumber}) in ${cloudEnv} ==========\033[0m"
 
@@ -47,8 +57,8 @@ def call(String cloudEnv, String datastore, String manager, String versionNumber
        echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update ${datastore} ${versionNumber} ${manager} '' '' 1 --image-tags trove --version ${versionNumber}"
        trove-manage --config-file /etc/trove/${cloudEnv}.conf datastore_version_update ${datastore} ${versionNumber} ${manager} '' '' 1 --image-tags trove --version ${versionNumber}
 
-       echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf db_load_datastore_config_parameters ${datastore} ${versionNumber} /etc/trove/templates/${manager}/validation-rules.json --version ${versionNumber}"
-       trove-manage --config-file /etc/trove/${cloudEnv}.conf db_load_datastore_config_parameters ${datastore} ${versionNumber} /etc/trove/templates/${manager}/validation-rules.json --version ${versionNumber}
+       echo "==> trove-manage --config-file /etc/trove/${cloudEnv}.conf db_load_datastore_config_parameters ${datastore} ${versionNumber} \$TEMPLATES/${manager}/validation-rules.json --version ${versionNumber}"
+       trove-manage --config-file /etc/trove/${cloudEnv}.conf db_load_datastore_config_parameters ${datastore} ${versionNumber} \$TEMPLATES/${manager}/validation-rules.json --version ${versionNumber}
 
        # Flavors are associated per row, so the candidate needs them before an
        # instance can be booted on it. They survive the later rename.
