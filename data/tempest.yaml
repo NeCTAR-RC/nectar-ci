@@ -1059,7 +1059,6 @@
             - 'orchestration'
             - 'loadbalancer'
             - 'database'
-            - 'coe'
             - 'application'
           skip_capacity_check: false
           environment: 'testing'
