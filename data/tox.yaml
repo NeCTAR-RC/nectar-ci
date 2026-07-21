@@ -2,34 +2,6 @@
     name: '{name}-os-tox-python3'
     jobs:
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          os_release: 'yoga'
-          environment: 'py310'
-          ubuntu_release: 'jammy'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          os_release: 'zed'
-          environment: 'pep8'
-          ubuntu_release: 'jammy'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          os_release: 'zed'
-          environment: 'py310'
-          ubuntu_release: 'jammy'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          environment: 'pep8'
-          os_release: '2023.1'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          environment: 'py310'
-          os_release: '2023.1'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          environment: 'pep8'
-          os_release: '2023.2'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          environment: 'py310'
-          os_release: '2023.2'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
           ubuntu_release: 'jammy'
           environment: 'pep8'
           os_release: '2024.1'
@@ -56,15 +28,6 @@
 - job-group:
     name: '{name}-os-tox-{environment}'
     jobs:
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          os_release: 'zed'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          os_release: '2023.1'
-      - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
-          ubuntu_release: 'jammy'
-          os_release: '2023.2'
       - '{name}-{ubuntu_release}-{os_release}-tox-{environment}':
           ubuntu_release: 'jammy'
           os_release: '2024.1'
