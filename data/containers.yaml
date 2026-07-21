@@ -162,6 +162,10 @@
     properties:
       - copyartifact:
           projects: '*-kolla-container-*'
+    triggers:
+      - timed: |
+          TZ=Australia/Melbourne
+          H H(2-6) H * *
     dsl: |
       pipeline {{
         agent {{ label 'docker' }}
