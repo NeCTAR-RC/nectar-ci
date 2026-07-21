@@ -326,7 +326,7 @@
           }}
           stages {{
               stage('Build Image') {{
-                  agent {{ label 'noble' }}
+                  agent {{ label 'image-build && noble' }}
                   steps {{
                       imageBuildQEMU 'trove'
                   }}
