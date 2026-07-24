@@ -117,6 +117,11 @@
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
+    name: nectar-metrics-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'NeCTAR-RC'
+- project:
     name: nova-helm
     jobs:
       - '{name}-helm-default-jobs':
