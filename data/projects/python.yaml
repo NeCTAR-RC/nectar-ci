@@ -206,19 +206,20 @@
 - project:
     name: nectar-metrics
     jobs:
-      - '{name}-jammy-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'py310'
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'py312'
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'flake8'
-      - '{name}-jammy-deb-package':
+          environment: 'pep8'
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
+          environment: 'cover'
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
+      - '{name}-container':
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: nectar-openstack
     jobs:
