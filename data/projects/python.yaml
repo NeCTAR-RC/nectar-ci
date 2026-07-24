@@ -220,6 +220,8 @@
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+      - '{name}-pypi-release':
+          organisation: 'NeCTAR-RC'
 - project:
     name: nectar-openstack
     jobs:
