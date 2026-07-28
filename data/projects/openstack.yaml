@@ -376,6 +376,6 @@
 - project:
     name: trove-tempest-plugin
     jobs:
-      - '{name}-default-tox-{environment}':
+      - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
