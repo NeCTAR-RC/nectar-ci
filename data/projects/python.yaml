@@ -270,6 +270,9 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'releasenotes'
+      - '{name}-container':
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
       - '{name}-reno-release-notes':
