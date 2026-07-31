@@ -1420,7 +1420,7 @@
           cd $WORKSPACE/tempest/
           ./setup_tempest.py -s ardctest-artm -e testing -j check-trove $tmpdir
           cd $tmpdir
-          stestr run -n trove_tempest_plugin.tests.scenario.database.test_basic_instance_ops.DatabaseScenarioTest.test_create_instances 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
+          stestr run -n trove_tempest_plugin.tests.scenario.test_instance_basic 2>&1 | grep --line-buffered -vE ' \w+Warning: |self._sock = None'
           RET=${{PIPESTATUS[0]}}
           rm -rf $tmpdir
           exit $RET
