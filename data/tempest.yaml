@@ -1628,7 +1628,11 @@
           fail: true
     builders:
       - shell: |
-          . /opt/tempest/bin/activate
+          if [ "{test}-{environment}" == "database-production" ]; then
+            . /opt/tempest-nagios/bin/activate
+          else
+            . /opt/tempest/bin/activate
+          fi
           [ {skip_capacity_check} == True ] && skip_capacity_check="--skip-capacity-check"
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e {environment} $skip_capacity_check
     triggers:
