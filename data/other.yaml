@@ -39,16 +39,6 @@
       - '{name}-dummy':
           organisation: 'NeCTAR-RC'
 - project:
-    name: git-secrets-puppet-internal
-    jobs:
-      - '{name}-git-secrets-sorted':
-          organisation: 'internal'
-- project:
-    name: git-secrets-puppet-openstack
-    jobs:
-      - '{name}-git-secrets-sorted':
-          organisation: 'NeCTAR-RC'
-- project:
     name: jupyterhub-on-nectar-k8s
     jobs:
       - '{name}-dummy':

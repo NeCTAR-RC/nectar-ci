@@ -28,10 +28,6 @@
           ssh-user-ip: puppet@openvox.svc.artm.rctest.nectar.org.au:22
           command: /var/lib/puppet/librarian/bin/puppet-librarian-install.sh testing
 - builder:
-    name: git-secrets-sorted
-    builders:
-      - shell: find . -name '*.pattern' -exec sort -c {{}} +
-- builder:
     name: puppet-lint
     builders:
       - shell: !include-raw-escape: scripts/puppet-lint.sh
