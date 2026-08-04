@@ -82,7 +82,7 @@ def call(String cloudEnv, String datastore, String family, String candidateVersi
                exit 1
            fi
            echo "Retiring current head \$HEAD_ID: '${family}' -> '\$HEAD_VER'"
-           openstack datastore version set \$HEAD_ID --version-name \$HEAD_VER
+           openstack datastore version set \$HEAD_ID --version-name \$HEAD_VER --disable
        else
            echo "No existing '${family}' head; promoting candidate directly"
        fi
