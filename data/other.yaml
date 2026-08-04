@@ -4,6 +4,11 @@
       - '{name}-dummy':
           organisation: 'internal'
 - project:
+    name: ai-ops
+    jobs:
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
+- project:
     name: bumblebee-dev
     jobs:
       - '{name}-dummy':
