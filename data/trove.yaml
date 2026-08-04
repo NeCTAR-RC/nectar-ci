@@ -34,7 +34,7 @@
     manager: mysql
     family: '8.4'
     # renovate: datasource=docker depName=mysql versioning=docker
-    version_number: '8.4.10'
+    version_number: '8.4.11'
     jobs:
       - 'trove-datastore-version-{name}'
 - project:
