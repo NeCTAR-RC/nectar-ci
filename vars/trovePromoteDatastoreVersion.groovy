@@ -53,7 +53,7 @@ def call(String cloudEnv, String datastore, String family, String candidateVersi
        echo "\033[35;1m========== Promoting ${datastore} ${candidateVersionName} to ${family} in ${cloudEnv} ==========\033[0m"
 
        # Columns are ID, Name, Version -- one call gives us the head's id and its patch.
-       LIST=\$(openstack database datastore version list ${datastore} -f value -c ID -c Name -c Version)
+       LIST=\$(openstack datastore version list ${datastore} -f value -c ID -c Name -c Version)
 
        CAND_ID=\$(echo "\$LIST" | awk -v c="${candidateVersionName}" '\$2 == c {print \$1}')
        HEAD_ID=\$(echo "\$LIST" | awk -v f="${family}" '\$2 == f {print \$1}')
@@ -82,16 +82,16 @@ def call(String cloudEnv, String datastore, String family, String candidateVersi
                exit 1
            fi
            echo "Retiring current head \$HEAD_ID: '${family}' -> '\$HEAD_VER'"
-           openstack database datastore version set \$HEAD_ID --version-name \$HEAD_VER
+           openstack datastore version set \$HEAD_ID --version-name \$HEAD_VER
        else
            echo "No existing '${family}' head; promoting candidate directly"
        fi
 
        echo "Promoting \$CAND_ID: '${candidateVersionName}' -> '${family}'"
-       openstack database datastore version set \$CAND_ID --version-name ${family}
+       openstack datastore version set \$CAND_ID --version-name ${family}
 
        echo "Datastore versions for ${datastore} in ${cloudEnv} now:"
-       openstack database datastore version list ${datastore}
+       openstack datastore version list ${datastore}
        """
     }
 }

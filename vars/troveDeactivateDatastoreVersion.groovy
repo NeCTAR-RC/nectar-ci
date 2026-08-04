@@ -46,7 +46,7 @@ def call(String cloudEnv, String datastore, String versionName) {
 
        echo "\033[35;1m========== Deactivating ${datastore} ${versionName} in ${cloudEnv} ==========\033[0m"
 
-       ID=\$(openstack database datastore version list ${datastore} -f value -c ID -c Name \
+       ID=\$(openstack datastore version list ${datastore} -f value -c ID -c Name \
              | awk -v n="${versionName}" '\$2 == n {print \$1}')
 
        if [ -z "\$ID" ]; then
@@ -54,8 +54,8 @@ def call(String cloudEnv, String datastore, String versionName) {
            exit 0
        fi
 
-       echo "==> openstack database datastore version set \$ID --disable"
-       openstack database datastore version set \$ID --disable
+       echo "==> openstack datastore version set \$ID --disable"
+       openstack datastore version set \$ID --disable
        """
     }
 }
