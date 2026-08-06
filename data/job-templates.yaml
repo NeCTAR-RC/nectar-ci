@@ -1995,6 +1995,9 @@
     name: '{name}-nodejs-storybook-deploy'
     defaults: global
     node: noble
+    # Two overlapping deploys would each see the other's fresh uploads as
+    # orphans and put delete timers on live objects in the shared container.
+    concurrent: false
     parameters:
       - string:
           name: GERRIT_REFSPEC
