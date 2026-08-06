@@ -254,6 +254,8 @@
           organisation: 'internal'
       - '{name}-puppet-prod-review':
           organisation: 'internal'
+      - '{name}-puppet-strings':
+          organisation: 'internal'
       - '{name}-r10k-diff-module-{branch}':
           organisation: 'internal'
           branch: 'master'

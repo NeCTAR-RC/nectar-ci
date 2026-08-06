@@ -303,3 +303,7 @@
     name: reno-release-notes
     builders:
       - shell: !include-raw-escape: scripts/reno-release-notes.sh
+- builder:
+    name: puppet-strings
+    builders:
+      - shell: !include-raw-escape: scripts/puppet-strings.sh
