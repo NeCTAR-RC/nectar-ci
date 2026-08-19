@@ -218,8 +218,6 @@
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'releasenotes'
-      - '{name}-noble-deb-package':
-          organisation: 'NeCTAR-RC'
       - '{name}-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
