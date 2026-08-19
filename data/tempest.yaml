@@ -1507,6 +1507,7 @@
       - qld
       - swinburne-01
       - tasmania
+      - tasmania-02
     jobs:
       - 'tempest-nagios-site-{site}-{test}':
           test:
