@@ -15,6 +15,6 @@ git checkout -B master "origin/$GERRIT_BRANCH"
 git pull
 git reset --hard
 mv apps* base-branch
-docker run --network host -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)/secrets:/secrets" -v "${tmpdir}:/output" -v "$(pwd)/base-branch:/base-branch" -v "$(pwd)/target-branch:/target-branch" -e "TARGET_BRANCH=$GERRIT_REFSPEC" -e "BASE_BRANCH=$GERRIT_BRANCH" -e "REPO=$GERRIT_PROJECT" registry.rc.nectar.org.au/docker.io/dagandersen/argocd-diff-preview:v0.1.18
+docker run --network host -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)/secrets:/secrets" -v "${tmpdir}:/output" -v "$(pwd)/base-branch:/base-branch" -v "$(pwd)/target-branch:/target-branch" -e "TARGET_BRANCH=$GERRIT_REFSPEC" -e "BASE_BRANCH=$GERRIT_BRANCH" -e "REPO=$GERRIT_PROJECT" registry.rc.nectar.org.au/docker.io/dagandersen/argocd-diff-preview:v0.2.13
 rm -rf secrets
 cat "${tmpdir}/diff.md"
