@@ -9,6 +9,8 @@
           environment: 'pep8'
       - '{name}-noble-tox-{environment}':
           environment: 'cover'
+      - '{name}-resolute-tox-{environment}':
+          environment: 'py314'
 # Test jobs for projects still on an older OS/python version.
 - job-group:
     name: '{name}-python-legacy-jobs'
