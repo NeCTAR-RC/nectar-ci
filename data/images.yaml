@@ -133,6 +133,12 @@
           image_name: '{name}'
           default_user: 'root'
 - project:
+    name: undercloud-ubuntu-26.04
+    jobs:
+      - 'image-build-undercloud-{name}':
+          image_name: '{name}'
+          default_user: 'root'
+- project:
     name: bumblebee-guacamole
     jobs:
       - 'image-build-bumblebee-{name}':
