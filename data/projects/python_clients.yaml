@@ -3,6 +3,8 @@
     jobs:
       - '{name}-noble-tox-{environment}':
           environment: 'py312'
+      - '{name}-resolute-tox-{environment}':
+          environment: 'py314'
       - '{name}-noble-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'cover'
