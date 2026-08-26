@@ -82,6 +82,19 @@
       - '{name}-noble-deb-package':
           organisation: 'NeCTAR-RC'
 - project:
+    name: frisch
+    jobs:
+      - '{name}-python-jobs':
+          organisation: 'NeCTAR-RC'
+      - '{name}-noble-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'frontend'
+      - '{name}-container':
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
+      - '{name}-pypi-release':
+          organisation: 'NeCTAR-RC'
+- project:
     name: hiera-gc
     jobs:
       - '{name}-jammy-tox-{environment}':

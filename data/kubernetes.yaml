@@ -48,6 +48,11 @@
       - '{name}-helm-package':
           organisation: 'NeCTAR-RC'
 - project:
+    name: frisch-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'NeCTAR-RC'
+- project:
     name: gnocchi-helm
     jobs:
       - '{name}-helm-default-jobs':
