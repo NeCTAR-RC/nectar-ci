@@ -212,6 +212,13 @@
     project-type: pipeline
     sandbox: true
     kolla_profile_name: 'false'
+    # The helm charts have no per-release branches, so only the one job whose
+    # os_release matches helm_os_release may update the chart -- otherwise a
+    # merge to an old nectar/<release> branch, or the monthly requirements
+    # rebuild of an old release, would point master's appVersion at a stale
+    # image.
+    helm_name: ''
+    helm_os_release: ''
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -324,8 +331,29 @@
                       docker tag ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{OPENSTACK_RELEASE}} ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                       docker push ${{REGISTRY}}/kolla/ubuntu-source-${{image}}:${{VERSION_TAG}}
                   done
+
+                  # VERSION_TAG only exists inside this shell, and it is the tag
+                  # the helm chart's appVersion has to match.
+                  printf '%s' "$VERSION_TAG" > image_tag.txt
                 '''
               }}
+            }}
+          }}
+          stage('Helm package update') {{
+            when {{
+              expression {{
+                return '{helm_name}' != '' && '{os_release}' == '{helm_os_release}'
+              }}
+            }}
+            steps {{
+              script {{
+                env.IMAGE_TAG = readFile('image_tag.txt').trim()
+                // Unset when the build came from the requirements reverse
+                // trigger rather than a gerrit merge.
+                env.HELM_CHANGE_PROJECT = env.GERRIT_PROJECT ?: '{organisation}/{name}'
+                env.HELM_CHANGE_MESSAGE = env.GERRIT_CHANGE_SUBJECT ?: 'Rebuilt {name} {os_release} kolla images'
+              }}
+              build job: '{helm_name}-helm-update-version', parameters: [string(name: 'IMAGE_TAG', value: "${{env.IMAGE_TAG}}"),string(name: 'CHANGE_PROJECT', value: "${{env.HELM_CHANGE_PROJECT}}"),string(name: 'CHANGE_MESSAGE', value: "${{env.HELM_CHANGE_MESSAGE}}")]
             }}
           }}
         }}
