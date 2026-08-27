@@ -366,6 +366,7 @@
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
+          helm_os_release: '2026.1'
       - '{name}-backup-container':
           organisation: 'NeCTAR-RC'
 - project:
