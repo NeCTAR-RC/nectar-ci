@@ -15,12 +15,8 @@
 - project:
     name: blazar
     jobs:
-      - '{name}-os-tox-{environment}':
+      - '{name}-os-tox-python3':
           organisation: 'NeCTAR-RC'
-          environment: 'py310'
-      - '{name}-os-tox-{environment}':
-          organisation: 'NeCTAR-RC'
-          environment: 'pep8'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
