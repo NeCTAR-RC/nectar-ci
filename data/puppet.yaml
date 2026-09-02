@@ -557,7 +557,7 @@
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
-    name: puppet-site-nectarunder
+    name: puppet-site-rcunder
     jobs:
       - '{name}-puppet-site-prod-jobs':
           organisation: 'internal'
