@@ -196,6 +196,13 @@
           organisation: 'NeCTAR-RC'
           helm_name: '{name}-helm'
 - project:
+    name: nectar-health-probe
+    jobs:
+      - '{name}-python-jobs':
+          organisation: 'NeCTAR-RC'
+      - '{name}-pypi-release':
+          organisation: 'NeCTAR-RC'
+- project:
     name: nectar-metrics
     jobs:
       - '{name}-python-jobs':
