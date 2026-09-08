@@ -8,13 +8,23 @@ set -o pipefail
 
 export PATH=~/nodejs-bin/:$PATH
 
-CONTAINER="review-$GERRIT_CHANGE_ID-$GERRIT_PATCHSET_NUMBER"
+# One container per change, not per patchset: the delete below wipes the
+# previous patchset's preview, so an open change holds one container instead
+# of one per patchset, and the preview URL stays stable across patchsets
+# (no-store keeps its content current). Change-Ids are unique per review, so
+# two reviews never share a container; Jenkins runs this job serially, so two
+# patchsets of one change cannot upload over each other. The change-merged/
+# abandoned clean job sweeps this name and the older per-patchset ones alike.
+CONTAINER="review-$GERRIT_CHANGE_ID"
 
 export OS_AUTH_URL=https://identity.rc.nectar.org.au/v3/
 export OS_AUTH_TYPE=v3applicationcredential
 export OS_APPLICATION_CREDENTIAL_ID=$CREDENTIAL_ID
 export OS_APPLICATION_CREDENTIAL_SECRET=$CREDENTIAL_SECRET
-openstack container delete --recursive "$CONTAINER" || true
+# swift, not openstack: the per-change container really holds the previous
+# patchset's ~400 objects now, and swiftclient deletes them on 10 concurrent
+# threads where the openstack CLI works through them one at a time.
+swift delete "$CONTAINER" || true
 AUTH=$(openstack container create "$CONTAINER" -f value -c account)
 BASEURL=v1/$AUTH/$CONTAINER
 
