@@ -635,11 +635,6 @@
       - '{name}-puppet-site-prod-jobs':
           organisation: 'Auckland'
 - project:
-    name: puppet-site-intersect
-    jobs:
-      - '{name}-puppet-site-prod-jobs':
-          organisation: 'internal'
-- project:
     name: puppet-site-qld_ctrl
     jobs:
       - '{name}-puppet-site-prod-jobs':
