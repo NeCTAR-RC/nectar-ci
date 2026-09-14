@@ -233,6 +233,7 @@
           organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
+      - '{name}-kolla-container-upstream'
 - project:
     name: neutron-lib
     jobs:
