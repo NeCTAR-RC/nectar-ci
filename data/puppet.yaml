@@ -605,11 +605,6 @@
       - '{name}-pre-commit-all':
           organisation: 'internal'
 - project:
-    name: puppet-site-undertest
-    jobs:
-      - '{name}-puppet-site-test-jobs':
-          organisation: 'internal'
-- project:
     name: puppet-site-auckland
     jobs:
       - '{name}-puppet-site-prod-jobs':
