@@ -15,10 +15,11 @@ openstack container delete --recursive "$CONTAINER" || true
 AUTH=$(openstack container create "$CONTAINER" -f value -c account)
 BASEURL=v1/$AUTH/$CONTAINER
 
-# build:geo is a post-build step for generative engine optimization (GEO),
-# run after the bundle is built.
+# build:geo is nectar-eligibility's post-build step for generative engine
+# optimization (GEO), run after the bundle is built. Other projects have no
+# such script, so it runs only if present.
 pnpm build --base="/$BASEURL/"
-pnpm build:geo
+pnpm run --if-present build:geo
 
 swift post "$CONTAINER" \
   --header 'X-Container-Meta-Web-Index: index.html' \

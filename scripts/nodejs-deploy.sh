@@ -5,10 +5,11 @@ set -ex
 
 export PATH=~/nodejs-bin/:$PATH
 
-# build:geo is a post-build step for generative engine optimization (GEO),
-# run after the bundle is built.
+# build:geo is nectar-eligibility's post-build step for generative engine
+# optimization (GEO), run after the bundle is built. Other projects have no
+# such script, so it runs only if present.
 pnpm build
-pnpm build:geo
+pnpm run --if-present build:geo
 
 CONTAINER="$DEPLOY_CONTAINER"
 

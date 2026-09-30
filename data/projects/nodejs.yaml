@@ -16,6 +16,27 @@
           organisation: 'NeCTAR-RC'
           container: 'nectar-eligibility'
           ga_measurement_id_credential: '977bcda3-8942-41f1-b086-1bc7683d42b9'
+# The build and deploy templates require ga_measurement_id_credential. This
+# project has no Google Analytics and never reads VITE_GA_MEASUREMENT_ID, so
+# it reuses nectar-eligibility's credential ids to satisfy the templates.
+- project:
+    name: nectar-survey
+    jobs:
+      - '{name}-nodejs-lint':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-test':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-test-e2e':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-build':
+          organisation: 'NeCTAR-RC'
+          ga_measurement_id_credential: 'd9b97c28-1005-4e24-9220-cff1e0a20a9b'
+      - '{name}-nodejs-build-clean':
+          organisation: 'NeCTAR-RC'
+      - '{name}-nodejs-deploy':
+          organisation: 'NeCTAR-RC'
+          container: 'nectar-survey'
+          ga_measurement_id_credential: '977bcda3-8942-41f1-b086-1bc7683d42b9'
 - project:
     name: ardc-ui-bootstrap
     jobs:
