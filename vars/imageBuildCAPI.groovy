@@ -18,11 +18,13 @@ def call(String imageName, String kubernetesVersion) {
 
         echo "Starting build..."
         cd \$WORKSPACE/images/capi
+        # extra_debs: nodes need nfs-common so kubelet can mount NFS volumes
         PACKER_FLAGS="\
         --var 'kubernetes_rpm_version=\${KUBERNETES_RPM_VERSION:-\$KUBERNETES_VERSION}' \
         --var 'kubernetes_semver=v\${KUBERNETES_SEMVER:-\$KUBERNETES_VERSION}' \
         --var 'kubernetes_series=v\${KUBERNETES_SERIES:-\${KUBERNETES_VERSION%.*}}' \
         --var 'kubernetes_deb_version=\${KUBERNETES_DEB_VERSION:-\${KUBERNETES_VERSION}-1.1}' \
+        --var 'extra_debs=nfs-common' \
         --var vnc_bind_address=0.0.0.0" \
         make build-qemu-\$IMAGE_NAME
 
