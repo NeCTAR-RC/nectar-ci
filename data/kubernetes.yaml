@@ -53,6 +53,11 @@
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
+    name: hive-helm
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'NeCTAR-RC'
+- project:
     name: gnocchi-helm
     jobs:
       - '{name}-helm-default-jobs':
