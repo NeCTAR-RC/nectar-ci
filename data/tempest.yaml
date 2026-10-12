@@ -1640,7 +1640,7 @@
           [ {skip_capacity_check} == True ] && skip_capacity_check="--skip-capacity-check"
           $WORKSPACE/nagios/tempest_nagios.py tempest -c $WORKSPACE/nagios/tempest_nagios.conf -s {site} -t {test} -e {environment} $skip_capacity_check
     triggers:
-      - timed: 'H(1-59) H(4-6) * * *'
+      - timed: 'H(1-59) H(6-8) * * *'
     publishers:
       - naginator:
           max-failed-builds: 1
