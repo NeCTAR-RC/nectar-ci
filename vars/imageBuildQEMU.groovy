@@ -11,13 +11,14 @@ def call(String imageName, String projectName = 'NeCTAR-Images') {
         export OS_USER_DOMAIN_NAME=Default
 
         IMAGE_NAME=$imageName
+        VERBOSE=${params.packer_debug ? 1 : 0}
         OUTPUT_DIR=\$WORKSPACE/builds/build_files/packer-\$IMAGE_NAME
 
         echo "Starting packer init..."
         make init target=\$IMAGE_NAME
 
         echo "Starting packer build..."
-        make build target=\$IMAGE_NAME
+        make build target=\$IMAGE_NAME verbose=\$VERBOSE
 
         # Clean up any left over build
         rm -vfr build

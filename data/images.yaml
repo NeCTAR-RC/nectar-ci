@@ -212,6 +212,10 @@
           name: az_testing
           description: AZ for testing in RCTest
           default: 'ardctest-artm'
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -310,6 +314,11 @@
 - job:
     name: image-build-trove
     defaults: global
+    parameters:
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -443,6 +452,10 @@
           name: az_testing
           description: AZ for testing in RCTest
           default: 'ardctest-artm'
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -539,6 +552,11 @@
 - job:
     name: image-build-octavia-amphora
     defaults: global
+    parameters:
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -639,6 +657,11 @@
 - job:
     name: image-build-manila-share-server
     defaults: global
+    parameters:
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -729,6 +752,10 @@
           name: project_name
           description: OpenStack project for testing/deployment
           default: 'nectar-ci'
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -780,6 +807,10 @@
           name: kubernetes_version
           description: Kubernetes version to build for (e.g. 1.29.3)
           default: '1.29.3'
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -839,6 +870,11 @@
     name: 'image-build-undercloud-{name}'
     defaults: global
     node: noble
+    parameters:
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:
@@ -913,6 +949,10 @@
           name: volume_azs_testing
           description: Deploy the volumes for the image
           default: 'ardctest-artm'
+      - bool:
+          name: packer_debug
+          description: Enable packer debug logging (PACKER_LOG=1)
+          default: false
     properties:
       - authorization:
           nobody:

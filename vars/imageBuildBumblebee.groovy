@@ -9,6 +9,7 @@ def call(String imageName, String projectName) {
         export OS_USER_DOMAIN_NAME=Default
         export OS_TENANT_NAME=\$OS_PROJECT_NAME  # packer fix
         export OS_DOMAIN_NAME=\$OS_PROJECT_DOMAIN_NAME  # packer fix
+        ${params.packer_debug ? 'export PACKER_LOG=1' : ''}
         rm -fr build; mkdir build
         rm -fr raw_image; mkdir raw_image
         NAME=$imageName

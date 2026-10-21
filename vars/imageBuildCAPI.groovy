@@ -5,6 +5,7 @@ def call(String imageName, String kubernetesVersion) {
 
         IMAGE_NAME=$imageName
         KUBERNETES_VERSION=$kubernetesVersion
+        ${params.packer_debug ? 'export PACKER_LOG=1' : ''}
 
         OUTPUT_NAME="\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION"
         OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$OUTPUT_NAME"
