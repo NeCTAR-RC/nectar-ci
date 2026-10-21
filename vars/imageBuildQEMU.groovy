@@ -14,6 +14,9 @@ def call(String imageName, String projectName = 'NeCTAR-Images') {
         VERBOSE=${params.packer_debug ? 1 : 0}
         OUTPUT_DIR=\$WORKSPACE/builds/build_files/packer-\$IMAGE_NAME
 
+        echo "Checking for KVM support on \$NODE_NAME..."
+        kvm-ok
+
         echo "Starting packer init..."
         make init target=\$IMAGE_NAME
 
