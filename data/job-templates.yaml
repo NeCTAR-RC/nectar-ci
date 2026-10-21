@@ -1385,7 +1385,8 @@
 - job-template:
     name: '{name}-reno-release-notes'
     defaults: global
-    node: noble
+    reno_node: noble
+    node: '{reno_node}'
     concurrent: false
     parameters:
       - string:

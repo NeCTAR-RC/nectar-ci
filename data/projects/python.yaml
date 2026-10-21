@@ -97,12 +97,19 @@
 - project:
     name: hive
     jobs:
-      - '{name}-python-jobs':
+      - '{name}-resolute-tox-{environment}':
           organisation: 'NeCTAR-RC'
-      - '{name}-noble-tox-{environment}':
+          environment: 'py314'
+      - '{name}-resolute-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
+      - '{name}-resolute-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
+      - '{name}-resolute-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'frontend'
-      - '{name}-noble-tox-{environment}':
+      - '{name}-resolute-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'e2e'
       - '{name}-container':
@@ -110,6 +117,7 @@
           helm_name: '{name}-helm'
       - '{name}-reno-release-notes':
           organisation: 'NeCTAR-RC'
+          reno_node: 'resolute'
 - project:
     name: hiera-gc
     jobs:
