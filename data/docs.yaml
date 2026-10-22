@@ -22,6 +22,8 @@
 - project:
     name: nectar-docs
     jobs:
+      - '{name}-pre-commit-all':
+          organisation: 'internal'
       - '{name}-zensical-check':
           organisation: 'internal'
       - '{name}-zensical-publish':
