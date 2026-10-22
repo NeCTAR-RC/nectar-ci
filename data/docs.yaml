@@ -24,6 +24,8 @@
     jobs:
       - '{name}-dummy':
           organisation: 'internal'
+      - '{name}-zensical-publish':
+          organisation: 'internal'
 - project:
     name: nectar-architecture
     jobs:

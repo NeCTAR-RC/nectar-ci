@@ -307,3 +307,7 @@
     name: puppet-strings
     builders:
       - shell: !include-raw-escape: scripts/puppet-strings.sh
+- builder:
+    name: zensical-publish
+    builders:
+      - shell: !include-raw-escape: scripts/zensical-publish.sh
