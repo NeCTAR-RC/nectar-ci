@@ -313,10 +313,11 @@
 - builder:
     name: zensical-build
     builders:
-      # Render HTML into ./site
+      # Render HTML into ./site; --strict fails the build on warnings such as
+      # links to missing pages
       - shell: |
           uv sync --frozen
-          uv run zensical build --clean
+          uv run zensical build --clean --strict
 - builder:
     name: swift-docs-publish
     builders:

@@ -22,7 +22,7 @@
 - project:
     name: nectar-docs
     jobs:
-      - '{name}-dummy':
+      - '{name}-zensical-check':
           organisation: 'internal'
       - '{name}-zensical-publish':
           organisation: 'internal'
