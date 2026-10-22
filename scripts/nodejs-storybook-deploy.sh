@@ -8,8 +8,6 @@
 set -ex
 set -o pipefail
 
-export PATH=~/nodejs-bin/:$PATH
-
 pnpm build-storybook
 
 CONTAINER="$DEPLOY_CONTAINER"

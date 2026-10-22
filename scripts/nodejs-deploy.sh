@@ -3,8 +3,6 @@
 # set -ex preserves the `sh -xe` Jenkins applied to the previous inline step.
 set -ex
 
-export PATH=~/nodejs-bin/:$PATH
-
 # build:geo is nectar-eligibility's post-build step for generative engine
 # optimization (GEO), run after the bundle is built. Other projects have no
 # such script, so it runs only if present.
