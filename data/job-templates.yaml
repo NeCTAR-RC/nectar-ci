@@ -1542,6 +1542,9 @@
           choosing-strategy: gerrit
     builders:
       - puppet-strings
+      - swift-docs-publish:
+          container: '{name}'
+          docs_dir: doc
     wrappers:
       # OpenStack application credential for the project that owns the
       # puppet-nectar docs Swift container. Shared with the release-notes jobs.
@@ -1594,7 +1597,10 @@
             after: {}
           choosing-strategy: gerrit
     builders:
-      - zensical-publish
+      - zensical-build
+      - swift-docs-publish:
+          container: '{name}'
+          docs_dir: site
     wrappers:
       # OpenStack application credential for the project that owns the docs
       # Swift containers. Shared with the release-notes and puppet-strings jobs.

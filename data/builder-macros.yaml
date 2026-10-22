@@ -303,11 +303,25 @@
     name: reno-release-notes
     builders:
       - shell: !include-raw-escape: scripts/reno-release-notes.sh
+# Docs builders render HTML into the workspace; swift-docs-publish then uploads
+# the rendered tree. puppet-strings and uv are assumed to be preinstalled.
 - builder:
     name: puppet-strings
     builders:
-      - shell: !include-raw-escape: scripts/puppet-strings.sh
+      # Render YARD HTML into ./doc
+      - shell: 'puppet strings generate'
 - builder:
-    name: zensical-publish
+    name: zensical-build
     builders:
-      - shell: !include-raw-escape: scripts/zensical-publish.sh
+      # Render HTML into ./site
+      - shell: |
+          uv sync --frozen
+          uv run zensical build --clean
+- builder:
+    name: swift-docs-publish
+    builders:
+      - inject:
+          properties-content: |
+            CONTAINER={container}
+            DOCS_DIR={docs_dir}
+      - shell: !include-raw-escape: scripts/swift-docs-publish.sh
