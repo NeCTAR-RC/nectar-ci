@@ -21,7 +21,7 @@
           environment: 'pep8'
 # Jobs for helm-deployed services: dev environment create/cleanup plus a
 # container build that updates the helm chart on merge. Callers supply
-# hostname_var for the devenv-create job.
+# hostname_var (and optionally devenv_helm_args) for the devenv-create job.
 - job-group:
     name: '{name}-service-jobs'
     jobs:
@@ -112,9 +112,11 @@
       - '{name}-resolute-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'e2e'
-      - '{name}-container':
+      - '{name}-service-jobs':
           organisation: 'NeCTAR-RC'
-          helm_name: '{name}-helm'
+          hostname_var: 'gateway.hostnames'
+          # manuka returns the user to HIVE_PUBLIC_URL/auth/websso/.
+          devenv_helm_args: ' --set conf.HIVE_PUBLIC_URL=https://$TAG.rcdev.nectar.org.au'
       - '{name}-reno-release-notes':
           organisation: 'NeCTAR-RC'
           reno_node: 'resolute'

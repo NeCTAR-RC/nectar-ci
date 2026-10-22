@@ -3,6 +3,10 @@
     defaults: global
     project-type: pipeline
     sandbox: true
+    # Extra helm install arguments, e.g. settings that embed the review
+    # hostname. Start with a space and refer to the review tag as the shell
+    # variable $TAG.
+    devenv_helm_args: ''
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -158,7 +162,7 @@
                       --username "$REGISTRY_USR" --password-stdin
                     helm install -n ${{TAG}} --create-namespace {name} oci://registry.rc.nectar.org.au/nectar-helm/{name} \
                       -f dev/{name}/values.yaml --set image.tag=${{TAG}} \
-                      --set {hostname_var}={{${{TAG}}.rcdev.nectar.org.au}}
+                      --set {hostname_var}={{${{TAG}}.rcdev.nectar.org.au}}{devenv_helm_args}
                     '''
                   }}
                 }}
