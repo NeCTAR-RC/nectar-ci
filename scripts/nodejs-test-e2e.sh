@@ -3,7 +3,6 @@
 # set -ex preserves the `sh -xe` Jenkins applied to the previous inline step.
 set -ex
 
-export PATH=~/nodejs-bin/:$PATH
 pnpm build
 pnpm test:e2e:install
 pnpm test:e2e

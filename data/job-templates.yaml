@@ -1735,7 +1735,7 @@
 - job-template:
     name: '{name}-nodejs-lint'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1777,7 +1777,7 @@
 - job-template:
     name: '{name}-nodejs-test'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1817,7 +1817,7 @@
 - job-template:
     name: '{name}-nodejs-test-e2e'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1857,7 +1857,7 @@
 - job-template:
     name: '{name}-nodejs-build'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1909,7 +1909,7 @@
 - job-template:
     name: '{name}-nodejs-build-clean'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -1953,7 +1953,7 @@
 - job-template:
     name: '{name}-nodejs-deploy'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -2002,7 +2002,7 @@
 - job-template:
     name: '{name}-nodejs-storybook-test'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -2042,7 +2042,7 @@
 - job-template:
     name: '{name}-nodejs-storybook-build'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -2091,7 +2091,7 @@
 - job-template:
     name: '{name}-nodejs-storybook-deploy'
     defaults: global
-    node: noble
+    node: resolute
     # Two overlapping deploys would each see the other's fresh uploads as
     # orphans and put delete timers on live objects in the shared container.
     concurrent: false
@@ -2140,7 +2140,7 @@
 - job-template:
     name: '{name}-nodejs-publish'
     defaults: global
-    node: noble
+    node: resolute
     parameters:
       - string:
           name: GERRIT_REFSPEC

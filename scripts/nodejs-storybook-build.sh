@@ -6,8 +6,6 @@
 set -ex
 set -o pipefail
 
-export PATH=~/nodejs-bin/:$PATH
-
 # One container per change, not per patchset: the delete below wipes the
 # previous patchset's preview, so an open change holds one container instead
 # of one per patchset, and the preview URL stays stable across patchsets
