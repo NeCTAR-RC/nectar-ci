@@ -8,6 +8,7 @@ set -euo pipefail
 # JJB params (injected by the swift-docs-publish builder macro):
 #   CONTAINER - Swift container to upload into
 #   DOCS_DIR  - directory under $WORKSPACE holding the rendered HTML
+#   DELETE_AFTER - seconds until uploaded objects expire (empty: never)
 #
 # The container is intentionally left private (no `swift post` ACL/web-index
 # metadata is set).
@@ -18,9 +19,13 @@ export OS_APPLICATION_CREDENTIAL_ID="$CREDENTIAL_ID"
 export OS_APPLICATION_CREDENTIAL_SECRET="$CREDENTIAL_SECRET"
 
 cd "$WORKSPACE"
-AUTH=$(openstack container create "$CONTAINER" -f value -c account)
+openstack container create "$CONTAINER"
 
 # Upload every rendered file from $WORKSPACE so the $DOCS_DIR/ prefix is kept
 # in the object name (e.g. doc/index.html).
-find "$DOCS_DIR" -type f | parallel -n50 openstack object create "$CONTAINER"
-echo "Uploaded docs to https://object-store.rc.nectar.org.au/v1/$AUTH/$CONTAINER/$DOCS_DIR/index.html"
+if [ -n "${DELETE_AFTER:-}" ]; then
+    swift upload "$CONTAINER" "$DOCS_DIR" \
+        --header "X-Delete-After: $DELETE_AFTER"
+else
+    find "$DOCS_DIR" -type f | parallel -n50 openstack object create "$CONTAINER"
+fi

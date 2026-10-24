@@ -325,4 +325,14 @@
           properties-content: |
             CONTAINER={container}
             DOCS_DIR={docs_dir}
+            DELETE_AFTER={delete_after|}
       - shell: !include-raw-escape: scripts/swift-docs-publish.sh
+- builder:
+    name: zensical-review-build
+    builders:
+      - shell: |
+          sed -i "s|^site_url = .*|site_url = \"https://{review_host}/review/$GERRIT_CHANGE_NUMBER/$GERRIT_PATCHSET_NUMBER/\"|" zensical.toml
+      - zensical-build
+      - shell: |
+          mkdir -p "review/$GERRIT_CHANGE_NUMBER"
+          mv site "review/$GERRIT_CHANGE_NUMBER/$GERRIT_PATCHSET_NUMBER"
