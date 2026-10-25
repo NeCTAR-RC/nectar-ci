@@ -44,6 +44,8 @@
           organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
+          helm_os_release: '2025.1'
 - project:
     name: cinder
     jobs:
@@ -58,6 +60,8 @@
           organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
+          helm_os_release: '2025.1'
 - project:
     name: designate
     jobs:
@@ -258,6 +262,8 @@
           organisation: 'NeCTAR-RC'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
+          helm_os_release: '2025.1'
 - project:
     name: octavia-dashboard
     jobs:
