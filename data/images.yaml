@@ -35,10 +35,6 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
-    name: fedora-43
-    jobs:
-      - 'image-build-official-{name}'
-- project:
     name: fedora-44
     jobs:
       - 'image-build-official-{name}'
