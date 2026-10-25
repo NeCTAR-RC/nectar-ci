@@ -3,19 +3,11 @@
     jobs:
       - 'image-build-official-{name}'
 - project:
-    name: rocky-8
-    jobs:
-      - 'image-build-official-{name}'
-- project:
     name: rocky-9
     jobs:
       - 'image-build-official-{name}'
 - project:
     name: rocky-10
-    jobs:
-      - 'image-build-official-{name}'
-- project:
-    name: almalinux-8
     jobs:
       - 'image-build-official-{name}'
 - project:
