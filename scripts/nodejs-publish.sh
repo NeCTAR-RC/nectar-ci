@@ -5,11 +5,28 @@ set -ex
 
 pnpm build
 
-# Basic auth (registry-scoped _auth = base64 of user:password), bound from the
-# Jenkins username/password credential. Written fresh into the ephemeral build
-# container each run and never committed. Mirrors the previous Bamboo pipeline.
+# Registry auth. Verdaccio 7 accepts only Bearer tokens on package requests
+# (Basic `_auth` entries are rejected), while its login route still takes
+# Basic credentials. So exchange the Jenkins username/password credential
+# for a token through the login route and write the token as a
+# registry-scoped `_authToken`. The credentials go in the Basic header as
+# well as the body: without the header Verdaccio treats the PUT as a
+# registration and answers 409 for an existing account (npm login hits
+# that 409 first and then retries with the header). Works on Verdaccio 6
+# and 7 alike. Written fresh into the ephemeral build container each run
+# and never committed. Tracing is paused so the password never reaches
+# the log.
 REGISTRY=verdaccio.artm.rc.nectar.org.au
-echo "//$REGISTRY/:_auth=$(echo -n "$VERDACCIO_USR:$VERDACCIO_PSW" | base64)" > "$HOME/.npmrc"
+set +x
+LOGIN_BODY=$(node -p 'JSON.stringify({name: process.env.VERDACCIO_USR, password: process.env.VERDACCIO_PSW})')
+TOKEN=$(curl -fsS -u "$VERDACCIO_USR:$VERDACCIO_PSW" \
+  -X PUT "https://$REGISTRY/-/user/org.couchdb.user:$VERDACCIO_USR" \
+  -H 'Content-Type: application/json' -d "$LOGIN_BODY" \
+  | node -p 'try { JSON.parse(require("fs").readFileSync(0, "utf8")).token || "" } catch { "" }')
+[ -n "$TOKEN" ] || { echo "registry login failed for $VERDACCIO_USR at $REGISTRY" >&2; exit 1; }
+echo "//$REGISTRY/:_authToken=$TOKEN" > "$HOME/.npmrc"
+unset LOGIN_BODY TOKEN
+set -x
 
 # Publish only when package.json carries a version not yet on the registry.
 # Versions are bumped on release, not every commit, so most merges (deps,
