@@ -314,6 +314,21 @@
       - '{name}-dummy':
           organisation: 'NeCTAR-RC'
 - project:
+    name: rcallocation
+    jobs:
+      - '{name}-resolute-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'py314'
+      - '{name}-resolute-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'pep8'
+      - '{name}-resolute-tox-{environment}':
+          organisation: 'NeCTAR-RC'
+          environment: 'cover'
+      - '{name}-reno-release-notes':
+          organisation: 'NeCTAR-RC'
+          reno_node: 'resolute'
+- project:
     name: taynac
     jobs:
       - '{name}-python-jobs':
