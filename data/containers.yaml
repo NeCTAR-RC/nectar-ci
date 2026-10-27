@@ -305,7 +305,7 @@
                   #!/bin/bash
                   set -eux -o pipefail
                   cd {name}
-                  export VERSION_TAG=`git describe`
+                  export VERSION_TAG=`git describe --long`
                   cd ..
                   export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                   export REGISTRY="registry.rc.nectar.org.au"
@@ -432,7 +432,7 @@
               )
               sh '''
                 cd {name}
-                export VERSION_TAG=`git describe`
+                export VERSION_TAG=`git describe --long`
                 cd ..
                 export BASE_BUILD_NUMBER=`cat artifacts/BUILD_NUMBER`
                 export REGISTRY="registry.rc.nectar.org.au"
