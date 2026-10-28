@@ -157,7 +157,8 @@
 - project:
     name: ubuntu-2404
     jobs:
-      - 'image-build-capi-{name}'
+      - 'image-build-capi-{name}':
+          build_label: 'image-build && noble'
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
@@ -782,6 +783,7 @@
     defaults: global
     project_name: 'NeCTAR-Images'
     kubernetes_version: '1.29.3'
+    build_label: 'noble'
     parameters:
       - string:
           name: project_name
@@ -806,7 +808,7 @@
       def imageId
       def imageName
       pipeline {{
-          agent {{ node {{ label 'noble' }} }}
+          agent {{ node {{ label '{build_label}' }} }}
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{

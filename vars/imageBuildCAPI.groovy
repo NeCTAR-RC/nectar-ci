@@ -7,6 +7,9 @@ def call(String imageName, String kubernetesVersion) {
         KUBERNETES_VERSION=$kubernetesVersion
         ${params.packer_debug ? 'export PACKER_LOG=1' : ''}
 
+        echo "Checking for KVM support on \$NODE_NAME..."
+        kvm-ok
+
         OUTPUT_NAME="\$IMAGE_NAME-kube-v\$KUBERNETES_VERSION"
         OUTPUT_DIR="\$WORKSPACE/images/capi/output/\$OUTPUT_NAME"
 
