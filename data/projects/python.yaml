@@ -328,6 +328,9 @@
       - '{name}-reno-release-notes':
           organisation: 'NeCTAR-RC'
           reno_node: 'resolute'
+      - '{name}-container':
+          organisation: 'NeCTAR-RC'
+          helm_name: '{name}-helm'
 - project:
     name: taynac
     jobs:
