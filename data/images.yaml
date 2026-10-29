@@ -291,7 +291,7 @@
                   }}
               }}
               cleanup {{
-                  node('noble') {{ deleteDir() }}
+                  deleteDir()
               }}
           }}
       }}
@@ -529,7 +529,7 @@
           }}
           post {{
               cleanup {{
-                  node('noble') {{ deleteDir() }}
+                  deleteDir()
               }}
           }}
       }}
@@ -773,7 +773,7 @@
                   }}
               }}
               cleanup {{
-                  node('noble') {{ deleteDir() }}
+                  deleteDir()
               }}
           }}
       }}
@@ -846,7 +846,7 @@
                   }}
               }}
               cleanup {{
-                  node('noble') {{ deleteDir() }}
+                  deleteDir()
               }}
           }}
       }}
@@ -892,7 +892,7 @@
                   }}
               }}
               cleanup {{
-                  node('noble') {{ deleteDir() }}
+                  deleteDir()
               }}
           }}
       }}
@@ -1031,7 +1031,7 @@
           }}
           post {{
               cleanup {{
-                  node('noble') {{ deleteDir() }}
+                  deleteDir()
               }}
           }}
       }}
