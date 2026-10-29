@@ -198,9 +198,10 @@
             }}
           }}
           cleanup {{
-            node('docker') {{
-              deleteDir() /* clean up our workspace */
-            }}
+            // Post runs on the pipeline-level docker agent. Don't ask for a
+            // second docker executor here: with every docker executor held
+            // by a build waiting in cleanup, they deadlock.
+            deleteDir() /* clean up our workspace */
           }}
         }}
       }}
