@@ -123,10 +123,6 @@
           image_name: '{name}'
           default_user: 'root'
 - project:
-    name: bumblebee-guacamole
-    jobs:
-      - 'image-build-bumblebee-{name}':
-- project:
     name: bumblebee-ubuntu-22.04
     jobs:
       - 'image-build-bumblebee-{name}':
