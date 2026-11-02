@@ -153,8 +153,7 @@
 - project:
     name: ubuntu-2404
     jobs:
-      - 'image-build-capi-{name}':
-          build_label: 'image-build && noble'
+      - 'image-build-capi-{name}'
 - job-template:
     name: 'image-build-official-{name}'
     defaults: global
@@ -209,7 +208,7 @@
       def imageName
       def testingPassed = false
       pipeline {{
-          agent {{ node {{ label 'noble' }} }}
+          agent {{ node {{ label 'image-build' }} }}
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
@@ -341,7 +340,7 @@
           }}
           stages {{
               stage('Build Image') {{
-                  agent {{ label 'noble' }}
+                  agent {{ label 'image-build' }}
                   steps {{
                       imageBuildQEMU 'trove'
                   }}
@@ -462,7 +461,7 @@
       def imageName
       def testingPassed = false
       pipeline {{
-          agent {{ node {{ label 'noble' }} }}
+          agent {{ node {{ label 'image-build' }} }}
           options {{
               ansiColor('xterm')
               timeout(time: 6, unit: 'HOURS')
@@ -581,7 +580,7 @@
           }}
           stages {{
               stage('Build Image') {{
-                  agent {{ label 'noble' }}
+                  agent {{ label 'image-build' }}
                   steps {{
                       imageBuildQEMU 'octavia-amphora'
                   }}
@@ -686,7 +685,7 @@
           }}
           stages {{
               stage('Build Image') {{
-                  agent {{ label 'noble' }}
+                  agent {{ label 'image-build' }}
                   steps {{
                       imageBuildQEMU 'manila-share-server'
                   }}
@@ -774,7 +773,7 @@
       def imageId
       def imageName
       pipeline {{
-          agent {{ node {{ label 'noble' }} }}
+          agent {{ node {{ label 'image-build' }} }}
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
@@ -805,7 +804,6 @@
     defaults: global
     project_name: 'NeCTAR-Images'
     kubernetes_version: '1.29.3'
-    build_label: 'noble'
     parameters:
       - string:
           name: project_name
@@ -830,7 +828,7 @@
       def imageId
       def imageName
       pipeline {{
-          agent {{ node {{ label '{build_label}' }} }}
+          agent {{ node {{ label 'image-build' }} }}
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
@@ -894,7 +892,7 @@
       def imageId
       def imageName
       pipeline {{
-          agent {{ node {{ label 'noble' }} }}
+          agent {{ node {{ label 'image-build' }} }}
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
@@ -973,7 +971,7 @@
       def imageName
       def testingPassed = false
       pipeline {{
-          agent {{ node {{ label 'noble' }} }}
+          agent {{ node {{ label 'image-build' }} }}
           options {{ ansiColor('xterm') }}
           stages {{
               stage('Build Image') {{
