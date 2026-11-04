@@ -60,30 +60,37 @@
       - 'image-build-official-{name}':
 - project:
     name: rstudio
+    base_image: 'image-build-official-ubuntu-24.04'
     jobs:
       - 'image-build-extra-{name}'
 - project:
     name: jupyterlab
+    base_image: 'image-build-official-ubuntu-22.04'
     jobs:
       - 'image-build-extra-{name}'
 - project:
     name: aiready-base
+    base_image: 'image-build-official-ubuntu-22.04-nvidia-vgpu'
     jobs:
       - 'image-build-extra-{name}'
 - project:
     name: aiready-llms
+    base_image: 'image-build-extra-aiready-base'
     jobs:
       - 'image-build-extra-{name}'
 - project:
     name: aiready-pytorch
+    base_image: 'image-build-extra-aiready-base'
     jobs:
       - 'image-build-extra-{name}'
 - project:
     name: aiready-tensorflow
+    base_image: 'image-build-extra-aiready-base'
     jobs:
       - 'image-build-extra-{name}'
 - project:
     name: aiready-torchvision
+    base_image: 'image-build-extra-aiready-base'
     jobs:
       - 'image-build-extra-{name}'
 - project:
@@ -416,6 +423,11 @@
 - job-template:
     name: 'image-build-extra-{name}'
     defaults: global
+    # UNSTABLE = RCTest failed; Production was still promoted.
+    triggers:
+      - reverse:
+          jobs: '{base_image}'
+          result: unstable
     parameters:
       - string:
           name: project_name
