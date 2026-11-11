@@ -190,6 +190,25 @@
               }}
             }}
           }}
+          stage('Trigger e2e') {{
+            // The Playwright suite lives in nectar-dashboard. It runs in its
+            // own job, which waits for this env to come up and comments on
+            // the review; it does not change this job's result or vote.
+            when {{ environment name: 'GERRIT_PROJECT', value: 'NeCTAR-RC/nectar-dashboard' }}
+            steps {{
+              build job: 'dashboard-devenv-e2e', wait: false,
+                parameters: [
+                  string(name: 'TAG', value: env.TAG),
+                  string(name: 'GERRIT_HOST', value: env.GERRIT_HOST),
+                  string(name: 'GERRIT_PROJECT', value: env.GERRIT_PROJECT),
+                  string(name: 'GERRIT_BRANCH', value: env.GERRIT_BRANCH),
+                  string(name: 'GERRIT_REFSPEC', value: env.GERRIT_REFSPEC),
+                  string(name: 'GERRIT_CHANGE_ID', value: env.GERRIT_CHANGE_ID),
+                  string(name: 'GERRIT_CHANGE_NUMBER', value: env.GERRIT_CHANGE_NUMBER),
+                  string(name: 'GERRIT_PATCHSET_NUMBER', value: env.GERRIT_PATCHSET_NUMBER),
+                ]
+            }}
+          }}
         }}
         post {{
           failure {{
@@ -215,6 +234,126 @@
             // second docker executor here: with every docker executor held
             // by a build waiting in cleanup, they deadlock.
             deleteDir() /* clean up our workspace */
+          }}
+        }}
+      }}
+- job:
+    name: 'dashboard-devenv-e2e'
+    description: >-
+      Run the nectar-dashboard Playwright e2e suite against a review's dev env. Started by dashboard-devenv-create once the env is deployed; comments the result on the review without voting.
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+    parameters:
+      - string:
+          name: TAG
+          description: "The dev env name, review-<change>-<patchset>."
+      - string:
+          name: GERRIT_HOST
+          default: review.rc.nectar.org.au
+      - string:
+          name: GERRIT_PROJECT
+          default: NeCTAR-RC/nectar-dashboard
+      - string:
+          name: GERRIT_BRANCH
+          default: nectar/2025.1
+      - string:
+          name: GERRIT_REFSPEC
+          default: refs/heads/nectar/2025.1
+      - string:
+          name: GERRIT_CHANGE_ID
+      - string:
+          name: GERRIT_CHANGE_NUMBER
+      - string:
+          name: GERRIT_PATCHSET_NUMBER
+    properties:
+      - throttle:
+          max-total: 3
+          option: project
+      - build-discarder:
+          num-to-keep: 30
+    dsl: |
+      pipeline {{
+        agent {{ label 'resolute' }}
+        options {{
+          timeout(time: 90, unit: 'MINUTES')
+        }}
+        environment {{
+          DASHBOARD_URL = "https://${{params.TAG}}.rcdev.nectar.org.au"
+          CI = 'true'
+          NPM_CONFIG_REGISTRY = 'https://verdaccio.artm.rc.nectar.org.au/'
+        }}
+        stages {{
+          stage('Checkout') {{
+            steps {{
+              checkout(
+                poll: false,
+                scm: [
+                  $class: 'GitSCM',
+                  branches: [[name: 'refs/remotes/origin/review']],
+                  extensions: [[$class: 'CleanCheckout']],
+                  userRemoteConfigs: [[
+                    credentialsId: 'cd8b8dd3-b897-4ecb-985d-180d5b6f8498',
+                    name: 'origin',
+                    refspec: '$GERRIT_REFSPEC:refs/remotes/origin/review',
+                    url: 'ssh://jenkins@review.rc.nectar.org.au:29418/$GERRIT_PROJECT.git'
+                  ]]
+                ]
+              )
+              script {{
+                // Branches from before the suite have no e2e tox env.
+                if (sh(returnStatus: true, script: 'grep -q "^\\[testenv:e2e\\]" tox.ini') != 0) {{
+                  currentBuild.result = 'NOT_BUILT'
+                  env.E2E_SKIP = 'true'
+                  echo 'No [testenv:e2e] in tox.ini on this branch; nothing to run.'
+                }}
+              }}
+            }}
+          }}
+          stage('Wait for env') {{
+            when {{ not {{ environment name: 'E2E_SKIP', value: 'true' }} }}
+            steps {{
+              // The env is still building when this job starts: the gateway
+              // answers 404 until the HTTPRoute exists and 5xx while the
+              // pods start (the startup probe allows up to 15 minutes).
+              timeout(time: 40, unit: 'MINUTES') {{
+                sh '''#!/bin/bash -u
+                until curl -fsS -o /dev/null --max-time 30 "$DASHBOARD_URL/auth/login/"; do
+                  sleep 20
+                done
+                echo "$DASHBOARD_URL is up"
+                '''
+              }}
+            }}
+          }}
+          stage('E2E') {{
+            when {{ not {{ environment name: 'E2E_SKIP', value: 'true' }} }}
+            steps {{
+              withCredentials([
+                file(credentialsId: 'dashboard-e2e-admin-openrc', variable: 'OPENRC'),
+                file(credentialsId: 'dashboard-e2e-user-openrc', variable: 'E2E_USER_OPENRC'),
+              ]) {{
+                sh 'tox -e e2e'
+              }}
+            }}
+          }}
+        }}
+        post {{
+          always {{
+            script {{
+              if (env.E2E_SKIP != 'true') {{
+                def summary = junit(allowEmptyResults: true, testResults: 'e2e/junit.xml')
+                archiveArtifacts allowEmptyArchive: true,
+                  artifacts: 'e2e/playwright-report/**, e2e/test-results/**'
+                def outcome = currentBuild.currentResult == 'SUCCESS' ? 'passed' : 'failed'
+                def counts = summary.totalCount > 0 ?
+                  " (${{summary.passCount}} passed, ${{summary.failCount}} failed, ${{summary.skipCount}} skipped)" : ''
+                gerritComment("E2E tests ${{outcome}}${{counts}} against ${{env.DASHBOARD_URL}}: ${{env.BUILD_URL}}")
+              }}
+            }}
+          }}
+          cleanup {{
+            deleteDir()
           }}
         }}
       }}
