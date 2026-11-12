@@ -255,6 +255,10 @@
           environment: 'functional'
       - '{name}-kolla-container':
           organisation: 'NeCTAR-RC'
+      # Ubuntu packages only up to 2024.1; 2025.1 onwards ships as kolla only
+      - '{name}-os-deb-package':
+          organisation: 'NeCTAR-RC'
+          nectar_branch_pattern: 'nectar/2024\.1'
 - project:
     name: octavia
     jobs:

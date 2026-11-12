@@ -502,6 +502,7 @@
     name: '{name}-os-deb-package'
     defaults: global
     node: deb-package
+    nectar_branch_pattern: 'nectar/.*'
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -522,7 +523,7 @@
                 - branch-compare-type: 'PLAIN'
                   branch-pattern: 'master'
                 - branch-compare-type: 'REG_EXP'
-                  branch-pattern: 'nectar/.*'
+                  branch-pattern: '{nectar_branch_pattern}'
                 - branch-compare-type: 'REG_EXP'
                   branch-pattern: 'uom/.*'
                 - branch-compare-type: 'REG_EXP'
