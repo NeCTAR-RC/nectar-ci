@@ -59,6 +59,10 @@
     jobs:
       - 'image-build-official-{name}':
 - project:
+    name: windows-2025
+    jobs:
+      - 'image-build-official-{name}':
+- project:
     name: rstudio
     base_image: 'image-build-official-ubuntu-24.04'
     jobs:
