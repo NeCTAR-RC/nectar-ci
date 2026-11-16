@@ -1,0 +1,75 @@
+# Generates an SPDX SBOM for one Glance image with Trivy and uploads it to the
+# sboms Swift container of NeCTAR-Images. Each stage runs one script from
+# resources/sbom/ through its vars/ step. Run by hand for now; image builds
+# will start it later.
+- job:
+    name: image-sbom-glance
+    description: >-
+      Generate an SPDX SBOM for a Glance image with Trivy and upload it to the sboms Swift container of NeCTAR-Images in the same cloud, named by the image's os_hash_algo and os_hash_value.
+    defaults: global
+    project-type: pipeline
+    sandbox: true
+    parameters:
+      - string:
+          name: IMAGE_ID
+          description: "The Glance image ID to scan."
+      - choice:
+          name: CLOUD_ENV
+          choices:
+            - production
+            - testing
+            - development
+          description: "Cloud the image is in. Leave as production if unsure."
+      - string:
+          name: PROJECT_NAME
+          default: NeCTAR-Images
+          description: "Project to authenticate to, for example NeCTAR-Images or octavia."
+    properties:
+      # Each run downloads the image and makes a raw copy, which can need
+      # tens of GB of disk.
+      - throttle:
+          max-total: 1
+          option: project
+    dsl: |
+      pipeline {{
+        agent {{ label 'docker' }}
+        options {{
+          ansiColor('xterm')
+          timeout(time: 90, unit: 'MINUTES')
+        }}
+        stages {{
+          stage('Download') {{
+            steps {{
+              script {{
+                if (!params.IMAGE_ID?.trim()) {{
+                  error 'IMAGE_ID is required'
+                }}
+                env.SBOM_IMAGE = downloadGlanceImage(params.IMAGE_ID.trim(), params.PROJECT_NAME, params.CLOUD_ENV)
+              }}
+            }}
+          }}
+          stage('Scan') {{
+            steps {{
+              script {{
+                env.SBOM_FILE = scanDiskImage(env.SBOM_IMAGE)
+              }}
+            }}
+          }}
+          stage('Upload') {{
+            steps {{
+              uploadSbom env.SBOM_FILE, params.CLOUD_ENV
+            }}
+          }}
+        }}
+        post {{
+          success {{
+            archiveArtifacts artifacts: 'sboms/**', fingerprint: true
+          }}
+          cleanup {{
+            // Keep work/trivy-cache so later builds on this agent reuse
+            // Trivy's Java DB. Remove the downloaded images, which can be
+            // tens of GB, and the SBOMs, so they are not archived again.
+            sh 'rm -rf glance sboms'
+          }}
+        }}
+      }}
