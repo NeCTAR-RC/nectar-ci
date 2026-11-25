@@ -274,11 +274,20 @@
     name: nodejs-deploy
     builders:
       - shell: !include-raw-escape: scripts/nodejs-deploy.sh
+# Runs after nodejs-deploy or nodejs-storybook-deploy. Gives a 90-day delete
+# timer, once, to each file in scope that has left the build since the last
+# deploy that finished; Swift deletes the file when the timer runs out. The
+# script header has the exact rule.
+- builder:
+    name: nodejs-swift-expire
+    builders:
+      - shell: !include-raw-escape: scripts/nodejs-swift-expire.sh
 # ardc-react ships two artifacts the nodejs-build/deploy builders above don't cover:
 # an npm component library (vite lib build -> dist/, published to Verdaccio) and a
 # Storybook docs site (build-storybook -> storybook-static/, served from Swift). It
-# reuses nodejs-install/lint/build-clean; the four builders below add Storybook
-# testing, a per-patchset Storybook preview, the Storybook deploy, and npm publish.
+# reuses nodejs-install/lint/build-clean/swift-expire; the four builders below add
+# Storybook testing, a per-patchset Storybook preview, the Storybook deploy, and
+# npm publish.
 - builder:
     name: nodejs-storybook-test
     builders:

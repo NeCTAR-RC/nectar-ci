@@ -2029,6 +2029,10 @@
     name: '{name}-nodejs-deploy'
     defaults: global
     node: resolute
+    # Each run deploys the patchset that triggered it, so with parallel runs
+    # the deploy of an older change could finish last and stay live. Two runs
+    # at once would also each overwrite the other's saved file list.
+    concurrent: false
     parameters:
       - string:
           name: GERRIT_REFSPEC
@@ -2062,9 +2066,16 @@
           choosing-strategy: gerrit
     builders:
       - inject:
-          properties-content: 'DEPLOY_CONTAINER={container}'
+          # DEPLOY_EXPIRE_SCOPE keeps the delete timers inside assets/: these
+          # containers also hold files that no build contains, uploaded by
+          # hand (nectar-survey's live surveys.json).
+          properties-content: |
+            DEPLOY_CONTAINER={container}
+            DEPLOY_BUILD_DIR=dist
+            DEPLOY_EXPIRE_SCOPE=assets/
       - nodejs-install
       - nodejs-deploy
+      - nodejs-swift-expire
     wrappers:
       - credentials-binding:
           - username-password-separated:
@@ -2167,8 +2178,9 @@
     name: '{name}-nodejs-storybook-deploy'
     defaults: global
     node: resolute
-    # Two overlapping deploys would each see the other's fresh uploads as
-    # orphans and put delete timers on live objects in the shared container.
+    # Each run deploys the patchset that triggered it, so with parallel runs
+    # the deploy of an older change could finish last and stay live. Two runs
+    # at once would also each overwrite the other's saved file list.
     concurrent: false
     parameters:
       - string:
@@ -2203,9 +2215,13 @@
           choosing-strategy: gerrit
     builders:
       - inject:
-          properties-content: 'DEPLOY_CONTAINER={container}'
+          properties-content: |
+            DEPLOY_CONTAINER={container}
+            DEPLOY_BUILD_DIR=storybook-static
+            DEPLOY_EXPIRE_SCOPE=container
       - nodejs-install
       - nodejs-storybook-deploy
+      - nodejs-swift-expire
     wrappers:
       - credentials-binding:
           - username-password-separated:
