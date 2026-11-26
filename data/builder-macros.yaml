@@ -86,12 +86,12 @@
     name: helm-lint
     builders:
       - shell: |
-          helm lint .
+          helm lint . $HELM_ARGS
 - builder:
     name: helm-template
     builders:
       - shell: |
-          helm template .
+          helm template . $HELM_ARGS
 - builder:
     name: helm-dependency-build
     builders:

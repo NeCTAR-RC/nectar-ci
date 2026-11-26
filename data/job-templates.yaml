@@ -105,11 +105,18 @@
     name: '{name}-helm-lint'
     defaults: global
     node: internal
+    # Charts that do not render from their default values alone set this,
+    # e.g. '-f values-test.yaml'.
+    helm_args: ''
     parameters:
       - string:
           name: GERRIT_REFSPEC
           default: refs/heads/master
           description: "The default branch to test."
+      - string:
+          name: HELM_ARGS
+          default: '{helm_args}'
+          description: "Extra arguments for helm template and helm lint."
     triggers:
       - gerrit:
           trigger-on:

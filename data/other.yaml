@@ -8,6 +8,14 @@
     jobs:
       - '{name}-pre-commit-all':
           organisation: 'internal'
+      # Release tags only: builds and pushes the nectar-mcp and
+      # nectar-skills images, then sets the new tag as the appVersion of the
+      # nectar-mcp chart.
+      - '{name}-container':
+          organisation: 'internal'
+          helm_name: 'nectar-mcp'
+          container_trigger_on:
+            - ref-updated-event
 - project:
     name: bumblebee-dev
     jobs:

@@ -103,6 +103,14 @@
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
 - project:
+    name: nectar-agents
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'internal'
+          # The chart needs an environment, and a skills image digest that
+          # only a release supplies: lint with a placeholder.
+          helm_args: '-f values-test.yaml --set skills.digest=sha256:0000000000000000000000000000000000000000000000000000000000000000'
+- project:
     name: nectar-conformance-helm
     jobs:
       - '{name}-helm-default-jobs':
@@ -126,6 +134,13 @@
     jobs:
       - '{name}-helm-default-jobs':
           organisation: 'NeCTAR-RC'
+- project:
+    name: nectar-mcp
+    jobs:
+      - '{name}-helm-default-jobs':
+          organisation: 'internal'
+          # The chart does not render without an environment.
+          helm_args: '-f values-test.yaml'
 - project:
     name: nectar-metrics-helm
     jobs:
