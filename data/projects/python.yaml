@@ -212,10 +212,10 @@
 - project:
     name: nectar-freshdesk
     jobs:
-      - '{name}-noble-tox-{environment}':
+      - '{name}-resolute-tox-{environment}':
           organisation: 'NeCTAR-RC'
-          environment: 'py312'
-      - '{name}-noble-tox-{environment}':
+          environment: 'py314'
+      - '{name}-resolute-tox-{environment}':
           organisation: 'NeCTAR-RC'
           environment: 'pep8'
       - '{name}-container':
