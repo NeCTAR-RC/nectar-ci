@@ -255,3 +255,8 @@
     jobs:
       - '{name}-kustomize-validate':
           organisation: 'NeCTAR-RC'
+- project:
+    name: agents-platform
+    jobs:
+      - '{name}-kustomize-validate':
+          organisation: 'internal'
