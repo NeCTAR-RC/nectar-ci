@@ -24,6 +24,10 @@
           name: PROJECT_NAME
           default: NeCTAR-Images
           description: "Project to authenticate to, for example NeCTAR-Images or octavia."
+      - string:
+          name: TRIVY_TIMEOUT
+          default: ""
+          description: "Trivy scan timeout, such as 60m. Leave empty for Trivy's default of 30 minutes."
     properties:
       # Each run downloads the image and makes a raw copy, which can need
       # tens of GB of disk.

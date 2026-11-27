@@ -6,7 +6,7 @@ def call(String image) {
     def glanceJson = image.take(image.lastIndexOf('.')) + '.json'
     writeFile file: 'bin/scan-disk-image.sh', text: libraryResource('sbom/scan-disk-image.sh')
     def sbom
-    withEnv(["IMAGE=$image", "GLANCE_JSON=$glanceJson"]) {
+    withEnv(["IMAGE=$image", "GLANCE_JSON=$glanceJson", "TRIVY_TIMEOUT=${params.TRIVY_TIMEOUT ?: ''}"]) {
         echo "\033[35;1m========== Scanning $image ==========\033[0m"
         // The script prints only the SBOM path on stdout.
         sbom = sh(script: 'bash bin/scan-disk-image.sh "$IMAGE" "$GLANCE_JSON"', returnStdout: true).trim()

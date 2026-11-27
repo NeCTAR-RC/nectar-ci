@@ -25,6 +25,13 @@ exec 3>&1 1>&2
 
 TRIVY_IMAGE=${TRIVY_IMAGE:-aquasec/trivy:0.72.0}
 
+# TRIVY_TIMEOUT, such as 60m, sets how long trivy vm may run. When it is
+# unset, Trivy uses its default of 30 minutes.
+timeout_args=()
+if [ -n "${TRIVY_TIMEOUT:-}" ]; then
+    timeout_args=(--timeout "$TRIVY_TIMEOUT")
+fi
+
 work=$PWD/work
 out_root=$PWD/sboms/glance
 
@@ -132,7 +139,7 @@ fi
 echo "Scanning with $TRIVY_IMAGE..." >&2
 docker run --rm --user "$user" -v "$(dirname "$scan"):/scan:ro" \
     -v "$work:/work" -v "$work/trivy-cache:/cache" \
-    "$TRIVY_IMAGE" vm --cache-dir /cache --scanners '' --format spdx-json \
+    "$TRIVY_IMAGE" vm "${timeout_args[@]}" --cache-dir /cache --scanners '' --format spdx-json \
     --no-progress --skip-version-check --disable-telemetry \
     -o "/work/$hash.spdx.json" "/scan/$(basename "$scan")"
 
