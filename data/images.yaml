@@ -445,11 +445,6 @@
 - job-template:
     name: 'image-build-extra-{name}'
     defaults: global
-    # UNSTABLE = RCTest failed; Production was still promoted.
-    triggers:
-      - reverse:
-          jobs: '{base_image}'
-          result: unstable
     parameters:
       - string:
           name: project_name
