@@ -302,6 +302,24 @@
                   }}
                   steps {{ promoteOfficialImage '{project_name}', 'production' }}
               }}
+              stage('Scan SBOM') {{
+                  when {{
+                      allOf {{
+                          expression {{ return params.deploy_production }}
+                      }}
+                  }}
+                  steps {{
+                      script {{
+                          def sbomImageId = readFile(file: 'build/.image-id').trim()
+                          build job: 'image-sbom-glance', wait: false,
+                              parameters: [
+                                  string(name: 'IMAGE_ID', value: sbomImageId),
+                                  string(name: 'CLOUD_ENV', value: 'production'),
+                                  string(name: 'PROJECT_NAME', value: 'NeCTAR-Images')
+                              ]
+                      }}
+                  }}
+              }}
           }}
           post {{
               failure {{
